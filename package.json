@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CallCoach — Intralinks Deal Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0f0f0f;--ink-2:#3a3a3a;--ink-3:#6b6b6b;--ink-4:#9b9b9b;
+  --paper:#fafaf8;--surface:#f3f2ef;--surface-2:#e8e6e1;--rule:#dddbd5;
+  --accent:#1a3a5c;--accent-light:#e8eef5;
+  --green:#1a6644;--green-light:#e6f2ec;
+  --amber:#7a4a00;--amber-light:#fdf3e3;
+  --red:#8b1f1f;--red-light:#fdeaea;--gold:#b8860b;
+  --purple:#4a2a7a;--purple-light:#f0ebfa;
+  --teal:#1a5a5a;--teal-light:#e6f5f5;
+  --sl:#00b388;--sl-dark:#00291f;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh;line-height:1.6;}
+
+/* HEADER */
+.hdr{background:var(--ink);height:58px;display:flex;align-items:center;padding:0 28px;position:sticky;top:0;z-index:200;gap:14px;}
+.logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff;white-space:nowrap;}
+.logo span{color:#7eb3e0;}
+.hdr-meta{font-family:'DM Mono',monospace;font-size:10px;color:#555;letter-spacing:0.08em;text-transform:uppercase;padding-left:16px;border-left:1px solid #333;}
+.hdr-right{margin-left:auto;display:flex;gap:8px;align-items:center;}
+.badge{font-family:'DM Mono',monospace;font-size:10px;padding:3px 8px;border-radius:3px;letter-spacing:0.05em;text-transform:uppercase;}
+.b-blue{background:#1a3a5c;color:#7eb3e0;}
+.b-sl{background:var(--sl-dark);color:var(--sl);}
+.b-amber{background:#3a2000;color:#e8a830;}
+
+/* NAV TABS */
+.nav-tabs{background:white;border-bottom:1px solid var(--rule);display:flex;padding:0 28px;gap:0;position:sticky;top:58px;z-index:100;}
+.nav-tab{padding:12px 20px;font-size:13px;font-weight:500;color:var(--ink-3);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.15s;white-space:nowrap;}
+.nav-tab:hover{color:var(--ink);}
+.nav-tab.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:600;}
+
+/* MAIN */
+.main{padding:28px 32px;max-width:1200px;margin:0 auto;}
+
+/* LOADING */
+.load-wrap{display:flex;align-items:center;justify-content:center;min-height:60vh;}
+.load-card{background:white;border:1px solid var(--rule);border-radius:12px;padding:40px;text-align:center;max-width:380px;width:100%;}
+.load-icon{font-size:36px;margin-bottom:16px;}
+.load-title{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:6px;}
+.load-sub{font-size:13px;color:var(--ink-3);margin-bottom:24px;line-height:1.6;}
+.prog-bar-wrap{width:100%;height:5px;background:var(--surface-2);border-radius:3px;overflow:hidden;margin-bottom:10px;}
+.prog-bar{height:100%;background:var(--sl);border-radius:3px;transition:width 0.5s ease;}
+.prog-step{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-3);min-height:18px;}
+
+/* EXEC DASHBOARD */
+.exec-header{margin-bottom:24px;}
+.exec-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;letter-spacing:-0.02em;margin-bottom:4px;}
+.exec-sub{font-size:13px;color:var(--ink-3);}
+.exec-meta{display:flex;align-items:center;gap:12px;margin-top:8px;flex-wrap:wrap;}
+.exec-meta-item{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-4);}
+
+/* FILTER BAR */
+.filter-bar{background:white;border:1px solid var(--rule);border-radius:8px;padding:12px 16px;margin-bottom:20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+.filter-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.07em;white-space:nowrap;}
+.filter-select{background:var(--surface);border:1px solid var(--rule);border-radius:5px;padding:6px 10px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--ink);cursor:pointer;}
+.filter-select:focus{outline:none;border-color:var(--accent);}
+.filter-search{flex:1;min-width:160px;background:var(--surface);border:1px solid var(--rule);border-radius:5px;padding:6px 10px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--ink);}
+.filter-search:focus{outline:none;border-color:var(--accent);}
+.filter-count{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-3);white-space:nowrap;margin-left:auto;}
+
+/* KPI STRIP */
+.kpi-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:20px;}
+.kpi{background:white;border:1px solid var(--rule);border-radius:8px;padding:14px 16px;text-align:center;}
+.kpi.k-green{border-top:3px solid var(--green);background:var(--green-light);}
+.kpi.k-amber{border-top:3px solid var(--gold);background:var(--amber-light);}
+.kpi.k-red{border-top:3px solid var(--red);background:var(--red-light);}
+.kpi.k-blue{border-top:3px solid var(--accent);background:var(--accent-light);}
+.kpi.k-purple{border-top:3px solid var(--purple);background:var(--purple-light);}
+.kpi.k-grey{border-top:3px solid var(--ink-3);}
+.kpi-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;line-height:1;margin-bottom:3px;}
+.kpi-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.06em;line-height:1.3;}
+.kpi.k-green .kpi-label{color:var(--green);}
+.kpi.k-amber .kpi-label{color:var(--amber);}
+.kpi.k-red .kpi-label{color:var(--red);}
+.kpi.k-blue .kpi-label{color:var(--accent);}
+.kpi.k-purple .kpi-label{color:var(--purple);}
+
+/* Q2 SECTIONS */
+.q2-section{margin-bottom:28px;}
+.q2-section-hdr{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--rule);}
+.q2-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.q2-section-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;}
+.q2-section-count{font-family:'DM Mono',monospace;font-size:12px;color:var(--ink-3);}
+.q2-section-arr{font-family:'DM Mono',monospace;font-size:12px;margin-left:auto;}
+
+/* DEAL TABLE */
+.deal-table{width:100%;border-collapse:collapse;}
+.deal-table th{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.07em;padding:8px 12px;text-align:left;border-bottom:2px solid var(--rule);white-space:nowrap;background:var(--surface);}
+.deal-table td{padding:11px 12px;border-bottom:1px solid var(--rule);font-size:13px;color:var(--ink-2);vertical-align:middle;}
+.deal-table tr:hover td{background:var(--surface);cursor:pointer;}
+.deal-table tr:last-child td{border-bottom:none;}
+.tbl-account{font-weight:600;color:var(--ink);}
+.tbl-rep{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-3);}
+.tbl-stage{font-family:'DM Mono',monospace;font-size:11px;padding:2px 8px;border-radius:3px;background:var(--surface-2);color:var(--ink-3);white-space:nowrap;}
+.tbl-arr{font-weight:500;white-space:nowrap;}
+.tbl-date{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-3);white-space:nowrap;}
+.tbl-activity{display:flex;align-items:center;gap:4px;}
+.act-dot{width:6px;height:6px;border-radius:50%;}
+.tbl-signal{display:flex;align-items:center;gap:5px;font-family:'DM Mono',monospace;font-size:11px;white-space:nowrap;}
+.sig-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.tbl-analyze{background:var(--accent);color:white;border:none;border-radius:4px;padding:4px 10px;font-family:'DM Mono',monospace;font-size:10px;cursor:pointer;white-space:nowrap;letter-spacing:0.04em;}
+.tbl-analyze:hover{background:#1e4a78;}
+.tbl-analyze.done{background:var(--green);cursor:default;}
+.tbl-analyze.loading{background:var(--surface-2);color:var(--ink-3);cursor:not-allowed;}
+
+/* COACHING PANEL */
+.coaching-panel{position:fixed;top:0;right:0;width:560px;height:100vh;background:white;box-shadow:-4px 0 40px rgba(0,0,0,0.15);z-index:300;overflow-y:auto;transform:translateX(100%);transition:transform 0.3s ease;}
+.coaching-panel.open{transform:translateX(0);}
+.panel-hdr{background:var(--ink);padding:18px 24px;display:flex;align-items:flex-start;gap:12px;position:sticky;top:0;z-index:10;}
+.panel-close{background:none;border:none;color:#888;font-size:20px;cursor:pointer;padding:2px 6px;border-radius:4px;flex-shrink:0;margin-left:auto;}
+.panel-close:hover{color:white;background:#333;}
+.panel-title{font-family:'Playfair Display',serif;font-size:18px;color:white;line-height:1.2;}
+.panel-sub{font-family:'DM Mono',monospace;font-size:10px;color:#666;margin-top:3px;}
+.panel-body{padding:20px 24px;}
+.panel-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px;text-align:center;gap:12px;}
+.panel-spinner{width:32px;height:32px;border:3px solid var(--rule);border-top-color:var(--sl);border-radius:50%;animation:spin 0.8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* PANEL COMPONENTS */
+.p-q2-box{border-radius:7px;padding:10px 14px;margin-bottom:16px;display:flex;align-items:flex-start;gap:10px;}
+.p-q2-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:3px;}
+.p-q2-label{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:3px;}
+.p-q2-text{font-size:12px;line-height:1.5;}
+
+.p-sl-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+.p-sl-card{background:var(--surface);border-radius:6px;padding:10px 12px;border-top:2px solid var(--sl);}
+.p-sl-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:3px;}
+.p-sl-value{font-size:12px;font-weight:600;color:var(--ink);line-height:1.3;}
+
+.p-recap{background:white;border:1px solid var(--rule);border-left:3px solid var(--sl);border-radius:5px;padding:12px 14px;margin-bottom:14px;}
+.p-recap-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--sl);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;}
+.p-recap-text{font-size:12px;color:var(--ink-2);line-height:1.7;}
+
+.p-scores{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:14px;}
+.p-score{background:var(--surface);border-radius:6px;padding:10px;text-align:center;}
+.p-score.hl-purple{background:var(--purple-light);border:1px solid #c0a8e0;}
+.p-score.hl-teal{background:var(--teal-light);border:1px solid #a0cece;}
+.p-score-num{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;line-height:1;margin-bottom:3px;}
+.p-score-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.06em;}
+.hl-purple .p-score-label{color:var(--purple);}
+.hl-teal .p-score-label{color:var(--teal);}
+
+.p-summ{background:var(--accent-light);border:1px solid #c5d8eb;border-left:3px solid var(--accent);border-radius:5px;padding:12px 14px;margin-bottom:14px;}
+.p-summ-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;}
+.p-summ-text{font-size:12px;color:var(--ink-2);line-height:1.7;}
+
+.p-two-col{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
+.p-wins{background:var(--green-light);border:1px solid #b8d9c8;border-radius:6px;padding:12px 14px;}
+.p-pris{background:var(--amber-light);border:1px solid #f0d9a8;border-radius:6px;padding:12px 14px;}
+.p-col-label{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:7px;}
+.p-wins .p-col-label{color:var(--green);}
+.p-pris .p-col-label{color:var(--amber);}
+.p-li{display:flex;gap:8px;font-size:12px;line-height:1.5;padding:4px 0;border-bottom:1px solid rgba(0,0,0,0.06);color:var(--ink-2);}
+.p-li:last-child{border-bottom:none;}
+.p-li-dot{flex-shrink:0;margin-top:6px;width:5px;height:5px;border-radius:50%;}
+.dot-g{background:var(--green);}
+.dot-a{background:var(--gold);}
+
+.p-nxt{background:var(--surface);border:1px solid var(--rule);border-left:3px solid var(--accent);border-radius:5px;padding:12px 14px;margin-bottom:14px;position:relative;}
+.p-nxt-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}
+.p-nxt-text{font-size:12px;color:var(--ink-2);line-height:1.7;font-style:italic;}
+.p-copy{position:absolute;top:10px;right:10px;background:white;border:1px solid var(--rule);border-radius:3px;padding:3px 8px;font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-3);cursor:pointer;}
+
+.p-tabs{display:flex;border-bottom:1px solid var(--rule);margin-bottom:14px;gap:0;}
+.p-tab{background:none;border:none;padding:7px 12px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--ink-3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.15s;font-weight:500;}
+.p-tab.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:600;}
+.p-tab-section{display:none;}
+.p-tab-section.show{display:block;}
+
+.p-fw-item{padding:11px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:40px 1fr;gap:10px;}
+.p-fw-item:last-child{border-bottom:none;}
+.p-fw-key{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;padding-top:1px;}
+.p-fw-hdr{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
+.p-fw-lbl{font-weight:600;font-size:12px;flex:1;}
+.sp{font-family:'DM Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;letter-spacing:0.05em;text-transform:uppercase;font-weight:500;}
+.sp-strong{background:var(--green-light);color:var(--green);border:1px solid #b8d9c8;}
+.sp-partial{background:var(--amber-light);color:var(--amber);border:1px solid #f0d9a8;}
+.sp-missing{background:var(--red-light);color:var(--red);border:1px solid #f0c0c0;}
+.sp-na{background:var(--surface);color:var(--ink-3);border:1px solid var(--rule);}
+.p-ev{background:var(--surface);border-radius:3px;padding:7px 10px;font-size:11px;color:var(--ink-3);line-height:1.6;margin-bottom:5px;border-left:2px solid var(--surface-2);}
+.p-coach{border-radius:3px;padding:7px 10px;font-size:11px;line-height:1.6;border-left:2px solid;}
+.p-coach-strong{background:var(--green-light);border-color:#5cb88a;color:#1a3d2a;}
+.p-coach-partial,.p-coach-missing{background:var(--amber-light);border-color:var(--gold);color:var(--amber);}
+.p-coach-na{background:var(--surface);border-color:var(--surface-2);color:var(--ink-3);}
+
+.ai-block{border:1px solid var(--rule);border-radius:6px;padding:12px 14px;margin-bottom:14px;}
+.ai-sharp{background:#e6f2ec;border-color:#b8d9c8;}
+.ai-partial{background:#fdf3e3;border-color:#f0d9a8;}
+.ai-generic{background:#fdeaea;border-color:#f0c0c0;}
+.ai-na{background:var(--surface);}
+.ai-hdr{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.ai-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500;}
+.ai-sharp .ai-title{color:var(--green);}
+.ai-partial .ai-title{color:var(--amber);}
+.ai-generic .ai-title{color:var(--red);}
+.ai-pill{font-family:'DM Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;letter-spacing:0.05em;text-transform:uppercase;font-weight:500;}
+.p-sharp{background:var(--green-light);color:var(--green);border:1px solid #b8d9c8;}
+.p-partial-ai{background:var(--amber-light);color:var(--amber);border:1px solid #f0d9a8;}
+.p-generic{background:var(--red-light);color:var(--red);border:1px solid #f0c0c0;}
+.p-na-ai{background:var(--surface);color:var(--ink-3);border:1px solid var(--rule);}
+.ai-body{font-size:12px;line-height:1.65;color:var(--ink-2);}
+.ai-coach-block{margin-top:6px;padding:7px 10px;border-radius:3px;background:rgba(0,0,0,0.04);font-size:11px;color:var(--ink-3);line-height:1.6;}
+
+/* OVERLAY */
+.panel-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.3);z-index:299;display:none;}
+.panel-overlay.show{display:block;}
+
+/* EMPTY STATE */
+.empty{text-align:center;padding:60px 20px;color:var(--ink-3);}
+.empty-icon{font-size:36px;margin-bottom:12px;}
+.empty-title{font-family:'Playfair Display',serif;font-size:18px;color:var(--ink);margin-bottom:6px;}
+.empty-sub{font-size:13px;line-height:1.6;}
+
+/* ACTIONS ROW IN PANEL */
+.p-act-row{display:flex;gap:8px;margin-bottom:14px;}
+.p-act-btn{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:5px;border:1.5px dashed;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;background:white;transition:all 0.15s;}
+.p-act-btn:hover{transform:translateY(-1px);}
+.btn-sf{border-color:#0176d3;color:#0176d3;}
+.btn-ol{border-color:#0078d4;color:#0078d4;}
+.btn-sl-link{border-color:var(--sl);color:var(--sl);}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="logo">Call<span>Coach</span></div>
+  <div class="hdr-meta">Intralinks · Deal Intelligence</div>
+  <div class="hdr-right">
+    <span class="badge b-sl" id="sl-badge" style="display:none">● Live</span>
+    <span class="badge b-blue" id="count-badge" style="display:none"></span>
+    <span class="badge b-amber" id="q2-badge" style="display:none"></span>
+  </div>
+</header>
+
+<nav class="nav-tabs">
+  <div class="nav-tab on" onclick="showView('exec',this)">📊 Executive Dashboard</div>
+  <div class="nav-tab" onclick="showView('calls',this)">📞 All Calls</div>
+  <div class="nav-tab" onclick="showView('coaching',this)">🎯 Team Coaching</div>
+</nav>
+
+<div class="main" id="main"></div>
+
+<!-- Coaching Panel -->
+<div class="panel-overlay" id="panel-overlay" onclick="closePanel()"></div>
+<div class="coaching-panel" id="coaching-panel">
+  <div class="panel-hdr">
+    <div>
+      <div class="panel-title" id="panel-title">Loading...</div>
+      <div class="panel-sub" id="panel-sub"></div>
+    </div>
+    <button class="panel-close" onclick="closePanel()">✕</button>
+  </div>
+  <div class="panel-body" id="panel-body">
+    <div class="panel-loading">
+      <div class="panel-spinner"></div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-3)">Loading call data...</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── CONFIG ──
+const MEDD_LABELS = {M:'Metrics',E:'Economic Buyer',Dc:'Decision Criteria',Dp:'Decision Process',P:'Paper Process',I:'Identified Pain',Ch:'Champion',Co:'Competition',Ce:'Compelling Event',Cp:'Closing Plan'};
+const MEDD_COLORS = {M:'#1a6644',E:'#1a3a5c',Dc:'#5a3a9a',Dp:'#5a3a9a',P:'#8b3a1f',I:'#8b1f1f',Ch:'#7a4a00',Co:'#555',Ce:'#7a2a5a',Cp:'#1a3a5c'};
+const COM_LABELS = {pbos:'Positive Business Outcomes',ri:'Required Capabilities',metrics:'Metrics / Value',discovery:'Discovery Questions',objections:'Objection Handling',next_steps:'Next Steps & Commitment'};
+const SF_STAGES_ORDERED = ['Discover','Define & Validate Solution','Deal Prep Side Car','Propose','Negotiate and Close','Contract Signed','Closed'];
+
+// ── STATE ──
+let allCalls = [];
+let analysisCache = {};
+let currentView = 'exec';
+let filters = { rep: 'all', signal: 'all', stage: 'all', search: '' };
+
+// ── HELPERS ──
+function sc(s){return s>=70?'var(--green)':s>=50?'var(--amber)':'var(--red)';}
+function tc(s){return s>=60?'var(--purple)':s>=35?'var(--amber)':'var(--red)';}
+function q2color(s){return s==='green'?'var(--green)':s==='amber'?'var(--gold)':'var(--red)';}
+function q2bg(s){return s==='green'?'var(--green-light)':s==='amber'?'var(--amber-light)':'var(--red-light)';}
+function q2border(s){return s==='green'?'#b8d9c8':s==='amber'?'#f0d9a8':'#f0c0c0';}
+function spClass(s){return 'sp-'+(s||'na');}
+function spLabel(s){return{strong:'Strong',partial:'Partial',missing:'Missing',na:'N/A'}[s]||'N/A';}
+function aiClass(s){return{sharp:'ai-sharp',partially_sharp:'ai-partial',generic:'ai-generic','n/a':'ai-na'}[s]||'ai-na';}
+function aiPillClass(s){return{sharp:'p-sharp',partially_sharp:'p-partial-ai',generic:'p-generic','n/a':'p-na-ai'}[s]||'p-na-ai';}
+function aiLabel(s){return{sharp:'Sharp ✓',partially_sharp:'Partially Sharp',generic:'Generic ✗','n/a':'Not Raised'}[s]||s;}
+function fmtDate(d){try{return new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric'});}catch{return d||'';}}
+function fmtDateFull(d){try{return new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}catch{return d||'';}}
+function fmtDur(s){return s?Math.round(s/60)+'m':'';}
+function fmtArr(v){if(!v||v===0)return '—';return '$'+Number(v).toLocaleString();}
+function getAccount(c){return c.crm_account_name||c.account_name||c.name||'Unknown';}
+function getRep(c){return c.user_name||c.owner_name||'Unknown Rep';}
+function getTitle(c){return c.name||c.title||getAccount(c);}
+function getStage(c){return c.crm_opportunity_stage||c.opportunity_stage||'Unknown';}
+function getAmount(c){return parseFloat(c.crm_opportunity_amount||0);}
+function getCloseDate(c){return c.crm_opportunity_close_date||'';}
+function getRecap(c){return c.recap||c.summary||'';}
+function getKM(c){return c.key_moments||[];}
+function extractTranscript(c){
+  if(c.transcript&&typeof c.transcript==='string')return c.transcript;
+  if(Array.isArray(c.transcript_lines))return c.transcript_lines.map(l=>`${l.speaker_name||'Speaker'}: ${l.content||''}`).join('\n');
+  return getRecap(c);
+}
+
+// ── Q2 SIGNAL LOGIC (fast, no Claude) ──
+function calcQ2Signal(call) {
+  const stage = getStage(call).toLowerCase();
+  const closeDate = getCloseDate(call);
+  const amount = getAmount(call);
+  const recap = getRecap(call).toLowerCase();
+  const km = getKM(call);
+  
+  // Parse close date
+  let closesInQ2 = false;
+  let closesThisYear = false;
+  if (closeDate) {
+    const cd = new Date(closeDate);
+    const now = new Date();
+    const q2End = new Date('2026-06-30');
+    const yearEnd = new Date('2026-12-31');
+    closesInQ2 = cd <= q2End && cd >= now;
+    closesThisYear = cd <= yearEnd;
+  }
+
+  // Activity signals from key moments
+  const hasUrgency = km.some(k => (k.title||'').toLowerCase().includes('urgency') || (k.title||'').toLowerCase().includes('timing'));
+  const hasNextSteps = km.some(k => (k.title||'').toLowerCase().includes('next step'));
+  const hasPain = km.some(k => (k.title||'').toLowerCase().includes('pain') || (k.title||'').toLowerCase().includes('business'));
+  const hasObjection = km.some(k => (k.title||'').toLowerCase().includes('objection'));
+
+  // Stage scoring
+  const stageScore = 
+    stage.includes('negotiate') || stage.includes('contract') ? 90 :
+    stage.includes('propose') ? 70 :
+    stage.includes('deal prep') || stage.includes('define') ? 45 :
+    stage.includes('discover') ? 20 : 30;
+
+  // Q2 signal
+  if (stageScore >= 70 && closesInQ2 && !hasObjection) {
+    return { signal: 'green', label: 'Closeable Q2', reason: `${getStage(call)} · closes ${fmtDateFull(closeDate)}` };
+  }
+  if (stageScore >= 45 && closesThisYear && (hasUrgency || hasNextSteps || hasPain)) {
+    return { signal: 'amber', label: 'Possible Q2', reason: `${getStage(call)} · ${hasUrgency?'urgency signal':'active engagement'}` };
+  }
+  if (stageScore >= 45 && closesInQ2) {
+    return { signal: 'amber', label: 'Possible Q2', reason: `${getStage(call)} · close date in Q2` };
+  }
+  return { signal: 'red', label: 'Unlikely Q2', reason: `${getStage(call)}${closeDate?' · closes '+fmtDateFull(closeDate):''}` };
+}
+
+function calcActivityScore(call) {
+  const km = getKM(call);
+  if (km.length >= 4) return { score: 'high', color: 'var(--green)', label: 'High' };
+  if (km.length >= 2) return { score: 'med', color: 'var(--amber)', label: 'Med' };
+  return { score: 'low', color: 'var(--red)', label: 'Low' };
+}
+
+// ── API ──
+async function slGet(path, params = '') {
+  const url = `/api/salesloft/${path}${params ? '?' + params : ''}`;
+  const resp = await fetch(url);
+  if (!resp.ok) throw new Error(`API ${resp.status}: ${await resp.text()}`);
+  return resp.json();
+}
+
+async function analyzeWithClaude(call) {
+  const transcript = extractTranscript(call);
+  const recap = getRecap(call);
+  const km = getKM(call).map(k=>`${k.title||''}: ${k.summary||k.text||''}`).join(' | ');
+
+  const prompt = `You are an elite B2B sales coach for Intralinks (VDR and alternative investments platform). 
+
+Context: Intralinks is transitioning from transactional VDR to subscription platform (DealCentre AI for M&A, FundCentre AI for alternatives). SS&C controls the AI stack end-to-end — model, fine-tuning, hosting inside the perimeter. Competitors (Datasite, Juniper Square, Anduin) use acquired or outsourced AI.
+
+Call: ${getTitle(call)}
+Account: ${getAccount(call)}
+Rep: ${getRep(call)}
+SF Stage: ${getStage(call)}
+Close Date: ${getCloseDate(call)||'Unknown'}
+Amount: ${fmtArr(getAmount(call))}
+
+Salesloft Recap: ${recap||'Not available'}
+Key Moments: ${km||'Not available'}
+Transcript: ${transcript.slice(0,5000)}
+
+Return ONLY valid JSON:
+{
+  "overall_score": 0-100,
+  "deal_context": "1-2 sentences",
+  "summary": "2-3 sentence coaching summary",
+  "ai_story": {"came_up":true/false,"sharp_or_generic":"sharp|partially_sharp|generic|n/a","how_handled":"description","coaching":"coaching note"},
+  "meddpicccc_scores": {"M":"strong|partial|missing|na","E":"strong|partial|missing|na","Dc":"strong|partial|missing|na","Dp":"strong|partial|missing|na","P":"strong|partial|missing|na","I":"strong|partial|missing|na","Ch":"strong|partial|missing|na","Co":"strong|partial|missing|na","Ce":"strong|partial|missing|na","Cp":"strong|partial|missing|na"},
+  "meddpicccc_coaching": {"M":"note","E":"note","Dc":"note","Dp":"note","P":"note","I":"note","Ch":"note","Co":"note","Ce":"note","Cp":"note"},
+  "transition_score": 0-100,
+  "multithread_score": 0-100,
+  "top_wins": ["win1","win2","win3"],
+  "top_priorities": ["p1","p2","p3"],
+  "suggested_next_step": "exact follow-up language"
+}`;
+
+  const resp = await fetch('/api/analyze', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})
+  });
+  const data = await resp.json();
+  const raw = data.content?.[0]?.text||'{}';
+  try { return JSON.parse(raw.replace(/```json|```/g,'')); }
+  catch(e) { return {}; }
+}
+
+// ── MAIN INIT ──
+async function init() {
+  showLoading('Connecting to Salesloft...', 5);
+  
+  try {
+    // Test connection
+    const me = await slGet('v2/me.json');
+    const repName = me.data?.first_name || 'Connected';
+    
+    showLoading(`Connected as ${repName}. Loading 2026 conversations...`, 12);
+
+    // Load all 2026 conversations with pagination
+    let page = 1;
+    let hasMore = true;
+    const allConvs = [];
+
+    while (hasMore && allConvs.length < 300) {
+      showLoading(`Loading calls... ${allConvs.length} so far`, 12 + (allConvs.length/300)*30);
+      try {
+        const params = `per_page=100&page=${page}&sort_by=updated_at&sort_direction=DESC&updated_at[gt]=2026-01-01T00:00:00Z`;
+        const r = await slGet('v2/conversations/calls', params);
+        const batch = r.data || [];
+        allConvs.push(...batch);
+        hasMore = batch.length === 100;
+        page++;
+        if (batch.length === 0) break;
+      } catch(e) {
+        break;
+      }
+    }
+
+    showLoading(`Processing ${allConvs.length} calls...`, 44);
+
+    // Add Q2 signal to each call (fast, no Claude)
+    allCalls = allConvs.map(call => ({
+      ...call,
+      _q2: calcQ2Signal(call),
+      _activity: calcActivityScore(call)
+    }));
+
+    // Sort: closeable first, then possible, then unlikely
+    allCalls.sort((a,b) => {
+      const order = {green:0,amber:1,red:2};
+      return (order[a._q2.signal]||2) - (order[b._q2.signal]||2);
+    });
+
+    showLoading('Building dashboard...', 95);
+    await new Promise(r=>setTimeout(r,300));
+
+    // Update header
+    document.getElementById('sl-badge').style.display='inline';
+    document.getElementById('count-badge').style.display='inline';
+    document.getElementById('count-badge').textContent = `${allCalls.length} Calls`;
+    const closeable = allCalls.filter(c=>c._q2.signal==='green').length;
+    const possible = allCalls.filter(c=>c._q2.signal==='amber').length;
+    document.getElementById('q2-badge').style.display='inline';
+    document.getElementById('q2-badge').textContent = `Q2: ${closeable}🟢 ${possible}🟡`;
+
+    hideLoading();
+    renderExecDashboard();
+
+  } catch(e) {
+    hideLoading();
+    document.getElementById('main').innerHTML = `
+      <div class="load-wrap"><div class="load-card">
+        <div class="load-icon">⚠️</div>
+        <div class="load-title">Connection Error</div>
+        <div class="load-sub">${e.message}<br><br>Check that SALESLOFT_API_KEY is set in Vercel environment variables.</div>
+      </div></div>`;
+  }
+}
+
+// ── LOADING ──
+function showLoading(step, pct) {
+  document.getElementById('main').innerHTML = `
+    <div class="load-wrap"><div class="load-card">
+      <div class="load-icon">🔍</div>
+      <div class="load-title">Loading Deal Intelligence</div>
+      <div class="load-sub">Pulling your Salesloft calls and building the Q2 forecast...</div>
+      <div class="prog-bar-wrap"><div class="prog-bar" style="width:${pct}%"></div></div>
+      <div class="prog-step">${step}</div>
+    </div></div>`;
+}
+function hideLoading() {}
+
+// ── VIEW SWITCHING ──
+function showView(view, tabEl) {
+  currentView = view;
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('on'));
+  if(tabEl) tabEl.classList.add('on');
+  if(view==='exec') renderExecDashboard();
+  else if(view==='calls') renderCallsView();
+  else if(view==='coaching') renderCoachingView();
+}
+
+// ── EXEC DASHBOARD ──
+function renderExecDashboard() {
+  const filtered = getFiltered();
+  const closeable = filtered.filter(c=>c._q2.signal==='green');
+  const possible = filtered.filter(c=>c._q2.signal==='amber');
+  const unlikely = filtered.filter(c=>c._q2.signal==='red');
+  const closeableArr = closeable.reduce((a,c)=>a+getAmount(c),0);
+  const possibleArr = possible.reduce((a,c)=>a+getAmount(c),0);
+  const totalArr = filtered.reduce((a,c)=>a+getAmount(c),0);
+  const reps = [...new Set(filtered.map(c=>getRep(c)))].filter(Boolean);
+
+  document.getElementById('main').innerHTML = `
+    <div class="exec-header">
+      <div class="exec-title">Deal Dashboard</div>
+      <div class="exec-sub">Q2 2026 Pipeline · Based on Salesloft activity + Salesforce stage data</div>
+      <div class="exec-meta">
+        <span class="exec-meta-item">📅 Last 30 days</span>
+        <span class="exec-meta-item">·</span>
+        <span class="exec-meta-item">${filtered.length} calls</span>
+        <span class="exec-meta-item">·</span>
+        <span class="exec-meta-item">${reps.length} reps</span>
+        <span class="exec-meta-item">·</span>
+        <span class="exec-meta-item">Live from Salesloft</span>
+      </div>
+    </div>
+
+    ${renderFilterBar(filtered)}
+
+    <div class="kpi-strip">
+      <div class="kpi k-green">
+        <div class="kpi-num" style="color:var(--green)">${closeable.length}</div>
+        <div class="kpi-label">Closeable Q2<br>${fmtArr(closeableArr)}</div>
+      </div>
+      <div class="kpi k-amber">
+        <div class="kpi-num" style="color:var(--gold)">${possible.length}</div>
+        <div class="kpi-label">Possible Q2<br>${fmtArr(possibleArr)}</div>
+      </div>
+      <div class="kpi k-red">
+        <div class="kpi-num" style="color:var(--red)">${unlikely.length}</div>
+        <div class="kpi-label">Unlikely Q2</div>
+      </div>
+      <div class="kpi k-blue">
+        <div class="kpi-num" style="color:var(--accent)">${fmtArr(closeableArr+possibleArr)}</div>
+        <div class="kpi-label">Q2 Pipeline ARR</div>
+      </div>
+      <div class="kpi k-purple">
+        <div class="kpi-num" style="color:var(--purple)">${reps.length}</div>
+        <div class="kpi-label">Active Reps</div>
+      </div>
+      <div class="kpi k-grey">
+        <div class="kpi-num" style="color:var(--ink-2)">${filtered.length}</div>
+        <div class="kpi-label">Total Calls</div>
+      </div>
+    </div>
+
+    ${renderQ2Section('🟢 Closeable Q2', closeable, 'green')}
+    ${renderQ2Section('🟡 Possible Q2', possible, 'amber')}
+    ${renderQ2Section('🔴 Unlikely Q2', unlikely, 'red', true)}`;
+
+  bindFilters();
+}
+
+function renderFilterBar(filtered) {
+  const reps = [...new Set(allCalls.map(c=>getRep(c)))].filter(Boolean).sort();
+  const stages = [...new Set(allCalls.map(c=>getStage(c)))].filter(Boolean).sort();
+  return `<div class="filter-bar">
+    <span class="filter-label">Filter:</span>
+    <select class="filter-select" id="f-rep" onchange="applyFilters()">
+      <option value="all">All Reps</option>
+      ${reps.map(r=>`<option value="${r}" ${filters.rep===r?'selected':''}>${r}</option>`).join('')}
+    </select>
+    <select class="filter-select" id="f-signal" onchange="applyFilters()">
+      <option value="all">All Signals</option>
+      <option value="green" ${filters.signal==='green'?'selected':''}>🟢 Closeable</option>
+      <option value="amber" ${filters.signal==='amber'?'selected':''}>🟡 Possible</option>
+      <option value="red" ${filters.signal==='red'?'selected':''}>🔴 Unlikely</option>
+    </select>
+    <select class="filter-select" id="f-stage" onchange="applyFilters()">
+      <option value="all">All Stages</option>
+      ${stages.map(s=>`<option value="${s}" ${filters.stage===s?'selected':''}>${s}</option>`).join('')}
+    </select>
+    <input type="text" class="filter-search" id="f-search" placeholder="Search account or rep..." value="${filters.search}" oninput="applyFilters()">
+    <span class="filter-count">${filtered.length} deals</span>
+  </div>`;
+}
+
+function bindFilters() {}
+
+function applyFilters() {
+  filters.rep = document.getElementById('f-rep')?.value || 'all';
+  filters.signal = document.getElementById('f-signal')?.value || 'all';
+  filters.stage = document.getElementById('f-stage')?.value || 'all';
+  filters.search = document.getElementById('f-search')?.value || '';
+  if(currentView==='exec') renderExecDashboard();
+  else if(currentView==='calls') renderCallsView();
+  else renderCoachingView();
+}
+
+function getFiltered() {
+  return allCalls.filter(c => {
+    if(filters.rep!=='all' && getRep(c)!==filters.rep) return false;
+    if(filters.signal!=='all' && c._q2?.signal!==filters.signal) return false;
+    if(filters.stage!=='all' && getStage(c)!==filters.stage) return false;
+    if(filters.search) {
+      const s = filters.search.toLowerCase();
+      if(!getAccount(c).toLowerCase().includes(s) && !getRep(c).toLowerCase().includes(s)) return false;
+    }
+    return true;
+  });
+}
+
+function renderQ2Section(title, calls, signal, collapsed=false) {
+  if(calls.length===0) return '';
+  const arr = calls.reduce((a,c)=>a+getAmount(c),0);
+  return `<div class="q2-section">
+    <div class="q2-section-hdr">
+      <div class="q2-dot" style="background:${q2color(signal)}"></div>
+      <div class="q2-section-title">${title}</div>
+      <div class="q2-section-count">${calls.length} deal${calls.length!==1?'s':''}</div>
+      ${arr>0?`<div class="q2-section-arr" style="color:${q2color(signal)}">${fmtArr(arr)}</div>`:''}
+    </div>
+    <table class="deal-table">
+      <thead><tr>
+        <th>Account</th>
+        <th>Rep</th>
+        <th>Stage</th>
+        <th>ARR</th>
+        <th>Close Date</th>
+        <th>Activity</th>
+        <th>Signal Reason</th>
+        <th>Coach</th>
+      </tr></thead>
+      <tbody>
+        ${calls.slice(0, collapsed?5:calls.length).map((c,i) => renderDealRow(c, i)).join('')}
+        ${collapsed&&calls.length>5?`<tr><td colspan="8" style="text-align:center;padding:10px;font-size:12px;color:var(--ink-3);cursor:pointer" onclick="showAllUnlikely()">Show all ${calls.length} unlikely deals ↓</td></tr>`:''}
+      </tbody>
+    </table>
+  </div>`;
+}
+
+function renderDealRow(call, i) {
+  const q2 = call._q2||{signal:'red',label:'Unknown',reason:''};
+  const act = call._activity||{color:'var(--ink-3)',label:'—'};
+  const analyzed = analysisCache[call.id];
+  const btnText = analyzed ? 'Coached ✓' : 'Analyze →';
+  const btnClass = analyzed ? 'tbl-analyze done' : 'tbl-analyze';
+  const stage = getStage(call);
+  const stageShort = stage.length>18 ? stage.slice(0,16)+'…' : stage;
+
+  return `<tr onclick="openCallPanel('${call.id}')">
+    <td>
+      <div class="tbl-account">${getAccount(call)}</div>
+      <div class="tbl-rep">${getRep(call)}</div>
+    </td>
+    <td><span class="tbl-stage" title="${stage}">${stageShort}</span></td>
+    <td class="tbl-arr">${fmtArr(getAmount(call))}</td>
+    <td class="tbl-date">${fmtDateFull(getCloseDate(call))}</td>
+    <td>
+      <div class="tbl-activity">
+        <div class="act-dot" style="background:${act.color}"></div>
+        <span style="font-size:11px;font-family:'DM Mono',monospace;color:${act.color}">${act.label}</span>
+        <span style="font-size:10px;color:var(--ink-4);font-family:'DM Mono',monospace;margin-left:2px">${getKM(call).length} signals</span>
+      </div>
+    </td>
+    <td>
+      <div class="tbl-signal" style="color:${q2color(q2.signal)}">
+        <div class="sig-dot" style="background:${q2color(q2.signal)}"></div>
+        <span>${q2.reason||q2.label}</span>
+      </div>
+    </td>
+    <td onclick="event.stopPropagation()">
+      <button class="${btnClass}" onclick="analyzeCall('${call.id}')">${btnText}</button>
+    </td>
+  </tr>`;
+}
+
+function showAllUnlikely() {
+  renderExecDashboard();
+}
+
+// ── CALLS VIEW ──
+function renderCallsView() {
+  const filtered = getFiltered();
+  document.getElementById('main').innerHTML = `
+    <div style="margin-bottom:20px">
+      <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:4px">All Calls</div>
+      <div style="font-size:13px;color:var(--ink-3)">Click any call to run AI coaching analysis</div>
+    </div>
+    ${renderFilterBar(filtered)}
+    <table class="deal-table">
+      <thead><tr>
+        <th>Account / Call</th>
+        <th>Rep</th>
+        <th>Date</th>
+        <th>Duration</th>
+        <th>Stage</th>
+        <th>Q2 Signal</th>
+        <th>Salesloft Signals</th>
+        <th>Coach</th>
+      </tr></thead>
+      <tbody>
+        ${filtered.map(c => renderCallRow(c)).join('')}
+      </tbody>
+    </table>`;
+  bindFilters();
+}
+
+function renderCallRow(call) {
+  const q2 = call._q2||{};
+  const analyzed = analysisCache[call.id];
+  const btnClass = analyzed ? 'tbl-analyze done' : 'tbl-analyze';
+  const km = getKM(call);
+  return `<tr onclick="openCallPanel('${call.id}')">
+    <td>
+      <div class="tbl-account">${getAccount(call)}</div>
+      <div class="tbl-rep" style="font-size:11px;color:var(--ink-3)">${getTitle(call)}</div>
+    </td>
+    <td><div class="tbl-rep">${getRep(call)}</div></td>
+    <td class="tbl-date">${fmtDate(call.created_at||call.updated_at)}</td>
+    <td class="tbl-date">${fmtDur(call.duration)}</td>
+    <td><span class="tbl-stage">${getStage(call)}</span></td>
+    <td><div class="tbl-signal" style="color:${q2color(q2.signal)}"><div class="sig-dot" style="background:${q2color(q2.signal)}"></div>${q2.label||'—'}</div></td>
+    <td>
+      <div style="display:flex;gap:4px;flex-wrap:wrap">
+        ${km.slice(0,3).map(k=>`<span style="font-size:10px;font-family:'DM Mono',monospace;background:var(--surface);padding:2px 6px;border-radius:3px;color:var(--ink-3)">${(k.title||'').slice(0,14)}</span>`).join('')}
+      </div>
+    </td>
+    <td onclick="event.stopPropagation()">
+      <button class="${btnClass}" onclick="analyzeCall('${call.id}')">${analyzed?'Coached ✓':'Analyze →'}</button>
+    </td>
+  </tr>`;
+}
+
+// ── COACHING VIEW ──
+function renderCoachingView() {
+  const analyzed = Object.values(analysisCache);
+  document.getElementById('main').innerHTML = `
+    <div style="margin-bottom:20px">
+      <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:4px">Team Coaching</div>
+      <div style="font-size:13px;color:var(--ink-3)">${analyzed.length} calls analyzed · Click any call to view full coaching notes</div>
+    </div>
+    ${analyzed.length===0?`<div class="empty"><div class="empty-icon">🎯</div><div class="empty-title">No calls analyzed yet</div><div class="empty-sub">Go to All Calls or the Executive Dashboard and click "Analyze →" on any call to generate coaching notes.</div></div>`:`
+    <table class="deal-table">
+      <thead><tr>
+        <th>Account</th><th>Rep</th><th>Score</th><th>AI Story</th><th>Value vs Feature</th><th>Q2</th><th>Top Priority</th>
+      </tr></thead>
+      <tbody>
+        ${analyzed.map(a => {
+          const call = allCalls.find(c=>c.id===a._callId)||{};
+          const q2 = call._q2||{};
+          return `<tr onclick="openCallPanel('${a._callId}')">
+            <td><div class="tbl-account">${getAccount(call)}</div><div class="tbl-rep">${getRep(call)}</div></td>
+            <td>${getRep(call)}</td>
+            <td><span style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:${sc(a.overall_score||0)}">${a.overall_score||0}</span></td>
+            <td><span class="ai-pill ${aiPillClass(a.ai_story?.sharp_or_generic||'n/a')}">${aiLabel(a.ai_story?.sharp_or_generic||'n/a')}</span></td>
+            <td><span style="font-size:12px">${a.value_vs_feature?.score==='value_led'?'✅ Value-Led':a.value_vs_feature?.score==='feature_led'?'❌ Feature-Led':'⚠️ Mixed'}</span></td>
+            <td><div class="tbl-signal" style="color:${q2color(q2.signal)}"><div class="sig-dot" style="background:${q2color(q2.signal)}"></div>${q2.label||'—'}</div></td>
+            <td style="font-size:12px;color:var(--ink-2)">${(a.top_priorities||[])[0]||'—'}</td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>`}`;
+}
+
+// ── COACHING PANEL ──
+function openCallPanel(callId) {
+  const call = allCalls.find(c=>c.id===callId);
+  if(!call) return;
+  
+  document.getElementById('panel-title').textContent = getAccount(call);
+  document.getElementById('panel-sub').textContent = `${getRep(call)} · ${fmtDateFull(call.created_at)} · ${fmtDur(call.duration)}`;
+  document.getElementById('panel-overlay').classList.add('show');
+  document.getElementById('coaching-panel').classList.add('open');
+  
+  const cached = analysisCache[callId];
+  if(cached) {
+    renderPanelContent(call, cached);
+  } else {
+    renderPanelBasic(call);
+  }
+}
+
+function renderPanelBasic(call) {
+  const q2 = call._q2||{};
+  const km = getKM(call);
+  const recap = getRecap(call);
+  
+  document.getElementById('panel-body').innerHTML = `
+    <div class="p-q2-box" style="background:${q2bg(q2.signal)};border:1px solid ${q2border(q2.signal)}">
+      <div class="p-q2-dot" style="background:${q2color(q2.signal)}"></div>
+      <div>
+        <div class="p-q2-label" style="color:${q2color(q2.signal)}">Q2 Signal · ${q2.label||''}</div>
+        <div class="p-q2-text" style="color:${q2color(q2.signal)}">${q2.reason||''}</div>
+      </div>
+    </div>
+
+    <div class="p-sl-strip">
+      <div class="p-sl-card"><div class="p-sl-label">Stage</div><div class="p-sl-value">${getStage(call)}</div></div>
+      <div class="p-sl-card"><div class="p-sl-label">Close Date</div><div class="p-sl-value">${fmtDateFull(getCloseDate(call))||'—'}</div></div>
+      <div class="p-sl-card"><div class="p-sl-label">Amount</div><div class="p-sl-value">${fmtArr(getAmount(call))}</div></div>
+    </div>
+
+    ${recap?`<div class="p-recap">
+      <div class="p-recap-label">⚡ Salesloft AI Recap</div>
+      <div class="p-recap-text">${recap}</div>
+      ${km.length?`<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px">
+        ${km.slice(0,4).map(k=>`<div style="background:var(--surface);border-radius:5px;padding:8px 10px">
+          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px">${k.title||''}</div>
+          <div style="font-size:11px;color:var(--ink-2);line-height:1.5">${k.summary||k.text||''}</div>
+        </div>`).join('')}
+      </div>`:''}
+    </div>`:''}
+
+    <div class="p-act-row">
+      <button class="p-act-btn btn-sf" onclick="alert('Coming soon')">☁ Save to Salesforce</button>
+      <button class="p-act-btn btn-ol" onclick="alert('Coming soon')">📅 Schedule</button>
+      ${call.id?`<button class="p-act-btn btn-sl-link" onclick="window.open('https://app.salesloft.com/app/conversation-intelligence/recordings/${call.id}','_blank')">⚡ Salesloft</button>`:''}
+    </div>
+
+    <div style="text-align:center;padding:20px;background:var(--surface);border-radius:8px;border:1px dashed var(--rule)">
+      <div style="font-size:13px;color:var(--ink-3);margin-bottom:12px">Run AI coaching analysis on this call</div>
+      <button style="background:var(--accent);color:white;border:none;border-radius:6px;padding:10px 24px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer" onclick="analyzeCallInPanel('${call.id}')">
+        🎯 Analyze This Call →
+      </button>
+      <div style="font-size:11px;color:var(--ink-4);margin-top:8px;font-family:'DM Mono',monospace">~10 seconds · MEDDPICCCC · AI Story · Coaching Notes</div>
+    </div>`;
+}
+
+async function analyzeCallInPanel(callId) {
+  const call = allCalls.find(c=>c.id===callId);
+  if(!call) return;
+  
+  // Load full call detail first
+  document.getElementById('panel-body').innerHTML = `
+    <div class="panel-loading">
+      <div class="panel-spinner"></div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-3)">Loading transcript...</div>
+    </div>`;
+
+  try {
+    // Get full call details
+    let fullCall = call;
+    try {
+      const detail = await slGet(`v2/conversations/calls/${callId}`);
+      fullCall = {...call, ...(detail.data||{})};
+    } catch(e) {}
+
+    document.getElementById('panel-body').innerHTML = `
+      <div class="panel-loading">
+        <div class="panel-spinner"></div>
+        <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-3)">Analyzing with Claude AI...</div>
+      </div>`;
+
+    const analysis = await analyzeWithClaude(fullCall);
+    analysis._callId = callId;
+    analysisCache[callId] = analysis;
+    
+    // Update the analyze button in table
+    document.querySelectorAll('.tbl-analyze').forEach(btn => {
+      if(btn.onclick?.toString().includes(callId)) {
+        btn.textContent = 'Coached ✓';
+        btn.className = 'tbl-analyze done';
+      }
+    });
+
+    renderPanelContent(fullCall, analysis);
+    
+    // Refresh coaching view if active
+    if(currentView==='coaching') renderCoachingView();
+    
+  } catch(e) {
+    document.getElementById('panel-body').innerHTML = `<div style="padding:20px;color:var(--red)">Analysis failed: ${e.message}</div>`;
+  }
+}
+
+async function analyzeCall(callId) {
+  const btn = event.target;
+  if(btn.classList.contains('done')) {
+    openCallPanel(callId);
+    return;
+  }
+  btn.textContent = '...';
+  btn.className = 'tbl-analyze loading';
+  btn.disabled = true;
+  
+  try {
+    const call = allCalls.find(c=>c.id===callId);
+    let fullCall = call;
+    try {
+      const detail = await slGet(`v2/conversations/calls/${callId}`);
+      fullCall = {...call,...(detail.data||{})};
+    } catch(e) {}
+    
+    const analysis = await analyzeWithClaude(fullCall);
+    analysis._callId = callId;
+    analysisCache[callId] = analysis;
+    btn.textContent = 'Coached ✓';
+    btn.className = 'tbl-analyze done';
+    btn.disabled = false;
+    openCallPanel(callId);
+  } catch(e) {
+    btn.textContent = 'Retry';
+    btn.className = 'tbl-analyze';
+    btn.disabled = false;
+  }
+}
+
+function renderPanelContent(call, analysis) {
+  const q2 = call._q2||{};
+  const ai = analysis.ai_story||{};
+  const scores = analysis.meddpicccc_scores||{};
+  const coaching = analysis.meddpicccc_coaching||{};
+  const s = analysis.overall_score||0;
+  const ts = analysis.transition_score||0;
+  const mts = analysis.multithread_score||0;
+  const meddScore = Object.values(scores).length ? 
+    Math.round(Object.values(scores).reduce((a,v)=>a+(v==='strong'?10:v==='partial'?5:v==='na'?10:0),0)/(Object.values(scores).length*10)*100) : 0;
+
+  document.getElementById('panel-body').innerHTML = `
+    <div class="p-q2-box" style="background:${q2bg(q2.signal)};border:1px solid ${q2border(q2.signal)}">
+      <div class="p-q2-dot" style="background:${q2color(q2.signal)}"></div>
+      <div>
+        <div class="p-q2-label" style="color:${q2color(q2.signal)}">Q2 Signal · ${q2.label||''}</div>
+        <div class="p-q2-text" style="color:${q2color(q2.signal)}">${q2.reason||''}</div>
+      </div>
+    </div>
+
+    <div class="p-sl-strip">
+      <div class="p-sl-card"><div class="p-sl-label">Stage</div><div class="p-sl-value">${getStage(call)}</div></div>
+      <div class="p-sl-card"><div class="p-sl-label">Close Date</div><div class="p-sl-value">${fmtDateFull(getCloseDate(call))||'—'}</div></div>
+      <div class="p-sl-card"><div class="p-sl-label">Amount</div><div class="p-sl-value">${fmtArr(getAmount(call))}</div></div>
+    </div>
+
+    <div class="p-scores">
+      <div class="p-score"><div class="p-score-num" style="color:${sc(s)}">${s}</div><div class="p-score-label">Overall</div></div>
+      <div class="p-score"><div class="p-score-num" style="color:${sc(meddScore)}">${meddScore}</div><div class="p-score-label">MEDDPICCCC</div></div>
+      <div class="p-score hl-purple"><div class="p-score-num" style="color:${tc(ts)}">${ts}</div><div class="p-score-label">Transition</div></div>
+      <div class="p-score hl-teal"><div class="p-score-num" style="color:${ts>=60?'var(--teal)':ts>=35?'var(--amber)':'var(--red)'}">${mts}</div><div class="p-score-label">Multi-Thread</div></div>
+    </div>
+
+    ${getRecap(call)?`<div class="p-recap">
+      <div class="p-recap-label">⚡ Salesloft AI Recap</div>
+      <div class="p-recap-text">${getRecap(call)}</div>
+    </div>`:''}
+
+    <div class="p-summ">
+      <div class="p-summ-label">Deal Context</div>
+      <div class="p-summ-text" style="font-size:11px;color:var(--ink-3);font-family:'DM Mono',monospace;margin-bottom:6px">${analysis.deal_context||''}</div>
+      <div class="p-summ-label">Coaching Summary</div>
+      <div class="p-summ-text">${analysis.summary||''}</div>
+    </div>
+
+    ${ai.how_handled?`<div class="ai-block ${aiClass(ai.sharp_or_generic||'n/a')}">
+      <div class="ai-hdr"><div class="ai-title">🤖 AI Story</div><span class="ai-pill ${aiPillClass(ai.sharp_or_generic||'n/a')}">${aiLabel(ai.sharp_or_generic||'n/a')}</span></div>
+      <div class="ai-body">${ai.how_handled}</div>
+      <div class="ai-coach-block">${ai.coaching||''}</div>
+    </div>`:''}
+
+    <div class="p-two-col">
+      <div class="p-wins"><div class="p-col-label">✓ Top Wins</div>${(analysis.top_wins||[]).map(w=>`<div class="p-li"><div class="p-li-dot dot-g"></div><div>${w}</div></div>`).join('')}</div>
+      <div class="p-pris"><div class="p-col-label">↑ Top Priorities</div>${(analysis.top_priorities||[]).map(p=>`<div class="p-li"><div class="p-li-dot dot-a"></div><div>${p}</div></div>`).join('')}</div>
+    </div>
+
+    ${analysis.suggested_next_step?`<div class="p-nxt">
+      <div class="p-nxt-label">Suggested Next Step</div>
+      <div class="p-nxt-text" id="p-nst">${analysis.suggested_next_step}</div>
+      <button class="p-copy" onclick="copyNST()">Copy</button>
+    </div>`:''}
+
+    <div class="p-act-row">
+      <button class="p-act-btn btn-sf" onclick="alert('Coming soon')">☁ Save to Salesforce</button>
+      <button class="p-act-btn btn-ol" onclick="alert('Coming soon')">📅 Schedule</button>
+      ${call.id?`<button class="p-act-btn btn-sl-link" onclick="window.open('https://app.salesloft.com/app/conversation-intelligence/recordings/${call.id}','_blank')">⚡ Salesloft</button>`:''}
+    </div>
+
+    <div class="p-tabs">
+      <button class="p-tab on" onclick="switchPTab('medd',this)">MEDDPICCCC</button>
+      <button class="p-tab" onclick="switchPTab('tr',this)">⇄ Transition</button>
+    </div>
+
+    <div class="p-tab-section show" id="ptab-medd">
+      ${Object.entries(MEDD_LABELS).map(([k,l])=>{
+        const st=scores[k]||'na';const co=coaching[k]||'';
+        return `<div class="p-fw-item">
+          <div class="p-fw-key" style="color:${MEDD_COLORS[k]||'#333'}">${k}</div>
+          <div>
+            <div class="p-fw-hdr"><div class="p-fw-lbl">${l}</div><span class="sp ${spClass(st)}">${spLabel(st)}</span></div>
+            ${co?`<div class="p-coach p-coach-${st}">${co}</div>`:''}
+          </div>
+        </div>`;
+      }).join('')}
+    </div>
+
+    <div class="p-tab-section" id="ptab-tr">
+      <div style="background:var(--surface);border-radius:7px;padding:14px;margin-bottom:10px">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);text-transform:uppercase;margin-bottom:4px">Transition Score</div>
+        <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:${tc(ts)}">${ts}</div>
+        <div style="font-size:12px;color:var(--ink-2);margin-top:4px">VDR → DCAI / FundCentre platform motion</div>
+      </div>
+      <div style="background:var(--surface);border-radius:7px;padding:14px">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);text-transform:uppercase;margin-bottom:4px">Multi-Thread Score</div>
+        <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:${mts>=60?'var(--teal)':mts>=35?'var(--amber)':'var(--red)'}">${mts}</div>
+        <div style="font-size:12px;color:var(--ink-2);margin-top:4px">Org exploration and stakeholder mapping</div>
+      </div>
+    </div>`;
+}
+
+function switchPTab(tab, btn) {
+  document.querySelectorAll('.p-tab-section').forEach(s=>s.classList.remove('show'));
+  document.querySelectorAll('.p-tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById('ptab-'+tab)?.classList.add('show');
+  btn.classList.add('on');
+}
+
+function closePanel() {
+  document.getElementById('panel-overlay').classList.remove('show');
+  document.getElementById('coaching-panel').classList.remove('open');
+}
+
+function copyNST() {
+  const t = document.getElementById('p-nst')?.innerText||'';
+  navigator.clipboard.writeText(t).catch(()=>{});
+  const b = document.querySelector('.p-copy');
+  if(b){b.textContent='Copied!';setTimeout(()=>b.textContent='Copy',1500);}
+}
+
+// ── START ──
+init();
+</script>
+</body>
+</html>
