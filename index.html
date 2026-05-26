@@ -363,11 +363,11 @@ function calcActivityScore(call) {
 
 // ── API ──
 async function slGet(path, params = '') {
-  const encodedPath = path.replace(/\/g, '__');
-  const encodedParams = params ? '&' + params.replace(/\[/g,'%5B').replace(/\]/g,'%5D') : '';
-  const url = `/api/sl?p=${encodedPath}${encodedParams}`;
+  const encodedPath = path.split('/').join('__');
+  const encodedParams = params ? '&' + params.split('[').join('%5B').split(']').join('%5D') : '';
+  const url = '/api/sl?p=' + encodedPath + encodedParams;
   const resp = await fetch(url);
-  if (!resp.ok) throw new Error(`API ${resp.status}: ${await resp.text()}`);
+  if (!resp.ok) throw new Error('API ' + resp.status);
   return resp.json();
 }
 
