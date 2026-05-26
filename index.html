@@ -207,6 +207,7 @@ function spLabel(s){return{strong:'Strong',partial:'Partial',missing:'Missing',n
 function aiClass(s){return{sharp:'ai-sharp',partially_sharp:'ai-partial',generic:'ai-generic','n/a':'ai-na'}[s]||'ai-na';}
 function aiPillClass(s){return{sharp:'p-sharp',partially_sharp:'p-partial',generic:'p-generic','n/a':'p-na'}[s]||'p-na';}
 function aiLabel(s){return{sharp:'Sharp ✓',partially_sharp:'Partially Sharp',generic:'Generic ✗','n/a':'Not Raised'}[s]||s;}
+function aiLabelShort(s){return{sharp:'Sharp',partially_sharp:'Partial',generic:'Generic','n/a':'—'}[s]||s;}
 
 // Init badges
 const closeable = CALLS.filter(c=>c.q2_signal==='green').length;
@@ -310,7 +311,7 @@ function renderQ2Section(title,calls,signal){
     </div>
     <table class="deal-table">
       <thead><tr>
-        <th>Account</th><th>Rep</th><th>Stage</th><th>ARR</th><th>Score</th><th>AI Story</th><th>Signal</th>
+        <th>Account</th><th>Rep</th><th>Stage</th><th>ARR</th><th>Score</th><th style="width:80px">AI Story</th><th>Signal</th>
       </tr></thead>
       <tbody>
         ${calls.map(c=>`<tr onclick="openPanel(${JSON.stringify(c.account).replace(/"/g,'&quot;')})">
@@ -319,7 +320,7 @@ function renderQ2Section(title,calls,signal){
           <td><span class="tbl-stage">${c.sf_stage}</span></td>
           <td class="tbl-arr">${fmtArr(c.estimated_arr)}</td>
           <td><span class="score-pill" style="color:${sc(c.overall_score)}">${c.overall_score}</span></td>
-          <td><span class="ai-pill ${aiPillClass(c.ai_story?.sharp_or_generic)}">${aiLabel(c.ai_story?.sharp_or_generic)}</span></td>
+          <td><span class="ai-pill ${aiPillClass(c.ai_story?.sharp_or_generic)}">${aiLabelShort(c.ai_story?.sharp_or_generic)}</span></td>
           <td><div class="tbl-signal" style="color:${q2color(c.q2_signal)}"><div class="sig-dot" style="background:${q2color(c.q2_signal)}"></div>${c.q2_reason}</div></td>
         </tr>`).join('')}
       </tbody>
@@ -343,7 +344,7 @@ function renderCalls(){
           <td style="font-family:'DM Mono',monospace;font-size:11px">${c.duration}</td>
           <td><span class="tbl-stage">${c.sf_stage}</span></td>
           <td><span class="score-pill" style="color:${sc(c.overall_score)}">${c.overall_score}</span></td>
-          <td><span class="ai-pill ${aiPillClass(c.ai_story?.sharp_or_generic)}">${aiLabel(c.ai_story?.sharp_or_generic)}</span></td>
+          <td><span class="ai-pill ${aiPillClass(c.ai_story?.sharp_or_generic)}">${aiLabelShort(c.ai_story?.sharp_or_generic)}</span></td>
           <td><div class="tbl-signal" style="color:${q2color(c.q2_signal)}"><div class="sig-dot" style="background:${q2color(c.q2_signal)}"></div>${c.q2_label}</div></td>
         </tr>`).join('')}
       </tbody>
@@ -362,7 +363,7 @@ function renderCoaching(){
           <td><div class="tbl-account">${c.account}</div><div class="tbl-rep">${c.date}</div></td>
           <td>${c.rep}</td>
           <td><span class="score-pill" style="color:${sc(c.overall_score)}">${c.overall_score}</span></td>
-          <td><span class="ai-pill ${aiPillClass(c.ai_story?.sharp_or_generic)}">${aiLabel(c.ai_story?.sharp_or_generic)}</span></td>
+          <td><span class="ai-pill ${aiPillClass(c.ai_story?.sharp_or_generic)}">${aiLabelShort(c.ai_story?.sharp_or_generic)}</span></td>
           <td style="font-size:12px">${c.value_vs_feature?.score==='value_led'?'✅ Value-Led':c.value_vs_feature?.score==='feature_led'?'❌ Feature-Led':'⚠️ Mixed'}</td>
           <td><span style="font-family:'DM Mono',monospace;font-size:12px;color:${tc(c.transition_score)}">${c.transition_score}</span></td>
           <td><span style="font-family:'DM Mono',monospace;font-size:12px;color:${tc(c.multithread_score)}">${c.multithread_score}</span></td>
