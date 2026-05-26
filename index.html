@@ -207,7 +207,7 @@ function spLabel(s){return{strong:'Strong',partial:'Partial',missing:'Missing',n
 function aiClass(s){return{sharp:'ai-sharp',partially_sharp:'ai-partial',generic:'ai-generic','n/a':'ai-na'}[s]||'ai-na';}
 function aiPillClass(s){return{sharp:'p-sharp',partially_sharp:'p-partial',generic:'p-generic','n/a':'p-na'}[s]||'p-na';}
 function aiLabel(s){return{sharp:'Sharp ✓',partially_sharp:'Partially Sharp',generic:'Generic ✗','n/a':'Not Raised'}[s]||s;}
-function aiLabelShort(s){return{sharp:'Sharp',partially_sharp:'Partial',generic:'Generic','n/a':'—'}[s]||s;}
+function aiLabelShort(s){return{sharp:'Sharp',partially_sharp:'Partial',generic:'Generic','n/a':'Not Raised'}[s]||s;}
 
 // Init badges
 const closeable = CALLS.filter(c=>c.q2_signal==='green').length;
