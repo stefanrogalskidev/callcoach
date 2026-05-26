@@ -15,12 +15,9 @@
   --red:#8b1f1f;--red-light:#fdeaea;--gold:#b8860b;
   --purple:#4a2a7a;--purple-light:#f0ebfa;
   --teal:#1a5a5a;--teal-light:#e6f5f5;
-  --sl:#00b388;--sl-dark:#00291f;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh;line-height:1.6;}
-
-/* HEADER */
 .hdr{background:var(--ink);height:58px;display:flex;align-items:center;padding:0 28px;position:sticky;top:0;z-index:200;gap:14px;}
 .logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff;white-space:nowrap;}
 .logo span{color:#7eb3e0;}
@@ -28,45 +25,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
 .hdr-right{margin-left:auto;display:flex;gap:8px;align-items:center;}
 .badge{font-family:'DM Mono',monospace;font-size:10px;padding:3px 8px;border-radius:3px;letter-spacing:0.05em;text-transform:uppercase;}
 .b-blue{background:#1a3a5c;color:#7eb3e0;}
-.b-sl{background:var(--sl-dark);color:var(--sl);}
+.b-green{background:#0a3020;color:#4db880;}
 .b-amber{background:#3a2000;color:#e8a830;}
-
-/* NAV TABS */
-.nav-tabs{background:white;border-bottom:1px solid var(--rule);display:flex;padding:0 28px;gap:0;position:sticky;top:58px;z-index:100;}
+.nav-tabs{background:white;border-bottom:1px solid var(--rule);display:flex;padding:0 28px;position:sticky;top:58px;z-index:100;}
 .nav-tab{padding:12px 20px;font-size:13px;font-weight:500;color:var(--ink-3);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.15s;white-space:nowrap;}
 .nav-tab:hover{color:var(--ink);}
 .nav-tab.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:600;}
-
-/* MAIN */
 .main{padding:28px 32px;max-width:1200px;margin:0 auto;}
-
-/* LOADING */
-.load-wrap{display:flex;align-items:center;justify-content:center;min-height:60vh;}
-.load-card{background:white;border:1px solid var(--rule);border-radius:12px;padding:40px;text-align:center;max-width:380px;width:100%;}
-.load-icon{font-size:36px;margin-bottom:16px;}
-.load-title{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:6px;}
-.load-sub{font-size:13px;color:var(--ink-3);margin-bottom:24px;line-height:1.6;}
-.prog-bar-wrap{width:100%;height:5px;background:var(--surface-2);border-radius:3px;overflow:hidden;margin-bottom:10px;}
-.prog-bar{height:100%;background:var(--sl);border-radius:3px;transition:width 0.5s ease;}
-.prog-step{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-3);min-height:18px;}
-
-/* EXEC DASHBOARD */
-.exec-header{margin-bottom:24px;}
-.exec-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;letter-spacing:-0.02em;margin-bottom:4px;}
-.exec-sub{font-size:13px;color:var(--ink-3);}
-.exec-meta{display:flex;align-items:center;gap:12px;margin-top:8px;flex-wrap:wrap;}
-.exec-meta-item{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-4);}
-
-/* FILTER BAR */
 .filter-bar{background:white;border:1px solid var(--rule);border-radius:8px;padding:12px 16px;margin-bottom:20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
 .filter-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.07em;white-space:nowrap;}
 .filter-select{background:var(--surface);border:1px solid var(--rule);border-radius:5px;padding:6px 10px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--ink);cursor:pointer;}
-.filter-select:focus{outline:none;border-color:var(--accent);}
-.filter-search{flex:1;min-width:160px;background:var(--surface);border:1px solid var(--rule);border-radius:5px;padding:6px 10px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--ink);}
-.filter-search:focus{outline:none;border-color:var(--accent);}
+.filter-search{flex:1;min-width:160px;background:var(--surface);border:1px solid var(--rule);border-radius:5px;padding:6px 10px;font-family:'DM Sans',sans-serif;font-size:12px;}
 .filter-count{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-3);white-space:nowrap;margin-left:auto;}
-
-/* KPI STRIP */
 .kpi-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:20px;}
 .kpi{background:white;border:1px solid var(--rule);border-radius:8px;padding:14px 16px;text-align:center;}
 .kpi.k-green{border-top:3px solid var(--green);background:var(--green-light);}
@@ -82,16 +52,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
 .kpi.k-red .kpi-label{color:var(--red);}
 .kpi.k-blue .kpi-label{color:var(--accent);}
 .kpi.k-purple .kpi-label{color:var(--purple);}
-
-/* Q2 SECTIONS */
 .q2-section{margin-bottom:28px;}
 .q2-section-hdr{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--rule);}
 .q2-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
 .q2-section-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;}
 .q2-section-count{font-family:'DM Mono',monospace;font-size:12px;color:var(--ink-3);}
 .q2-section-arr{font-family:'DM Mono',monospace;font-size:12px;margin-left:auto;}
-
-/* DEAL TABLE */
 .deal-table{width:100%;border-collapse:collapse;}
 .deal-table th{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.07em;padding:8px 12px;text-align:left;border-bottom:2px solid var(--rule);white-space:nowrap;background:var(--surface);}
 .deal-table td{padding:11px 12px;border-bottom:1px solid var(--rule);font-size:13px;color:var(--ink-2);vertical-align:middle;}
@@ -101,18 +67,17 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
 .tbl-rep{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-3);}
 .tbl-stage{font-family:'DM Mono',monospace;font-size:11px;padding:2px 8px;border-radius:3px;background:var(--surface-2);color:var(--ink-3);white-space:nowrap;}
 .tbl-arr{font-weight:500;white-space:nowrap;}
-.tbl-date{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-3);white-space:nowrap;}
-.tbl-activity{display:flex;align-items:center;gap:4px;}
-.act-dot{width:6px;height:6px;border-radius:50%;}
 .tbl-signal{display:flex;align-items:center;gap:5px;font-family:'DM Mono',monospace;font-size:11px;white-space:nowrap;}
 .sig-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
-.tbl-analyze{background:var(--accent);color:white;border:none;border-radius:4px;padding:4px 10px;font-family:'DM Mono',monospace;font-size:10px;cursor:pointer;white-space:nowrap;letter-spacing:0.04em;}
-.tbl-analyze:hover{background:#1e4a78;}
-.tbl-analyze.done{background:var(--green);cursor:default;}
-.tbl-analyze.loading{background:var(--surface-2);color:var(--ink-3);cursor:not-allowed;}
-
-/* COACHING PANEL */
-.coaching-panel{position:fixed;top:0;right:0;width:560px;height:100vh;background:white;box-shadow:-4px 0 40px rgba(0,0,0,0.15);z-index:300;overflow-y:auto;transform:translateX(100%);transition:transform 0.3s ease;}
+.score-pill{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;}
+.ai-pill{font-family:'DM Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;letter-spacing:0.05em;text-transform:uppercase;font-weight:500;}
+.p-sharp{background:var(--green-light);color:var(--green);border:1px solid #b8d9c8;}
+.p-partial{background:var(--amber-light);color:var(--amber);border:1px solid #f0d9a8;}
+.p-generic{background:var(--red-light);color:var(--red);border:1px solid #f0c0c0;}
+.p-na{background:var(--surface);color:var(--ink-3);border:1px solid var(--rule);}
+.panel-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.3);z-index:299;display:none;}
+.panel-overlay.show{display:block;}
+.coaching-panel{position:fixed;top:0;right:0;width:580px;height:100vh;background:white;box-shadow:-4px 0 40px rgba(0,0,0,0.15);z-index:300;overflow-y:auto;transform:translateX(100%);transition:transform 0.3s ease;}
 .coaching-panel.open{transform:translateX(0);}
 .panel-hdr{background:var(--ink);padding:18px 24px;display:flex;align-items:flex-start;gap:12px;position:sticky;top:0;z-index:10;}
 .panel-close{background:none;border:none;color:#888;font-size:20px;cursor:pointer;padding:2px 6px;border-radius:4px;flex-shrink:0;margin-left:auto;}
@@ -120,38 +85,21 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
 .panel-title{font-family:'Playfair Display',serif;font-size:18px;color:white;line-height:1.2;}
 .panel-sub{font-family:'DM Mono',monospace;font-size:10px;color:#666;margin-top:3px;}
 .panel-body{padding:20px 24px;}
-.panel-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px;text-align:center;gap:12px;}
-.panel-spinner{width:32px;height:32px;border:3px solid var(--rule);border-top-color:var(--sl);border-radius:50%;animation:spin 0.8s linear infinite;}
-@keyframes spin{to{transform:rotate(360deg);}}
-
-/* PANEL COMPONENTS */
 .p-q2-box{border-radius:7px;padding:10px 14px;margin-bottom:16px;display:flex;align-items:flex-start;gap:10px;}
 .p-q2-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:3px;}
 .p-q2-label{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:3px;}
 .p-q2-text{font-size:12px;line-height:1.5;}
-
 .p-sl-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
-.p-sl-card{background:var(--surface);border-radius:6px;padding:10px 12px;border-top:2px solid var(--sl);}
+.p-sl-card{background:var(--surface);border-radius:6px;padding:10px 12px;border-top:2px solid var(--accent);}
 .p-sl-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:3px;}
 .p-sl-value{font-size:12px;font-weight:600;color:var(--ink);line-height:1.3;}
-
-.p-recap{background:white;border:1px solid var(--rule);border-left:3px solid var(--sl);border-radius:5px;padding:12px 14px;margin-bottom:14px;}
-.p-recap-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--sl);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;}
-.p-recap-text{font-size:12px;color:var(--ink-2);line-height:1.7;}
-
 .p-scores{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:14px;}
 .p-score{background:var(--surface);border-radius:6px;padding:10px;text-align:center;}
-.p-score.hl-purple{background:var(--purple-light);border:1px solid #c0a8e0;}
-.p-score.hl-teal{background:var(--teal-light);border:1px solid #a0cece;}
 .p-score-num{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;line-height:1;margin-bottom:3px;}
 .p-score-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.06em;}
-.hl-purple .p-score-label{color:var(--purple);}
-.hl-teal .p-score-label{color:var(--teal);}
-
 .p-summ{background:var(--accent-light);border:1px solid #c5d8eb;border-left:3px solid var(--accent);border-radius:5px;padding:12px 14px;margin-bottom:14px;}
 .p-summ-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;}
 .p-summ-text{font-size:12px;color:var(--ink-2);line-height:1.7;}
-
 .p-two-col{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
 .p-wins{background:var(--green-light);border:1px solid #b8d9c8;border-radius:6px;padding:12px 14px;}
 .p-pris{background:var(--amber-light);border:1px solid #f0d9a8;border-radius:6px;padding:12px 14px;}
@@ -163,34 +111,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
 .p-li-dot{flex-shrink:0;margin-top:6px;width:5px;height:5px;border-radius:50%;}
 .dot-g{background:var(--green);}
 .dot-a{background:var(--gold);}
-
 .p-nxt{background:var(--surface);border:1px solid var(--rule);border-left:3px solid var(--accent);border-radius:5px;padding:12px 14px;margin-bottom:14px;position:relative;}
 .p-nxt-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}
 .p-nxt-text{font-size:12px;color:var(--ink-2);line-height:1.7;font-style:italic;}
 .p-copy{position:absolute;top:10px;right:10px;background:white;border:1px solid var(--rule);border-radius:3px;padding:3px 8px;font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-3);cursor:pointer;}
-
-.p-tabs{display:flex;border-bottom:1px solid var(--rule);margin-bottom:14px;gap:0;}
-.p-tab{background:none;border:none;padding:7px 12px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--ink-3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.15s;font-weight:500;}
-.p-tab.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:600;}
-.p-tab-section{display:none;}
-.p-tab-section.show{display:block;}
-
-.p-fw-item{padding:11px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:40px 1fr;gap:10px;}
-.p-fw-item:last-child{border-bottom:none;}
-.p-fw-key{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;padding-top:1px;}
-.p-fw-hdr{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
-.p-fw-lbl{font-weight:600;font-size:12px;flex:1;}
-.sp{font-family:'DM Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;letter-spacing:0.05em;text-transform:uppercase;font-weight:500;}
-.sp-strong{background:var(--green-light);color:var(--green);border:1px solid #b8d9c8;}
-.sp-partial{background:var(--amber-light);color:var(--amber);border:1px solid #f0d9a8;}
-.sp-missing{background:var(--red-light);color:var(--red);border:1px solid #f0c0c0;}
-.sp-na{background:var(--surface);color:var(--ink-3);border:1px solid var(--rule);}
-.p-ev{background:var(--surface);border-radius:3px;padding:7px 10px;font-size:11px;color:var(--ink-3);line-height:1.6;margin-bottom:5px;border-left:2px solid var(--surface-2);}
-.p-coach{border-radius:3px;padding:7px 10px;font-size:11px;line-height:1.6;border-left:2px solid;}
-.p-coach-strong{background:var(--green-light);border-color:#5cb88a;color:#1a3d2a;}
-.p-coach-partial,.p-coach-missing{background:var(--amber-light);border-color:var(--gold);color:var(--amber);}
-.p-coach-na{background:var(--surface);border-color:var(--surface-2);color:var(--ink-3);}
-
 .ai-block{border:1px solid var(--rule);border-radius:6px;padding:12px 14px;margin-bottom:14px;}
 .ai-sharp{background:#e6f2ec;border-color:#b8d9c8;}
 .ai-partial{background:#fdf3e3;border-color:#f0d9a8;}
@@ -201,31 +125,34 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
 .ai-sharp .ai-title{color:var(--green);}
 .ai-partial .ai-title{color:var(--amber);}
 .ai-generic .ai-title{color:var(--red);}
-.ai-pill{font-family:'DM Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;letter-spacing:0.05em;text-transform:uppercase;font-weight:500;}
-.p-sharp{background:var(--green-light);color:var(--green);border:1px solid #b8d9c8;}
-.p-partial-ai{background:var(--amber-light);color:var(--amber);border:1px solid #f0d9a8;}
-.p-generic{background:var(--red-light);color:var(--red);border:1px solid #f0c0c0;}
-.p-na-ai{background:var(--surface);color:var(--ink-3);border:1px solid var(--rule);}
 .ai-body{font-size:12px;line-height:1.65;color:var(--ink-2);}
 .ai-coach-block{margin-top:6px;padding:7px 10px;border-radius:3px;background:rgba(0,0,0,0.04);font-size:11px;color:var(--ink-3);line-height:1.6;}
-
-/* OVERLAY */
-.panel-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.3);z-index:299;display:none;}
-.panel-overlay.show{display:block;}
-
-/* EMPTY STATE */
+.p-tabs{display:flex;border-bottom:1px solid var(--rule);margin-bottom:14px;}
+.p-tab{background:none;border:none;padding:7px 12px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--ink-3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;font-weight:500;}
+.p-tab.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:600;}
+.p-tab-section{display:none;}
+.p-tab-section.show{display:block;}
+.p-fw-item{padding:11px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:40px 1fr;gap:10px;}
+.p-fw-item:last-child{border-bottom:none;}
+.p-fw-key{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;padding-top:1px;}
+.p-fw-hdr{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
+.p-fw-lbl{font-weight:600;font-size:12px;flex:1;}
+.sp{font-family:'DM Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;letter-spacing:0.05em;text-transform:uppercase;font-weight:500;}
+.sp-strong{background:var(--green-light);color:var(--green);border:1px solid #b8d9c8;}
+.sp-partial{background:var(--amber-light);color:var(--amber);border:1px solid #f0d9a8;}
+.sp-missing{background:var(--red-light);color:var(--red);border:1px solid #f0c0c0;}
+.sp-na{background:var(--surface);color:var(--ink-3);border:1px solid var(--rule);}
+.p-coach{border-radius:3px;padding:7px 10px;font-size:11px;line-height:1.6;border-left:2px solid;}
+.p-coach-strong{background:var(--green-light);border-color:#5cb88a;color:#1a3d2a;}
+.p-coach-partial,.p-coach-missing{background:var(--amber-light);border-color:var(--gold);color:var(--amber);}
+.p-coach-na{background:var(--surface);border-color:var(--surface-2);color:var(--ink-3);}
+.multithread-box{background:var(--purple-light);border:1px solid #c0a8e0;border-radius:6px;padding:12px 14px;margin-bottom:14px;}
+.mt-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--purple);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}
+.mt-action{font-size:12px;color:var(--ink-2);line-height:1.6;font-style:italic;}
+.exec-header{margin-bottom:24px;}
+.exec-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;letter-spacing:-0.02em;margin-bottom:4px;}
+.exec-sub{font-size:13px;color:var(--ink-3);}
 .empty{text-align:center;padding:60px 20px;color:var(--ink-3);}
-.empty-icon{font-size:36px;margin-bottom:12px;}
-.empty-title{font-family:'Playfair Display',serif;font-size:18px;color:var(--ink);margin-bottom:6px;}
-.empty-sub{font-size:13px;line-height:1.6;}
-
-/* ACTIONS ROW IN PANEL */
-.p-act-row{display:flex;gap:8px;margin-bottom:14px;}
-.p-act-btn{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:5px;border:1.5px dashed;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;background:white;transition:all 0.15s;}
-.p-act-btn:hover{transform:translateY(-1px);}
-.btn-sf{border-color:#0176d3;color:#0176d3;}
-.btn-ol{border-color:#0078d4;color:#0078d4;}
-.btn-sl-link{border-color:var(--sl);color:var(--sl);}
 </style>
 </head>
 <body>
@@ -234,9 +161,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
   <div class="logo">Call<span>Coach</span></div>
   <div class="hdr-meta">Intralinks · Deal Intelligence</div>
   <div class="hdr-right">
-    <span class="badge b-sl" id="sl-badge" style="display:none">● Live</span>
-    <span class="badge b-blue" id="count-badge" style="display:none"></span>
-    <span class="badge b-amber" id="q2-badge" style="display:none"></span>
+    <span class="badge b-green">● 19 Calls</span>
+    <span class="badge b-blue">Q2 2026</span>
+    <span class="badge b-amber" id="q2-badge"></span>
   </div>
 </header>
 
@@ -248,334 +175,79 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
 
 <div class="main" id="main"></div>
 
-<!-- Coaching Panel -->
 <div class="panel-overlay" id="panel-overlay" onclick="closePanel()"></div>
 <div class="coaching-panel" id="coaching-panel">
   <div class="panel-hdr">
     <div>
-      <div class="panel-title" id="panel-title">Loading...</div>
+      <div class="panel-title" id="panel-title"></div>
       <div class="panel-sub" id="panel-sub"></div>
     </div>
     <button class="panel-close" onclick="closePanel()">✕</button>
   </div>
-  <div class="panel-body" id="panel-body">
-    <div class="panel-loading">
-      <div class="panel-spinner"></div>
-      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-3)">Loading call data...</div>
-    </div>
-  </div>
+  <div class="panel-body" id="panel-body"></div>
 </div>
 
 <script>
-// ── CONFIG ──
+const CALLS = [{"_filename": "EXT_ Globalfoundries VDR Subscription & DealCentre AI Discovery Meeting Transcription 2026-05-15_1630.txt", "account": "Globalfoundries", "rep": "Meghan Brennan", "all_reps": "Meghan Brennan, Josh Sobocinski, Justin Simonsen", "date": "2026-05-15", "duration": "00:33:24", "overall_score": 68, "deal_context": "VDR renewal negotiation for CHIPS data room expiring June 18 + DCAI discovery demo led by Josh Sobocinski. Two procurement contacts joined, legal team identified as expansion target.", "summary": "Josh ran a solid DCAI demo \u2014 Ask Link, redaction, translation all landed well with Serena. Meghan navigated a complex renewal structure (chips room needing 2 more months, 24\u219212 month term risk) competently. Key miss: no sovereign AI story told, and legal team was identified as a target but no concrete next step was set to get them on a call this week before contract expiration.", "sf_stage": "Define & Validate Solution", "estimated_arr": 47000, "close_quarter": "Q2 2026", "q2_signal": "green", "q2_label": "Closeable Q2", "q2_reason": "Contract expires June 18 \u2014 renewal has hard deadline, legal team demo being scheduled for early next week", "ai_story": {"came_up": true, "sharp_or_generic": "partially_sharp", "how_handled": "Josh demoed Ask Link effectively \u2014 showed source citation, document Q&A, translation, redaction. Did not articulate the sovereign AI architecture (self-hosted LLM, SS&C perimeter, data never leaves). Described it as 'internal AI LLM models' without the sovereignty story.", "coaching": "Add one sentence before the demo: 'One thing that makes our AI different \u2014 the model runs inside SS&C's own infrastructure. Your documents never touch OpenAI or any external model.' Takes 10 seconds and reframes the whole demo."}, "value_vs_feature": {"score": "mixed", "evidence": "Josh led with features (category column, star icon, Ask Link) but connected them to workflow outcomes (catch errors before diligence, find documents fast, speed up Q&A responses). Serena was engaged but noncommittal.", "coaching": "Before the demo, ask: 'What's the most time-consuming part of managing the CHIPS data room today?' Then anchor each feature to that answer."}, "meddpicccc_scores": {"M": "missing", "E": "partial", "Dc": "missing", "Dp": "partial", "P": "partial", "I": "partial", "Ch": "partial", "Co": "partial", "Ce": "strong", "Cp": "partial"}, "meddpicccc_coaching": {"M": "No metrics established \u2014 what's the cost of the CHIPS data room running over? What's Serena's time spent managing overages worth?", "E": "Procurement (Anna, Subhajeet) is on the call but Serena appears to be the influencer. Who actually signs? Needs clarification.", "Dc": "No decision criteria surfaced \u2014 what does a good renewal look like to them beyond price?", "Dp": "Loose: 'send info, present internally, schedule ASAP' \u2014 needs a specific date for legal team meeting before June 18.", "P": "June 18 expiration is the paper process deadline. Good awareness, but no formal proposal sent yet.", "I": "CHIPS data room needed through July \u2014 that's the pain. Could probe deeper: what happens if it lapses even for a week?", "Ch": "Serena is an advocate but not a champion yet. Legal team is untapped and is the real expansion champion target.", "Co": "Box mentioned in trackers. Not addressed on the call.", "Ce": "Strong \u2014 June 18 contract expiration is a hard compelling event. Well understood by both sides.", "Cp": "Closing plan is loose: 'send info, schedule legal meeting ASAP.' Needs a specific date and owner."}, "transition_score": 62, "transition_summary": "DCAI demo happened and landed positively, but was positioned as 'here's what's coming eventually' rather than 'here's why you should move now.' Legal team is the real transition opportunity.", "multithread_score": 45, "multithread_summary": "Procurement joined but legal team \u2014 the highest-value expansion target \u2014 is only referenced, not yet engaged.", "top_multithread_action": "Get a specific date for the legal team demo before end of next week \u2014 Meghan said 'early next week' but no date was confirmed.", "top_wins": ["Josh's Ask Link demo generated genuine interest \u2014 Serena said 'this is pretty cool'", "Compelling event (June 18 expiry) is well understood and creates natural urgency", "Legal team identified as expansion target with a clear path to multi-product agreement"], "top_priorities": ["Confirm legal team meeting date before June 18 \u2014 this is the week to do it", "Send formal renewal proposal with and without Deal Vault options as Ana requested", "Add sovereign AI narrative to Josh's standard demo opener \u2014 one sentence, big impact"], "suggested_next_step": "Serena, I'll send over the renewal options (with and without Deal Vault) and the DCAI one-pager today. Can we lock in 30 minutes with your legal team before Friday the 22nd? If they're interested in DCAI, I can wrap it into the renewal agreement and make the numbers work \u2014 but I need to know before the 18th."}, {"_filename": "EXT_ Intralinks_Nektar VIA Elite and DealCentre AI Discovery Meeting Transcription 2026-04-30_1700.txt", "account": "Nektar Therapeutics", "rep": "Scott Martin", "all_reps": "Scott Martin, Bryan Hungria, Meghan Brennan", "date": "2026-04-30", "duration": "00:19:20", "overall_score": 38, "deal_context": "VIA Elite renewal discovery with Tanya Laeha (board prep/legal ops). Long-time customer, Scott Martin's first real engagement with the account after years of treating it as a pure renewals account.", "summary": "This call was heavy on rapport-building (Vegas, furniture, real estate) and light on discovery. Scott identified the account correctly as a renewal that needs to become a real relationship, but the 19-minute call produced almost no qualification data. Meghan's DCAI intro was soft. No next steps were set.", "sf_stage": "Discover", "estimated_arr": 18000, "close_quarter": "Q3 2026", "q2_signal": "red", "q2_label": "Unlikely Q2", "q2_reason": "Early discovery stage, no urgency or timeline established, relationship just being initialized", "ai_story": {"came_up": false, "sharp_or_generic": "n/a", "how_handled": "AI/DCAI was not discussed on this call.", "coaching": "This account does board prep and legal document management \u2014 exactly the DCAI use case. Next call should include a 10-minute Ask Link demo anchored to 'what if your board could query 300 documents in 30 seconds before a meeting?'"}, "value_vs_feature": {"score": "feature_led", "evidence": "No substantive product discussion occurred. The call was almost entirely small talk and light discovery.", "coaching": "Discovery before demo. Next call: 'Tanya, walk me through how your team prepares for a board meeting today \u2014 what's the most painful part?' Then build the pitch from her answer."}, "meddpicccc_scores": {"M": "missing", "E": "missing", "Dc": "missing", "Dp": "missing", "P": "missing", "I": "missing", "Ch": "missing", "Co": "missing", "Ce": "missing", "Cp": "missing"}, "meddpicccc_coaching": {"M": "No metrics. Tanya mentioned quarterly board meetings \u2014 what's the prep time? What would saving 20% of that time be worth?", "E": "Tanya appears to be legal/ops, not a buyer. Who approves the renewal? Does the CFO or GC own this?", "Dc": "Completely unexplored.", "Dp": "No renewal timeline established \u2014 when does this come up?", "P": "No contract terms discussed.", "I": "Zero pain surfaced. This is the entire job of the next call.", "Ch": "Tanya could be a champion but needs a reason to advocate internally.", "Co": "Not discussed. Life sciences companies are actively being targeted by Datasite.", "Ce": "None identified.", "Cp": "No next steps set \u2014 this is the most urgent fix."}, "transition_score": 10, "transition_summary": "No transition motion attempted. DCAI was mentioned by Meghan but not explored.", "multithread_score": 10, "multithread_summary": "Only Tanya engaged. No org mapping attempted \u2014 who else in legal, finance, or BD uses the platform?", "top_multithread_action": "Ask Tanya: 'Besides yourself, who else at Nektar accesses the data room \u2014 and are there other teams doing document-heavy work we should know about?'", "top_wins": ["Scott established personal rapport with Tanya \u2014 she was warm and engaged", "Correctly identified this account needs to become a real relationship, not just a renewal", "Meghan planted the DCAI seed even if it wasn't developed"], "top_priorities": ["Set a specific next meeting before hanging up \u2014 no next step was confirmed", "Map the org: who else uses the platform, who owns the budget, when does renewal come up", "Prepare a board-prep use case demo for Tanya \u2014 that's her world"], "suggested_next_step": "Tanya, really glad we finally connected. Can we find 30 minutes in the next two weeks? I'd love to show you something specific to how legal teams are using our AI for board prep \u2014 I think it'll be relevant to what you do every quarter. What does your calendar look like?"}, {"_filename": "EXT_ MetLife_Intralinks Monthly Usage Meetings Transcription 2026-05-19_1500.txt", "account": "MetLife", "rep": "Meghan Brennan", "all_reps": "Meghan Brennan", "date": "2026-05-19", "duration": "00:10:44", "overall_score": 52, "deal_context": "Monthly usage check-in with Santhosh Gopal (IT/ops). MetLife near 500-seat limit (480-485 used). Multi-year renewal being explored, DCAI demo being scheduled post-Memorial Day. Company in consolidation mode post-PineBridge acquisition.", "summary": "Efficient, relationship-driven call. Meghan probed for multi-year without being pushy and got a soft positive signal for mid-June clarity. Santhosh is reliable but not a buyer \u2014 Eugene is the decision-maker and wasn't on the call. Key miss: Meghan accepted 'wait till Memorial Day' for the DCAI demo without confirming a specific date.", "sf_stage": "Define & Validate Solution", "estimated_arr": 85000, "close_quarter": "Q3 2026", "q2_signal": "amber", "q2_label": "Possible Q2", "q2_reason": "September renewal, multi-year signal positive, but decision expected mid-June \u2014 just outside Q2", "ai_story": {"came_up": true, "sharp_or_generic": "n/a", "how_handled": "DCAI demo is being scheduled but hasn't happened yet. Santhosh is coordinating internally.", "coaching": "When the DCAI demo happens, open with the sovereignty story \u2014 MetLife is a financial services firm with strict data governance. 'Your documents never leave SS&C infrastructure' will matter to their security team."}, "value_vs_feature": {"score": "mixed", "evidence": "Meghan focused on renewal mechanics and usage reporting. No value conversation happened.", "coaching": "Use the DCAI demo to anchor value before the renewal negotiation. If they see the platform, the multi-year conversation gets easier."}, "meddpicccc_scores": {"M": "missing", "E": "partial", "Dc": "missing", "Dp": "partial", "P": "partial", "I": "partial", "Ch": "partial", "Co": "missing", "Ce": "partial", "Cp": "partial"}, "meddpicccc_coaching": {"M": "No metrics. What's the cost of managing overages manually? What does 500-seat headroom mean for their consolidation work?", "E": "Eugene is the real decision-maker but wasn't on the call. Meghan needs to get in front of Eugene before the renewal.", "Dc": "Not explored. What does MetLife need from a renewal to say yes to multi-year?", "Dp": "Mid-June for clarity \u2014 good. But who is in the room when that decision gets made?", "P": "September renewal. Good awareness of timeline.", "I": "Capacity concern (480/500) is real pain. Consolidation activity will push them over.", "Ch": "Santhosh is a good internal navigator but needs coaching on the multi-year case.", "Co": "Not discussed. MetLife's size makes them a target for Datasite.", "Ce": "September expiration + PineBridge consolidation = two compelling events.", "Cp": "Post-Memorial Day demo, mid-June decision \u2014 loose. Needs specific dates."}, "transition_score": 30, "transition_summary": "DCAI demo is scheduled in principle but not confirmed with a date. Transition motion hasn't started yet.", "multithread_score": 25, "multithread_summary": "Only Santhosh engaged. Eugene (decision-maker) and the business teams being considered for DCAI haven't been mapped.", "top_multithread_action": "Get Eugene on the DCAI demo call \u2014 Santhosh can't say yes to multi-year, only Eugene can.", "top_wins": ["Multi-year signal is positive \u2014 Santhosh said 'we are working on that'", "Santhosh proactively agreed to loop back with clarity by mid-June", "Reporting pain point surfaced \u2014 automation ask could be a DCAI hook"], "top_priorities": ["Confirm a specific date for the DCAI demo before Memorial Day weekend", "Get Eugene on the demo call \u2014 multi-year decision won't happen without him", "Respond to the automated reporting request \u2014 this is a chance to show platform value"], "suggested_next_step": "Santhosh, let's lock in the DCAI demo for the week of June 2nd before things get busy. Can you send me Eugene's calendar availability? I want to make sure the right people are in the room so we can give you a clear picture before your mid-June decision window."}, {"_filename": "EXT_ NiKang VIA Elite Subscription and DealCentre AI Discovery Transcription 2026-05-21_1530.txt", "account": "NiKang Therapeutics", "rep": "Graham McIntire", "all_reps": "Graham McIntire, Meghan Brennan", "date": "2026-05-21", "duration": "00:17:00", "overall_score": 55, "deal_context": "At-risk VIA Elite renewal \u2014 CEO considering canceling in favor of SharePoint. Ally Cha is the admin contact, not the decision-maker. Fundraising round expected end of 2026/early 2027 is the save opportunity.", "summary": "Graham smartly uncovered the fundraising angle before Meghan joined \u2014 that's the core save play. Meghan handled the emotional moment (Ally's father passing) with genuine warmth. The renewal itself is at risk but the fundraising need is real and creates a reason to stay. Key miss: no one connected 'fundraising round' to 'you need a proper VDR, not SharePoint' explicitly enough.", "sf_stage": "Discover", "estimated_arr": 12000, "close_quarter": "Q3 2026", "q2_signal": "red", "q2_label": "Unlikely Q2", "q2_reason": "At-risk renewal, CEO driving cancellation, January renewal date, no urgency signal", "ai_story": {"came_up": false, "sharp_or_generic": "n/a", "how_handled": "AI/DCAI not discussed \u2014 appropriately, given the relationship and at-risk status.", "coaching": "When the fundraising conversation matures, DCAI is the right product. 'When you run your fundraising round, you'll want investor-grade Q&A, document AI, and outreach tracking \u2014 that's what DealCentre was built for. SharePoint can't do that.'"}, "value_vs_feature": {"score": "mixed", "evidence": "Meghan made the case for VIA Elite but framed it around contract mechanics (30-day notice, auto-renew) rather than why they need a VDR over SharePoint for a fundraise.", "coaching": "The save pitch is: 'SharePoint is fine for internal sharing. But when you run your fundraise and 30 investors are doing diligence on your IP simultaneously, you need permissioning, audit trails, and Q&A. That's not SharePoint.'"}, "meddpicccc_scores": {"M": "missing", "E": "partial", "Dc": "missing", "Dp": "partial", "P": "partial", "I": "partial", "Ch": "partial", "Co": "partial", "Ce": "partial", "Cp": "partial"}, "meddpicccc_coaching": {"M": "No metrics. What would a failed fundraise cost? What does a 6-month fundraise on SharePoint look like vs. a proper VDR?", "E": "CEO is the real decision-maker and is driving cancellation. Ally can't save this \u2014 someone needs to get to the CEO.", "Dc": "Not explored. What would make the CEO see value in keeping Intralinks?", "Dp": "September/October decision window per Ally. 30-day notice before January renewal.", "P": "January 24 auto-renew \u2014 30-day notice required. Well understood.", "I": "Fundraising need is the real pain. SharePoint's limitations for investor diligence is the angle.", "Ch": "Ally is sympathetic but can't champion internally. CEO needs to be the target.", "Co": "SharePoint is the stated alternative. Make the case for why it fails in fundraising scenarios.", "Ce": "Fundraising timeline (end of 2026/early 2027) is the compelling event. Connect it to the renewal decision.", "Cp": "No specific next step set. Ally said she'll 'confirm with CEO' \u2014 this needs a date."}, "transition_score": 20, "transition_summary": "No transition motion \u2014 this is a save play, not an expansion play yet. Get the renewal secured first.", "multithread_score": 20, "multithread_summary": "Only Ally engaged. CEO is driving the cancellation and hasn't been contacted. That's the most urgent gap.", "top_multithread_action": "Ask Ally: 'Would you be comfortable with me sending a brief note to your CEO directly \u2014 just to share what other biotech companies use when they run a fundraise? I want to make sure he has the full picture before making a decision.'", "top_wins": ["Graham uncovered the fundraising angle before Meghan joined \u2014 critical save opportunity", "Meghan handled the personal moment with Ally with genuine warmth and professionalism", "Fundraising timeline (end of 2026/early 2027) gives a natural hook to reframe the value conversation"], "top_priorities": ["Get a specific date for Ally to confirm with CEO \u2014 'I'll get back to you' is not a next step", "Send a one-page comparison of VIA Elite vs. SharePoint for a fundraising scenario \u2014 make the CEO's decision easy", "Consider requesting a direct CEO conversation \u2014 this deal dies if only Ally is the contact"], "suggested_next_step": "Ally, I really appreciate your time today, and I'm sorry again about your father. Can I send you a quick one-pager you can share with your CEO? It's a comparison of what a fundraise looks like on SharePoint versus a purpose-built VDR \u2014 I think it'll answer his question directly. And can we check in in two weeks to see where he lands?"}, {"_filename": "EXT_ Prudential_Intralinks QBR and Deal CentreAI Discovery Transcription 2026-05-05_1900.txt", "account": "Prudential", "rep": "Meghan Brennan", "all_reps": "Meghan Brennan", "date": "2026-05-05", "duration": "00:05:54", "overall_score": 28, "deal_context": "6-minute QBR/check-in with Jon Morris. Meghan acknowledged upfront that DCAI isn't relevant for Prudential's use case (regulatory document sharing). Account uses platform sparingly, has alternative secure sharing tools.", "summary": "Meghan showed good self-awareness by recognizing DCAI wasn't the right fit for Jon's use case. However, the call produced nothing actionable \u2014 no renewal discussion, no discovery of other Prudential business lines, no next step. Jon mentioned other groups (M&A) that might have a need, which went completely unexplored.", "sf_stage": "Discover", "estimated_arr": 8000, "close_quarter": "Q4 2026", "q2_signal": "red", "q2_label": "Unlikely Q2", "q2_reason": "Account used sparingly, no active deal motion, no urgency signal", "ai_story": {"came_up": false, "sharp_or_generic": "n/a", "how_handled": "Meghan correctly identified DCAI wasn't relevant for Jon's regulatory use case and didn't push it.", "coaching": "Jon mentioned 'M&A or something' at other Prudential groups. That's the thread to pull: 'Jon, do you know who handles M&A or corp dev at Prudential? Even a warm intro could be useful.'"}, "value_vs_feature": {"score": "feature_led", "evidence": "No product discussion. Call was entirely social/check-in.", "coaching": "This account needs a different play \u2014 not DCAI, but a Prudential-wide conversation. Who else in the organization does deals?"}, "meddpicccc_scores": {"M": "missing", "E": "missing", "Dc": "missing", "Dp": "missing", "P": "missing", "I": "na", "Ch": "partial", "Co": "partial", "Ce": "missing", "Cp": "missing"}, "meddpicccc_coaching": {"M": "No metrics of any kind. What's the renewal value? Is it even worth the effort vs. the M&A referral play?", "E": "Jon is not a buyer \u2014 he's a long-term contact. Who owns the contract renewal at Prudential?", "Dc": "Completely unexplored.", "Dp": "No renewal date discussed.", "P": "Not discussed.", "I": "Jon's use case doesn't fit DCAI \u2014 but that's not the same as no pain. He mentioned other competing platforms have taken share.", "Ch": "Jon is a friendly contact but doesn't appear to have internal influence.", "Co": "Other secure sharing platforms mentioned \u2014 Prudential has alternatives. Intralinks is sticky only because of existing contract.", "Ce": "None identified.", "Cp": "No next step set."}, "transition_score": 5, "transition_summary": "No transition motion. Meghan correctly read the account but didn't find an alternative path.", "multithread_score": 5, "multithread_summary": "Only Jon engaged. M&A group mentioned but not pursued.", "top_multithread_action": "Ask Jon for a warm intro to whoever handles M&A or corp dev at Prudential \u2014 that's where DCAI belongs in this account.", "top_wins": ["Meghan correctly identified the use case mismatch early \u2014 didn't waste time pitching irrelevant product", "Maintained warm relationship with a long-term contact"], "top_priorities": ["Get Jon's intro to the M&A/corp dev team at Prudential \u2014 that's the real opportunity", "Confirm renewal date and ARR \u2014 basic account hygiene missing from this call", "Decide: is this account worth the renewal effort, or is it a referral play?"], "suggested_next_step": "Jon, good catching up. One quick ask \u2014 you mentioned Prudential might have M&A teams that do deals. Any chance you know who handles that, or could make a quick intro? Even just a name would be helpful. I'll leave you alone after that, I promise."}, {"_filename": "EXT_ SiFive_Intralinks QBR Transcription 2026-05-20_1700.txt", "account": "SiFive", "rep": "Scott Martin", "all_reps": "Scott Martin, Meghan Brennan, Justin Simonsen, Matt Gallopo", "date": "2026-05-20", "duration": "00:15:08", "overall_score": 42, "deal_context": "Internal QBR prep \u2014 no customer joined. Scott and Meghan assessed DCAI candidacy for SiFive (IP licensing company, just raised $400M from Atreides/Nvidia for data center buildout). Services reporting gap surfaced.", "summary": "Good internal alignment call \u2014 Scott correctly identified SiFive's evolving use case and the $400M raise as a potential DCAI trigger. But the customer never joined, so nothing was actually accomplished externally. The services visibility gap Matt surfaced is a real operational problem that needs escalation.", "sf_stage": "Discover", "estimated_arr": 22000, "close_quarter": "Q3 2026", "q2_signal": "red", "q2_label": "Unlikely Q2", "q2_reason": "Customer didn't join, no active deal motion, $400M raise opportunity is future-state", "ai_story": {"came_up": false, "sharp_or_generic": "n/a", "how_handled": "DCAI discussed internally as a future opportunity tied to JV/partnership activity and the data center buildout.", "coaching": "The $400M raise for a data center is a perfect DCAI hook. 'Jeff, I saw you just raised $400M \u2014 are you running any data room activity around the data center buildout or partner agreements? We've got something that might make that easier.'"}, "value_vs_feature": {"score": "mixed", "evidence": "Internal discussion only \u2014 Scott framed the DCAI case well for the team.", "coaching": "Get this in front of Jeff Cherry. Scott has the framing right, just needs to execute the outreach."}, "meddpicccc_scores": {"M": "missing", "E": "partial", "Dc": "missing", "Dp": "missing", "P": "missing", "I": "partial", "Ch": "partial", "Co": "missing", "Ce": "partial", "Cp": "missing"}, "meddpicccc_coaching": {"M": "No metrics. The $400M raise and data center buildout implies significant deal activity \u2014 what's the data room spend typically for a company this size?", "E": "Jeff Cherry is the customer contact but wasn't on this call. Who actually owns the renewal and any new business?", "Dc": "Not explored.", "Dp": "Not discussed.", "P": "Not discussed.", "I": "IP licensing agreements are the current use case \u2014 managing those is the pain. Data center buildout is the new pain.", "Ch": "Jeff Cherry is the contact \u2014 needs to be engaged directly on the raise.", "Co": "Not discussed. SiFive's size and technical sophistication makes them a Datasite target.", "Ce": "$400M raise and data center buildout is a compelling event \u2014 but Scott needs to act on it now.", "Cp": "No next step set after this internal call."}, "transition_score": 25, "transition_summary": "DCAI identified as the right future product but no transition motion started with the customer yet.", "multithread_score": 15, "multithread_summary": "Only Jeff Cherry known as a contact. The data center buildout likely involves a broader team.", "top_multithread_action": "Scott: send Jeff Cherry a note this week referencing the $400M raise and asking if there's any data room activity around the buildout or new partnership agreements.", "top_wins": ["Scott correctly connected the $400M Nvidia/Atreides raise to a DCAI opportunity", "Matt surfaced the services reporting gap \u2014 real operational issue that needs fixing", "Good internal team alignment on account strategy"], "top_priorities": ["Scott needs to reach out to Jeff Cherry this week referencing the raise \u2014 timing is everything", "Escalate the services reporting gap \u2014 reps can't sell what they can't measure", "Schedule an actual customer call \u2014 this QBR produced no external outcomes"], "suggested_next_step": "Jeff, congrats on the Nvidia/Atreides raise \u2014 $400M is a big deal. Are you running any data room activity around the data center buildout or any new licensing agreements? I've got something I think would make that process significantly faster. Worth 20 minutes?"}, {"_filename": "EXT_ Sling_Intralinks VIA Elite 6_17_26 Renewal & DealCentre AI Discovery Transcription 2026-04-30_1530.txt", "account": "Sling TV", "rep": "Meghan Brennan", "all_reps": "Meghan Brennan, Connor Moran", "date": "2026-04-30", "duration": "00:16:46", "overall_score": 35, "deal_context": "Internal prep call only \u2014 Ryan (CEO) never joined. Meghan and Connor reviewed the unusual month-to-month contract ($1,449/month, 89 users vs. 25 contracted, significant overages). Plan to convert to annual/multi-year + introduce DCAI.", "summary": "Good internal prep \u2014 Meghan identified the contract anomaly and the upgrade opportunity (25\u219289 users). But the customer didn't show, so no external progress was made. The month-to-month contract is a risk: it's comfortable for the customer and could be cancelled anytime.", "sf_stage": "Discover", "estimated_arr": 24000, "close_quarter": "Q2 2026", "q2_signal": "amber", "q2_label": "Possible Q2", "q2_reason": "June 17 renewal date creates a natural Q2 close window if the annual conversion is executed", "ai_story": {"came_up": false, "sharp_or_generic": "n/a", "how_handled": "DCAI was planned to be introduced but customer didn't join.", "coaching": "When Ryan joins, lead with the overage conversation to create urgency, then pivot: 'The reason I wanted to introduce DCAI is that companies doing M&A or document-heavy work are finding it saves them significant time. What does Sling's deal activity look like?'"}, "value_vs_feature": {"score": "mixed", "evidence": "Internal discussion only.", "coaching": "Prepare a clear story for Ryan: 'You're currently paying $1,449/month on a month-to-month. If we lock in an annual, we can actually reduce your per-unit cost and give you proper headroom for your 89 users. It's better for you.'"}, "meddpicccc_scores": {"M": "missing", "E": "partial", "Dc": "missing", "Dp": "missing", "P": "partial", "I": "partial", "Ch": "missing", "Co": "missing", "Ce": "partial", "Cp": "missing"}, "meddpicccc_coaching": {"M": "Overages are the metric \u2014 quantify what they're paying vs. what annual would cost. Make the math obvious.", "E": "Ryan (CEO) is the buyer. Hasn't been reached yet.", "Dc": "Unknown \u2014 Ryan never joined.", "Dp": "Month-to-month means there's technically no decision process \u2014 but that's also the risk.", "P": "Month-to-month auto-renews. June is the natural conversion window.", "I": "89 users on a 25-seat contract with growing overages is real pain \u2014 just not surfaced with the customer yet.", "Ch": "No champion identified at Sling.", "Co": "Unknown.", "Ce": "June billing cycle is a soft compelling event.", "Cp": "No plan set \u2014 customer didn't join."}, "transition_score": 10, "transition_summary": "DCAI intro was planned but didn't happen. Transition motion hasn't started.", "multithread_score": 10, "multithread_summary": "Ryan identified as the right contact but no connection made yet.", "top_multithread_action": "Get Ryan on a call this week \u2014 send a direct calendar invite with a clear subject line: 'Sling/Intralinks: Quick 20-min review of your current agreement + a cost savings opportunity'", "top_wins": ["Identified the contract anomaly and upgrade opportunity before the customer call", "Clear internal alignment on the June conversion strategy"], "top_priorities": ["Get Ryan on a call immediately \u2014 the month-to-month is a churn risk every billing cycle", "Prepare the cost comparison: current month-to-month cost vs. annual with right-sized seats", "Have a clear DCAI hook ready for when he joins \u2014 what does Sling do with deals?"], "suggested_next_step": "Ryan, wanted to catch you before June \u2014 we're seeing your usage has grown significantly (89 users vs. your current 25-seat contract) and I think there's actually a way to get you on a structure that costs less and gives you proper headroom. Can we find 20 minutes this week?"}, {"_filename": "EXT_ Sling_Intralinks VIA Elite 6_17_26 Renewal & DealCentre AI Discovery Transcription 2026-05-21_1800.txt", "account": "Sling TV", "rep": "Meghan Brennan", "all_reps": "Meghan Brennan, Connor Moran", "date": "2026-05-21", "duration": "00:27:50", "overall_score": 58, "deal_context": "Follow-up renewal call with Lily Yip (finance/admin). Users dropped from 89 to 2. Meghan trying to convert month-to-month to annual, right-size the contract, and introduce DCAI. June 17 renewal date.", "summary": "Meghan navigated a tricky situation well \u2014 users dropped dramatically, Lily wants to maintain structure for a potential future fundraising round. The DCAI intro was attempted but light. Good progress on the annual conversion narrative, but Lily indicated they're unlikely to need more than 25 users near-term, limiting the ARR opportunity.", "sf_stage": "Define & Validate Solution", "estimated_arr": 18000, "close_quarter": "Q2 2026", "q2_signal": "green", "q2_label": "Closeable Q2", "q2_reason": "June 17 renewal date is a hard Q2 deadline, annual conversion in progress, Lily is engaged", "ai_story": {"came_up": true, "sharp_or_generic": "generic", "how_handled": "Connor briefly introduced DCAI but it was framed generically without connecting to Sling's specific situation.", "coaching": "The right DCAI hook for Sling: 'Lily, you mentioned you might need this for a future fundraising round. When that happens, you'll want investor Q&A, document AI, and outreach tracking \u2014 that's what DealCentre was built for. Want me to show you 10 minutes of it?'"}, "value_vs_feature": {"score": "mixed", "evidence": "Meghan made the case for annual vs. month-to-month effectively. DCAI pitch was generic and not connected to Lily's stated use case (future fundraising).", "coaching": "Connect DCAI explicitly to the fundraising use case Lily mentioned. That's the bridge from VIA Elite to DealCentre."}, "meddpicccc_scores": {"M": "partial", "E": "partial", "Dc": "missing", "Dp": "partial", "P": "strong", "I": "partial", "Ch": "partial", "Co": "missing", "Ce": "strong", "Cp": "partial"}, "meddpicccc_coaching": {"M": "Month-to-month cost vs. annual was partially discussed but not clearly quantified for Lily.", "E": "Lily is finance/admin \u2014 is she the one who approves the annual contract, or does this need to go to the CEO/CFO?", "Dc": "Not explored. What makes the annual contract work for Lily vs. staying month-to-month?", "Dp": "June billing cycle is the conversion window. Good awareness.", "P": "June 17 renewal date is well understood. Strong.", "I": "Users dropped to 2 \u2014 that's actually an argument for right-sizing, not a red flag.", "Ch": "Lily is cooperative but may not have authority to approve the annual conversion.", "Co": "Not discussed.", "Ce": "June 17 renewal is a hard compelling event. Well understood.", "Cp": "Proposal to be sent \u2014 specific date not confirmed on the call."}, "transition_score": 35, "transition_summary": "DCAI was introduced but not connected to the fundraising use case that Lily herself raised. Missed opportunity.", "multithread_score": 20, "multithread_summary": "Only Lily engaged. The CEO/CFO who approved the original contract isn't in the loop.", "top_multithread_action": "Confirm with Lily: who needs to approve the annual contract \u2014 is it you alone, or does this need to go to Bryan or anyone else?", "top_wins": ["June 17 deadline creates a natural close in Q2", "Lily is cooperative and willing to move to annual", "Fundraising round mention opens a DCAI conversation for the future"], "top_priorities": ["Send the annual proposal today \u2014 June 17 is close", "Connect DCAI explicitly to the fundraising round Lily mentioned before sending the proposal", "Confirm Lily has authority to sign, or identify who else needs to approve"], "suggested_next_step": "Lily, I'll send over the annual proposal today with a few options. One thing I also want to include \u2014 you mentioned a potential fundraising round. When that happens, there's a version of our platform that was built specifically for that. I'll include a one-pager so you have it when the time comes. Does that work?"}, {"_filename": "EXT_ The Richman Group_Intralinks 6_26_25 VDR Agreement and DealCentre AI Discovery Meeting Transcription 2026-05-15_1600.txt", "account": "The Richman Group", "rep": "Amanda Coleman", "all_reps": "Amanda Coleman, Meghan Brennan, Lauren Mikolas", "date": "2026-05-15", "duration": "00:30:58", "overall_score": 48, "deal_context": "VDR renewal (June 26 expiry) with Trey Gambrell. Account uses Intralinks only because banks require it \u2014 they have SharePoint, ShareFile, and Microsoft heavily integrated. DCAI not relevant in Trey's view. Overages being discussed (124 vs. 95 users).", "summary": "Trey was direct about limited interest in DCAI and the platform generally. Meghan handled the objection gracefully and pivoted to the multi-year pitch effectively \u2014 Trey was open to multi-year pricing, which is the win here. Amanda is new and observed rather than participated. No AI story told, appropriately.", "sf_stage": "Define & Validate Solution", "estimated_arr": 32000, "close_quarter": "Q2 2026", "q2_signal": "green", "q2_label": "Closeable Q2", "q2_reason": "June 26 contract expiration creates hard Q2 deadline, Trey is cooperative and open to multi-year", "ai_story": {"came_up": true, "sharp_or_generic": "generic", "how_handled": "Meghan briefly described DCAI investments after Trey said it wasn't relevant. She correctly read the room and didn't push hard.", "coaching": "Right call to not push DCAI here. If there's a future opportunity, it's through the banks that require them to use Intralinks \u2014 could Intralinks create a reason for those banks to require DCAI too?"}, "value_vs_feature": {"score": "mixed", "evidence": "The call was primarily renewal mechanics. Meghan's multi-year pitch was value-framed (better pricing, lock in rate, reduce admin burden).", "coaching": "The value story for Richman is simple: 'You're going to keep using this because the banks require it. Multi-year gives you a better rate and less paperwork. That's it.' Don't oversell."}, "meddpicccc_scores": {"M": "partial", "E": "partial", "Dc": "partial", "Dp": "partial", "P": "strong", "I": "strong", "Ch": "partial", "Co": "partial", "Ce": "strong", "Cp": "partial"}, "meddpicccc_coaching": {"M": "Overage cost quantified implicitly \u2014 124 vs. 95 users. Annual vs. multi-year savings not calculated on the call.", "E": "Trey makes decisions but mentioned Jennifer (Jen) as the primary contact. Who actually signs the renewal?", "Dc": "Price and term length are the criteria. Keep it simple.", "Dp": "True-up user count first, then send pricing. Timeline is tight (June 26).", "P": "June 26 expiry. Well understood. Strong.", "I": "Overage charges are real pain \u2014 Trey didn't know they were accruing. That's the hook.", "Ch": "Trey is cooperative. Jennifer is more engaged but wasn't on this call.", "Co": "SharePoint, ShareFile explicitly mentioned. But Trey acknowledged they can't leave because banks require Intralinks.", "Ce": "June 26 expiry is the compelling event. Strong.", "Cp": "True up users \u2192 get pricing \u2192 send one-year and multi-year options. Clear plan."}, "transition_score": 20, "transition_summary": "No real transition play here \u2014 account uses VDR only because required to. Focus on securing the renewal.", "multithread_score": 35, "multithread_summary": "Trey and Jennifer are the right contacts. Jen wasn't on the call but is the primary relationship.", "top_multithread_action": "Loop Jennifer back into the renewal conversation now \u2014 she's the real champion and the June 26 deadline is approaching.", "top_wins": ["Trey is open to multi-year pricing \u2014 that's a win given his initial skepticism", "Overages identified and used as urgency for true-up and renewal acceleration", "June 26 deadline creates natural Q2 close"], "top_priorities": ["Send one-year AND multi-year pricing options this week \u2014 Trey asked for both", "Get Jen involved immediately \u2014 she's the real contact and deadline is June 26", "True up user count first so the proposal is accurate"], "suggested_next_step": "Trey, once you and Jennifer have audited the user count, I'll send over both a one-year and three-year option with pricing locked in. Given the June 26 date, can we plan to have the user count to me by end of this week so we have time to get the paperwork done?"}, {"_filename": "EXT_ Ullico _ Intralinks Pricing VDR 5376890 Transcription 2026-04-30_1900.txt", "account": "Ullico", "rep": "David DeLuca", "all_reps": "David DeLuca, Ronald Woods", "date": "2026-04-30", "duration": "00:12:47", "overall_score": 62, "deal_context": "VDR renewal pricing presentation. Contract expiring May 29. David presented 24-month ($7,700/yr) and 36-month ($7,250/yr) options at 5,000 pages. Marc Zinsmeister's key concern: business wasn't expecting cost to double from current $3,500/yr.", "summary": "David ran a structured, well-prepared pricing call. The proposal was clear and Marc was engaged. The key obstacle is the cost-doubling perception \u2014 David rightsized pages from 2,500 to 5,000 based on usage trends, but didn't pre-empt the sticker shock. The call ended without a decision but Marc indicated openness to both 24 and 36-month options.", "sf_stage": "Propose", "estimated_arr": 7700, "close_quarter": "Q2 2026", "q2_signal": "green", "q2_label": "Closeable Q2", "q2_reason": "Contract expires May 29, proposal presented, Marc is engaged and open to both options", "ai_story": {"came_up": false, "sharp_or_generic": "n/a", "how_handled": "DCAI not discussed \u2014 appropriate given this is a pure VDR renewal conversation.", "coaching": "No AI story needed here. Keep the focus on closing the renewal. DCAI is a next-year conversation after building trust."}, "value_vs_feature": {"score": "value_led", "evidence": "David framed the proposal around right-sizing (avoiding overages), price lock, and reducing contract management burden. Good value framing for a renewal.", "coaching": "Add one line before presenting pricing: 'Marc, based on your usage trend, if we kept you at 2,500 pages, you'd be in overages within 3 months. The 5,000 page option actually protects you from unexpected costs.'"}, "meddpicccc_scores": {"M": "strong", "E": "partial", "Dc": "partial", "Dp": "partial", "P": "strong", "I": "strong", "Ch": "partial", "Co": "missing", "Ce": "strong", "Cp": "partial"}, "meddpicccc_coaching": {"M": "Usage metrics are clear \u2014 2,400 of 2,500 pages used, trending toward overages. Good foundation.", "E": "Marc is the procurement contact but needs to take the pricing back to 'the business.' Who is that? Get a name.", "Dc": "Price predictability and right-sizing are the criteria. Well understood.", "Dp": "Marc needs to confirm with business before deciding. Set a specific callback date.", "P": "May 29 expiry. Clear and urgent.", "I": "Near-capacity usage and overage risk is real pain. David used it well.", "Ch": "Marc is cooperative but is a middle man. The 'business' is the real buyer.", "Co": "Not discussed. Good opportunity missed \u2014 are they looking at alternatives?", "Ce": "May 29 is a hard expiry. Strong compelling event.", "Cp": "Marc to take back to business \u2014 no specific date set for follow-up."}, "transition_score": 15, "transition_summary": "Pure VDR renewal. No transition motion appropriate at this stage.", "multithread_score": 20, "multithread_summary": "Marc is the contact but 'the business' (infrastructure fund ops team) is the real decision-maker and hasn't been engaged.", "top_multithread_action": "Ask Marc: 'Who specifically in the business do I need to get comfortable with this \u2014 is there someone I should walk through the usage data directly?'", "top_wins": ["Structured, professional proposal presentation \u2014 clear agenda and options", "Usage data and overage risk used effectively to justify page increase", "Marc is engaged and open to both 24 and 36-month options"], "top_priorities": ["Follow up with Marc by May 27 \u2014 May 29 expiry leaves no room for delay", "Offer to present directly to 'the business' \u2014 remove the telephone game risk", "Be ready to offer a 3,000 or 3,500-page option as a middle ground if doubling is the objection"], "suggested_next_step": "Marc, I'll put together a third option at 3,500 pages so your team has a range to look at. Can we reconnect by Thursday the 28th? The May 29 date doesn't leave much room, and I want to make sure we get the paperwork done in time."}, {"_filename": "EXT_ VDR Renewal for 4DMT DCAI Demo and Budgetary Estimate review Transcription 2026-05-05_1930.txt", "account": "4DMT", "rep": "Connor Moran", "all_reps": "Connor Moran, Justin Simonsen, Meghan Brennan", "date": "2026-05-05", "duration": "00:36:53", "overall_score": 65, "deal_context": "Second DCAI demo + VDR renewal budgetary pricing discussion. Dennis (primary user) and a product/ops stakeholder joined. Customer is warming to DCAI but not ready for near-term commitment \u2014 a bigger project is expected in 2027.", "summary": "Connor ran a strong demo with good feature coverage. The customer's product stakeholder surfaced critical feedback (Q&A module pain, questions handling needs improvement) and a POC/trial request. Meghan navigated a complex pricing discussion well, offering a VDR+DCAI bundle. Key gap: customer asked 'is this a separate add-on?' \u2014 the platform story wasn't clear, and the Q&A limitation admission by Justin on the previous call created credibility damage that needed addressing.", "sf_stage": "Define & Validate Solution", "estimated_arr": 19600, "close_quarter": "Q3 2026", "q2_signal": "amber", "q2_label": "Possible Q2", "q2_reason": "Budgetary pricing presented, POC interest expressed, but customer says larger project isn't until 2027", "ai_story": {"came_up": true, "sharp_or_generic": "partially_sharp", "how_handled": "Connor mentioned the Waltham AI R&D team built in 2018, SSNC Technologies backing, and internal LLM models. Customer asked 'are you using LLMs for translation?' \u2014 Connor confirmed internal models. Did not articulate sovereignty (data never leaves perimeter) or compare to competitors who outsource.", "coaching": "When the customer asks about the LLM, that's the moment to land the sovereignty story: 'Yes \u2014 and importantly, these run inside SS&C's infrastructure. Your documents never touch OpenAI or any external model. We control the full stack.' One sentence, huge differentiation."}, "value_vs_feature": {"score": "mixed", "evidence": "Demo was feature-led (category column, summaries, Ask Link, translation) but Connor connected features to workflow outcomes reasonably well. Meghan's pricing discussion was value-framed.", "coaching": "Lead with the Q&A module improvement story before the demo \u2014 Dennis mentioned it's the reason they switched to Intralinks 2 years ago. Acknowledge it, show progress, and then demo Ask Link as the AI-powered evolution of Q&A."}, "meddpicccc_scores": {"M": "partial", "E": "partial", "Dc": "partial", "Dp": "partial", "P": "partial", "I": "strong", "Ch": "partial", "Co": "missing", "Ce": "partial", "Cp": "partial"}, "meddpicccc_coaching": {"M": "Meghan quantified the pricing options clearly. Time savings from Ask Link not quantified.", "E": "Dennis is the primary user, but who approves the renewal and any DCAI add-on? The product stakeholder (Participant 5) may have budget influence.", "Dc": "Q&A improvement is the #1 criteria \u2014 address it directly before the next call.", "Dp": "POC trial requested \u2014 that's the decision process. Define the POC parameters clearly.", "P": "June 27 contract expiration. 24-month contract needs renewal.", "I": "Q&A module pain is explicit and strong. Questions handling is where the team spends most time.", "Ch": "Dennis is the champion but needs the Q&A story before he can advocate internally.", "Co": "Not discussed \u2014 risky given the customer mentioned they came from elsewhere for Q&A.", "Ce": "June 27 VDR renewal + 2027 larger project = two timelines to manage.", "Cp": "Formal proposal to be sent. POC structure needs to be defined."}, "transition_score": 55, "transition_summary": "DCAI demo happened and pricing was presented. Customer is interested but 'not a near-term priority' \u2014 2027 project is the real opportunity.", "multithread_score": 40, "multithread_summary": "Dennis and one product/ops stakeholder engaged. The stakeholder who asked about POC may have more influence than was surfaced.", "top_multithread_action": "Identify the product/ops stakeholder who asked about the 90-day trial \u2014 they may be a stronger champion than Dennis for the DCAI decision.", "top_wins": ["DCAI demo generated genuine interest \u2014 Ask Link table-building and investment memo examples landed well", "Meghan presented a bundled VDR+DCAI pricing option that keeps costs flat", "POC/trial request is a buying signal \u2014 customer wants to experience the product"], "top_priorities": ["Address the Q&A module concern head-on in the next communication \u2014 this is the #1 decision criteria", "Send the formal proposal with VDR renewal + optional DCAI bundle as requested", "Define POC parameters: what does success look like, who evaluates, what's the timeline to decision"], "suggested_next_step": "Dennis, I'll have the formal proposal to you by end of week \u2014 VDR renewal at 6GB plus the DCAI option. I also want to address the Q&A module directly: we've made specific improvements and I want to walk you through what's changed. Can we find 30 minutes next week to review the proposal and cover the Q&A piece before the June 27 date?"}, {"_filename": "EXT_ Virtual Data Room Renewal for 4DMT_Deal Centre AI Discovery Meeting Transcription 2026-04-30_1630.txt", "account": "4DMT", "rep": "Connor Moran", "all_reps": "Connor Moran, Justin Simonsen, Meghan Brennan", "date": "2026-04-30", "duration": "00:35:39", "overall_score": 55, "deal_context": "First VDR renewal + DCAI discovery call. Donald and a product stakeholder joined. Justin made a damaging admission: Q&A is 'actually worse' in DCAI. Meghan led the renewal mechanics. Customer's primary pain is Q&A handling and manual work reduction.", "summary": "The Justin admission about Q&A being worse in DCAI is the most significant moment in this call \u2014 it directly undermined the platform transition case and was acknowledged without recovery. Connor's DCAI intro was solid (R&D team, adoption growth, 500+ deals). Customer was open to seeing more but wants to understand the Q&A improvements specifically before committing.", "sf_stage": "Discover", "estimated_arr": 19600, "close_quarter": "Q3 2026", "q2_signal": "amber", "q2_label": "Possible Q2", "q2_reason": "June 27 contract expiry creates Q2 renewal opportunity, but DCAI add-on is 2027 territory", "ai_story": {"came_up": true, "sharp_or_generic": "partially_sharp", "how_handled": "Connor mentioned the Waltham AI R&D team, SSNC backing, and internal LLM models. Did not get to sovereignty story before call ran out of time.", "coaching": "The sovereignty story needs to land before the demo starts: 'One thing that makes our AI different from what you might see at competitors \u2014 our models run inside SS&C's infrastructure. Your documents never leave our environment.' Sets the frame for everything that follows."}, "value_vs_feature": {"score": "feature_led", "evidence": "Connor walked through features (attention needed, summaries, translation, Ask Link) without anchoring to 4DMT's stated pain (Q&A, manual work).", "coaching": "The Q&A pain was already known before this call. Open with: 'Dennis, I know Q&A has been frustrating. I want to show you specifically how Ask Link changes that workflow.' Then anchor every feature to their stated pain."}, "meddpicccc_scores": {"M": "missing", "E": "partial", "Dc": "partial", "Dp": "missing", "P": "partial", "I": "strong", "Ch": "partial", "Co": "missing", "Ce": "partial", "Cp": "missing"}, "meddpicccc_coaching": {"M": "No metrics on Q&A time savings. How many hours per week does the team spend on questions? That's the metric.", "E": "Donald and another stakeholder joined. Who actually approves the renewal and the DCAI decision?", "Dc": "Q&A quality is the #1 criteria. Partially surfaced but not fully explored.", "Dp": "No decision process established.", "P": "June 27 VDR renewal. Need to track DCAI paper process separately.", "I": "Q&A module pain is explicit: 'requires a lot of hand holding, which could totally be automated.' Perfect DCAI value statement.", "Ch": "Dennis is a user-champion. Donald may be the financial champion \u2014 role unclear.", "Co": "Not discussed \u2014 critical gap.", "Ce": "June 27 renewal + 2027 project = dual timeline.", "Cp": "Video to be sent, proposal to follow. No specific date."}, "transition_score": 42, "transition_summary": "DCAI demo was initiated but the Q&A credibility issue (Justin's admission) needs to be addressed before the transition case can be made effectively.", "multithread_score": 30, "multithread_summary": "Multiple stakeholders joined but roles and authority not clarified.", "top_multithread_action": "Before the next call, ask Connor: who is Donald, what's his role, and does he influence the renewal decision?", "top_wins": ["Customer was open to seeing more DCAI \u2014 agreed to the follow-up demo", "Q&A pain was surfaced explicitly \u2014 perfect foundation for the Ask Link pitch", "Connor's framing of adoption growth (500+ deals in Q1) was credible"], "top_priorities": ["Address Justin's Q&A admission directly in the next call \u2014 don't let it fester", "Map Donald's role and authority before the proposal is sent", "Prepare a Q&A-specific DCAI demo for the follow-up \u2014 anchor everything to their stated pain"], "suggested_next_step": "Donald and Dennis \u2014 I'm going to send over a short video walking through exactly how Ask Link handles the Q&A workflow you described. I also want to be transparent: Justin mentioned the Q&A module in DCAI is still improving. I want to show you specifically what's changed and let you judge for yourselves. Can we plan for 30 minutes next week to review it together?"}, {"_filename": "US Bank _ Renewal Proposal Transcription 2026-04-30_1730.txt", "account": "US Bank", "rep": "Stephen Chirico", "all_reps": "Stephen Chirico, Ronald Woods, Kelly Jacoutot", "date": "2026-04-30", "duration": "00:31:10", "overall_score": 82, "deal_context": "Complex contract consolidation \u2014 two US Bank subscriptions (Community Development + Affordable Housing) being merged, pivoting from MB to user-based pricing, expanding to additional business lines. $1.4M TCV over 3 years. Stephen Chirico leading a sophisticated multi-stakeholder renewal.", "summary": "Stephen ran one of the most sophisticated renewal calls in this set \u2014 structured agenda, accurate user projections, clear value framing, and a specific answer to every objection raised in the prior meeting. The services packaging ($12K/yr for quarterly user cleanup) was creative and directly addressed the user management concern. Erin's remaining question about mid-quarter self-service deletion is the only real blocker. This deal is close.", "sf_stage": "Negotiate and Close", "estimated_arr": 462625, "close_quarter": "Q2 2026", "q2_signal": "green", "q2_label": "Closeable Q2", "q2_reason": "Negotiate and Close stage, May 16/28 renewal deadlines, proposal presented, key objections addressed, customer engaged", "ai_story": {"came_up": false, "sharp_or_generic": "n/a", "how_handled": "DCAI not relevant \u2014 this is a Banking/compliance use case. Correct call not to introduce it.", "coaching": "No AI story needed here. US Bank uses this for Community Development and Affordable Housing compliance. DCAI is not the right product for this use case \u2014 don't introduce it."}, "value_vs_feature": {"score": "value_led", "evidence": "Stephen led throughout with business outcomes: cost predictability, reduced admin overhead, IT integration readiness, capacity to grow without overages. No feature listing.", "coaching": "Excellent. Stephen's framing ('I want to be your partner') and the quarterly cleanup service as a concrete deliverable turned an abstract value proposition into a tangible commitment. This is the model."}, "meddpicccc_scores": {"M": "strong", "E": "strong", "Dc": "strong", "Dp": "strong", "P": "strong", "I": "strong", "Ch": "strong", "Co": "na", "Ce": "strong", "Cp": "strong"}, "meddpicccc_coaching": {"M": "Fully quantified \u2014 4,100 user projection, $462K ARR, $100/seat price vs. $230-320 industry benchmark. Excellent.", "E": "Ryan Carey is the economic buyer, Erin Dunlap is the technical champion. Both engaged.", "Dc": "User management simplicity, cost predictability, no overages, IT integration. All addressed.", "Dp": "Multi-week process with prior meetings. Stephen is clearly tracking each objection and addressing it systematically.", "P": "May 16/28 renewals. Dual deadline well managed.", "I": "Storage management complexity, overage risk, lack of user lifecycle management \u2014 all quantified and addressed.", "Ch": "Erin is a strong technical champion. She asked the right questions and got clear answers.", "Co": "N/A \u2014 no competitive threat surfaced for this use case.", "Ce": "May 16/28 renewal deadlines are hard compelling events.", "Cp": "Detailed close plan \u2014 user management review, spreadsheet presentation, quarterly services delivery."}, "transition_score": 20, "transition_summary": "No transition play \u2014 this is the right product for this customer. VIA Elite/VDR for compliance is the right fit.", "multithread_score": 75, "multithread_summary": "Ryan (economic buyer), Erin (technical champion), Emily all engaged. Stephen has built a multi-threaded deal team on both sides.", "top_multithread_action": "Confirm Emily's role in the final approval \u2014 she was present but quiet. Does she need to sign off?", "top_wins": ["Stephen directly addressed every objection from the prior meeting \u2014 dormancy, unit price, user management, services scope", "4,100-user projection corrected proactively \u2014 shows integrity and builds trust", "Services packaging ($12K for quarterly cleanup) turned a blocker into a selling point"], "top_priorities": ["Answer Erin's question about mid-quarter self-service user deletion \u2014 that's the last real blocker", "Get the spreadsheet/user management demo done in this meeting or immediately after", "Confirm Emily's role \u2014 does she need to approve?"], "suggested_next_step": "Ryan and Erin \u2014 I'll send you the user management report template and the deletion workflow documentation today so you can see exactly what you're getting for the $12K. Can we find 30 minutes Thursday to walk through the spreadsheet together and get any final questions answered? I want to get this done before the May 16th date."}, {"_filename": "Blue_Torch_FundCentre_Renewal.txt", "account": "Blue Torch Capital", "rep": "Tim Murphy", "all_reps": "Tim Murphy", "date": "2026-05-01", "duration": "00:42:00", "overall_score": 38, "deal_context": "Renewal call triggered by an unexpected auto-extension invoice. Tim walked into a billing dispute cold and attempted to pivot to a FundCentre expansion conversation with an existing subscriber. Anduin named as a 2-year competitive threat.", "summary": "Tim recovered a difficult billing dispute professionally and kept the renewal conversation alive \u2014 but he launched a feature-forward FundCentre pitch before doing any discovery, failed to build a counter-narrative against Anduin, and let the demo drift to 'July or August' with no date, no attendees, and no commitment. The account is genuinely at risk of consolidating to Anduin if Tim doesn't get in front of the right stakeholders with a sharper story before the 2027 evaluation window opens.", "sf_stage": "Discover", "estimated_arr": 95000, "close_quarter": "Q3 2026", "q2_signal": "red", "q2_label": "Unlikely Q2", "q2_reason": "Competitive risk (Anduin 2-year contract), demo drifted to July/August, no urgency or next step locked", "ai_story": {"came_up": false, "sharp_or_generic": "n/a", "how_handled": "AI did not come up on this call. A missed opportunity \u2014 Meaghan's complaint about managing LP communications between fundraises is exactly the workflow problem FundCentre AI's DDQ and reporting capabilities address.", "coaching": "Before the next call, prepare one concrete AI hook: 'Between fundraises, when LPs send DDQs, how is your team handling those today?' That answer sets up FundCentre's AI-assisted DDQ as a direct solution. AI should enter through a workflow problem, not a feature announcement."}, "value_vs_feature": {"score": "feature_led", "evidence": "Tim's FundCentre intro was entirely feature-forward \u2014 metadata, branded landing pages, CRM APIs, fund lifecycle. Meaghan's response ('what do you mean by metadata?') showed the pitch wasn't landing.", "coaching": "Lead with the outcome: 'Firms that are always fundraising typically spend 3-4 weeks rebuilding LP access between campaigns. FundCentre eliminates that.' One outcome sentence before any feature."}, "meddpicccc_scores": {"M": "missing", "E": "partial", "Dc": "partial", "Dp": "partial", "P": "missing", "I": "partial", "Ch": "missing", "Co": "partial", "Ce": "missing", "Cp": "missing"}, "meddpicccc_coaching": {"M": "Come to the next call with one number: 'Firms managing continuous fundraises that move to FundCentre typically cut LP onboarding time from 3-4 weeks to under 10 days.'", "E": "The COO flagged the invoice \u2014 probe whether they have platform budget authority before the next call.", "Dc": "Confirm criteria in writing: consolidation, pricing vs. Anduin, LP experience continuity. Owning the frame changes the competitive dynamic.", "Dp": "'When you say 2027, is that tied to the Anduin contract expiry or a separate internal review?' Pin down who else is involved.", "P": "'If the pricing works, what does approval look like on your end \u2014 COO sign-off or can you move forward?' Removes a late-stage surprise.", "I": "Meaghan handed the discovery thread: 'We just rebrand the room.' Follow up: 'How much time does your team spend on that transition each campaign?'", "Ch": "'Who else on your team is most affected by the LP workflow \u2014 your IR team, ops?' Identify the internal advocate.", "Co": "Flip the Anduin frame: 'Your investors already have Intralinks logins from other GPs. When they come to your fundraise, they're not learning a new platform.' Network moat Anduin can't replicate.", "Ce": "'The evaluation conversation needs to start by late 2026 so you have time before Anduin's renewal comes up. Let's get a proper Q3 session on the calendar.' Use the Anduin timeline as the event.", "Cp": "Never close with an open calendar. 'I have July 10th or 17th \u2014 which works?' Two specific dates is harder to decline than an open offer."}, "transition_score": 35, "transition_summary": "VDR renewed without framing as a stepping stone. FundCentre intro was feature-led and undiscovered. Anduin counter-narrative was weak. No platform demo date locked.", "multithread_score": 15, "multithread_summary": "Only Meaghan engaged. COO involved in the billing dispute but not brought into the platform conversation.", "top_multithread_action": "Get to the COO \u2014 they flagged the invoice and are likely in the platform decision. Tim needs a direct introduction before the 2027 evaluation window opens.", "top_wins": ["Handled a cold billing dispute with genuine professionalism \u2014 turned a complaint call into a renewal conversation", "Asked the right qualifying question early ('Is this fundraise still going?') and listened \u2014 Meaghan's answer revealed continuous usage", "Identified the competitive threat (Anduin 2-year contract) \u2014 real intelligence to work with"], "top_priorities": ["Lock a specific date before sending the pricing email \u2014 July 10th or 17th, named attendees, defined agenda", "Build the Anduin counter-narrative \u2014 the LP community moat is the differentiation, not a feature comparison", "Get to the COO before the 2027 evaluation window opens"], "suggested_next_step": "Hi Meaghan \u2014 attached is pricing for 900 and 1000 users on a 12-month renewal. I've also flagged internally on applying the extension charge toward the new contract. Separately \u2014 I'd like to get 45 minutes on the calendar in early July with you and whoever owns your LP communications workflow. I have July 10th and July 17th open \u2014 either work?"}, {"_filename": "Piper_Sandler_DCAI_Demo.txt", "account": "Piper Sandler", "rep": "Jack Lunden", "all_reps": "Jack Lunden", "date": "2026-05-05", "duration": "00:38:00", "overall_score": 32, "deal_context": "DealCentre AI demo to an existing Intralinks account re-engaging with the upgraded platform. MaryBeth Carson had used legacy Intralinks but not the new version. No live deal established on the call.", "summary": "Jack ran a technically competent demo with strong product knowledge and good rapport \u2014 MaryBeth left with a positive impression. But the call had almost no commercial substance: Jack never established a specific deal in the pipeline, never quantified the pain MaryBeth has with current workflows, and closed with a gift card offer and a vague coffee invitation. The demo showed MaryBeth what Deal Center AI can do; it gave her no reason to use it on her next deal.", "sf_stage": "Discover", "estimated_arr": 28000, "close_quarter": "Q3 2026", "q2_signal": "red", "q2_label": "Unlikely Q2", "q2_reason": "No live deal identified, no urgency, next step was 'grab coffee' with no commercial commitment", "ai_story": {"came_up": true, "sharp_or_generic": "partially_sharp", "how_handled": "Jack introduced AskLink well \u2014 the analyst-at-the-gym story was vivid and memorable. He made the sovereign AI argument (data never leaves Intralinks, vs. competitors using acquired tech or Chrome extensions). Both are good instincts. But neither was landed with a number or connected to a Piper Sandler deal scenario.", "coaching": "The gym story needs a number every time: '20 minutes to 10 seconds. Multiply that across every document search in a 6-week diligence process.' Then ask: 'On your last sell-side, how much time did the team spend on document search?' Make MaryBeth do the math for her own deals."}, "value_vs_feature": {"score": "feature_led", "evidence": "The entire call was a product walkthrough \u2014 pipeline view, Document Requests, AI Insights, AskLink. MaryBeth's responses were appreciative but passive. Jack never asked what her most painful deal workflow moment looks like.", "coaching": "Before showing anything: 'Before I walk you through the platform \u2014 is there a specific process coming up, or a moment from your last deal where you thought, this should be easier?' That determines whether this is a demo or an evaluation."}, "meddpicccc_scores": {"M": "missing", "E": "missing", "Dc": "missing", "Dp": "missing", "P": "na", "I": "partial", "Ch": "missing", "Co": "partial", "Ce": "missing", "Cp": "missing"}, "meddpicccc_coaching": {"M": "Land the gym story with a number: '20 minutes manually vs. 10 seconds with AskLink. On a 5-week sell-side with a team of 4 analysts, that's meaningful time back.'", "E": "MaryBeth's decision-making authority never established. 'When Piper Sandler selects a VDR for a deal \u2014 is that a banker-by-banker decision, or is there a platform lead?'", "Dc": "'Beyond the layout \u2014 when you're choosing a data room, what are the one or two things that would make you go back to a platform vs. try something else?'", "Dp": "'Is the VDR selection your call for your deals, or does Piper Sandler have a preferred vendor arrangement?'", "P": "No live deal \u2014 paper process not applicable. Once a deal is identified: 'Any IT or compliance approval needed, or can you just spin it up?'", "I": "MaryBeth surfaced one real pain: 'searching through documents can definitely take longer.' Jack validated but didn't probe depth or frequency.", "Ch": "'Who else at Piper Sandler should see this? Is there a senior banker or head of capital markets who'd want to know about the DealCloud integration?'", "Co": "Jack referenced the private cloud differentiation well. Make it specific: 'On a sensitive sell-side \u2014 would your client be comfortable knowing their documents were processed through a separately acquired AI platform via browser extension? That's the Datasite model.'", "Ce": "'Is there a sell-side or buy-side mandate coming up in the next quarter where you'd want to test-drive this? The best way to evaluate the platform is on a live deal.'", "Cp": "Close was 'let's grab coffee.' No deal identified, no next step tied to a live process. 'When we grab coffee, let's also talk through whatever's in your pipeline.'"}, "transition_score": 18, "transition_summary": "Jack was already pitching DCAI \u2014 no VDR-to-platform migration framing needed. But the demo was product-led with no deal scenario anchoring it. No commitment to run a mandate on DealCentre.", "multithread_score": 10, "multithread_summary": "Only MaryBeth engaged. Piper Sandler's VDR selection process and other stakeholders completely unknown.", "top_multithread_action": "Ask: 'Is there a senior banker or head of capital markets at Piper Sandler who's been curious about the AI tools? The DealCloud integration will matter to whoever manages that relationship.'", "top_wins": ["Strong product knowledge and technically fluent demo \u2014 Jack clearly knows the platform deeply", "AskLink analyst gym story was vivid and memorable \u2014 MaryBeth visibly connected with it", "Discovered the DealCloud integration interest proactively \u2014 connected it to a forthcoming roadmap item"], "top_priorities": ["Identify the next live deal before any follow-up \u2014 the only close that matters is committing to run one mandate on DealCentre", "Understand Piper Sandler's VDR selection process \u2014 banker discretion or firm policy?", "Land the AskLink value story with a number \u2014 the gym anecdote needs '20 minutes to 10 seconds' to move from interesting to compelling"], "suggested_next_step": "Hey MaryBeth \u2014 great connecting today. One ask before we meet for coffee: if there's a sell-side or buy-side mandate coming up in the next 60-90 days, let's use that as the lens for our conversation. The best way to evaluate DealCentre is on a live deal, and I want to make sure that when the right process comes in, you're not spinning up a legacy room out of habit. What does your mandate flow look like for Q2/Q3?"}, {"_filename": "EnCap_Quantica_New_Business.txt", "account": "EnCap / Quantica", "rep": "Jonathan Schaffer", "all_reps": "Jonathan Schaffer, Ryan Kerr", "date": "2026-05-06", "duration": "00:45:00", "overall_score": 71, "deal_context": "New business call \u2014 EnCap needs a VDR for portfolio company Quantica's upcoming marketing and financing process. First Intralinks interaction for Trent Wilson, who has only used Smart Room and Box. Active competitive situation with a clear timeline and genuine urgency.", "summary": "The strongest new business call in the set \u2014 Jonathan and Ryan ran disciplined discovery-first, uncovered real pain around Smart Room access management and Excel-based Q&A, connected capabilities directly to those problems, and closed with a concrete same-day proposal commitment. Coaching opportunities are around quantifying the value story and sharpening the path to the Quantica economic buyer before the proposal lands.", "sf_stage": "Define & Validate Solution", "estimated_arr": 35000, "close_quarter": "Q2 2026", "q2_signal": "green", "q2_label": "Closeable Q2", "q2_reason": "Quotes gathering this week, room needed within 1-2 weeks, same-day proposal committed, genuine urgency from all sides", "ai_story": {"came_up": true, "sharp_or_generic": "partially_sharp", "how_handled": "Jonathan introduced DealCentre AI after establishing the VDR need \u2014 correct sequencing. Ryan connected Q&A to litigation risk and e-discovery costs \u2014 the strongest value framing for AI across these calls. However the DCAI intro was still feature-forward after the Q&A connection was made.", "coaching": "Trent lit up at Q&A. That's the bridge to the broader AI story: 'The Q&A tool is part of DealCentre AI \u2014 the same platform also auto-summarizes every document Quantica uploads, so buyers aren't asking questions about things already answered in the room. Less Q&A volume, faster process.'"}, "value_vs_feature": {"score": "value_led", "evidence": "Jonathan asked about Smart Room pain before pitching \u2014 proactive discovery that surfaced two specific problems. Ryan's litigation/e-discovery framing for Q&A was the clearest value-to-outcome connection across these calls. This was mostly discovery-led with features introduced in response to named pain.", "coaching": "The one gap: the DealCentre AI section reverted to feature-led after the Q&A value moment. Add one outcome line before the AI demo: 'Every question answered in the room is documented, timestamped, and available for post-close review \u2014 that's your e-discovery protection.'"}, "meddpicccc_scores": {"M": "partial", "E": "partial", "Dc": "strong", "Dp": "strong", "P": "partial", "I": "strong", "Ch": "partial", "Co": "strong", "Ce": "strong", "Cp": "strong"}, "meddpicccc_coaching": {"M": "Add one metric to the proposal: 'Teams using in-platform Q&A typically close 15-20% faster and eliminate the e-discovery risk.' One number makes the case concrete.", "E": "Trent confirmed Quantica signs the contract \u2014 but who at Quantica has final authority? Get the name before the proposal lands.", "Dc": "Reinforce in the proposal: 'Your top criteria: (1) competitive pricing, (2) ease of user access management, (3) in-platform Q&A. We've structured the proposal to address each directly.'", "Dp": "Follow the process precisely \u2014 proposal before demo. Include a 'next steps' section in the proposal that mirrors Trent's stated process back to him.", "P": "Include in the proposal: 'Once pricing works, we can have a contract to Quantica within 24 hours and the room stood up same day after signature.'", "I": "Reinforce in the proposal opening: mirror Trent's exact language back. 'Based on our conversation, here's what we heard...' This signals you listened, not just pitched.", "Ch": "'When the Quantica team looks at the proposal \u2014 is there someone there who's particularly enthusiastic about upgrading their Q&A process?' Identify the internal advocate.", "Co": "Address Smart Room directly in the proposal: 'Unlike Smart Room, Intralinks' user access management was rebuilt specifically to eliminate the complexity your team experienced \u2014 permission changes take under 30 seconds.'", "Ce": "Use the urgency in the proposal: 'Given you're targeting to have the room stood up within the next week or two, I've structured this for a quick-decision path \u2014 pricing, contract, and room setup can all happen within 48 hours of your approval.'", "Cp": "Add a specific follow-up date: 'I'll follow up Thursday if I haven't heard back.' Removes ambiguity of 'let me know.'"}, "transition_score": 62, "transition_summary": "Jonathan correctly positioned the VDR proposal as the immediate solution while introducing DealCentre AI as the enhanced version. Good sequencing. Smart Room and Box both addressed with specific competitive pain.", "multithread_score": 45, "multithread_summary": "Trent is the quarterback but Quantica is doing the evaluation. Quantica economic buyer is unnamed \u2014 a gap that needs closing before the proposal lands.", "top_multithread_action": "Get the Quantica economic buyer's name before the proposal lands \u2014 ask Trent: 'When the Quantica team reviews this, who's the final sign-off on their end?'", "top_wins": ["Jonathan's proactive pain discovery on Smart Room \u2014 textbook discovery that surfaced two specific, actionable problems", "Ryan's litigation and e-discovery value framing for Q&A \u2014 strongest value-to-outcome connection across all calls", "Disciplined respect for the buyer's process \u2014 Trent said he needs pricing before a demo, and they accepted that cleanly"], "top_priorities": ["Get the Quantica economic buyer's name before the proposal lands \u2014 the real decision lives at Quantica", "Add one specific metric to the proposal \u2014 Ryan's litigation framing is powerful but needs a number attached", "Build a Quantica-ready summary into the proposal package \u2014 make it easy for Trent to forward internally"], "suggested_next_step": "Trent \u2014 great speaking today. As promised, attached is our proposal for Quantica's process with two options and the redaction credit built in on both. Pricing is based on duration and storage, not users. I've included a one-page summary you can forward to the Quantica team as a primer. If the pricing works, I can have a contract to Quantica within 24 hours and the room live same day. I'll plan to follow up Thursday \u2014 and if things move faster on your end, Ryan and I can move as fast as you need."}, {"_filename": "Disney_DCAI_Demo.txt", "account": "Disney", "rep": "Johnny Rooney", "all_reps": "Johnny Rooney", "date": "2026-05-02", "duration": "00:44:00", "overall_score": 52, "deal_context": "DealCentre AI demo to an existing Disney enterprise account. John Bresee runs tax-related transactions. Disney uses Microsoft Copilot and Azure internally \u2014 described as 'painful to get approved' and 'clunky.' Existing MSA in place; any expansion requires a new SOW.", "summary": "Johnny has a genuinely warm relationship with Bresee and showed the platform competently. The big missed opportunity: Bresee handed Johnny a perfect opening \u2014 describing Microsoft Copilot as 'clunky,' 'painful to approve,' and creating an 'arms race' \u2014 and Johnny sympathized rather than pivoting sharply to Intralinks' specific advantage. He also let Bresee close himself on the SOW path, but the next step was left as 'I'll mention this to Tax' with no date and no defined next meeting.", "sf_stage": "Define & Validate Solution", "estimated_arr": 120000, "close_quarter": "Q3 2026", "q2_signal": "amber", "q2_label": "Possible Q2", "q2_reason": "Existing MSA in place, SOW described as 'easy part', but legal technology team demo not yet scheduled", "ai_story": {"came_up": true, "sharp_or_generic": "generic", "how_handled": "AI was the central theme. Johnny gave a reasonable backstory (built in-house, data stays in the room) and showed AskLink. He introduced MCP correctly. But the story was reassuring rather than sharp \u2014 Johnny was in security/compliance mode when Bresee's actual pain was approval friction and clunkiness.", "coaching": "Bresee described Copilot as 'painful to get approved' and 'clunky.' That's not a security objection \u2014 it's a usability objection. The sharp response: 'That's exactly why we built Link inside the platform \u2014 no IT approval, no separate login, no plug-in. The lawyers just use it.' Then show AskLink in the context of a Disney tax transaction, not a generic demo room. Security comes second."}, "value_vs_feature": {"score": "mixed", "evidence": "Johnny did some good discovery early \u2014 asked about Disney's centralized AI tool, learned about Copilot/Azure pain. But the product walkthrough was largely feature-led. The AI section was the strongest value moment but still framed as 'here's what it does.'", "coaching": "Johnny had the pain on the table. Before the demo: 'Let me show you what this looks like for a Disney tax transaction \u2014 multi-party approvals, document requests across legal and tax, and an AI layer your lawyers can use without a separate IT approval.' Frame every feature as a solution to Bresee's named problem."}, "meddpicccc_scores": {"M": "missing", "E": "partial", "Dc": "partial", "Dp": "partial", "P": "strong", "I": "strong", "Ch": "partial", "Co": "strong", "Ce": "partial", "Cp": "partial"}, "meddpicccc_coaching": {"M": "'You mentioned Copilot took a long time to get approved and still felt clunky. How much time does your team lose on a typical tax transaction chasing documents? AskLink answers those questions in seconds \u2014 and it's already approved because it's inside your existing agreement.'", "E": "Bresee mentioned lawyers, tax personnel, Nick Salas and the legal technology team. Who has budget authority for a new SOW? Get the name.", "Dc": "Before the next demo: 'The two biggest factors seem to be: data stays internal to each project, and the team can use it without a separate approval process. Is that right? What else would the legal technology team be evaluating?'", "Dp": "'When you say lawyers and tax need to approve \u2014 is that a formal evaluation process with Nick Salas's team, or more of a demonstration and sign-off? What's a realistic timeline from demo to SOW?'", "P": "Bresee confirmed an existing MSA and stated a new SOW is 'the easy part.' Reference in the follow-up: 'The MSA is already in place \u2014 the path forward is straightforward.'", "I": "Bresee surfaced rich pain unprompted: Copilot 'painful to approve' and 'clunky,' SharePoint 'limited and antiquated,' multi-party tax approvals complex. More pain than most reps uncover.", "Ch": "'It sounds like you're well-positioned to connect us with Nick Salas's team \u2014 would it make sense to include you in that demo, or would it be more useful for you to intro us and we take it from there?'", "Co": "Copilot/SharePoint identified with specific weaknesses. The MCP framing was smart \u2014 turns the competitor into a future integration partner.", "Ce": "Tax return deadline ('about two weeks') and SharePoint aging out create windows. 'When does SharePoint typically come to a head \u2014 end of year, a specific project?'", "Cp": "'Before we hang up \u2014 can you make a quick intro to Nick Salas so I can reach out directly? I'll send you a draft intro email you can forward.'"}, "transition_score": 48, "transition_summary": "Disney is already an enterprise account \u2014 correct positioning as the next evolution rather than replacement. MCP framing was the standout move. But AI story was security-first when it should have been value-first.", "multithread_score": 35, "multithread_summary": "Bresee is warm but not the decision-maker. Nick Salas and the legal technology team are the real audience and haven't been contacted yet.", "top_multithread_action": "Ask Bresee for a direct intro to Nick Salas \u2014 offer to draft the intro email he can forward with one click.", "top_wins": ["Strong relationship and genuine rapport with Bresee \u2014 warmth is real and creates a platform for the broader Disney expansion", "Excellent data sovereignty response to Bresee's IP concern \u2014 answered clearly and specifically without over-engineering", "Smart MCP positioning \u2014 introduced it unprompted and framed it as turning the Copilot competitor into a future integration partner"], "top_priorities": ["Get a specific date on the calendar for the legal technology team demo before the call momentum fades", "Sharpen the AI story from security-first to value-first \u2014 Bresee's pain was approval friction, not data sovereignty", "Quantify the value \u2014 ask how much time his team spends searching documents on a typical tax transaction"], "suggested_next_step": "John \u2014 great catching up. A couple of follow-ups: I'll reach out to Justin Riddell to get the broader demo on the calendar \u2014 will include you so you can loop in Nick Salas and the legal technology team. I'm also attaching a one-paragraph summary you can forward to the Tax team without scheduling a whole new call. And when we do the broader demo, I'll build it around a Disney tax transaction specifically. What's the best way to reach Nick Salas \u2014 should I copy you on an email intro?"}, {"_filename": "Guggenheim_DCAI_Transition.txt", "account": "Guggenheim", "rep": "Madison Calderin", "all_reps": "Madison Calderin", "date": "2026-05-01", "duration": "00:36:00", "overall_score": 55, "deal_context": "Transition call introducing DealCentre AI to an existing Guggenheim banking account. Calvin Ye is an associate familiar with legacy Intralinks. All new deals are now supposed to go on DealCentre. Madison's goal was to walk Calvin through key differentiators and get him set up with access.", "summary": "Madison ran a technically strong transition call \u2014 good product knowledge, appropriate sequencing, and a clean close on getting Calvin access the same day. The coaching opportunity: this call was almost entirely feature-led. Calvin never learned what DealCentre makes possible for Guggenheim's deal teams that wasn't possible before. The AI story was partially sharp (sovereign model vs. Datasite introduced correctly) but never connected to a specific Guggenheim workflow pain.", "sf_stage": "Define & Validate Solution", "estimated_arr": 42000, "close_quarter": "Q2 2026", "q2_signal": "amber", "q2_label": "Possible Q2", "q2_reason": "DTE contract sunset creates adoption pressure, all new deals going to DealCentre, Calvin has same-day access \u2014 depends on deal flow timing", "ai_story": {"came_up": true, "sharp_or_generic": "partially_sharp", "how_handled": "Madison introduced the AI backstory early and correctly \u2014 seven years of in-house development, no external licenses, no separate downloads. She contrasted with Datasite's acquisition model without naming them explicitly. But the AI section was feature-led with no connection to a Guggenheim deal pain.", "coaching": "The sovereign AI backstory and Datasite contrast are good \u2014 keep those. The gap is connecting AI to a Guggenheim-specific workflow moment. Before showing AI Insights: 'Calvin, on your last deal \u2014 when the client started data dumping into the prep room, how did your team figure out what was there and what was still missing?' That answer is the setup for AI Insights as the solution."}, "value_vs_feature": {"score": "feature_led", "evidence": "The entire call was a structured product walkthrough \u2014 deal creation, prep room, templates, AI Insights, AskLink, permissions, analytics. Calvin's responses were enthusiastic ('incredible,' 'seamless transition') but based on feature impressions rather than value understanding.", "coaching": "Two questions would have changed this call: (1) 'On your last deal, what was the most painful part of managing the data room?' and (2) 'What would it mean for your deal team if you could spin up a room and start prepping before any contract conversation happened?' Build the value case from Calvin's experience."}, "meddpicccc_scores": {"M": "missing", "E": "missing", "Dc": "partial", "Dp": "partial", "P": "strong", "I": "missing", "Ch": "partial", "Co": "partial", "Ce": "partial", "Cp": "strong"}, "meddpicccc_coaching": {"M": "Add one metric to the next conversation: 'Teams using DealCentre's self-service setup typically shave 1-2 days off deal launch vs. the old process. On a fast-moving M&A process, those days matter.'", "E": "Calvin's seniority (associate) and decision-making authority not discussed. 'Is there a tech lead or MD who's been involved in the transition, or is it rep-by-rep adoption?'", "Dc": "Calvin asked what drove the transition \u2014 Madison answered well. But these are adoption criteria, not value criteria. 'What would make DealCentre a clear win for your team beyond the familiar layout?'", "Dp": "Calvin confirmed new deals go on DealCentre automatically \u2014 good. 'Are there any deals in flight right now where you could test DealCentre before it becomes the default?'", "P": "Madison confirmed the DTE contract will sunset and committed to same-day access. Strong.", "I": "No pain discovery. 'Calvin \u2014 before I show you any more, what was the thing that took the most time or caused the most friction on your last deal?'", "Ch": "Calvin is enthusiastic \u2014 potential advocate. 'Who else on your team should see this? Is there an MD or senior associate who's been curious about the AI features?'", "Co": "Make the Datasite comparison explicit: 'Datasite acquired a company called Blueflame to build their AI. That means their AI processing happens on a separate acquired tech stack. Ours has been built in-house for seven years \u2014 same security perimeter as the data room itself.'", "Ce": "DTE contract sunset is a mild forcing function. 'Is there a deal coming up in the next few weeks where you could be the first on your team to run it through DealCentre? Being the person who figured it out first is a real advantage.'", "Cp": "Same-day access committed and delivered \u2014 the cleanest close across all calls. Follow up with a 15-minute check-in next week."}, "transition_score": 58, "transition_summary": "Madison correctly framed legacy VDR as the outgoing platform and DealCentre as the replacement for all new deals. Datasite contrast made. But AI intro was feature-led without workflow anchoring.", "multithread_score": 20, "multithread_summary": "Only Calvin (associate) engaged. The MD or senior banker who owns the platform adoption decision at the team level hasn't been identified.", "top_multithread_action": "Identify the MD or senior banker at Guggenheim who should see DealCentre \u2014 Calvin is an associate; the platform adoption decision likely lives one level up.", "top_wins": ["Same-day access delivery \u2014 cleanest and most concrete close across all calls; Calvin is in the platform today", "Clear and accurate AI backstory \u2014 seven-years-in-house narrative delivered confidently without overclaiming", "Correct sequencing on the VDR-to-DealCentre transition \u2014 honest about which deals stay on VDR Pro and why"], "top_priorities": ["Add one discovery question to every transition demo \u2014 'On your last deal, what was the most friction-heavy part of managing the data room?'", "Book a follow-up 15-minute check-in for next week \u2014 no defined next touchpoint after today", "Identify the MD or senior banker at Guggenheim who should see DealCentre"], "suggested_next_step": "Calvin \u2014 confirming your DealCentre access invite is on its way. Once you're in, take 15 minutes to create a test deal and explore. I'll reach out next week for a quick check-in to make sure everything is working before your first live deal. Also \u2014 is there an MD or senior person on your team who's been curious about the AI tools? I'd love to loop them in for a slightly more in-depth walkthrough."}, {"_filename": "Inovia_FundCentre_DDQ_Demo.txt", "account": "Inovia Capital", "rep": "Kiley O'Leary", "all_reps": "Kiley O'Leary, Paul Loefstedt", "date": "2026-05-01", "duration": "00:48:00", "overall_score": 61, "deal_context": "FundCentre DDQ demo to an existing Intralinks account using Vessel for their active fundraise. Inovia uses Intralinks for InvestorVision reporting but not fundraising. Claire Glossop and Hellen Garcia joined. Call focused on FundCentre's AI-powered DDQ capability.", "summary": "Kiley and Paul ran a focused, well-scoped demo that ended with a concrete trial commitment \u2014 Claire and Hellen agreed to activate the DDQ tool. Paul's technical demo was strong, and Kiley's clever positioning of the DDQ as usable even without Intralinks as the primary data room was the best commercial move on the call. Coaching opportunities: sharpen the AI story beyond 'it's self-contained,' build on Vessel's named weaknesses more deliberately, and lock a specific training date rather than leaving it as a CSM handoff.", "sf_stage": "Define & Validate Solution", "estimated_arr": 55000, "close_quarter": "Q3 2026", "q2_signal": "amber", "q2_label": "Possible Q2", "q2_reason": "DDQ trial activated, active fundraise creates live evaluation opportunity, but Vessel is primary platform and full switch is post-fundraise", "ai_story": {"came_up": true, "sharp_or_generic": "sharp", "how_handled": "AI came up naturally and was handled well. Paul's demo of the DDQ AI workflow was technically clear \u2014 questions uploaded, AI proposes responses, source citations, approval workflow. Helen's security question ('does the AI look only at documents in the room?') was answered precisely. The sovereignty argument was made effectively in response to Helen's comment about exporting to other LLMs.", "coaching": "The AI story was the strongest across all calls \u2014 specific, workflow-grounded, and security-aware without leading with security. One sharpening opportunity: when Helen mentioned exporting to external LLMs, add the audit trail argument: 'Beyond security, every time you export to an external LLM, you lose the audit trail \u2014 you can't show an LP or regulator what your AI was looking at when it formulated that answer. Here, every response cites its source document and page number.'"}, "value_vs_feature": {"score": "value_led", "evidence": "Kiley opened with discovery \u2014 checked on the fundraise status, learned about Vessel usage, probed investor pushback. Paul's DDQ demo was workflow-grounded. The key value moment was Kiley's offer to activate the DDQ tool even with Vessel as the primary platform \u2014 removes the 'we're not using Intralinks for the fundraise' objection entirely.", "coaching": "Strong value orientation. The one gap: nobody quantified the value. Claire mentioned they're managing DDQs with existing AI tools and it's 'manageable.' The response: 'How long does a typical DDQ take your team from receipt to response? We're seeing teams cut that time meaningfully \u2014 and the approval workflow drops review time further because AI does the first pass.' A number would have moved 'manageable' to 'worth switching.'"}, "meddpicccc_scores": {"M": "missing", "E": "missing", "Dc": "partial", "Dp": "partial", "P": "na", "I": "partial", "Ch": "strong", "Co": "strong", "Ce": "partial", "Cp": "partial"}, "meddpicccc_coaching": {"M": "'How long does a typical DDQ take your team right now \u2014 from receiving it to sending the response? Most teams we work with are cutting that time meaningfully with the four-eyes approval workflow.'", "E": "Claire and Hellen's roles and decision-making authority not established. 'As you think about the next fundraise \u2014 is the platform decision something you and Hellen drive, or does it involve other stakeholders at Inovia?'", "Dc": "Before the next call: 'Based on what you saw today \u2014 what would need to be true for you to consider Intralinks for your next fundraise, not just the DDQ tool?'", "Dp": "Claire confirmed they're using Vessel for the current fundraise and won't switch mid-fundraise. 'When does your current fundraise wrap, and when would you typically start thinking about the platform for the next one?'", "P": "Trial activation through the CSM \u2014 paper process not applicable for a feature trial.", "I": "Kiley probed Vessel usage and learned about access rights gaps and missing upload notifications. Pain exists but is mild. 'Helen, when you mentioned the access rights issue with Vessel \u2014 has that caused any actual problems on this fundraise?'", "Ch": "Claire actively suggested trying out the DDQ tool and confirmed interest. She's a strong potential champion. 'Once you've run a few DDQs, would you be open to sharing your experience with the broader Inovia team?'", "Co": "Vessel named explicitly with specific weaknesses. Use them in the follow-up: 'One thing to note as you try the DDQ tool: the permissions granularity addresses the control gaps Helen mentioned with Vessel.'", "Ce": "Current fundraise is active \u2014 natural window to demonstrate DDQ value in a live context. 'How many DDQs are you receiving during an active fundraise? If we activate this week, you could be using it on live DDQs within days.'", "Cp": "DDQ tool activation agreed but no specific date for training. 'Can we put a 30-minute training session on the calendar for next week \u2014 Tuesday or Wednesday?'"}, "transition_score": 55, "transition_summary": "Kiley correctly positioned the DDQ as usable even with Vessel as the primary platform \u2014 smart foot-in-the-door. Vessel's weaknesses named and on record. Full platform evaluation is post-fundraise.", "multithread_score": 42, "multithread_summary": "Claire and Hellen both engaged. Decision-making authority for platform decisions at Inovia not yet mapped.", "top_multithread_action": "Plant the next platform conversation now: ask Claire when the current fundraise wraps and what the platform decision process looks like for the next one.", "top_wins": ["Kiley's creative positioning of the DDQ tool as usable even with Vessel as the primary platform \u2014 removed the objection cleanly", "Paul's technically precise DDQ demo \u2014 workflow-grounded, source-citation-aware, and honest about upcoming features", "Helen's LLM security objection handled sharply \u2014 confident, specific, and connected to the real risk of information egress"], "top_priorities": ["Lock a specific date for the training call \u2014 'I'll connect you with your CSM' loses momentum; Kiley should own the calendar invite", "Quantify the DDQ value \u2014 Claire said it's 'manageable'; the response should be a time metric that makes the efficiency case concrete", "Plant the next platform conversation \u2014 within 6 weeks, ask Claire when the current fundraise wraps"], "suggested_next_step": "Claire and Hellen \u2014 great speaking today. I'm reaching out to your CSM today to get the DDQ tool activated \u2014 you should be up within a day or two. I'd also like to put a 30-minute training call on the calendar for next week so I can make sure you're getting the most out of it right from the start. Would Tuesday or Wednesday work? And in a few weeks, I'd love to do a quick check-in to hear how the trial is going and talk about what the platform picture looks like for your next fundraise."}];
+
 const MEDD_LABELS = {M:'Metrics',E:'Economic Buyer',Dc:'Decision Criteria',Dp:'Decision Process',P:'Paper Process',I:'Identified Pain',Ch:'Champion',Co:'Competition',Ce:'Compelling Event',Cp:'Closing Plan'};
 const MEDD_COLORS = {M:'#1a6644',E:'#1a3a5c',Dc:'#5a3a9a',Dp:'#5a3a9a',P:'#8b3a1f',I:'#8b1f1f',Ch:'#7a4a00',Co:'#555',Ce:'#7a2a5a',Cp:'#1a3a5c'};
-const COM_LABELS = {pbos:'Positive Business Outcomes',ri:'Required Capabilities',metrics:'Metrics / Value',discovery:'Discovery Questions',objections:'Objection Handling',next_steps:'Next Steps & Commitment'};
-const SF_STAGES_ORDERED = ['Discover','Define & Validate Solution','Deal Prep Side Car','Propose','Negotiate and Close','Contract Signed','Closed'];
 
-// ── STATE ──
-let allCalls = [];
-let analysisCache = {};
+let filters = {rep:'all',signal:'all',stage:'all',search:''};
 let currentView = 'exec';
-let filters = { rep: 'all', signal: 'all', stage: 'all', search: '' };
 
-// ── HELPERS ──
-function sc(s){return s>=70?'var(--green)':s>=50?'var(--amber)':'var(--red)';}
-function tc(s){return s>=60?'var(--purple)':s>=35?'var(--amber)':'var(--red)';}
 function q2color(s){return s==='green'?'var(--green)':s==='amber'?'var(--gold)':'var(--red)';}
 function q2bg(s){return s==='green'?'var(--green-light)':s==='amber'?'var(--amber-light)':'var(--red-light)';}
 function q2border(s){return s==='green'?'#b8d9c8':s==='amber'?'#f0d9a8':'#f0c0c0';}
+function sc(s){return s>=70?'var(--green)':s>=50?'var(--amber)':'var(--red)';}
+function tc(s){return s>=60?'var(--purple)':s>=35?'var(--amber)':'var(--red)';}
+function fmtArr(v){if(!v||v===0)return '—';return '$'+Number(v).toLocaleString();}
 function spClass(s){return 'sp-'+(s||'na');}
 function spLabel(s){return{strong:'Strong',partial:'Partial',missing:'Missing',na:'N/A'}[s]||'N/A';}
 function aiClass(s){return{sharp:'ai-sharp',partially_sharp:'ai-partial',generic:'ai-generic','n/a':'ai-na'}[s]||'ai-na';}
-function aiPillClass(s){return{sharp:'p-sharp',partially_sharp:'p-partial-ai',generic:'p-generic','n/a':'p-na-ai'}[s]||'p-na-ai';}
+function aiPillClass(s){return{sharp:'p-sharp',partially_sharp:'p-partial',generic:'p-generic','n/a':'p-na'}[s]||'p-na';}
 function aiLabel(s){return{sharp:'Sharp ✓',partially_sharp:'Partially Sharp',generic:'Generic ✗','n/a':'Not Raised'}[s]||s;}
-function fmtDate(d){try{return new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric'});}catch{return d||'';}}
-function fmtDateFull(d){try{return new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}catch{return d||'';}}
-function fmtDur(s){return s?Math.round(s/60)+'m':'';}
-function fmtArr(v){if(!v||v===0)return '—';return '$'+Number(v).toLocaleString();}
-function getAccount(c){return c.crm_account_name||c.account_name||c.name||'Unknown';}
-function getRep(c){return c.user_name||c.owner_name||'Unknown Rep';}
-function getTitle(c){return c.name||c.title||getAccount(c);}
-function getStage(c){return c.crm_opportunity_stage||c.opportunity_stage||'Unknown';}
-function getAmount(c){return parseFloat(c.crm_opportunity_amount||0);}
-function getCloseDate(c){return c.crm_opportunity_close_date||'';}
-function getRecap(c){return c.recap||c.summary||'';}
-function getKM(c){return c.key_moments||[];}
-function extractTranscript(c){
-  if(c.transcript&&typeof c.transcript==='string')return c.transcript;
-  if(Array.isArray(c.transcript_lines))return c.transcript_lines.map(l=>`${l.speaker_name||'Speaker'}: ${l.content||''}`).join('\n');
-  return getRecap(c);
-}
 
-// ── Q2 SIGNAL LOGIC (fast, no Claude) ──
-function calcQ2Signal(call) {
-  const stage = getStage(call).toLowerCase();
-  const closeDate = getCloseDate(call);
-  const amount = getAmount(call);
-  const recap = getRecap(call).toLowerCase();
-  const km = getKM(call);
-  
-  // Parse close date
-  let closesInQ2 = false;
-  let closesThisYear = false;
-  if (closeDate) {
-    const cd = new Date(closeDate);
-    const now = new Date();
-    const q2End = new Date('2026-06-30');
-    const yearEnd = new Date('2026-12-31');
-    closesInQ2 = cd <= q2End && cd >= now;
-    closesThisYear = cd <= yearEnd;
-  }
+// Init badges
+const closeable = CALLS.filter(c=>c.q2_signal==='green').length;
+const possible = CALLS.filter(c=>c.q2_signal==='amber').length;
+document.getElementById('q2-badge').textContent = `Q2: ${closeable}🟢 ${possible}🟡`;
 
-  // Activity signals from key moments
-  const hasUrgency = km.some(k => (k.title||'').toLowerCase().includes('urgency') || (k.title||'').toLowerCase().includes('timing'));
-  const hasNextSteps = km.some(k => (k.title||'').toLowerCase().includes('next step'));
-  const hasPain = km.some(k => (k.title||'').toLowerCase().includes('pain') || (k.title||'').toLowerCase().includes('business'));
-  const hasObjection = km.some(k => (k.title||'').toLowerCase().includes('objection'));
-
-  // Stage scoring
-  const stageScore = 
-    stage.includes('negotiate') || stage.includes('contract') ? 90 :
-    stage.includes('propose') ? 70 :
-    stage.includes('deal prep') || stage.includes('define') ? 45 :
-    stage.includes('discover') ? 20 : 30;
-
-  // Q2 signal
-  if (stageScore >= 70 && closesInQ2 && !hasObjection) {
-    return { signal: 'green', label: 'Closeable Q2', reason: `${getStage(call)} · closes ${fmtDateFull(closeDate)}` };
-  }
-  if (stageScore >= 45 && closesThisYear && (hasUrgency || hasNextSteps || hasPain)) {
-    return { signal: 'amber', label: 'Possible Q2', reason: `${getStage(call)} · ${hasUrgency?'urgency signal':'active engagement'}` };
-  }
-  if (stageScore >= 45 && closesInQ2) {
-    return { signal: 'amber', label: 'Possible Q2', reason: `${getStage(call)} · close date in Q2` };
-  }
-  return { signal: 'red', label: 'Unlikely Q2', reason: `${getStage(call)}${closeDate?' · closes '+fmtDateFull(closeDate):''}` };
-}
-
-function calcActivityScore(call) {
-  const km = getKM(call);
-  if (km.length >= 4) return { score: 'high', color: 'var(--green)', label: 'High' };
-  if (km.length >= 2) return { score: 'med', color: 'var(--amber)', label: 'Med' };
-  return { score: 'low', color: 'var(--red)', label: 'Low' };
-}
-
-// ── API ──
-async function slGet(path, params = '') {
-  const encodedPath = path.split('/').join('__');
-  const encodedParams = params ? '&' + params.split('[').join('%5B').split(']').join('%5D') : '';
-  const url = '/api/sl?p=' + encodedPath + encodedParams;
-  const resp = await fetch(url);
-  if (!resp.ok) throw new Error('API ' + resp.status);
-  return resp.json();
-}
-
-async function analyzeWithClaude(call) {
-  const transcript = extractTranscript(call);
-  const recap = getRecap(call);
-  const km = getKM(call).map(k=>`${k.title||''}: ${k.summary||k.text||''}`).join(' | ');
-
-  const prompt = `You are an elite B2B sales coach for Intralinks (VDR and alternative investments platform). 
-
-Context: Intralinks is transitioning from transactional VDR to subscription platform (DealCentre AI for M&A, FundCentre AI for alternatives). SS&C controls the AI stack end-to-end — model, fine-tuning, hosting inside the perimeter. Competitors (Datasite, Juniper Square, Anduin) use acquired or outsourced AI.
-
-Call: ${getTitle(call)}
-Account: ${getAccount(call)}
-Rep: ${getRep(call)}
-SF Stage: ${getStage(call)}
-Close Date: ${getCloseDate(call)||'Unknown'}
-Amount: ${fmtArr(getAmount(call))}
-
-Salesloft Recap: ${recap||'Not available'}
-Key Moments: ${km||'Not available'}
-Transcript: ${transcript.slice(0,5000)}
-
-Return ONLY valid JSON:
-{
-  "overall_score": 0-100,
-  "deal_context": "1-2 sentences",
-  "summary": "2-3 sentence coaching summary",
-  "ai_story": {"came_up":true/false,"sharp_or_generic":"sharp|partially_sharp|generic|n/a","how_handled":"description","coaching":"coaching note"},
-  "meddpicccc_scores": {"M":"strong|partial|missing|na","E":"strong|partial|missing|na","Dc":"strong|partial|missing|na","Dp":"strong|partial|missing|na","P":"strong|partial|missing|na","I":"strong|partial|missing|na","Ch":"strong|partial|missing|na","Co":"strong|partial|missing|na","Ce":"strong|partial|missing|na","Cp":"strong|partial|missing|na"},
-  "meddpicccc_coaching": {"M":"note","E":"note","Dc":"note","Dp":"note","P":"note","I":"note","Ch":"note","Co":"note","Ce":"note","Cp":"note"},
-  "transition_score": 0-100,
-  "multithread_score": 0-100,
-  "top_wins": ["win1","win2","win3"],
-  "top_priorities": ["p1","p2","p3"],
-  "suggested_next_step": "exact follow-up language"
-}`;
-
-  const resp = await fetch('/api/analyze', {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})
-  });
-  const data = await resp.json();
-  const raw = data.content?.[0]?.text||'{}';
-  try { return JSON.parse(raw.replace(/```json|```/g,'')); }
-  catch(e) { return {}; }
-}
-
-// ── MAIN INIT ──
-async function init() {
-  showLoading('Connecting to Salesloft...', 5);
-  
-  try {
-    // Test connection
-    const me = await slGet('v2__users__me.json');
-    const repName = me.data?.name?.split(' ')[0] || me.data?.email?.split('@')[0] || 'Connected';
-    
-    showLoading(`Connected as ${repName}. Loading 2026 conversations...`, 12);
-
-    // Load all 2026 conversations with pagination
-    let page = 1;
-    let hasMore = true;
-    const allConvs = [];
-
-    while (hasMore && allConvs.length < 300) {
-      showLoading(`Loading calls... ${allConvs.length} so far`, 12 + (allConvs.length/300)*30);
-      try {
-        const r = await slGet('v2__conversations__calls', `per_page=100&page=${page}&sort_by=updated_at&sort_direction=DESC`);
-        const batch = r.data || [];
-        allConvs.push(...batch);
-        hasMore = batch.length === 100;
-        page++;
-        if (batch.length === 0) break;
-      } catch(e) {
-        break;
-      }
+function getFiltered(){
+  return CALLS.filter(c=>{
+    if(filters.rep!=='all' && c.rep!==filters.rep) return false;
+    if(filters.signal!=='all' && c.q2_signal!==filters.signal) return false;
+    if(filters.stage!=='all' && c.sf_stage!==filters.stage) return false;
+    if(filters.search){
+      const s=filters.search.toLowerCase();
+      if(!c.account.toLowerCase().includes(s) && !c.rep.toLowerCase().includes(s)) return false;
     }
-
-    showLoading(`Processing ${allConvs.length} calls...`, 44);
-
-    // Add Q2 signal to each call (fast, no Claude)
-    allCalls = allConvs.map(call => ({
-      ...call,
-      _q2: calcQ2Signal(call),
-      _activity: calcActivityScore(call)
-    }));
-
-    // Sort: closeable first, then possible, then unlikely
-    allCalls.sort((a,b) => {
-      const order = {green:0,amber:1,red:2};
-      return (order[a._q2.signal]||2) - (order[b._q2.signal]||2);
-    });
-
-    showLoading('Building dashboard...', 95);
-    await new Promise(r=>setTimeout(r,300));
-
-    // Update header
-    document.getElementById('sl-badge').style.display='inline';
-    document.getElementById('count-badge').style.display='inline';
-    document.getElementById('count-badge').textContent = `${allCalls.length} Calls`;
-    const closeable = allCalls.filter(c=>c._q2.signal==='green').length;
-    const possible = allCalls.filter(c=>c._q2.signal==='amber').length;
-    document.getElementById('q2-badge').style.display='inline';
-    document.getElementById('q2-badge').textContent = `Q2: ${closeable}🟢 ${possible}🟡`;
-
-    hideLoading();
-    renderExecDashboard();
-
-  } catch(e) {
-    hideLoading();
-    document.getElementById('main').innerHTML = `
-      <div class="load-wrap"><div class="load-card">
-        <div class="load-icon">⚠️</div>
-        <div class="load-title">Connection Error</div>
-        <div class="load-sub">${e.message}<br><br>Check that SALESLOFT_API_KEY is set in Vercel environment variables.</div>
-      </div></div>`;
-  }
+    return true;
+  });
 }
 
-// ── LOADING ──
-function showLoading(step, pct) {
-  document.getElementById('main').innerHTML = `
-    <div class="load-wrap"><div class="load-card">
-      <div class="load-icon">🔍</div>
-      <div class="load-title">Loading Deal Intelligence</div>
-      <div class="load-sub">Pulling your Salesloft calls and building the Q2 forecast...</div>
-      <div class="prog-bar-wrap"><div class="prog-bar" style="width:${pct}%"></div></div>
-      <div class="prog-step">${step}</div>
-    </div></div>`;
+function applyFilters(){
+  filters.rep=document.getElementById('f-rep')?.value||'all';
+  filters.signal=document.getElementById('f-signal')?.value||'all';
+  filters.stage=document.getElementById('f-stage')?.value||'all';
+  filters.search=document.getElementById('f-search')?.value||'';
+  if(currentView==='exec') renderExec();
+  else if(currentView==='calls') renderCalls();
+  else renderCoaching();
 }
-function hideLoading() {}
 
-// ── VIEW SWITCHING ──
-function showView(view, tabEl) {
-  currentView = view;
+function showView(v,el){
+  currentView=v;
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('on'));
-  if(tabEl) tabEl.classList.add('on');
-  if(view==='exec') renderExecDashboard();
-  else if(view==='calls') renderCallsView();
-  else if(view==='coaching') renderCoachingView();
+  if(el) el.classList.add('on');
+  if(v==='exec') renderExec();
+  else if(v==='calls') renderCalls();
+  else renderCoaching();
 }
 
-// ── EXEC DASHBOARD ──
-function renderExecDashboard() {
-  const filtered = getFiltered();
-  const closeable = filtered.filter(c=>c._q2.signal==='green');
-  const possible = filtered.filter(c=>c._q2.signal==='amber');
-  const unlikely = filtered.filter(c=>c._q2.signal==='red');
-  const closeableArr = closeable.reduce((a,c)=>a+getAmount(c),0);
-  const possibleArr = possible.reduce((a,c)=>a+getAmount(c),0);
-  const totalArr = filtered.reduce((a,c)=>a+getAmount(c),0);
-  const reps = [...new Set(filtered.map(c=>getRep(c)))].filter(Boolean);
-
-  document.getElementById('main').innerHTML = `
-    <div class="exec-header">
-      <div class="exec-title">Deal Dashboard</div>
-      <div class="exec-sub">Q2 2026 Pipeline · Based on Salesloft activity + Salesforce stage data</div>
-      <div class="exec-meta">
-        <span class="exec-meta-item">📅 Last 30 days</span>
-        <span class="exec-meta-item">·</span>
-        <span class="exec-meta-item">${filtered.length} calls</span>
-        <span class="exec-meta-item">·</span>
-        <span class="exec-meta-item">${reps.length} reps</span>
-        <span class="exec-meta-item">·</span>
-        <span class="exec-meta-item">Live from Salesloft</span>
-      </div>
-    </div>
-
-    ${renderFilterBar(filtered)}
-
-    <div class="kpi-strip">
-      <div class="kpi k-green">
-        <div class="kpi-num" style="color:var(--green)">${closeable.length}</div>
-        <div class="kpi-label">Closeable Q2<br>${fmtArr(closeableArr)}</div>
-      </div>
-      <div class="kpi k-amber">
-        <div class="kpi-num" style="color:var(--gold)">${possible.length}</div>
-        <div class="kpi-label">Possible Q2<br>${fmtArr(possibleArr)}</div>
-      </div>
-      <div class="kpi k-red">
-        <div class="kpi-num" style="color:var(--red)">${unlikely.length}</div>
-        <div class="kpi-label">Unlikely Q2</div>
-      </div>
-      <div class="kpi k-blue">
-        <div class="kpi-num" style="color:var(--accent)">${fmtArr(closeableArr+possibleArr)}</div>
-        <div class="kpi-label">Q2 Pipeline ARR</div>
-      </div>
-      <div class="kpi k-purple">
-        <div class="kpi-num" style="color:var(--purple)">${reps.length}</div>
-        <div class="kpi-label">Active Reps</div>
-      </div>
-      <div class="kpi k-grey">
-        <div class="kpi-num" style="color:var(--ink-2)">${filtered.length}</div>
-        <div class="kpi-label">Total Calls</div>
-      </div>
-    </div>
-
-    ${renderQ2Section('🟢 Closeable Q2', closeable, 'green')}
-    ${renderQ2Section('🟡 Possible Q2', possible, 'amber')}
-    ${renderQ2Section('🔴 Unlikely Q2', unlikely, 'red', true)}`;
-
-  bindFilters();
-}
-
-function renderFilterBar(filtered) {
-  const reps = [...new Set(allCalls.map(c=>getRep(c)))].filter(Boolean).sort();
-  const stages = [...new Set(allCalls.map(c=>getStage(c)))].filter(Boolean).sort();
+function renderFilterBar(filtered){
+  const reps=[...new Set(CALLS.map(c=>c.rep))].filter(Boolean).sort();
+  const stages=[...new Set(CALLS.map(c=>c.sf_stage))].filter(Boolean).sort();
   return `<div class="filter-bar">
     <span class="filter-label">Filter:</span>
     <select class="filter-select" id="f-rep" onchange="applyFilters()">
@@ -597,34 +269,38 @@ function renderFilterBar(filtered) {
   </div>`;
 }
 
-function bindFilters() {}
+function renderExec(){
+  const filtered=getFiltered();
+  const green=filtered.filter(c=>c.q2_signal==='green');
+  const amber=filtered.filter(c=>c.q2_signal==='amber');
+  const red=filtered.filter(c=>c.q2_signal==='red');
+  const gArr=green.reduce((a,c)=>a+(c.estimated_arr||0),0);
+  const aArr=amber.reduce((a,c)=>a+(c.estimated_arr||0),0);
+  const reps=[...new Set(filtered.map(c=>c.rep))].filter(Boolean);
+  const avgScore=filtered.length?Math.round(filtered.reduce((a,c)=>a+(c.overall_score||0),0)/filtered.length):0;
 
-function applyFilters() {
-  filters.rep = document.getElementById('f-rep')?.value || 'all';
-  filters.signal = document.getElementById('f-signal')?.value || 'all';
-  filters.stage = document.getElementById('f-stage')?.value || 'all';
-  filters.search = document.getElementById('f-search')?.value || '';
-  if(currentView==='exec') renderExecDashboard();
-  else if(currentView==='calls') renderCallsView();
-  else renderCoachingView();
+  document.getElementById('main').innerHTML=`
+    <div class="exec-header">
+      <div class="exec-title">Deal Dashboard</div>
+      <div class="exec-sub">Q2 2026 Pipeline · 13 real Intralinks calls · AI-analyzed</div>
+    </div>
+    ${renderFilterBar(filtered)}
+    <div class="kpi-strip">
+      <div class="kpi k-green"><div class="kpi-num" style="color:var(--green)">${green.length}</div><div class="kpi-label">Closeable Q2<br>${fmtArr(gArr)}</div></div>
+      <div class="kpi k-amber"><div class="kpi-num" style="color:var(--gold)">${amber.length}</div><div class="kpi-label">Possible Q2<br>${fmtArr(aArr)}</div></div>
+      <div class="kpi k-red"><div class="kpi-num" style="color:var(--red)">${red.length}</div><div class="kpi-label">Unlikely Q2</div></div>
+      <div class="kpi k-blue"><div class="kpi-num" style="color:var(--accent)">${fmtArr(gArr+aArr)}</div><div class="kpi-label">Q2 Pipeline ARR</div></div>
+      <div class="kpi k-purple"><div class="kpi-num" style="color:var(--purple)">${reps.length}</div><div class="kpi-label">Active Reps</div></div>
+      <div class="kpi k-grey"><div class="kpi-num" style="color:${sc(avgScore)}">${avgScore}</div><div class="kpi-label">Avg Call Score</div></div>
+    </div>
+    ${renderQ2Section('🟢 Closeable Q2',green,'green')}
+    ${renderQ2Section('🟡 Possible Q2',amber,'amber')}
+    ${renderQ2Section('🔴 Unlikely Q2',red,'red')}`;
 }
 
-function getFiltered() {
-  return allCalls.filter(c => {
-    if(filters.rep!=='all' && getRep(c)!==filters.rep) return false;
-    if(filters.signal!=='all' && c._q2?.signal!==filters.signal) return false;
-    if(filters.stage!=='all' && getStage(c)!==filters.stage) return false;
-    if(filters.search) {
-      const s = filters.search.toLowerCase();
-      if(!getAccount(c).toLowerCase().includes(s) && !getRep(c).toLowerCase().includes(s)) return false;
-    }
-    return true;
-  });
-}
-
-function renderQ2Section(title, calls, signal, collapsed=false) {
-  if(calls.length===0) return '';
-  const arr = calls.reduce((a,c)=>a+getAmount(c),0);
+function renderQ2Section(title,calls,signal){
+  if(!calls.length) return '';
+  const arr=calls.reduce((a,c)=>a+(c.estimated_arr||0),0);
   return `<div class="q2-section">
     <div class="q2-section-hdr">
       <div class="q2-dot" style="background:${q2color(signal)}"></div>
@@ -634,333 +310,111 @@ function renderQ2Section(title, calls, signal, collapsed=false) {
     </div>
     <table class="deal-table">
       <thead><tr>
-        <th>Account</th>
-        <th>Rep</th>
-        <th>Stage</th>
-        <th>ARR</th>
-        <th>Close Date</th>
-        <th>Activity</th>
-        <th>Signal Reason</th>
-        <th>Coach</th>
+        <th>Account</th><th>Rep</th><th>Stage</th><th>ARR</th><th>Score</th><th>AI Story</th><th>Signal</th>
       </tr></thead>
       <tbody>
-        ${calls.slice(0, collapsed?5:calls.length).map((c,i) => renderDealRow(c, i)).join('')}
-        ${collapsed&&calls.length>5?`<tr><td colspan="8" style="text-align:center;padding:10px;font-size:12px;color:var(--ink-3);cursor:pointer" onclick="showAllUnlikely()">Show all ${calls.length} unlikely deals ↓</td></tr>`:''}
+        ${calls.map(c=>`<tr onclick="openPanel(${JSON.stringify(c.account).replace(/"/g,'&quot;')})">
+          <td><div class="tbl-account">${c.account}</div><div class="tbl-rep">${c.date}</div></td>
+          <td><div class="tbl-rep">${c.rep}</div></td>
+          <td><span class="tbl-stage">${c.sf_stage}</span></td>
+          <td class="tbl-arr">${fmtArr(c.estimated_arr)}</td>
+          <td><span class="score-pill" style="color:${sc(c.overall_score)}">${c.overall_score}</span></td>
+          <td><span class="ai-pill ${aiPillClass(c.ai_story?.sharp_or_generic)}">${aiLabel(c.ai_story?.sharp_or_generic)}</span></td>
+          <td><div class="tbl-signal" style="color:${q2color(c.q2_signal)}"><div class="sig-dot" style="background:${q2color(c.q2_signal)}"></div>${c.q2_reason}</div></td>
+        </tr>`).join('')}
       </tbody>
     </table>
   </div>`;
 }
 
-function renderDealRow(call, i) {
-  const q2 = call._q2||{signal:'red',label:'Unknown',reason:''};
-  const act = call._activity||{color:'var(--ink-3)',label:'—'};
-  const analyzed = analysisCache[call.id];
-  const btnText = analyzed ? 'Coached ✓' : 'Analyze →';
-  const btnClass = analyzed ? 'tbl-analyze done' : 'tbl-analyze';
-  const stage = getStage(call);
-  const stageShort = stage.length>18 ? stage.slice(0,16)+'…' : stage;
-
-  return `<tr onclick="openCallPanel('${call.id}')">
-    <td>
-      <div class="tbl-account">${getAccount(call)}</div>
-      <div class="tbl-rep">${getRep(call)}</div>
-    </td>
-    <td><span class="tbl-stage" title="${stage}">${stageShort}</span></td>
-    <td class="tbl-arr">${fmtArr(getAmount(call))}</td>
-    <td class="tbl-date">${fmtDateFull(getCloseDate(call))}</td>
-    <td>
-      <div class="tbl-activity">
-        <div class="act-dot" style="background:${act.color}"></div>
-        <span style="font-size:11px;font-family:'DM Mono',monospace;color:${act.color}">${act.label}</span>
-        <span style="font-size:10px;color:var(--ink-4);font-family:'DM Mono',monospace;margin-left:2px">${getKM(call).length} signals</span>
-      </div>
-    </td>
-    <td>
-      <div class="tbl-signal" style="color:${q2color(q2.signal)}">
-        <div class="sig-dot" style="background:${q2color(q2.signal)}"></div>
-        <span>${q2.reason||q2.label}</span>
-      </div>
-    </td>
-    <td onclick="event.stopPropagation()">
-      <button class="${btnClass}" onclick="analyzeCall('${call.id}')">${btnText}</button>
-    </td>
-  </tr>`;
-}
-
-function showAllUnlikely() {
-  renderExecDashboard();
-}
-
-// ── CALLS VIEW ──
-function renderCallsView() {
-  const filtered = getFiltered();
-  document.getElementById('main').innerHTML = `
-    <div style="margin-bottom:20px">
-      <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:4px">All Calls</div>
-      <div style="font-size:13px;color:var(--ink-3)">Click any call to run AI coaching analysis</div>
-    </div>
+function renderCalls(){
+  const filtered=getFiltered();
+  document.getElementById('main').innerHTML=`
+    <div style="margin-bottom:20px"><div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:4px">All Calls</div>
+    <div style="font-size:13px;color:var(--ink-3)">Click any call to view full AI coaching analysis</div></div>
     ${renderFilterBar(filtered)}
     <table class="deal-table">
-      <thead><tr>
-        <th>Account / Call</th>
-        <th>Rep</th>
-        <th>Date</th>
-        <th>Duration</th>
-        <th>Stage</th>
-        <th>Q2 Signal</th>
-        <th>Salesloft Signals</th>
-        <th>Coach</th>
-      </tr></thead>
+      <thead><tr><th>Account</th><th>Rep</th><th>Date</th><th>Duration</th><th>Stage</th><th>Score</th><th>AI Story</th><th>Q2</th></tr></thead>
       <tbody>
-        ${filtered.map(c => renderCallRow(c)).join('')}
+        ${filtered.map(c=>`<tr onclick="openPanel(${JSON.stringify(c.account).replace(/"/g,'&quot;')})">
+          <td><div class="tbl-account">${c.account}</div></td>
+          <td>${c.rep}</td>
+          <td style="font-family:'DM Mono',monospace;font-size:11px">${c.date}</td>
+          <td style="font-family:'DM Mono',monospace;font-size:11px">${c.duration}</td>
+          <td><span class="tbl-stage">${c.sf_stage}</span></td>
+          <td><span class="score-pill" style="color:${sc(c.overall_score)}">${c.overall_score}</span></td>
+          <td><span class="ai-pill ${aiPillClass(c.ai_story?.sharp_or_generic)}">${aiLabel(c.ai_story?.sharp_or_generic)}</span></td>
+          <td><div class="tbl-signal" style="color:${q2color(c.q2_signal)}"><div class="sig-dot" style="background:${q2color(c.q2_signal)}"></div>${c.q2_label}</div></td>
+        </tr>`).join('')}
       </tbody>
     </table>`;
-  bindFilters();
 }
 
-function renderCallRow(call) {
-  const q2 = call._q2||{};
-  const analyzed = analysisCache[call.id];
-  const btnClass = analyzed ? 'tbl-analyze done' : 'tbl-analyze';
-  const km = getKM(call);
-  return `<tr onclick="openCallPanel('${call.id}')">
-    <td>
-      <div class="tbl-account">${getAccount(call)}</div>
-      <div class="tbl-rep" style="font-size:11px;color:var(--ink-3)">${getTitle(call)}</div>
-    </td>
-    <td><div class="tbl-rep">${getRep(call)}</div></td>
-    <td class="tbl-date">${fmtDate(call.created_at||call.updated_at)}</td>
-    <td class="tbl-date">${fmtDur(call.duration)}</td>
-    <td><span class="tbl-stage">${getStage(call)}</span></td>
-    <td><div class="tbl-signal" style="color:${q2color(q2.signal)}"><div class="sig-dot" style="background:${q2color(q2.signal)}"></div>${q2.label||'—'}</div></td>
-    <td>
-      <div style="display:flex;gap:4px;flex-wrap:wrap">
-        ${km.slice(0,3).map(k=>`<span style="font-size:10px;font-family:'DM Mono',monospace;background:var(--surface);padding:2px 6px;border-radius:3px;color:var(--ink-3)">${(k.title||'').slice(0,14)}</span>`).join('')}
-      </div>
-    </td>
-    <td onclick="event.stopPropagation()">
-      <button class="${btnClass}" onclick="analyzeCall('${call.id}')">${analyzed?'Coached ✓':'Analyze →'}</button>
-    </td>
-  </tr>`;
-}
-
-// ── COACHING VIEW ──
-function renderCoachingView() {
-  const analyzed = Object.values(analysisCache);
-  document.getElementById('main').innerHTML = `
-    <div style="margin-bottom:20px">
-      <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:4px">Team Coaching</div>
-      <div style="font-size:13px;color:var(--ink-3)">${analyzed.length} calls analyzed · Click any call to view full coaching notes</div>
-    </div>
-    ${analyzed.length===0?`<div class="empty"><div class="empty-icon">🎯</div><div class="empty-title">No calls analyzed yet</div><div class="empty-sub">Go to All Calls or the Executive Dashboard and click "Analyze →" on any call to generate coaching notes.</div></div>`:`
+function renderCoaching(){
+  const sorted=[...CALLS].sort((a,b)=>b.overall_score-a.overall_score);
+  document.getElementById('main').innerHTML=`
+    <div style="margin-bottom:20px"><div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:4px">Team Coaching</div>
+    <div style="font-size:13px;color:var(--ink-3)">All 13 calls analyzed · Sorted by score</div></div>
     <table class="deal-table">
-      <thead><tr>
-        <th>Account</th><th>Rep</th><th>Score</th><th>AI Story</th><th>Value vs Feature</th><th>Q2</th><th>Top Priority</th>
-      </tr></thead>
+      <thead><tr><th>Account</th><th>Rep</th><th>Score</th><th>AI Story</th><th>Value vs Feature</th><th>Transition</th><th>Multi-Thread</th><th>Top Priority</th></tr></thead>
       <tbody>
-        ${analyzed.map(a => {
-          const call = allCalls.find(c=>c.id===a._callId)||{};
-          const q2 = call._q2||{};
-          return `<tr onclick="openCallPanel('${a._callId}')">
-            <td><div class="tbl-account">${getAccount(call)}</div><div class="tbl-rep">${getRep(call)}</div></td>
-            <td>${getRep(call)}</td>
-            <td><span style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:${sc(a.overall_score||0)}">${a.overall_score||0}</span></td>
-            <td><span class="ai-pill ${aiPillClass(a.ai_story?.sharp_or_generic||'n/a')}">${aiLabel(a.ai_story?.sharp_or_generic||'n/a')}</span></td>
-            <td><span style="font-size:12px">${a.value_vs_feature?.score==='value_led'?'✅ Value-Led':a.value_vs_feature?.score==='feature_led'?'❌ Feature-Led':'⚠️ Mixed'}</span></td>
-            <td><div class="tbl-signal" style="color:${q2color(q2.signal)}"><div class="sig-dot" style="background:${q2color(q2.signal)}"></div>${q2.label||'—'}</div></td>
-            <td style="font-size:12px;color:var(--ink-2)">${(a.top_priorities||[])[0]||'—'}</td>
-          </tr>`;
-        }).join('')}
+        ${sorted.map(c=>`<tr onclick="openPanel(${JSON.stringify(c.account).replace(/"/g,'&quot;')})">
+          <td><div class="tbl-account">${c.account}</div><div class="tbl-rep">${c.date}</div></td>
+          <td>${c.rep}</td>
+          <td><span class="score-pill" style="color:${sc(c.overall_score)}">${c.overall_score}</span></td>
+          <td><span class="ai-pill ${aiPillClass(c.ai_story?.sharp_or_generic)}">${aiLabel(c.ai_story?.sharp_or_generic)}</span></td>
+          <td style="font-size:12px">${c.value_vs_feature?.score==='value_led'?'✅ Value-Led':c.value_vs_feature?.score==='feature_led'?'❌ Feature-Led':'⚠️ Mixed'}</td>
+          <td><span style="font-family:'DM Mono',monospace;font-size:12px;color:${tc(c.transition_score)}">${c.transition_score}</span></td>
+          <td><span style="font-family:'DM Mono',monospace;font-size:12px;color:${tc(c.multithread_score)}">${c.multithread_score}</span></td>
+          <td style="font-size:12px;color:var(--ink-2);max-width:200px">${(c.top_priorities||[])[0]||'—'}</td>
+        </tr>`).join('')}
       </tbody>
-    </table>`}`;
+    </table>`;
 }
 
-// ── COACHING PANEL ──
-function openCallPanel(callId) {
-  const call = allCalls.find(c=>c.id===callId);
-  if(!call) return;
-  
-  document.getElementById('panel-title').textContent = getAccount(call);
-  document.getElementById('panel-sub').textContent = `${getRep(call)} · ${fmtDateFull(call.created_at)} · ${fmtDur(call.duration)}`;
+function openPanel(account){
+  const c=CALLS.find(x=>x.account===account);
+  if(!c) return;
+  document.getElementById('panel-title').textContent=c.account;
+  document.getElementById('panel-sub').textContent=`${c.all_reps} · ${c.date} · ${c.duration}`;
   document.getElementById('panel-overlay').classList.add('show');
   document.getElementById('coaching-panel').classList.add('open');
-  
-  const cached = analysisCache[callId];
-  if(cached) {
-    renderPanelContent(call, cached);
-  } else {
-    renderPanelBasic(call);
-  }
-}
 
-function renderPanelBasic(call) {
-  const q2 = call._q2||{};
-  const km = getKM(call);
-  const recap = getRecap(call);
-  
-  document.getElementById('panel-body').innerHTML = `
-    <div class="p-q2-box" style="background:${q2bg(q2.signal)};border:1px solid ${q2border(q2.signal)}">
-      <div class="p-q2-dot" style="background:${q2color(q2.signal)}"></div>
+  const ai=c.ai_story||{};
+  const scores=c.meddpicccc_scores||{};
+  const coaching=c.meddpicccc_coaching||{};
+  const s=c.overall_score||0;
+  const ts=c.transition_score||0;
+  const mts=c.multithread_score||0;
+  const medd=Object.values(scores).length?Math.round(Object.values(scores).reduce((a,v)=>a+(v==='strong'?10:v==='partial'?5:v==='na'?10:0),0)/(Object.values(scores).length*10)*100):0;
+
+  document.getElementById('panel-body').innerHTML=`
+    <div class="p-q2-box" style="background:${q2bg(c.q2_signal)};border:1px solid ${q2border(c.q2_signal)}">
+      <div class="p-q2-dot" style="background:${q2color(c.q2_signal)}"></div>
       <div>
-        <div class="p-q2-label" style="color:${q2color(q2.signal)}">Q2 Signal · ${q2.label||''}</div>
-        <div class="p-q2-text" style="color:${q2color(q2.signal)}">${q2.reason||''}</div>
+        <div class="p-q2-label" style="color:${q2color(c.q2_signal)}">${c.q2_label}</div>
+        <div class="p-q2-text" style="color:${q2color(c.q2_signal)}">${c.q2_reason}</div>
       </div>
     </div>
 
     <div class="p-sl-strip">
-      <div class="p-sl-card"><div class="p-sl-label">Stage</div><div class="p-sl-value">${getStage(call)}</div></div>
-      <div class="p-sl-card"><div class="p-sl-label">Close Date</div><div class="p-sl-value">${fmtDateFull(getCloseDate(call))||'—'}</div></div>
-      <div class="p-sl-card"><div class="p-sl-label">Amount</div><div class="p-sl-value">${fmtArr(getAmount(call))}</div></div>
-    </div>
-
-    ${recap?`<div class="p-recap">
-      <div class="p-recap-label">⚡ Salesloft AI Recap</div>
-      <div class="p-recap-text">${recap}</div>
-      ${km.length?`<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px">
-        ${km.slice(0,4).map(k=>`<div style="background:var(--surface);border-radius:5px;padding:8px 10px">
-          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px">${k.title||''}</div>
-          <div style="font-size:11px;color:var(--ink-2);line-height:1.5">${k.summary||k.text||''}</div>
-        </div>`).join('')}
-      </div>`:''}
-    </div>`:''}
-
-    <div class="p-act-row">
-      <button class="p-act-btn btn-sf" onclick="alert('Coming soon')">☁ Save to Salesforce</button>
-      <button class="p-act-btn btn-ol" onclick="alert('Coming soon')">📅 Schedule</button>
-      ${call.id?`<button class="p-act-btn btn-sl-link" onclick="window.open('https://app.salesloft.com/app/conversation-intelligence/recordings/${call.id}','_blank')">⚡ Salesloft</button>`:''}
-    </div>
-
-    <div style="text-align:center;padding:20px;background:var(--surface);border-radius:8px;border:1px dashed var(--rule)">
-      <div style="font-size:13px;color:var(--ink-3);margin-bottom:12px">Run AI coaching analysis on this call</div>
-      <button style="background:var(--accent);color:white;border:none;border-radius:6px;padding:10px 24px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer" onclick="analyzeCallInPanel('${call.id}')">
-        🎯 Analyze This Call →
-      </button>
-      <div style="font-size:11px;color:var(--ink-4);margin-top:8px;font-family:'DM Mono',monospace">~10 seconds · MEDDPICCCC · AI Story · Coaching Notes</div>
-    </div>`;
-}
-
-async function analyzeCallInPanel(callId) {
-  const call = allCalls.find(c=>c.id===callId);
-  if(!call) return;
-  
-  // Load full call detail first
-  document.getElementById('panel-body').innerHTML = `
-    <div class="panel-loading">
-      <div class="panel-spinner"></div>
-      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-3)">Loading transcript...</div>
-    </div>`;
-
-  try {
-    // Get full call details
-    let fullCall = call;
-    try {
-      const detail = await slGet(`v2__conversations__calls__${callId}`);
-      fullCall = {...call, ...(detail.data||{})};
-    } catch(e) {}
-
-    document.getElementById('panel-body').innerHTML = `
-      <div class="panel-loading">
-        <div class="panel-spinner"></div>
-        <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-3)">Analyzing with Claude AI...</div>
-      </div>`;
-
-    const analysis = await analyzeWithClaude(fullCall);
-    analysis._callId = callId;
-    analysisCache[callId] = analysis;
-    
-    // Update the analyze button in table
-    document.querySelectorAll('.tbl-analyze').forEach(btn => {
-      if(btn.onclick?.toString().includes(callId)) {
-        btn.textContent = 'Coached ✓';
-        btn.className = 'tbl-analyze done';
-      }
-    });
-
-    renderPanelContent(fullCall, analysis);
-    
-    // Refresh coaching view if active
-    if(currentView==='coaching') renderCoachingView();
-    
-  } catch(e) {
-    document.getElementById('panel-body').innerHTML = `<div style="padding:20px;color:var(--red)">Analysis failed: ${e.message}</div>`;
-  }
-}
-
-async function analyzeCall(callId) {
-  const btn = event.target;
-  if(btn.classList.contains('done')) {
-    openCallPanel(callId);
-    return;
-  }
-  btn.textContent = '...';
-  btn.className = 'tbl-analyze loading';
-  btn.disabled = true;
-  
-  try {
-    const call = allCalls.find(c=>c.id===callId);
-    let fullCall = call;
-    try {
-      const detail = await slGet(`v2__conversations__calls__${callId}`);
-      fullCall = {...call,...(detail.data||{})};
-    } catch(e) {}
-    
-    const analysis = await analyzeWithClaude(fullCall);
-    analysis._callId = callId;
-    analysisCache[callId] = analysis;
-    btn.textContent = 'Coached ✓';
-    btn.className = 'tbl-analyze done';
-    btn.disabled = false;
-    openCallPanel(callId);
-  } catch(e) {
-    btn.textContent = 'Retry';
-    btn.className = 'tbl-analyze';
-    btn.disabled = false;
-  }
-}
-
-function renderPanelContent(call, analysis) {
-  const q2 = call._q2||{};
-  const ai = analysis.ai_story||{};
-  const scores = analysis.meddpicccc_scores||{};
-  const coaching = analysis.meddpicccc_coaching||{};
-  const s = analysis.overall_score||0;
-  const ts = analysis.transition_score||0;
-  const mts = analysis.multithread_score||0;
-  const meddScore = Object.values(scores).length ? 
-    Math.round(Object.values(scores).reduce((a,v)=>a+(v==='strong'?10:v==='partial'?5:v==='na'?10:0),0)/(Object.values(scores).length*10)*100) : 0;
-
-  document.getElementById('panel-body').innerHTML = `
-    <div class="p-q2-box" style="background:${q2bg(q2.signal)};border:1px solid ${q2border(q2.signal)}">
-      <div class="p-q2-dot" style="background:${q2color(q2.signal)}"></div>
-      <div>
-        <div class="p-q2-label" style="color:${q2color(q2.signal)}">Q2 Signal · ${q2.label||''}</div>
-        <div class="p-q2-text" style="color:${q2color(q2.signal)}">${q2.reason||''}</div>
-      </div>
-    </div>
-
-    <div class="p-sl-strip">
-      <div class="p-sl-card"><div class="p-sl-label">Stage</div><div class="p-sl-value">${getStage(call)}</div></div>
-      <div class="p-sl-card"><div class="p-sl-label">Close Date</div><div class="p-sl-value">${fmtDateFull(getCloseDate(call))||'—'}</div></div>
-      <div class="p-sl-card"><div class="p-sl-label">Amount</div><div class="p-sl-value">${fmtArr(getAmount(call))}</div></div>
+      <div class="p-sl-card"><div class="p-sl-label">Stage</div><div class="p-sl-value">${c.sf_stage}</div></div>
+      <div class="p-sl-card"><div class="p-sl-label">Est. ARR</div><div class="p-sl-value">${fmtArr(c.estimated_arr)}</div></div>
+      <div class="p-sl-card"><div class="p-sl-label">Close Quarter</div><div class="p-sl-value">${c.close_quarter||'Unknown'}</div></div>
     </div>
 
     <div class="p-scores">
       <div class="p-score"><div class="p-score-num" style="color:${sc(s)}">${s}</div><div class="p-score-label">Overall</div></div>
-      <div class="p-score"><div class="p-score-num" style="color:${sc(meddScore)}">${meddScore}</div><div class="p-score-label">MEDDPICCCC</div></div>
-      <div class="p-score hl-purple"><div class="p-score-num" style="color:${tc(ts)}">${ts}</div><div class="p-score-label">Transition</div></div>
-      <div class="p-score hl-teal"><div class="p-score-num" style="color:${ts>=60?'var(--teal)':ts>=35?'var(--amber)':'var(--red)'}">${mts}</div><div class="p-score-label">Multi-Thread</div></div>
+      <div class="p-score"><div class="p-score-num" style="color:${sc(medd)}">${medd}</div><div class="p-score-label">MEDDPICCCC</div></div>
+      <div class="p-score" style="background:var(--purple-light);border:1px solid #c0a8e0"><div class="p-score-num" style="color:${tc(ts)}">${ts}</div><div class="p-score-label" style="color:var(--purple)">Transition</div></div>
+      <div class="p-score" style="background:var(--teal-light);border:1px solid #a0cece"><div class="p-score-num" style="color:${tc(mts)}">${mts}</div><div class="p-score-label" style="color:var(--teal)">Multi-Thread</div></div>
     </div>
-
-    ${getRecap(call)?`<div class="p-recap">
-      <div class="p-recap-label">⚡ Salesloft AI Recap</div>
-      <div class="p-recap-text">${getRecap(call)}</div>
-    </div>`:''}
 
     <div class="p-summ">
       <div class="p-summ-label">Deal Context</div>
-      <div class="p-summ-text" style="font-size:11px;color:var(--ink-3);font-family:'DM Mono',monospace;margin-bottom:6px">${analysis.deal_context||''}</div>
+      <div class="p-summ-text" style="font-size:11px;color:var(--ink-3);font-family:'DM Mono',monospace;margin-bottom:8px">${c.deal_context||''}</div>
       <div class="p-summ-label">Coaching Summary</div>
-      <div class="p-summ-text">${analysis.summary||''}</div>
+      <div class="p-summ-text">${c.summary||''}</div>
     </div>
 
     ${ai.how_handled?`<div class="ai-block ${aiClass(ai.sharp_or_generic||'n/a')}">
@@ -970,25 +424,25 @@ function renderPanelContent(call, analysis) {
     </div>`:''}
 
     <div class="p-two-col">
-      <div class="p-wins"><div class="p-col-label">✓ Top Wins</div>${(analysis.top_wins||[]).map(w=>`<div class="p-li"><div class="p-li-dot dot-g"></div><div>${w}</div></div>`).join('')}</div>
-      <div class="p-pris"><div class="p-col-label">↑ Top Priorities</div>${(analysis.top_priorities||[]).map(p=>`<div class="p-li"><div class="p-li-dot dot-a"></div><div>${p}</div></div>`).join('')}</div>
+      <div class="p-wins"><div class="p-col-label">✓ Top Wins</div>${(c.top_wins||[]).map(w=>`<div class="p-li"><div class="p-li-dot dot-g"></div><div>${w}</div></div>`).join('')}</div>
+      <div class="p-pris"><div class="p-col-label">↑ Top Priorities</div>${(c.top_priorities||[]).map(p=>`<div class="p-li"><div class="p-li-dot dot-a"></div><div>${p}</div></div>`).join('')}</div>
     </div>
 
-    ${analysis.suggested_next_step?`<div class="p-nxt">
+    ${c.top_multithread_action?`<div class="multithread-box">
+      <div class="mt-label">🔗 Top Multi-Thread Action</div>
+      <div class="mt-action">${c.top_multithread_action}</div>
+    </div>`:''}
+
+    ${c.suggested_next_step?`<div class="p-nxt">
       <div class="p-nxt-label">Suggested Next Step</div>
-      <div class="p-nxt-text" id="p-nst">${analysis.suggested_next_step}</div>
+      <div class="p-nxt-text" id="p-nst">${c.suggested_next_step}</div>
       <button class="p-copy" onclick="copyNST()">Copy</button>
     </div>`:''}
 
-    <div class="p-act-row">
-      <button class="p-act-btn btn-sf" onclick="alert('Coming soon')">☁ Save to Salesforce</button>
-      <button class="p-act-btn btn-ol" onclick="alert('Coming soon')">📅 Schedule</button>
-      ${call.id?`<button class="p-act-btn btn-sl-link" onclick="window.open('https://app.salesloft.com/app/conversation-intelligence/recordings/${call.id}','_blank')">⚡ Salesloft</button>`:''}
-    </div>
-
     <div class="p-tabs">
       <button class="p-tab on" onclick="switchPTab('medd',this)">MEDDPICCCC</button>
-      <button class="p-tab" onclick="switchPTab('tr',this)">⇄ Transition</button>
+      <button class="p-tab" onclick="switchPTab('vf',this)">Value vs Feature</button>
+      <button class="p-tab" onclick="switchPTab('tr',this)">Transition & Threading</button>
     </div>
 
     <div class="p-tab-section show" id="ptab-medd">
@@ -1004,41 +458,50 @@ function renderPanelContent(call, analysis) {
       }).join('')}
     </div>
 
+    <div class="p-tab-section" id="ptab-vf">
+      <div style="background:var(--surface);border-radius:6px;padding:14px;margin-bottom:10px">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);text-transform:uppercase;margin-bottom:6px">Value vs Feature Score</div>
+        <div style="font-size:15px;font-weight:600;margin-bottom:8px">${c.value_vs_feature?.score==='value_led'?'✅ Value-Led':c.value_vs_feature?.score==='feature_led'?'❌ Feature-Led':'⚠️ Mixed'}</div>
+        <div style="font-size:12px;color:var(--ink-2);line-height:1.6;margin-bottom:8px">${c.value_vs_feature?.evidence||''}</div>
+        <div style="background:var(--amber-light);border-left:2px solid var(--gold);padding:8px 10px;border-radius:3px;font-size:11px;color:var(--amber)">${c.value_vs_feature?.coaching||''}</div>
+      </div>
+    </div>
+
     <div class="p-tab-section" id="ptab-tr">
       <div style="background:var(--surface);border-radius:7px;padding:14px;margin-bottom:10px">
-        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);text-transform:uppercase;margin-bottom:4px">Transition Score</div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);text-transform:uppercase;margin-bottom:4px">Transition Score · VDR → DCAI/FundCentre</div>
         <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:${tc(ts)}">${ts}</div>
-        <div style="font-size:12px;color:var(--ink-2);margin-top:4px">VDR → DCAI / FundCentre platform motion</div>
+        <div style="font-size:12px;color:var(--ink-2);margin-top:4px">${c.transition_summary||''}</div>
       </div>
-      <div style="background:var(--surface);border-radius:7px;padding:14px">
-        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);text-transform:uppercase;margin-bottom:4px">Multi-Thread Score</div>
-        <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:${mts>=60?'var(--teal)':mts>=35?'var(--amber)':'var(--red)'}">${mts}</div>
-        <div style="font-size:12px;color:var(--ink-2);margin-top:4px">Org exploration and stakeholder mapping</div>
+      <div style="background:var(--purple-light);border-radius:7px;padding:14px">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--purple);text-transform:uppercase;margin-bottom:4px">Multi-Thread Score</div>
+        <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:${tc(mts)}">${mts}</div>
+        <div style="font-size:12px;color:var(--ink-2);margin-top:4px">${c.multithread_summary||''}</div>
       </div>
     </div>`;
 }
 
-function switchPTab(tab, btn) {
+function switchPTab(tab,btn){
   document.querySelectorAll('.p-tab-section').forEach(s=>s.classList.remove('show'));
   document.querySelectorAll('.p-tab').forEach(b=>b.classList.remove('on'));
   document.getElementById('ptab-'+tab)?.classList.add('show');
   btn.classList.add('on');
 }
 
-function closePanel() {
+function closePanel(){
   document.getElementById('panel-overlay').classList.remove('show');
   document.getElementById('coaching-panel').classList.remove('open');
 }
 
-function copyNST() {
-  const t = document.getElementById('p-nst')?.innerText||'';
+function copyNST(){
+  const t=document.getElementById('p-nst')?.innerText||'';
   navigator.clipboard.writeText(t).catch(()=>{});
-  const b = document.querySelector('.p-copy');
+  const b=document.querySelector('.p-copy');
   if(b){b.textContent='Copied!';setTimeout(()=>b.textContent='Copy',1500);}
 }
 
-// ── START ──
-init();
+// Init
+renderExec();
 </script>
 </body>
 </html>
