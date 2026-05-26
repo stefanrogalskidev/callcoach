@@ -423,7 +423,7 @@ async function init() {
   
   try {
     // Test connection
-    const me = await slGet('v2/me.json');
+    const me = await slGet('v2__me.json');
     const repName = me.data?.first_name || 'Connected';
     
     showLoading(`Connected as ${repName}. Loading 2026 conversations...`, 12);
@@ -436,8 +436,7 @@ async function init() {
     while (hasMore && allConvs.length < 300) {
       showLoading(`Loading calls... ${allConvs.length} so far`, 12 + (allConvs.length/300)*30);
       try {
-        const params = `per_page=100&page=${page}&sort_by=updated_at&sort_direction=DESC`;
-        const r = await slGet('v2/conversations/calls', params);
+        const r = await slGet('v2__conversations__calls', `per_page=100&page=${page}&sort_by=updated_at&sort_direction=DESC`);
         const batch = r.data || [];
         allConvs.push(...batch);
         hasMore = batch.length === 100;
@@ -855,7 +854,7 @@ async function analyzeCallInPanel(callId) {
     // Get full call details
     let fullCall = call;
     try {
-      const detail = await slGet(`v2/conversations/calls/${callId}`);
+      const detail = await slGet(`v2__conversations__calls__${callId}`);
       fullCall = {...call, ...(detail.data||{})};
     } catch(e) {}
 
@@ -901,7 +900,7 @@ async function analyzeCall(callId) {
     const call = allCalls.find(c=>c.id===callId);
     let fullCall = call;
     try {
-      const detail = await slGet(`v2/conversations/calls/${callId}`);
+      const detail = await slGet(`v2__conversations__calls__${callId}`);
       fullCall = {...call,...(detail.data||{})};
     } catch(e) {}
     
