@@ -363,8 +363,9 @@ function calcActivityScore(call) {
 
 // ── API ──
 async function slGet(path, params = '') {
-  const encodedPath = path.replace(/\//g, '__');
-  const url = `/api/sl?p=${encodedPath}${params ? '&' + params : ''}`;
+  const encodedPath = path.replace(/\/g, '__');
+  const encodedParams = params ? '&' + params.replace(/\[/g,'%5B').replace(/\]/g,'%5D') : '';
+  const url = `/api/sl?p=${encodedPath}${encodedParams}`;
   const resp = await fetch(url);
   if (!resp.ok) throw new Error(`API ${resp.status}: ${await resp.text()}`);
   return resp.json();
@@ -435,7 +436,7 @@ async function init() {
     while (hasMore && allConvs.length < 300) {
       showLoading(`Loading calls... ${allConvs.length} so far`, 12 + (allConvs.length/300)*30);
       try {
-        const params = `per_page=100&page=${page}&sort_by=updated_at&sort_direction=DESC&updated_at[gt]=2026-01-01T00:00:00Z`;
+        const params = `per_page=100&page=${page}&sort_by=updated_at&sort_direction=DESC`;
         const r = await slGet('v2/conversations/calls', params);
         const batch = r.data || [];
         allConvs.push(...batch);
