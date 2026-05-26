@@ -423,8 +423,8 @@ async function init() {
   
   try {
     // Test connection
-    const me = await slGet('v2__me.json');
-    const repName = me.data?.first_name || 'Connected';
+    const me = await slGet('v2__users__me.json');
+    const repName = me.data?.name?.split(' ')[0] || me.data?.email?.split('@')[0] || 'Connected';
     
     showLoading(`Connected as ${repName}. Loading 2026 conversations...`, 12);
 
