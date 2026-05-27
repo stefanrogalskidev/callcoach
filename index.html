@@ -40,6 +40,20 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
 .filter-search{flex:1;min-width:160px;background:var(--surface);border:1px solid var(--rule);border-radius:5px;padding:6px 10px;font-family:'DM Sans',sans-serif;font-size:12px;}
 .filter-count{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-3);white-space:nowrap;margin-left:auto;}
 .kpi-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:20px;}
+.score-info-link{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);text-decoration:none;cursor:pointer;display:flex;align-items:center;gap:4px;margin-top:8px;}
+.score-info-link:hover{color:var(--accent);}
+.score-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;}
+.score-modal-overlay.open{display:flex;}
+.score-modal{background:var(--paper);border-radius:10px;padding:28px 32px;max-width:560px;width:90%;max-height:80vh;overflow-y:auto;position:relative;}
+.score-modal-close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:18px;cursor:pointer;color:var(--ink-3);}
+.score-modal h2{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:4px;}
+.score-modal .score-modal-sub{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:20px;}
+.score-modal h3{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:var(--accent);margin:16px 0 6px;}
+.score-modal p,.score-modal li{font-size:13px;color:var(--ink-2);line-height:1.65;}
+.score-modal ul{padding-left:18px;margin:4px 0;}
+.score-modal .caveat{background:var(--surface);border-radius:6px;padding:12px 14px;margin-top:16px;border-left:3px solid var(--gold);}
+.score-info-icon{display:inline-flex;align-items:center;justify-content:center;width:13px;height:13px;border-radius:50%;border:1px solid var(--ink-4);font-size:9px;cursor:pointer;color:var(--ink-4);margin-left:4px;vertical-align:middle;}
+.score-info-icon:hover{border-color:var(--accent);color:var(--accent);}
 .kpi{background:white;border:1px solid var(--rule);border-radius:8px;padding:14px 16px;text-align:center;}
 .kpi.k-green{border-top:3px solid var(--green);background:var(--green-light);}
 .kpi.k-amber{border-top:3px solid var(--gold);background:var(--amber-light);}
@@ -224,6 +238,9 @@ function aiLabel(s){return{sharp:'Sharp ✓',partially_sharp:'Partially Sharp',g
 function aiLabelShort(s){return{sharp:'Sharp',partially_sharp:'Partial',generic:'Generic','n/a':'Not Raised'}[s]||s;}
 
 // Init badges
+function openScoreModal(){document.getElementById('scoreModal').classList.add('open');}
+function closeScoreModal(){document.getElementById('scoreModal').classList.remove('open');}
+
 const closeable = CALLS.filter(c=>c.q2_signal==='green').length;
 const possible = CALLS.filter(c=>c.q2_signal==='amber').length;
 document.getElementById('q2-badge').textContent = `Q2: ${closeable}🟢 ${possible}🟡`;
@@ -308,6 +325,7 @@ function renderExec(){
       <div class="kpi k-purple"><div class="kpi-num" style="color:var(--purple)">${reps.length}</div><div class="kpi-label">Active Reps</div></div>
       <div class="kpi k-grey"><div class="kpi-num" style="color:${sc(avgScore)}">${avgScore}</div><div class="kpi-label">Avg Call Score</div></div>
     </div>
+    <div style="text-align:right;margin-top:-12px;margin-bottom:16px"><span class="score-info-link" onclick="openScoreModal()">ⓘ How scores work</span></div>
     ${renderCrossTeamThemes()}
     ${renderQ2Section('🟢 Closeable Q2',green,'green')}
     ${renderQ2Section('🟡 Possible Q2',amber,'amber')}
@@ -496,7 +514,7 @@ function openPanel(account){
     </div>
 
     <div class="p-scores">
-      <div class="p-score"><div class="p-score-num" style="color:${sc(s)}">${s}</div><div class="p-score-label">Overall</div></div>
+      <div class="p-score"><div class="p-score-num" style="color:${sc(s)}">${s}</div><div class="p-score-label">Overall <span class="score-info-icon" onclick="event.stopPropagation();openScoreModal()">i</span></div></div>
       <div class="p-score"><div class="p-score-num" style="color:${sc(medd)}">${medd}</div><div class="p-score-label">MEDDPICCCC</div></div>
       <div class="p-score" style="background:var(--purple-light);border:1px solid #c0a8e0"><div class="p-score-num" style="color:${tc(ts)}">${ts}</div><div class="p-score-label" style="color:var(--purple)">Transition</div></div>
       <div class="p-score" style="background:var(--teal-light);border:1px solid #a0cece"><div class="p-score-num" style="color:${tc(mts)}">${mts}</div><div class="p-score-label" style="color:var(--teal)">Multi-Thread</div></div>
@@ -595,5 +613,40 @@ function copyNST(){
 // Init
 renderExec();
 </script>
+<div class="score-modal-overlay" id="scoreModal" onclick="if(event.target===this)closeScoreModal()">
+  <div class="score-modal">
+    <button class="score-modal-close" onclick="closeScoreModal()">✕</button>
+    <h2>How Scores Work</h2>
+    <div class="score-modal-sub">AI-powered analysis · 33 calls · Q2 2026</div>
+
+    <h3>Overall Score (0–100)</h3>
+    <p>A holistic judgment weighted across MEDDPICCCC completeness, value vs. feature orientation, transition motion quality, multi-threading depth, and closing discipline. Not a formula — calibrated AI judgment applied consistently against a defined rubric.</p>
+
+    <h3>MEDDPICCCC (10 elements)</h3>
+    <p>Each element scored <strong>strong / partial / missing / n/a</strong>. The aggregate score is a weighted average across all 10:</p>
+    <ul>
+      <li><strong>M</strong> — Metrics: quantified business impact established</li>
+      <li><strong>E</strong> — Economic Buyer: identified and engaged</li>
+      <li><strong>Dc</strong> — Decision Criteria: understood and influenced</li>
+      <li><strong>Dp</strong> — Decision Process: mapped with timeline</li>
+      <li><strong>P</strong> — Paper Process: legal/procurement path known</li>
+      <li><strong>I</strong> — Identified Pain: specific pain articulated</li>
+      <li><strong>Ch</strong> — Champion: internal advocate confirmed</li>
+      <li><strong>Co</strong> — Competition: competitive landscape addressed</li>
+      <li><strong>Ce</strong> — Compelling Event: urgency driver identified</li>
+      <li><strong>Cp</strong> — Closing Plan: specific next step with date</li>
+    </ul>
+
+    <h3>Transition Score (0–100)</h3>
+    <p>How well the rep framed VDR as an entry point to DCAI or FundCentre, introduced the broader platform, and set a specific next platform conversation with a committed date.</p>
+
+    <h3>Multi-Thread Score (0–100)</h3>
+    <p>Whether the rep mapped the org beyond a single contact, engaged multiple stakeholders, asked strategic AI and data questions, and explored platform consolidation angles.</p>
+
+    <h3>AI Story (sharp / partially sharp / generic / n/a)</h3>
+    <p>Whether the rep articulated SS&C's sovereign AI architecture — model, fine-tuning, and hosting inside the perimeter — the stack control argument, and differentiation from Datasite's outsourced Blueflame model.</p>
+
+  </div>
+</div>
 </body>
 </html>
