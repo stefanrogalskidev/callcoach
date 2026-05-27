@@ -41,6 +41,16 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
 .filter-count{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-3);white-space:nowrap;margin-left:auto;}
 .kpi-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:20px;}
 .score-info-link{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);text-decoration:none;cursor:pointer;display:flex;align-items:center;gap:4px;margin-top:8px;}
+.heatmap-table{width:100%;border-collapse:collapse;font-size:12px;}
+.heatmap-table th{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.06em;padding:8px 10px;text-align:center;border-bottom:2px solid var(--rule);background:var(--surface);position:sticky;top:80px;z-index:50;white-space:nowrap;}
+.heatmap-table th.rep-col{text-align:left;min-width:150px;}
+.heatmap-table td{padding:7px 10px;text-align:center;border-bottom:1px solid var(--rule);vertical-align:middle;}
+.heatmap-table td.rep-name{text-align:left;font-weight:600;font-size:12px;color:var(--ink);white-space:nowrap;}
+.heatmap-table td.rep-calls{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);text-align:center;}
+.hm-cell{display:inline-flex;align-items:center;justify-content:center;width:52px;height:30px;border-radius:5px;font-family:'DM Mono',monospace;font-size:11px;font-weight:600;}
+.hm-na{background:var(--surface);color:var(--ink-4);font-size:10px;}
+.heatmap-legend{display:flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);}
+.heatmap-legend-swatch{width:16px;height:16px;border-radius:3px;}
 .score-info-link:hover{color:var(--accent);}
 .score-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;}
 .score-modal-overlay.open{display:flex;}
@@ -199,6 +209,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
   <div class="nav-tab on" onclick="showView('exec',this)">📊 Executive Dashboard</div>
   <div class="nav-tab" onclick="showView('calls',this)">📞 All Calls</div>
   <div class="nav-tab" onclick="showView('coaching',this)">🎯 Team Coaching</div>
+  <div class="nav-tab" onclick="showView('heatmap',this)">🔥 Coaching Heatmap</div>
 </nav>
 
 <div class="main" id="main"></div>
@@ -274,7 +285,8 @@ function showView(v,el){
   if(el) el.classList.add('on');
   if(v==='exec') renderExec();
   else if(v==='calls') renderCalls();
-  else renderCoaching();
+  else if(v==='coaching') renderCoaching();
+  else if(v==='heatmap') renderHeatmap();
 }
 
 function renderFilterBar(filtered){
@@ -397,6 +409,90 @@ function renderCrossTeamThemes(){
       <div class="theme-content"><strong>${t.lead}</strong>${t.text}</div>
     </div>`).join('')}
   </div>`;
+}
+
+function aiScore(v){return v==='sharp'?100:v==='partially_sharp'?60:v==='generic'?20:null;}
+function vfScore(v){return v==='value_led'?100:v==='mixed'?50:v==='feature_led'?10:null;}
+function cpScore(v){return v==='strong'?100:v==='partial'?50:v==='missing'?0:null;}
+
+function hmColor(score){
+  if(score===null) return null;
+  if(score>=75) return {bg:'#1a7f4b',fg:'#ffffff'};
+  if(score>=50) return {bg:'#f0a500',fg:'#ffffff'};
+  if(score>=25) return {bg:'#e06420',fg:'#ffffff'};
+  return {bg:'#c0392b',fg:'#ffffff'};
+}
+
+function renderHeatmap(){
+  // Group calls by rep, exclude Unknown Rep
+  const repMap = {};
+  for(const c of CALLS){
+    if(c.rep==='Unknown Rep') continue;
+    if(!repMap[c.rep]) repMap[c.rep]=[];
+    repMap[c.rep].push(c);
+  }
+
+  // Sort reps by number of calls desc, then name
+  const reps = Object.entries(repMap).sort((a,b)=>b[1].length-a[1].length||a[0].localeCompare(b[0]));
+
+  const dims = [
+    {key:'overall', label:'Overall', fn: c=>c.overall_score},
+    {key:'ai',      label:'AI Story', fn: c=>aiScore(c.ai_story?.sharp_or_generic)},
+    {key:'vf',      label:'Value vs Feature', fn: c=>vfScore(c.value_vs_feature?.score)},
+    {key:'trans',   label:'Transition', fn: c=>c.transition_score},
+    {key:'multi',   label:'Multi-Thread', fn: c=>c.multithread_score},
+    {key:'cp',      label:'Closing Plan', fn: c=>cpScore(c.meddpicccc_scores?.Cp)},
+  ];
+
+  function avg(calls, fn){
+    const vals = calls.map(fn).filter(v=>v!==null&&v!==undefined);
+    if(!vals.length) return null;
+    return Math.round(vals.reduce((a,b)=>a+b,0)/vals.length);
+  }
+
+  function cell(score){
+    if(score===null) return `<div class="hm-cell hm-na">—</div>`;
+    const c=hmColor(score);
+    return `<div class="hm-cell" style="background:${c.bg};color:${c.fg}">${score}</div>`;
+  }
+
+  // Team averages row
+  const teamRow = dims.map(d=>{
+    const vals = CALLS.filter(c=>c.rep!=='Unknown Rep').map(c=>d.fn(c)).filter(v=>v!==null&&v!==undefined);
+    return vals.length ? Math.round(vals.reduce((a,b)=>a+b,0)/vals.length) : null;
+  });
+
+  document.getElementById('main').innerHTML=`
+    <div style="margin-bottom:16px">
+      <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:4px">Coaching Heatmap</div>
+      <div style="font-size:13px;color:var(--ink-3);margin-bottom:12px">Rep performance across key coaching dimensions · ${CALLS.filter(c=>c.rep!=='Unknown Rep').length} calls</div>
+      <div class="heatmap-legend">
+        <div class="heatmap-legend-swatch" style="background:#1a7f4b"></div><span>75–100 Strong</span>
+        <div class="heatmap-legend-swatch" style="background:#f0a500"></div><span>50–74 Developing</span>
+        <div class="heatmap-legend-swatch" style="background:#e06420"></div><span>25–49 Needs Work</span>
+        <div class="heatmap-legend-swatch" style="background:#c0392b"></div><span>0–24 Critical Gap</span>
+      </div>
+    </div>
+    <table class="heatmap-table">
+      <thead><tr>
+        <th class="rep-col">Rep</th>
+        <th>Calls</th>
+        ${dims.map(d=>`<th>${d.label}</th>`).join('')}
+      </tr></thead>
+      <tbody>
+        <tr style="background:var(--surface)">
+          <td class="rep-name" style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);font-weight:400;text-transform:uppercase;letter-spacing:0.05em">Team Avg</td>
+          <td class="rep-calls">${CALLS.filter(c=>c.rep!=='Unknown Rep').length}</td>
+          ${teamRow.map(s=>` <td>${cell(s)}</td>`).join('')}
+        </tr>
+        <tr><td colspan="${dims.length+2}" style="padding:0;border-bottom:2px solid var(--rule)"></td></tr>
+        ${reps.map(([rep,calls])=>`<tr onclick="showView('coaching',document.querySelectorAll('.nav-tab')[2])" style="cursor:pointer" onmouseover="this.style.background='var(--surface)'" onmouseout="this.style.background=''">
+          <td class="rep-name">${rep}</td>
+          <td class="rep-calls">${calls.length}</td>
+          ${dims.map(d=>`<td>${cell(avg(calls,d.fn))}</td>`).join('')}
+        </tr>`).join('')}
+      </tbody>
+    </table>`;
 }
 
 function renderQ2Section(title,calls,signal){
