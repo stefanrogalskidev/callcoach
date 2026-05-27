@@ -33,8 +33,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
 .nav-tab.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:600;}
 .main{padding:28px 32px;max-width:1200px;margin:0 auto;}
 .filter-bar{background:white;border:1px solid var(--rule);border-radius:8px;padding:12px 16px;margin-bottom:20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
-.table-sticky-above{position:sticky;top:100px;z-index:60;background:var(--paper);padding-bottom:0;}
-.table-sticky-above .filter-bar{margin-bottom:0;border-radius:8px 8px 0 0;border-bottom:none;}
+
 
 .filter-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.07em;white-space:nowrap;}
 .filter-select{background:var(--surface);border:1px solid var(--rule);border-radius:5px;padding:6px 10px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--ink);cursor:pointer;}
@@ -63,6 +62,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
 .q2-section-arr{font-family:'DM Mono',monospace;font-size:12px;margin-left:auto;}
 .deal-table{width:100%;border-collapse:collapse;}
 .deal-table th{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.07em;padding:8px 12px;text-align:left;border-bottom:2px solid var(--rule);white-space:nowrap;background:var(--surface);position:sticky;top:100px;z-index:50;}
+.deal-table-calls th{top:222px;}
+.deal-table-coaching th{top:168px;}
 .deal-table td{padding:11px 12px;border-bottom:1px solid var(--rule);font-size:13px;color:var(--ink-2);vertical-align:middle;}
 .deal-table tr:hover td{background:var(--surface);cursor:pointer;}
 .deal-table tr:last-child td{border-bottom:none;}
@@ -412,13 +413,11 @@ function renderQ2Section(title,calls,signal){
 function renderCalls(){
   const filtered=getFiltered();
   document.getElementById('main').innerHTML=`
-    <div class="table-sticky-above">
-      <div style="padding-bottom:12px"><div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:4px">All Calls</div>
-      <div style="font-size:13px;color:var(--ink-3)">Click any call to view full AI coaching analysis</div></div>
-      ${renderFilterBar(filtered)}
-    </div>
-    <table class="deal-table" style="margin-top:0">
-      <thead><tr><th style="top:0">Account</th><th style="top:0">Rep</th><th style="top:0">Date</th><th style="top:0">Duration</th><th style="top:0">Stage</th><th style="top:0">Score</th><th style="top:0">AI Story</th><th style="top:0">Q2</th></tr></thead>
+    <div style="margin-bottom:12px"><div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:4px">All Calls</div>
+    <div style="font-size:13px;color:var(--ink-3)">Click any call to view full AI coaching analysis</div></div>
+    ${renderFilterBar(filtered)}
+    <table class="deal-table deal-table-calls">
+      <thead><tr><th>Account</th><th>Rep</th><th>Date</th><th>Duration</th><th>Stage</th><th>Score</th><th>AI Story</th><th>Q2</th></tr></thead>
       <tbody>
         ${filtered.map(c=>`<tr onclick="openPanel(${JSON.stringify(c.account).replace(/"/g,'&quot;')})">
           <td><div class="tbl-account">${c.account}</div></td>
@@ -437,12 +436,10 @@ function renderCalls(){
 function renderCoaching(){
   const sorted=[...CALLS].sort((a,b)=>b.overall_score-a.overall_score);
   document.getElementById('main').innerHTML=`
-    <div class="table-sticky-above">
-      <div style="padding-bottom:12px"><div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:4px">Team Coaching</div>
-      <div style="font-size:13px;color:var(--ink-3)">All ${CALLS.length} calls analyzed · Sorted by score</div></div>
-    </div>
-    <table class="deal-table" style="margin-top:0">
-      <thead><tr><th style="top:0">Account</th><th style="top:0">Rep</th><th style="top:0">Score</th><th style="top:0">AI Story</th><th style="top:0">Value vs Feature</th><th style="top:0">Transition</th><th style="top:0">Multi-Thread</th><th style="top:0">Top Priority</th></tr></thead>
+    <div style="margin-bottom:20px"><div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:4px">Team Coaching</div>
+    <div style="font-size:13px;color:var(--ink-3)">All ${CALLS.length} calls analyzed · Sorted by score</div></div>
+    <table class="deal-table deal-table-coaching">
+      <thead><tr><th>Account</th><th>Rep</th><th>Score</th><th>AI Story</th><th>Value vs Feature</th><th>Transition</th><th>Multi-Thread</th><th>Top Priority</th></tr></thead>
       <tbody>
         ${sorted.map(c=>`<tr onclick="openPanel(${JSON.stringify(c.account).replace(/"/g,'&quot;')})">
           <td><div class="tbl-account">${c.account}</div><div class="tbl-rep">${c.date}</div></td>
