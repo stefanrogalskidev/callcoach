@@ -153,6 +153,16 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
 .exec-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;letter-spacing:-0.02em;margin-bottom:4px;}
 .exec-sub{font-size:13px;color:var(--ink-3);}
 .empty{text-align:center;padding:60px 20px;color:var(--ink-3);}
+.themes-section{margin-bottom:28px;background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:20px 24px;}
+.themes-hdr{display:flex;align-items:baseline;gap:10px;margin-bottom:16px;}
+.themes-hdr-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;}
+.themes-hdr-sub{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);margin-left:auto;text-transform:uppercase;letter-spacing:0.06em;}
+.theme-item{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--rule);}
+.theme-item:last-child{border-bottom:none;padding-bottom:0;}
+.theme-item:first-child{padding-top:0;}
+.theme-icon-wrap{width:32px;height:32px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:15px;margin-top:1px;}
+.theme-content{font-size:13px;color:var(--ink-2);line-height:1.65;}
+.theme-content strong{color:var(--ink);font-weight:600;}
 </style>
 </head>
 <body>
@@ -294,9 +304,77 @@ function renderExec(){
       <div class="kpi k-purple"><div class="kpi-num" style="color:var(--purple)">${reps.length}</div><div class="kpi-label">Active Reps</div></div>
       <div class="kpi k-grey"><div class="kpi-num" style="color:${sc(avgScore)}">${avgScore}</div><div class="kpi-label">Avg Call Score</div></div>
     </div>
+    ${renderCrossTeamThemes()}
     ${renderQ2Section('🟢 Closeable Q2',green,'green')}
     ${renderQ2Section('🟡 Possible Q2',amber,'amber')}
     ${renderQ2Section('🔴 Unlikely Q2',red,'red')}`;
+}
+
+function renderCrossTeamThemes(){
+  // Computed from all 33 calls
+  const aiCameUp = CALLS.filter(c=>c.ai_story?.came_up).length; // 14
+  const aiSharp = CALLS.filter(c=>c.ai_story?.sharp_or_generic==='sharp').length; // 1
+  const aiPartial = CALLS.filter(c=>c.ai_story?.sharp_or_generic==='partially_sharp').length; // 8
+  const aiGeneric = CALLS.filter(c=>c.ai_story?.sharp_or_generic==='generic').length; // 4
+
+  const valueLed = CALLS.filter(c=>c.value_vs_feature?.score==='value_led').length; // 8
+  const featureLed = CALLS.filter(c=>c.value_vs_feature?.score==='feature_led').length; // 8
+  const mixed = CALLS.filter(c=>c.value_vs_feature?.score==='mixed').length; // 17
+
+  const avgTransition = Math.round(CALLS.reduce((a,c)=>a+(c.transition_score||0),0)/CALLS.length); // 32
+  const transitionAbove60 = CALLS.filter(c=>(c.transition_score||0)>=60).length; // 2
+
+  const avgMultithread = Math.round(CALLS.reduce((a,c)=>a+(c.multithread_score||0),0)/CALLS.length); // 28
+  const multithreadAbove50 = CALLS.filter(c=>(c.multithread_score||0)>=50).length; // 3
+
+  const cpStrong = CALLS.filter(c=>c.meddpicccc_scores?.Cp==='strong').length; // 4
+  const cpMissing = CALLS.filter(c=>c.meddpicccc_scores?.Cp==='missing').length; // 13
+
+  const avgScore = Math.round(CALLS.reduce((a,c)=>a+(c.overall_score||0),0)/CALLS.length); // 54
+
+  const themes=[
+    {
+      icon:'🤖',
+      bg:'#e8eef5',
+      lead:'The AI story is being told inconsistently.',
+      text:` AI came up on ${aiCameUp} of ${CALLS.length} calls. Of those, only 1 (Inovia/Paul) told a fully sharp, sovereignty-grounded story. ${aiPartial} were partially sharp, and ${aiGeneric} were generic with no stack control argument. The two questions every rep must answer: where does your data go during AI processing, and who controls the stack? For Intralinks the answer is SS&C controls everything — model, fine-tuning, hosting, all inside the perimeter.`
+    },
+    {
+      icon:'📊',
+      bg:'#e6f2ec',
+      lead:'Value-vs-feature is the sharpest coaching lever.',
+      text:` Only ${valueLed} of ${CALLS.length} calls were value-led. ${featureLed} were feature-led and ${mixed} were mixed. The value-led calls (US Bank, EnCap, PSC, Inovia, Amentum) averaged a score of ${Math.round(CALLS.filter(c=>c.value_vs_feature?.score==='value_led').reduce((a,c)=>a+(c.overall_score||0),0)/valueLed)} vs. ${Math.round(CALLS.filter(c=>c.value_vs_feature?.score==='feature_led').reduce((a,c)=>a+(c.overall_score||0),0)/featureLed)} for feature-led calls. Reps who asked one discovery question before demoing consistently produced better outcomes.`
+    },
+    {
+      icon:'🔄',
+      bg:'#f0ebfa',
+      lead:'The transition motion is underdeveloped across the board.',
+      text:` Average transition score across all ${CALLS.length} calls is ${avgTransition}/100. Only ${transitionAbove60} calls scored above 60 (EnCap and Globalfoundries). No rep consistently framed the VDR as an entry point and set up a specific platform conversation with a date. This is the team's biggest upsell motion — and it's being left on the table in nearly every call.`
+    },
+    {
+      icon:'🔗',
+      bg:'#fdf3e3',
+      lead:'Multi-threading is almost entirely absent.',
+      text:` Average multi-thread score is ${avgMultithread}/100. Only ${multithreadAbove50} calls scored above 50 (US Bank at 75, Amentum at 55, Behrman at 50). The majority of calls stayed with a single contact and never mapped the broader stakeholder landscape. Platform infrastructure deals require champions at multiple levels — this gap is directly correlated with lower close rates.`
+    },
+    {
+      icon:'🏁',
+      bg:'#fdeaea',
+      lead:'Closing discipline separates the top calls from the rest.',
+      text:` Only ${cpStrong} of ${CALLS.length} calls had a strong closing plan. ${cpMissing} had no closing plan at all. The top-scoring calls (US Bank 82, PSC 72, EnCap 71) all ended with a specific date and defined next action. The bottom calls universally closed with vague language — "I'll follow up," "let's grab coffee," or no next step at all.`
+    }
+  ];
+
+  return `<div class="themes-section">
+    <div class="themes-hdr">
+      <div class="themes-hdr-title">Cross-Team Themes</div>
+      <div class="themes-hdr-sub">${CALLS.length} calls · Q2 2026</div>
+    </div>
+    ${themes.map(t=>`<div class="theme-item">
+      <div class="theme-icon-wrap" style="background:${t.bg}">${t.icon}</div>
+      <div class="theme-content"><strong>${t.lead}</strong>${t.text}</div>
+    </div>`).join('')}
+  </div>`;
 }
 
 function renderQ2Section(title,calls,signal){
