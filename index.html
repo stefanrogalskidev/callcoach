@@ -490,7 +490,9 @@ function openPanel(account){
       </div>
       <div class="p-sl-card"><div class="p-sl-label">Est. ARR</div><div class="p-sl-value">${fmtArr(c.estimated_arr)}</div></div>
       <div class="p-sl-card"><div class="p-sl-label">Close Quarter</div><div class="p-sl-value">${c.close_quarter||'Unknown'}</div></div>
-      <div class="p-sl-card" style="background:transparent;border:none;border-top:none;"></div>
+      <div class="p-sl-card" style="display:flex;align-items:center;justify-content:center;background:transparent;border:1px dashed var(--rule);border-top:2px dashed var(--rule);">
+        <button onclick="event.stopPropagation();alert('Salesforce integration coming soon')" style="background:#0070d2;color:white;border:none;border-radius:5px;padding:7px 12px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.04em;cursor:pointer;white-space:nowrap;">⬆ Push to Salesforce</button>
+      </div>
     </div>
 
     <div class="p-scores">
