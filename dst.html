@@ -144,6 +144,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
 .seg-corp{background:var(--teal-light);color:var(--teal);border:1px solid #a8d0d0;}
 .seg-adv{background:var(--amber-light);color:var(--amber);border:1px solid #f0d9a8;}
 .acct-type-badge{font-family:'DM Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;letter-spacing:0.05em;text-transform:uppercase;font-weight:500;}
+.call-type-badge{font-family:'DM Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;letter-spacing:0.05em;text-transform:uppercase;font-weight:500;}
+.ct-cold{background:#f0e8f8;color:#5a1a8a;border:1px solid #d0b0e8;}
+.ct-warm{background:#e8f0f8;color:#1a4a8a;border:1px solid #a8c0e0;}
+.ct-inbound{background:#e8f8f0;color:#1a6a3a;border:1px solid #a8d8b8;}
+.ct-unknown{background:var(--surface);color:var(--ink-4);border:1px solid var(--rule);}
 .acct-newnew{background:#e8f4fd;color:#1a5a8a;border:1px solid #b8d4f0;}
 .acct-react{background:#fdf0e8;color:#8a4a1a;border:1px solid #f0c8a8;}
 .heatmap-table{width:100%;border-collapse:collapse;font-size:12px;}
@@ -254,6 +259,12 @@ const CALLS = [
   //   manager: 'Aimee Caldwell',          // or 'Dave Corbett'
   //   segment: 'corporates',              // 'corporates' | 'alts' | 'advisory'
   //   account_type: 'net_new',            // 'net_new' | 'reactivation'
+  //   call_type: 'cold_call',             // 'cold_call' | 'warm_connect' | 'inbound_meeting' | 'unknown'
+  //                                       // cold_call = rep dials, no prior agreement to speak
+  //                                       // warm_connect = prospect agreed to meeting via email/LinkedIn, first live conversation
+  //                                       // inbound_meeting = prospect initiated via marketing/referral/form fill
+  //                                       // unknown = ambiguous from transcript; add call_type_confidence: 'low'
+  //   call_type_confidence: 'high',       // 'high' | 'low' — flag when inference is ambiguous
   //   date: '2026-05-28',
   //   duration: '00:08:32',
   //   overall_score: 0,                   // 0-100
@@ -294,7 +305,7 @@ const REPS = {
 // HELPERS
 // ============================================================
 let currentView = 'exec';
-let filterRep = 'all', filterOutcome = 'all', filterSegment = 'all', filterSearch = '';
+let filterRep = 'all', filterOutcome = 'all', filterSegment = 'all', filterCallType = 'all', filterSearch = '';
 
 function sc(s){return s>=70?'var(--green)':s>=50?'var(--gold)':'var(--red)';}
 function aiPillClass(v){return v==='sharp'?'p-sharp':v==='partially_sharp'?'p-partial':v==='generic'?'p-generic':'p-na';}
@@ -305,6 +316,8 @@ function segLabel(v){return v==='alts'?'Alts':v==='corporates'?'Corporates':'Adv
 function segClass(v){return v==='alts'?'seg-alts':v==='corporates'?'seg-corp':'seg-adv';}
 function acctLabel(v){return v==='net_new'?'Net New':'Reactivation';}
 function acctClass(v){return v==='net_new'?'acct-newnew':'acct-react';}
+function callTypeLabel(v){return v==='cold_call'?'Cold Call':v==='warm_connect'?'Warm Connect':v==='inbound_meeting'?'Inbound Meeting':'Unknown';}
+function callTypeClass(v){return v==='cold_call'?'ct-cold':v==='warm_connect'?'ct-warm':v==='inbound_meeting'?'ct-inbound':'ct-unknown';}
 function hmColor(s){
   if(s===null) return null;
   if(s>=75) return {bg:'#1a7f4b',fg:'#ffffff'};
@@ -318,6 +331,7 @@ function getFiltered(){
     if(filterRep!=='all' && c.rep!==filterRep) return false;
     if(filterOutcome!=='all' && c.meeting_outcome!==filterOutcome) return false;
     if(filterSegment!=='all' && c.segment!==filterSegment) return false;
+    if(filterCallType!=='all' && c.call_type!==filterCallType) return false;
     if(filterSearch && !c.account.toLowerCase().includes(filterSearch) && !c.rep.toLowerCase().includes(filterSearch)) return false;
     return true;
   });
@@ -360,7 +374,7 @@ function openPanel(account){
       </div>
     </div>
 
-    <div class="p-meta-strip">
+    <div class="p-meta-strip" style="grid-template-columns:repeat(4,1fr)">
       <div class="p-meta-card">
         <div class="p-meta-label">Segment</div>
         <div class="p-meta-value"><span class="seg-badge ${segClass(c.segment)}">${segLabel(c.segment)}</span></div>
@@ -368,6 +382,13 @@ function openPanel(account){
       <div class="p-meta-card">
         <div class="p-meta-label">Account Type</div>
         <div class="p-meta-value"><span class="acct-type-badge ${acctClass(c.account_type)}">${acctLabel(c.account_type)}</span></div>
+      </div>
+      <div class="p-meta-card">
+        <div class="p-meta-label">Call Type</div>
+        <div class="p-meta-value">
+          <span class="call-type-badge ${callTypeClass(c.call_type)}">${callTypeLabel(c.call_type)}</span>
+          ${c.call_type_confidence==='low'?'<div style="font-family:\'DM Mono\',monospace;font-size:8px;color:var(--amber);margin-top:2px">⚠ inferred</div>':''}
+        </div>
       </div>
       <div class="p-meta-card">
         <div class="p-meta-label">Manager</div>
@@ -475,6 +496,13 @@ function renderFilterBar(filtered){
       <option value="corporates">Corporates</option>
       <option value="alts">Alts</option>
       <option value="advisory">Advisory</option>
+    </select>
+    <select class="filter-select" onchange="filterCallType=this.value;rerender()">
+      <option value="all">All Call Types</option>
+      <option value="cold_call">Cold Call</option>
+      <option value="warm_connect">Warm Connect</option>
+      <option value="inbound_meeting">Inbound Meeting</option>
+      <option value="unknown">Unknown</option>
     </select>
     <input class="filter-search" placeholder="Search account or rep..." oninput="filterSearch=this.value.toLowerCase();rerender()" value="${filterSearch}">
     <span class="filter-count">${filtered.length} calls</span>
@@ -599,6 +627,7 @@ function renderGroupSection(title, calls, type){
           <td><div style="font-size:13px">${c.rep}</div><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4)">${c.manager}</div></td>
           <td><span class="seg-badge ${segClass(c.segment)}">${segLabel(c.segment)}</span></td>
           <td><span class="acct-type-badge ${acctClass(c.account_type)}">${acctLabel(c.account_type)}</span></td>
+          <td><span class="call-type-badge ${callTypeClass(c.call_type)}">${callTypeLabel(c.call_type)}</span>${c.call_type_confidence==='low'?'<span style="font-family:\'DM Mono\',monospace;font-size:8px;color:var(--amber);margin-left:3px">⚠</span>':''}</td>
           <td style="font-family:'DM Mono',monospace;font-size:11px">${c.date}</td>
           <td><span class="score-pill" style="color:${sc(c.overall_score)}">${c.overall_score}</span></td>
           <td><span class="ai-pill ${aiPillClass(c.ai_story?.sharp_or_generic)}">${aiLabelShort(c.ai_story?.sharp_or_generic)}</span></td>
@@ -623,7 +652,7 @@ function renderCalls(){
     ${filtered.length===0?`<div class="empty">No calls match the current filters.</div>`:`
     <table class="deal-table deal-table-calls">
       <thead><tr>
-        <th>Account</th><th>Rep</th><th>Segment</th><th>Type</th>
+        <th>Account</th><th>Rep</th><th>Segment</th><th>Acct Type</th><th>Call Type</th>
         <th>Date</th><th>Duration</th><th>Score</th><th>AI Story</th><th>Outcome</th>
       </tr></thead>
       <tbody>
@@ -632,6 +661,7 @@ function renderCalls(){
           <td>${c.rep}</td>
           <td><span class="seg-badge ${segClass(c.segment)}">${segLabel(c.segment)}</span></td>
           <td><span class="acct-type-badge ${acctClass(c.account_type)}">${acctLabel(c.account_type)}</span></td>
+          <td><span class="call-type-badge ${callTypeClass(c.call_type)}">${callTypeLabel(c.call_type)}</span>${c.call_type_confidence==='low'?'<span style="font-family:\'DM Mono\',monospace;font-size:8px;color:var(--amber);margin-left:3px">⚠</span>':''}</td>
           <td style="font-family:'DM Mono',monospace;font-size:11px">${c.date}</td>
           <td style="font-family:'DM Mono',monospace;font-size:11px">${c.duration}</td>
           <td><span class="score-pill" style="color:${sc(c.overall_score)}">${c.overall_score}</span></td>
