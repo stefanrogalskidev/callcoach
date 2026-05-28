@@ -252,45 +252,4259 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
 // Schema defined below. Currently empty — scaffold only.
 // ============================================================
 const CALLS = [
-  // Example schema (remove this comment when adding real calls):
-  // {
-  //   account: 'Account Name',
-  //   rep: 'Rep Name',
-  //   manager: 'Aimee Caldwell',          // or 'Dave Corbett'
-  //   segment: 'corporates',              // 'corporates' | 'alts' | 'advisory'
-  //   account_type: 'net_new',            // 'net_new' | 'reactivation'
-  //   call_type: 'cold_call',             // 'cold_call' | 'warm_connect' | 'inbound_meeting' | 'unknown'
-  //                                       // cold_call = rep dials, no prior agreement to speak
-  //                                       // warm_connect = prospect agreed to meeting via email/LinkedIn, first live conversation
-  //                                       // inbound_meeting = prospect initiated via marketing/referral/form fill
-  //                                       // unknown = ambiguous from transcript; add call_type_confidence: 'low'
-  //   call_type_confidence: 'high',       // 'high' | 'low' — flag when inference is ambiguous
-  //   date: '2026-05-28',
-  //   duration: '00:08:32',
-  //   overall_score: 0,                   // 0-100
-  //   deal_context: '',                   // 1-2 sentence account context
-  //   summary: '',                        // 2-3 sentence coaching summary
-  //   meeting_outcome: 'booked',          // 'booked' | 'committed' | 'none'
-  //   meeting_outcome_label: 'Meeting Booked',
-  //   meeting_outcome_reason: '',
-  //   ai_story: {
-  //     came_up: true,
-  //     sharp_or_generic: 'sharp',        // 'sharp' | 'partially_sharp' | 'generic' | 'n/a'
-  //     how_handled: '',
-  //     coaching: ''
-  //   },
-  //   dimensions: {
-  //     opening:    { score: 0, label: 'strong|partial|weak', note: '' },
-  //     discovery:  { score: 0, label: 'strong|partial|weak', note: '' },
-  //     pain:       { score: 0, label: 'strong|partial|weak', note: '' },
-  //     ai_story:   { score: 0, label: 'strong|partial|weak', note: '' },
-  //     objections: { score: 0, label: 'strong|partial|weak|na', note: '' },
-  //     next_step:  { score: 0, label: 'booked|committed|none', note: '' },
-  //   },
-  //   top_wins: [],
-  //   top_priorities: [],
-  //   suggested_next_step: ''
-  // }
+  {
+    "account": "JPB Partners",
+    "rep": "Jamison McNulty",
+    "manager": "Dave Corbett",
+    "segment": "alts",
+    "account_type": "net_new",
+    "call_type": "cold_call",
+    "call_type_confidence": "high",
+    "date": "2026-05-05",
+    "duration": "00:02:55",
+    "overall_score": 28,
+    "deal_context": "Cold voicemail left for Andrew Berdahl at JPB Partners. No live conversation.",
+    "summary": "Voicemail only — generic pitch about diligence and portfolio work. No AI story, no FundCentre mention, no next step beyond leaving a number. Not scoreable as a full call.",
+    "meeting_outcome": "none",
+    "meeting_outcome_label": "No Next Step",
+    "meeting_outcome_reason": "Voicemail left, no callback, no meeting booked.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "AI not raised.",
+      "coaching": "On a live call, lead with FundCentre AI and Ask Link as the reason to have the conversation — not generic 'diligence and portfolio work.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 30,
+        "label": "weak",
+        "note": "Generic voicemail with no hook beyond 'diligence and portfolio work'."
+      },
+      "discovery": {
+        "score": 0,
+        "label": "weak",
+        "note": "No live conversation — no discovery possible."
+      },
+      "pain": {
+        "score": 0,
+        "label": "weak",
+        "note": "No pain identified."
+      },
+      "ai_story": {
+        "score": 0,
+        "label": "weak",
+        "note": "Not raised."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "Voicemail only."
+      },
+      "next_step": {
+        "score": 10,
+        "label": "none",
+        "note": "Left a callback number only."
+      }
+    },
+    "top_wins": [
+      "Made the outbound attempt to a relevant Alts account"
+    ],
+    "top_priorities": [
+      "Sharpen the voicemail hook — lead with FundCentre AI not generic language",
+      "Follow up with a specific email: 'We just launched Ask Link inside FundCentre'",
+      "Offer a specific reason to call back — a relevant insight or trigger event"
+    ],
+    "suggested_next_step": "Follow up email: 'Hi Andrew — I left you a voicemail. We work with PE firms on the fundraising-to-reporting lifecycle — Ask Link, our AI, is now embedded in FundCentre. Worth a 10-minute call?'"
+  },
+  {
+    "account": "Broadview Real Estate Partners",
+    "rep": "Jamison McNulty",
+    "manager": "Dave Corbett",
+    "segment": "alts",
+    "account_type": "net_new",
+    "call_type": "cold_call",
+    "call_type_confidence": "high",
+    "date": "2026-05-08",
+    "duration": "00:02:16",
+    "overall_score": 25,
+    "deal_context": "Voicemail left for wrong contact (Justin Brown) at Broadview Real Estate Partners.",
+    "summary": "Wrong contact reached — voicemail left for Justin Brown instead of Arya Reddy. Generic pitch about deal execution and investor reporting. No AI story, no FundCentre mention.",
+    "meeting_outcome": "none",
+    "meeting_outcome_label": "No Next Step",
+    "meeting_outcome_reason": "Wrong contact reached, voicemail left, no meeting booked.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "AI not raised.",
+      "coaching": "Even in a voicemail, a brief AI hook can differentiate and drive callbacks."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 20,
+        "label": "weak",
+        "note": "Wrong contact reached."
+      },
+      "discovery": {
+        "score": 0,
+        "label": "weak",
+        "note": "No live conversation."
+      },
+      "pain": {
+        "score": 0,
+        "label": "weak",
+        "note": "No pain identified."
+      },
+      "ai_story": {
+        "score": 0,
+        "label": "weak",
+        "note": "Not raised."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "N/A."
+      },
+      "next_step": {
+        "score": 10,
+        "label": "none",
+        "note": "Left a number only."
+      }
+    },
+    "top_wins": [
+      "Made the outbound attempt"
+    ],
+    "top_priorities": [
+      "Verify contact before calling — CRM hygiene",
+      "Develop a voicemail script with a specific AI hook for real estate firms",
+      "Follow up via email to correct contact with a personalized note"
+    ],
+    "suggested_next_step": "Find Arya Reddy's direct email and send a personalized note about FundCentre for real estate investment firms."
+  },
+  {
+    "account": "Washington DC ArchAngels",
+    "rep": "Jamison McNulty",
+    "manager": "Dave Corbett",
+    "segment": "alts",
+    "account_type": "net_new",
+    "call_type": "cold_call",
+    "call_type_confidence": "high",
+    "date": "2026-05-05",
+    "duration": "00:05:24",
+    "overall_score": 42,
+    "deal_context": "Cold call to Dan Loague at DC ArchAngels (angel investment group). Jamison quickly identified this was not a pooled capital firm but pivoted and offered to send FundCentre info.",
+    "summary": "Good real-time qualification — Jamison identified DC ArchAngels doesn't raise pooled capital. Showed adaptability. The pivot to 'sending info' was vague and the AI story was absent. A weak close.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Prospect agreed to receive info and calendar link. No hard meeting booked.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "AI not raised.",
+      "coaching": "Even for a borderline prospect, a mention of Ask Link could have elevated the conversation and driven a stronger commitment."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 50,
+        "label": "partial",
+        "note": "Connected live and pivoted when he reached the wrong prospect type."
+      },
+      "discovery": {
+        "score": 55,
+        "label": "partial",
+        "note": "Asked good qualifying questions but could have gone deeper on pain."
+      },
+      "pain": {
+        "score": 35,
+        "label": "weak",
+        "note": "Identified email as current process but didn't anchor to a real pain."
+      },
+      "ai_story": {
+        "score": 0,
+        "label": "weak",
+        "note": "Not raised."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "No objections raised."
+      },
+      "next_step": {
+        "score": 40,
+        "label": "committed",
+        "note": "Agreed to send info and calendar link, but no date or specific meeting confirmed."
+      }
+    },
+    "top_wins": [
+      "Qualified quickly — recognized this wasn't a pooled capital firm",
+      "Adapted pitch in real time to angel network use case",
+      "Got permission to follow up with a calendar link"
+    ],
+    "top_priorities": [
+      "Close for a specific time on the calendar — 'Would Tuesday at 2pm work?'",
+      "Lead with AI on the next outreach",
+      "Don't send generic info — send something specific to their use case"
+    ],
+    "suggested_next_step": "Follow up email with calendar link: 'Hi Randall — as promised, here's a link to my calendar. I'd love to show you how we help angel networks manage materials and Q&A digitally — 15 minutes. [link]'"
+  },
+  {
+    "account": "Post Road Group",
+    "rep": "Jamison McNulty",
+    "manager": "Dave Corbett",
+    "segment": "alts",
+    "account_type": "reactivation",
+    "call_type": "cold_call",
+    "call_type_confidence": "high",
+    "date": "2026-05-01",
+    "duration": "00:02:21",
+    "overall_score": 38,
+    "deal_context": "Existing client check-in call with Jeff Baisley at Post Road Group. Jamison introduced himself as new point of contact and asked for feedback on InvestorVision platform.",
+    "summary": "Decent account management touch but no expansion motion attempted. No AI story, no FundCentre positioning. Call ended without a next step beyond 'reach out if you have questions.'",
+    "meeting_outcome": "none",
+    "meeting_outcome_label": "No Next Step",
+    "meeting_outcome_reason": "No meeting booked, no follow-up committed. Generic close.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "AI not raised.",
+      "coaching": "Existing clients are the easiest audience for an AI story — 'we just embedded Ask Link into FundCentre' would have differentiated this touchpoint."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 55,
+        "label": "partial",
+        "note": "Good intro — identified himself as new point of contact, noted existing client relationship."
+      },
+      "discovery": {
+        "score": 30,
+        "label": "weak",
+        "note": "Asked for feedback but didn't probe for pain, expansion interest, or upcoming fund events."
+      },
+      "pain": {
+        "score": 20,
+        "label": "weak",
+        "note": "No pain uncovered."
+      },
+      "ai_story": {
+        "score": 0,
+        "label": "weak",
+        "note": "Not raised."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "No objections."
+      },
+      "next_step": {
+        "score": 20,
+        "label": "none",
+        "note": "'Let me know if questions come up' — no defined next step."
+      }
+    },
+    "top_wins": [
+      "Made the touchpoint — existing client relationship maintained"
+    ],
+    "top_priorities": [
+      "Ask specifically about upcoming fund events — new fund launch? next reporting cycle?",
+      "Introduce Unified FundCentre and Ask Link as a reason to schedule a proper 20-minute call",
+      "Book a specific follow-up: 'Can I schedule 20 minutes next week to show you what's new on the platform?'"
+    ],
+    "suggested_next_step": "Book a demo call: 'Hi Jeff — great connecting. I'd love to show you what's new on FundCentre — specifically Ask Link, our new AI. Can we do 20 minutes next Tuesday?'"
+  },
+  {
+    "account": "FlowStone Partners",
+    "rep": "Jamison McNulty",
+    "manager": "Dave Corbett",
+    "segment": "alts",
+    "account_type": "reactivation",
+    "call_type": "cold_call",
+    "call_type_confidence": "high",
+    "date": "2026-05-04",
+    "duration": "00:02:05",
+    "overall_score": 55,
+    "deal_context": "Existing client — Jamison reached Mark Phillip to introduce himself as new point of contact ahead of a renewal. Booked a call for Wednesday or Thursday.",
+    "summary": "Strong outcome for a short call — Jamison got a live conversation, established himself as new POC, and booked a specific meeting. Offered to loop in the renewals colleague. Missed opportunity to plant an AI seed before the renewal conversation.",
+    "meeting_outcome": "booked",
+    "meeting_outcome_label": "Meeting Booked",
+    "meeting_outcome_reason": "Meeting confirmed for Wednesday or Thursday. Jamison to send invite options.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "AI not raised — renewal call focus.",
+      "coaching": "Before the renewal meeting, send a brief teaser about Unified FundCentre and Ask Link so the client arrives curious rather than just prepared to defend the current contract."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 70,
+        "label": "strong",
+        "note": "Identified existing client relationship immediately."
+      },
+      "discovery": {
+        "score": 40,
+        "label": "partial",
+        "note": "Learned the renewal is coming and Mark's availability. Didn't probe for platform usage."
+      },
+      "pain": {
+        "score": 30,
+        "label": "weak",
+        "note": "No pain uncovered."
+      },
+      "ai_story": {
+        "score": 0,
+        "label": "weak",
+        "note": "Not raised."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "No objections."
+      },
+      "next_step": {
+        "score": 85,
+        "label": "booked",
+        "note": "Meeting booked for Wednesday or Thursday. Invite to be sent."
+      }
+    },
+    "top_wins": [
+      "Got a live conversation and booked a specific meeting",
+      "Offered to loop in renewals colleague — right instinct",
+      "Professional and low-pressure approach appropriate for existing client"
+    ],
+    "top_priorities": [
+      "Before the meeting, send a brief note about what's new — specifically Ask Link and Unified FundCentre",
+      "In the meeting, ask about upcoming fund events and whether they're using the full platform",
+      "Don't just do a check-in renewal call — this is an expansion opportunity"
+    ],
+    "suggested_next_step": "Send invite for Wed/Thu + pre-read email: 'Hi Mark — looking forward to connecting. Before we talk, wanted to share a quick update on what's new on FundCentre — including Ask Link, our new AI. [link to one-pager]'"
+  },
+  {
+    "account": "Turtle Creek Investment Advisors",
+    "rep": "Jamison McNulty",
+    "manager": "Dave Corbett",
+    "segment": "alts",
+    "account_type": "reactivation",
+    "call_type": "warm_connect",
+    "call_type_confidence": "high",
+    "date": "2026-05-04",
+    "duration": "00:08:40",
+    "overall_score": 52,
+    "deal_context": "InView API connectivity follow-up with Vimarth Shukla. Active evaluation of InView aggregation across 12+ funds and multiple domains. Pricing and technical scoping discussion. Client explicitly mentioned AI interest.",
+    "summary": "Active deal in motion — Vimarth is genuinely evaluating InView for LP aggregation. Jamison showed good relationship management but was underprepared on pricing and technical details. Client's AI interest was not connected to Ask Link or FundCentre AI capabilities. Missed.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Jamison committed to sending pricing by end of day for 12-20 fund range.",
+    "ai_story": {
+      "came_up": true,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Client explicitly mentioned using AI to automate and aggregate — Jamison didn't connect this to Ask Link or FundCentre AI.",
+      "coaching": "This was the perfect moment for the AI story — 'Ask Link inside FundCentre lets your team query across all those fund documents without manually aggregating them.' Missed."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 65,
+        "label": "partial",
+        "note": "Good — built on previous conversation context."
+      },
+      "discovery": {
+        "score": 60,
+        "label": "partial",
+        "note": "Good on technical requirements. Could have probed the AI use case more."
+      },
+      "pain": {
+        "score": 55,
+        "label": "partial",
+        "note": "Pain identified: manual aggregation across multiple fund accounts. Not fully developed."
+      },
+      "ai_story": {
+        "score": 10,
+        "label": "weak",
+        "note": "Client explicitly mentioned AI interest — Jamison didn't connect to Ask Link."
+      },
+      "objections": {
+        "score": 50,
+        "label": "partial",
+        "note": "Handled SSNC vs non-SSNC limitation honestly."
+      },
+      "next_step": {
+        "score": 60,
+        "label": "committed",
+        "note": "Committed to sending pricing. No specific follow-up call booked."
+      }
+    },
+    "top_wins": [
+      "Active evaluation — this is a live opportunity",
+      "Good technical discovery on scope (12-20 funds, multiple domains)",
+      "Honest about limitations — didn't oversell"
+    ],
+    "top_priorities": [
+      "Get pricing out same day — don't let this cool",
+      "Book a specific follow-up call for pricing review",
+      "Lead with Ask Link in the pricing email — client is already thinking about AI"
+    ],
+    "suggested_next_step": "Send pricing for 12 and 20 fund scenarios + book a 20-min call: 'Hi Vimarth — pricing attached. I also wanted to show you how Ask Link can help your team query across all those funds without manual aggregation — can we do 20 minutes Thursday?'"
+  },
+  {
+    "account": "MC Square Capital",
+    "rep": "Jamison McNulty",
+    "manager": "Dave Corbett",
+    "segment": "advisory",
+    "account_type": "net_new",
+    "call_type": "warm_connect",
+    "call_type_confidence": "high",
+    "date": "2026-05-27",
+    "duration": "00:12:37",
+    "overall_score": 58,
+    "deal_context": "Will Skantze is an investment banker (lower middle market M&A) currently using Caplinked. Looking for a repeatable VDR process for multiple client deals. Booked a demo for June 4th.",
+    "summary": "Good live conversation with a genuinely interested prospect. Will wants a repeatable process — exactly what DealCentre subscription sells. Jamison was weak on pricing but booked a demo for June 4th. AI story mentioned but was vague — no sovereignty, no Link, no Datasite comparison.",
+    "meeting_outcome": "booked",
+    "meeting_outcome_label": "Meeting Booked",
+    "meeting_outcome_reason": "Demo booked for June 4th at 1:30pm Eastern.",
+    "ai_story": {
+      "came_up": true,
+      "sharp_or_generic": "generic",
+      "how_handled": "Jamison mentioned 'AI functionality' and 'DealCentre AI' but without sovereignty, Link specificity, or Datasite comparison.",
+      "coaching": "Before the demo: 'Our AI — Link — runs inside DealCentre's perimeter. Your client documents never leave our walls. Datasite's AI is outsourced to a company they acquired called Blueflame. Ours is built in.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 60,
+        "label": "partial",
+        "note": "Good relationship tone from warm connect."
+      },
+      "discovery": {
+        "score": 65,
+        "label": "partial",
+        "note": "Identified use case (investment banker, repeatable client process, lower middle market). Could have probed Caplinked pain more."
+      },
+      "pain": {
+        "score": 55,
+        "label": "partial",
+        "note": "Pain identified: Caplinked is cheap but has service issues; wants a repeatable process."
+      },
+      "ai_story": {
+        "score": 25,
+        "label": "generic",
+        "note": "Mentioned DealCentre AI but without sovereignty, Link, or Datasite differentiation."
+      },
+      "objections": {
+        "score": 55,
+        "label": "partial",
+        "note": "Handled price concern by deferring to demo and promising pricing visibility."
+      },
+      "next_step": {
+        "score": 85,
+        "label": "booked",
+        "note": "Demo booked June 4th, 1:30pm ET."
+      }
+    },
+    "top_wins": [
+      "Booked a specific demo with date and time",
+      "Identified the exact use case — repeatable client process for investment banker",
+      "Built good rapport and kept Will engaged for 12 minutes"
+    ],
+    "top_priorities": [
+      "Before the demo, prepare pricing for a lower middle market single-deal structure — Will explicitly asked for this",
+      "Sharpen the AI story: Link inside the perimeter, Datasite outsourced Blueflame, documents never leave our walls",
+      "Demo should focus on the repeatable deal template"
+    ],
+    "suggested_next_step": "Send demo invite + pre-read: 'Hi Will — confirmed for June 4th at 1:30. I'll have illustrative pricing for a lower middle market deal ready. Quick preview: [DealCentre one-pager]. See you Thursday.'"
+  },
+  {
+    "account": "Micolsir",
+    "rep": "Jamison McNulty",
+    "manager": "Dave Corbett",
+    "segment": "corporates",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-05-27",
+    "duration": "00:11:41",
+    "overall_score": 55,
+    "deal_context": "Bert Falls manages insurance carrier relationships and alternative investment deal flow. Inbound interest in data room for document management and buyer Q&A. Small process (5-10 parties). Meeting booked for next Tuesday at 3pm.",
+    "summary": "Good discovery call — Jamison identified the use case (M&A/deal process with small buyer group, document security, Q&A management) and got a meeting booked. However, he led with VDR features rather than value, admitted he didn't know pricing, and missed the AI story entirely despite Q&A and document management being core Link use cases.",
+    "meeting_outcome": "booked",
+    "meeting_outcome_label": "Meeting Booked",
+    "meeting_outcome_reason": "Meeting booked for next Tuesday at 3pm. Bert confirmed.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Not raised despite Q&A management being a core Ask Link use case.",
+      "coaching": "Before Tuesday's meeting: 'Ask Link can auto-answer buyer Q&A from documents you've uploaded — your team stops answering the same question 40 times.' This is the exact value prop for his use case."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 60,
+        "label": "partial",
+        "note": "Good rapport — built on Bert's inbound interest."
+      },
+      "discovery": {
+        "score": 65,
+        "label": "partial",
+        "note": "Good discovery on use case, number of parties, pain (manual email process, security)."
+      },
+      "pain": {
+        "score": 60,
+        "label": "partial",
+        "note": "Pain identified: 24/7 availability needed, security, Q&A organization. Solid foundation."
+      },
+      "ai_story": {
+        "score": 0,
+        "label": "weak",
+        "note": "Not raised despite strong fit — Q&A management is Ask Link's core use case."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "No major objections raised."
+      },
+      "next_step": {
+        "score": 85,
+        "label": "booked",
+        "note": "Meeting booked for Tuesday at 3pm."
+      }
+    },
+    "top_wins": [
+      "Booked a specific meeting with date and time",
+      "Good discovery on use case and pain points",
+      "Asked about competitive landscape (no other vendors — sole consideration)"
+    ],
+    "top_priorities": [
+      "Lead with AI in Tuesday's meeting — Q&A auto-answer via Ask Link is the killer feature for his use case",
+      "Prepare rough pricing before Tuesday — he explicitly asked for an estimate",
+      "Invite compliance officer (Bert mentioned this) — get that stakeholder in the room"
+    ],
+    "suggested_next_step": "Pre-meeting email: 'Hi Bert — confirmed for Tuesday at 3. I'll have rough pricing ready. Quick preview: our AI (Ask Link) auto-answers buyer Q&A from your uploaded documents. See you Tuesday.'"
+  },
+  {
+    "account": "Hawkeye Partners",
+    "rep": "Jamison McNulty",
+    "manager": "Dave Corbett",
+    "segment": "alts",
+    "account_type": "net_new",
+    "call_type": "warm_connect",
+    "call_type_confidence": "high",
+    "date": "2026-05-26",
+    "duration": "00:12:22",
+    "overall_score": 52,
+    "deal_context": "Intro call with Harjit Purewal, new finance/accounting hire at Hawkeye Partners. Existing FundCentre Reporting client. New fund raising planned for Q3. Institutional investor base.",
+    "summary": "Good discovery call with a warm existing client contact. Jamison identified the Q3 fundraising opportunity and began to pitch the full FundCentre suite. However, the AI story was absent, the close was weak ('touch base in Q3'), and the opportunity to book a specific meeting before Q3 fundraising begins was missed.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Agreed to connect again in Q3 (September). No hard meeting date.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Not raised despite institutional investor base and AI being highly relevant for LP onboarding.",
+      "coaching": "The institutional LP base is the perfect AI hook: 'Ask Link means your team can query across all LP documents and fund reports without manual work — especially powerful when managing institutional investors at scale.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 65,
+        "label": "partial",
+        "note": "Good — leveraged existing relationship and Harjit's new role as context."
+      },
+      "discovery": {
+        "score": 70,
+        "label": "partial",
+        "note": "Good discovery — identified role, upcoming fund raise, institutional LP base, current tools."
+      },
+      "pain": {
+        "score": 55,
+        "label": "partial",
+        "note": "Pain identified: manual one-by-one capital call process, upcoming fundraise complexity."
+      },
+      "ai_story": {
+        "score": 0,
+        "label": "weak",
+        "note": "Not raised despite institutional LP base being ideal for AI positioning."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "No objections."
+      },
+      "next_step": {
+        "score": 35,
+        "label": "committed",
+        "note": "Q3 follow-up agreed but no specific date. Too far out and too vague."
+      }
+    },
+    "top_wins": [
+      "Good discovery — identified Q3 fundraise as a real expansion opportunity",
+      "Introduced FundCentre as a full suite (not just reporting)",
+      "Mentioned Walnut as a tool for Harjit to explore"
+    ],
+    "top_priorities": [
+      "Don't wait until Q3 — book a 20-minute demo call now before they start evaluating options",
+      "Lead with AI in the demo — Ask Link for institutional LP management is the differentiator",
+      "Send Walnut link immediately — keep momentum"
+    ],
+    "suggested_next_step": "Email Harjit + Bryce: 'Hi Harjit — given the Q3 fundraise on the horizon, I'd love to show you FundCentre's fundraising platform before you start evaluating options — 20 minutes next week? Also attaching the Walnut sandbox. [link]'"
+  },
+  {
+    "account": "JBG Associates",
+    "rep": "Jamison McNulty",
+    "manager": "Dave Corbett",
+    "segment": "alts",
+    "account_type": "reactivation",
+    "call_type": "warm_connect",
+    "call_type_confidence": "high",
+    "date": "2026-05-06",
+    "duration": "00:27:37",
+    "overall_score": 48,
+    "deal_context": "Intro call with Racine Gooding, existing long-term Intralinks client managing winding-down real estate funds (~4 more years). 1100 credentialed users. Workspace consistency challenges. AI is 'center front issue' at the firm.",
+    "summary": "Good relationship call that surfaced real intelligence — 4-year runway, company transition, AI interest. But Jamison was passive throughout. The AI story was raised vaguely ('on the roadmap') when Ask Link is live. No specific next step beyond 'I'll follow up via email.'",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Jamison said he'd follow up via email. No hard meeting booked.",
+    "ai_story": {
+      "came_up": true,
+      "sharp_or_generic": "generic",
+      "how_handled": "Mentioned AI summaries as 'on the roadmap' — but Ask Link is live. Didn't connect to specific pain.",
+      "coaching": "Ask Link could specifically address the workspace consistency pain: 'When we fix the data consistency issues, Ask Link will be able to query across all your workspaces without manual work.' Concrete and relevant."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 60,
+        "label": "partial",
+        "note": "Good — leveraged long-standing relationship and Christine Faith connection."
+      },
+      "discovery": {
+        "score": 65,
+        "label": "partial",
+        "note": "Good — surfaced workspace consistency pain, company transition, AI interest, 4-year runway."
+      },
+      "pain": {
+        "score": 55,
+        "label": "partial",
+        "note": "Pain identified: workspace inconsistency, manual uploads, time constraints. Not fully anchored to solutions."
+      },
+      "ai_story": {
+        "score": 15,
+        "label": "generic",
+        "note": "Mentioned AI as roadmap item — but it's live. Missed."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "No objections."
+      },
+      "next_step": {
+        "score": 25,
+        "label": "committed",
+        "note": "Follow-up email promised. No specific meeting booked."
+      }
+    },
+    "top_wins": [
+      "Excellent relationship intelligence gathered — 4-year runway, AI as 'center front issue'",
+      "Surfaced workspace consistency as a real operational pain",
+      "Built strong trust in a long-standing client relationship"
+    ],
+    "top_priorities": [
+      "Don't just send email — book a 3-way call with Christine Faith and Racine to address workspace consistency",
+      "Raise Ask Link as a live capability, not roadmap: 'This isn't coming — it's here'",
+      "Explore the 'going private again' angle — new fund = new FundCentre fundraising opportunity"
+    ],
+    "suggested_next_step": "3-way email to Racine, Faith, and Lily: 'Hi all — after speaking with Racine, I'd love to set up a call to discuss the workspace consistency issue and show you Ask Link, which is live now. Would 30 minutes next week work?'"
+  },
+  {
+    "account": "Delphos / MMJ",
+    "rep": "Jamison McNulty",
+    "manager": "Dave Corbett",
+    "segment": "alts",
+    "account_type": "net_new",
+    "call_type": "warm_connect",
+    "call_type_confidence": "high",
+    "date": "2026-05-07",
+    "duration": "00:25:04",
+    "overall_score": 50,
+    "deal_context": "Intro call with Scott Caffrey, placement agent at Delphos/MMJ. Focuses on smaller managers ($500M or less) raising capital. Uses DocSend. Looking to understand Intralinks offering to potentially recommend to GPs.",
+    "summary": "Good conversation with the right person — placement agents are referral sources. Jamison showed the FundCentre suite and got Scott's contact. However, the AI story was confused (called MCP 'MMJ,' mixed up product names), pricing was speculative, and no concrete next step was booked.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Scott agreed to receive materials and an illustrative proposal.",
+    "ai_story": {
+      "came_up": true,
+      "sharp_or_generic": "generic",
+      "how_handled": "Mentioned 'proprietary AI' and referenced Anthropic/MCP but confused the product names (called it 'MMJ'). No sovereignty argument, no Datasite differentiation, no Link mention.",
+      "coaching": "Learn the correct product names: MCP is the protocol, Link is the AI engine, DealCentre Connect is the product. The placement agent audience responds to: 'Our AI is built in-house, not outsourced like Datasite's Blueflame.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 55,
+        "label": "partial",
+        "note": "Good relationship tone, jumped into context quickly."
+      },
+      "discovery": {
+        "score": 60,
+        "label": "partial",
+        "note": "Good — identified placement agent role, smaller manager focus, DocSend usage."
+      },
+      "pain": {
+        "score": 50,
+        "label": "partial",
+        "note": "Pain identified: DocSend is a commodity, fragmented tools. But not developed deeply."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "generic",
+        "note": "Mentioned AI and Anthropic but confused product names. No clear sovereignty or Datasite differentiation."
+      },
+      "objections": {
+        "score": 50,
+        "label": "partial",
+        "note": "Handled pricing pressure by promising flexibility. But didn't anchor to value."
+      },
+      "next_step": {
+        "score": 45,
+        "label": "committed",
+        "note": "Send materials and proposal. No specific follow-up call date."
+      }
+    },
+    "top_wins": [
+      "Right audience — placement agents are referral sources with high leverage",
+      "Showed the FundCentre suite effectively at a high level",
+      "Got contact info and LinkedIn connection commitment"
+    ],
+    "top_priorities": [
+      "Learn the correct AI product names before next call — MCP, Link, DealCentre Connect",
+      "Book a specific follow-up call when sending the proposal",
+      "For placement agents, the referral pitch is: 'Tell your GPs that institutional LPs know and trust Intralinks'"
+    ],
+    "suggested_next_step": "Send illustrative proposal + book a call: 'Hi Scott — attached is what 50 and 100 user scenarios look like for a smaller manager. I'd love to walk through it — can we do 20 minutes next week? [calendar link]'"
+  },
+  {
+    "account": "Bluff Point Associates",
+    "rep": "Jamison McNulty",
+    "manager": "Dave Corbett",
+    "segment": "corporates",
+    "account_type": "reactivation",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-05-19",
+    "duration": "00:18:30",
+    "overall_score": 60,
+    "deal_context": "Family office with 30+ platform deals and 15+ add-ons. Tyler Condello — reactivation from Raymond James VDR experience. Caroline Collard joined as support. 6 exits expected in next 3 years. No AI story — Caroline demo'd DCAI.",
+    "summary": "Good call — Caroline stepped in effectively with the DCAI demo and Tyler was receptive. Tyler's interest in AI (doc summarization, version tracking) was genuine. No next step was committed to other than 'send materials when you need.' Jamison was too passive. No Link/sovereignty argument made.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Tyler said 'feel free to follow up' — no specific date or trigger.",
+    "ai_story": {
+      "came_up": true,
+      "sharp_or_generic": "partially_sharp",
+      "how_handled": "Caroline described Link accurately (closed environment, proprietary, fact-checked sources) but didn't make the sovereignty argument vs Datasite.",
+      "coaching": "Add the Datasite comparison: 'Unlike some competitors who outsource their AI to a third-party product they acquired, our AI, Link, is built directly into DealCentre — no separate license, no additional security perimeter.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 65,
+        "label": "partial",
+        "note": "Good — Jamison established context and brought Caroline in appropriately."
+      },
+      "discovery": {
+        "score": 60,
+        "label": "partial",
+        "note": "Good — identified family office structure, exit pipeline (6 in 3 years), historical VDR use."
+      },
+      "pain": {
+        "score": 55,
+        "label": "partial",
+        "note": "Pain identified: email and ShareFile for current deals, version confusion, AI interest."
+      },
+      "ai_story": {
+        "score": 50,
+        "label": "partial",
+        "note": "Caroline gave a partially sharp AI story — closed environment, fact-checked sources. Missing Datasite differentiation."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "No objections raised — Tyler was receptive throughout."
+      },
+      "next_step": {
+        "score": 30,
+        "label": "committed",
+        "note": "Tyler said 'follow up whenever.' No specific meeting, date, or trigger event."
+      }
+    },
+    "top_wins": [
+      "Caroline's demo was effective and well-received",
+      "Good discovery — 6 exits in 3 years is a real pipeline signal",
+      "Tyler was engaged and receptive — genuine interest"
+    ],
+    "top_priorities": [
+      "Define the trigger event for re-engagement — ask Tyler: 'Which of the 6 exits is most likely first?'",
+      "Book a 30-minute deep dive with the deal team — not just Tyler",
+      "Sharpen the AI story for Jamison: add Datasite differentiation to what Caroline built"
+    ],
+    "suggested_next_step": "Email Tyler: 'Hi Tyler — thanks for making time. Given you have exits on the horizon, I'd love to set up a deeper dive with your deal team when one starts to firm up. Which one do you think is most likely first? [materials attached]'"
+  },
+  {
+    "account": "Locust Walk Partners",
+    "rep": "Jonathan Bearden",
+    "manager": "Aimee Caldwell",
+    "segment": "advisory",
+    "account_type": "net_new",
+    "call_type": "cold_call",
+    "call_type_confidence": "high",
+    "date": "2026-04-28",
+    "duration": "00:05:43",
+    "overall_score": 52,
+    "deal_context": "Cold call to Alex Hogenhuis at Locust Walk Partners (life sciences advisory). Alex said Locust Walk doesn't set up data rooms themselves but would refer clients. Showed interest in translation and AI capabilities for Chinese clients.",
+    "summary": "Solid cold call — Jonathan got a live conversation and uncovered a real use case (Chinese clients needing translation). Alex agreed to receive materials. The AI story touched on translation but was generic — no Link, no sovereignty, no Datasite comparison. Close was weak: 'I'll send a one-sheet' with no meeting booked.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Alex agreed to receive materials and engage if a relevant deal comes up. No meeting booked.",
+    "ai_story": {
+      "came_up": true,
+      "sharp_or_generic": "generic",
+      "how_handled": "Jonathan mentioned AI for Q&A and translation but was vague — 'AI can translate' without specifics on Link or the closed environment.",
+      "coaching": "For life sciences advisory with Chinese clients: 'Our AI, Link, can translate documents inside the data room in real time — and the documents never leave our secure perimeter. That matters when you're sharing sensitive IP across borders.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 65,
+        "label": "partial",
+        "note": "Good live cold call — identified as VDR provider, earned the right to continue."
+      },
+      "discovery": {
+        "score": 55,
+        "label": "partial",
+        "note": "Discovered Locust Walk doesn't set up rooms themselves but refers. Identified Chinese client base."
+      },
+      "pain": {
+        "score": 50,
+        "label": "partial",
+        "note": "Translation pain surfaced by the prospect, not Jonathan. Good that it was identified."
+      },
+      "ai_story": {
+        "score": 25,
+        "label": "generic",
+        "note": "Mentioned AI for translation and Q&A but no specifics."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "No real objections."
+      },
+      "next_step": {
+        "score": 40,
+        "label": "committed",
+        "note": "Agreed to send one-sheet. No meeting booked."
+      }
+    },
+    "top_wins": [
+      "Got a live conversation on a cold call",
+      "Identified translation use case for Chinese clients — specific and relevant",
+      "Alex acknowledged the potential referral relationship"
+    ],
+    "top_priorities": [
+      "Send one-sheet AND book a specific call — 'Can we do 15 minutes next week so I can show you the translation capability live?'",
+      "Lead with AI in the follow-up — 'Link translates inside the data room in real time, documents never leave our walls'",
+      "Position as a referral partner, not just a vendor"
+    ],
+    "suggested_next_step": "Email + meeting ask: 'Hi Alex — as promised, one-sheet attached. The translation capability is something I'd love to show you live — it's AI-powered and runs inside our secure environment. 15 minutes next week? [calendar link]'"
+  },
+  {
+    "account": "Moore & Van Allen",
+    "rep": "Jonathan Bearden",
+    "manager": "Aimee Caldwell",
+    "segment": "advisory",
+    "account_type": "net_new",
+    "call_type": "cold_call",
+    "call_type_confidence": "high",
+    "date": "2026-05-19",
+    "duration": "00:02:03",
+    "overall_score": 30,
+    "deal_context": "Cold call to Grayson Campbell at Moore & Van Allen (law firm). Grayson accidentally answered mid-thought, was confused throughout. No meeting outcome.",
+    "summary": "Confusing call — Grayson answered by accident and was lost throughout. Jonathan's pitch was unclear. 'I'll save your number' is not a next step.",
+    "meeting_outcome": "none",
+    "meeting_outcome_label": "No Next Step",
+    "meeting_outcome_reason": "Grayson said he'd save the number — vague non-commitment.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Not raised.",
+      "coaching": "N/A for this call. Focus on a clearer opening pitch first."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 35,
+        "label": "weak",
+        "note": "Opening was unclear — prospect was confused and admitted it."
+      },
+      "discovery": {
+        "score": 20,
+        "label": "weak",
+        "note": "Minimal discovery. Confirmed Moore & Van Allen does M&A work."
+      },
+      "pain": {
+        "score": 0,
+        "label": "weak",
+        "note": "No pain identified."
+      },
+      "ai_story": {
+        "score": 0,
+        "label": "weak",
+        "note": "Not raised."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "N/A."
+      },
+      "next_step": {
+        "score": 10,
+        "label": "none",
+        "note": "'I'll save your number' is not a next step."
+      }
+    },
+    "top_wins": [
+      "Made the attempt",
+      "Stayed professional despite confusion"
+    ],
+    "top_priorities": [
+      "Simplify the cold call opener — 'Jonathan from Intralinks — we help law firms run smoother M&A deals. Do you work on any of those?'",
+      "When prospect is confused, pivot quickly to a simple value statement",
+      "Follow up via email with a clearer introduction"
+    ],
+    "suggested_next_step": "Email to Grayson: 'Hi Grayson — we spoke briefly. I work with law firms on M&A due diligence. Worth a 10-minute chat when you have a deal in the works? [calendar link]'"
+  },
+  {
+    "account": "Cadence IB / EDGE Technologies",
+    "rep": "Jonathan Bearden",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-04-27",
+    "duration": "00:14:02",
+    "overall_score": 72,
+    "deal_context": "Christopher Schmid at Cadence IB requesting a second VDR (Project Cadence) with terms matching prior AFC deal. Jonathan processed the contract, looped in CSM Lauren, explained the platform, and answered permission questions.",
+    "summary": "Excellent execution — Jonathan managed an active client request cleanly, matched prior deal terms, looped in CSM Lauren, answered complex permission questions accurately, and moved toward contract execution. A missed opportunity to introduce DealCentre AI as an upgrade path for future deals.",
+    "meeting_outcome": "booked",
+    "meeting_outcome_label": "Meeting Booked",
+    "meeting_outcome_reason": "Contract via DocuSign being sent to Kevin. Lauren engaged for onboarding. Next steps clear.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Not raised.",
+      "coaching": "After this deal closes, introduce DealCentre AI as the platform evolution: 'For your next deal, would you want to see what our AI-powered version looks like? Ask Link automates Q&A — you might save a lot of time on the next process.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 80,
+        "label": "strong",
+        "note": "Professional, organized, had context from prior deal."
+      },
+      "discovery": {
+        "score": 70,
+        "label": "partial",
+        "note": "Good — understood the scope (small process, 3-4 buyers). Could have asked about future deal pipeline."
+      },
+      "pain": {
+        "score": 60,
+        "label": "partial",
+        "note": "Pain was clear: existing data room insufficient as deal scaled. Well understood."
+      },
+      "ai_story": {
+        "score": 0,
+        "label": "weak",
+        "note": "Not raised — appropriate for this specific call but a missed seed for future."
+      },
+      "objections": {
+        "score": 80,
+        "label": "strong",
+        "note": "Handled all technical questions (permissions, blinding, DocuSign contract) confidently."
+      },
+      "next_step": {
+        "score": 90,
+        "label": "booked",
+        "note": "Contract being sent, Lauren engaged, room setup underway."
+      }
+    },
+    "top_wins": [
+      "Excellent client management — smooth, professional, all bases covered",
+      "Looped in Lauren proactively",
+      "Answered complex permission questions accurately"
+    ],
+    "top_priorities": [
+      "After contract signed, plant the DealCentre AI seed for future deals",
+      "Ask about Cadence's broader deal pipeline — could they benefit from a subscription?",
+      "Share insights/reporting feature with Christopher — helps him track buyer engagement"
+    ],
+    "suggested_next_step": "Post-deal: 'Hi Christopher — contract processed, Lauren will onboard you. One thing worth knowing for your next deal: we have an AI-powered version (DealCentre AI) that automates Q&A and document summarization. Worth a look when this one closes?'"
+  },
+  {
+    "account": "Exit Boston",
+    "rep": "Jonathan Bearden",
+    "manager": "Aimee Caldwell",
+    "segment": "advisory",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-05-04",
+    "duration": "00:16:58",
+    "overall_score": 58,
+    "deal_context": "Mike Camarro at Exit Boston — current Dropbox user, doing 6-10 deals/year. Happy with Dropbox functionality but service is poor. Jonathan pitched 3 pillars (technology, service, security) and agreed to send pricing + demo Thursday.",
+    "summary": "Solid discovery call — Jonathan identified Dropbox pain (no service, no human support) and positioned Intralinks as the premium alternative. Good structure. However, no AI story was told despite Mike asking 'what differentiates you from everyone else?' — a perfect AI story opening. The close was good — specific Thursday follow-up.",
+    "meeting_outcome": "booked",
+    "meeting_outcome_label": "Meeting Booked",
+    "meeting_outcome_reason": "Thursday callback booked for 1-2pm to schedule a demo.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Not raised despite Mike asking 'what differentiates you?' — a perfect AI story opening.",
+      "coaching": "When Mike asked 'what differentiates you?' — that was the moment: 'Three things: technology, service, and security. On technology, we're now AI-powered — Link runs inside our platform, your deal documents never leave our walls while your team gets AI-powered Q&A and summaries. No one else offers that at the VDR level.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 65,
+        "label": "partial",
+        "note": "Good rapport — sports talk was appropriate and built comfort."
+      },
+      "discovery": {
+        "score": 65,
+        "label": "partial",
+        "note": "Good — identified deal volume (6-10/year), Dropbox pain (no service), that Mike absorbs costs himself."
+      },
+      "pain": {
+        "score": 60,
+        "label": "partial",
+        "note": "Pain identified: Dropbox service is poor, no human support, security ambiguity."
+      },
+      "ai_story": {
+        "score": 0,
+        "label": "weak",
+        "note": "Not raised despite a perfect opening ('what differentiates you?')."
+      },
+      "objections": {
+        "score": 55,
+        "label": "partial",
+        "note": "Handled pricing question by deferring to a proposal."
+      },
+      "next_step": {
+        "score": 75,
+        "label": "booked",
+        "note": "Thursday 1-2pm callback confirmed. Demo to follow."
+      }
+    },
+    "top_wins": [
+      "Good rapport and discovery",
+      "Identified Dropbox service pain as the key lever",
+      "Booked a specific Thursday follow-up"
+    ],
+    "top_priorities": [
+      "Lead with AI in the demo — 'Ask Link automates Q&A so you're not answering the same document question 40 times per deal'",
+      "Quantify the service value: '6-10 deals a year with bad support creates real deal risk'",
+      "In the demo, show how DealCentre compares to Dropbox on security certifications"
+    ],
+    "suggested_next_step": "Thursday call: confirm demo time. Open demo with: 'Mike — you asked what differentiates us. Let me start with the AI story because it changes the conversation.'"
+  },
+  {
+    "account": "PRAG Advisors",
+    "rep": "Jonathan Bearden",
+    "manager": "Aimee Caldwell",
+    "segment": "advisory",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-04-30",
+    "duration": "00:24:27",
+    "overall_score": 65,
+    "deal_context": "Natalie Sidor at PRAG Advisors — needs a VDR for a bond issuance process with ongoing reporting. Existing team recommended Intralinks. Evaluating one competitor. Jonathan walked through a quick demo and answered pricing questions.",
+    "summary": "Strong commercial progression — Jonathan managed pricing concerns well, walked through the platform, and has a warm prospect already recommended by her team. The close was soft ('I'll reach out in a couple weeks') but buying intent is clear. No AI story despite Q&A and reporting being core use cases.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Natalie to circle back in 1-2 weeks after client conversation. Demo for client also proposed.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Not raised despite reporting and Q&A being the core use case.",
+      "coaching": "For a bond issuance with ongoing reporting: 'Ask Link lets your team query across all bond documents and reports — instead of manually searching, you just ask. For an ongoing reporting relationship, that saves significant time.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 65,
+        "label": "partial",
+        "note": "Good relationship tone, picked up from prior conversation."
+      },
+      "discovery": {
+        "score": 65,
+        "label": "partial",
+        "note": "Good — understood the use case (bond issuance, ongoing reporting, small process)."
+      },
+      "pain": {
+        "score": 60,
+        "label": "partial",
+        "note": "Pain: needs a more formal, secure repository. Annual pricing uncertainty. Well-understood."
+      },
+      "ai_story": {
+        "score": 0,
+        "label": "weak",
+        "note": "Not raised despite reporting and Q&A being core use cases."
+      },
+      "objections": {
+        "score": 70,
+        "label": "partial",
+        "note": "Handled annual pricing escalation concern well."
+      },
+      "next_step": {
+        "score": 55,
+        "label": "committed",
+        "note": "1-2 week follow-up agreed. No hard date."
+      }
+    },
+    "top_wins": [
+      "Strong internal recommendation — warm prospect",
+      "Handled pricing concerns confidently",
+      "Offered CSM (John) for onboarding — right structure"
+    ],
+    "top_priorities": [
+      "Follow up in 1 week not 2 — buying intent is clear",
+      "Include Ask Link in the client demo — 'your investors can ask questions about the bond documents and get instant AI answers'",
+      "Ask who the competitor is — helps sharpen the pitch for the client demo"
+    ],
+    "suggested_next_step": "Follow up in 1 week: 'Hi Natalie — checking in. Have you had a chance to speak with your client? I'd love to schedule the demo for early next week. [calendar link]'"
+  },
+  {
+    "account": "Rose Law Firm",
+    "rep": "Jonathan Bearden",
+    "manager": "Aimee Caldwell",
+    "segment": "advisory",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-04-24",
+    "duration": "00:14:43",
+    "overall_score": 62,
+    "deal_context": "Tanya Chuck at Rose Law Firm — representing seller in a small M&A deal with 2 buyers. Evaluating VDR (comparing 1 competitor). Jonathan explained permissioning, pricing, and setup. Proposal to be sent same day.",
+    "summary": "Good discovery and platform explanation. Jonathan asked the right questions (deal structure, timeline, budget, competition) and handled Sofiia's existing Intralinks knowledge as a positive. AI story was absent. Close was professional — proposal same day, demo next week.",
+    "meeting_outcome": "booked",
+    "meeting_outcome_label": "Meeting Booked",
+    "meeting_outcome_reason": "Demo requested for early next week. Proposal being sent today.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Not raised.",
+      "coaching": "For a 2-buyer sell-side process: 'Ask Link can auto-answer the same due diligence questions from both buyer groups — your team answers once, the AI handles follow-ups. For a 2-buyer process, that's real time savings.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 65,
+        "label": "partial",
+        "note": "Covered Alex's absence cleanly and got into the deal quickly."
+      },
+      "discovery": {
+        "score": 70,
+        "label": "partial",
+        "note": "Good — deal size, 2 buyers, 6 months, no strict budget, competitor in play."
+      },
+      "pain": {
+        "score": 60,
+        "label": "partial",
+        "note": "Pain: need to control access by buyer group, move quickly. Well understood."
+      },
+      "ai_story": {
+        "score": 0,
+        "label": "weak",
+        "note": "Not raised."
+      },
+      "objections": {
+        "score": 65,
+        "label": "partial",
+        "note": "Handled competitor question and budget question professionally."
+      },
+      "next_step": {
+        "score": 80,
+        "label": "booked",
+        "note": "Demo early next week, proposal today. Well-structured close."
+      }
+    },
+    "top_wins": [
+      "Good deal discovery in a short time",
+      "Smooth coverage for Alex — professional handoff",
+      "Structured a clear 3-step close (proposal today, demo next week, Alex Monday)"
+    ],
+    "top_priorities": [
+      "In the demo, lead with AI — Q&A automation for a 2-buyer process is the differentiator",
+      "When Alex returns, brief him on the deal details for a seamless handoff",
+      "Ask who the competitor is before the demo"
+    ],
+    "suggested_next_step": "Send proposal today + email: 'Hi Tanya — proposal attached. Demo early next week — Alex will be back and will reach out Monday to schedule.'"
+  },
+  {
+    "account": "Capital BBW",
+    "rep": "Jonathan Bearden",
+    "manager": "Aimee Caldwell",
+    "segment": "advisory",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-05-21",
+    "duration": "00:33:11",
+    "overall_score": 65,
+    "deal_context": "Jill Verman (assistant to Roberta Caputo) at Capital BBW — Florida business brokers doing 10-15 M&A deals/year. Currently using Dropbox. Inbound lead via form fill. Jonathan gave a full demo including DealCentre, document requests, permissions, AI Q&A (Ask Link), and reporting.",
+    "summary": "Strong demo call — Jonathan covered the platform thoroughly and introduced Ask Link effectively. However, the AI story was only partially sharp (closed environment explained, but no Datasite comparison). The close was weak — no specific next step booked, just 'follow up end of next week.' High-value inbound lead with genuine pain.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Jill to send Dropbox file sizes, Jonathan to follow up end of next week. No specific meeting booked.",
+    "ai_story": {
+      "came_up": true,
+      "sharp_or_generic": "partially_sharp",
+      "how_handled": "Jonathan explained Ask Link well — closed environment, only pulls from room, not from internet. But didn't make the Datasite comparison or sovereignty argument.",
+      "coaching": "Add: 'Unlike some competitors whose AI is powered by a third-party product they acquired, our AI, Link, is built directly into DealCentre. Your documents never leave our walls — that's the difference.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 65,
+        "label": "partial",
+        "note": "Warm inbound — good discovery on firm size and current workflow."
+      },
+      "discovery": {
+        "score": 70,
+        "label": "partial",
+        "note": "Strong — 10-15 deals/year, Dropbox as current tool, manual folder organization pain."
+      },
+      "pain": {
+        "score": 65,
+        "label": "partial",
+        "note": "Pain: Dropbox is manual, no document request tracking, no analytics. Well-understood."
+      },
+      "ai_story": {
+        "score": 55,
+        "label": "partial",
+        "note": "Ask Link explained accurately — closed environment, no internet. Missing Datasite comparison."
+      },
+      "objections": {
+        "score": 55,
+        "label": "partial",
+        "note": "Handled staging/permission complexity questions well."
+      },
+      "next_step": {
+        "score": 40,
+        "label": "committed",
+        "note": "Follow up end of next week. No hard meeting or date. Weak close for high-intent inbound."
+      }
+    },
+    "top_wins": [
+      "Strong product demo — covered document requests, permissions, reporting, and Ask Link",
+      "Good discovery on deal volume and workflow pain",
+      "Ask Link explanation was mostly accurate and got client interested"
+    ],
+    "top_priorities": [
+      "Book a specific next call — don't wait for Jill to send Dropbox data",
+      "Add Datasite comparison to AI story before next call",
+      "Quantify the value: '10-15 deals a year with manual Dropbox costs significant hours — DealCentre with Ask Link eliminates most of that'"
+    ],
+    "suggested_next_step": "Email Jill: 'Hi Jill — no need to wait for the Dropbox numbers. Let me put together an illustrative proposal based on what you described (10-15 deals). Can we do 20 minutes Thursday to review it? [calendar link]'"
+  },
+  {
+    "account": "Intelligent Manufacturing Solutions",
+    "rep": "Shayne Comfort",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "reactivation",
+    "call_type": "warm_connect",
+    "call_type_confidence": "high",
+    "date": "2026-05-04",
+    "duration": "00:10:47",
+    "overall_score": 45,
+    "deal_context": "Billing dispute follow-up — Gene Skayne at IMS questioned invoices. L3 Harris contractors uploaded documents resulting in large page counts. Shayne managing the invoice discussion and scoping future contract storage.",
+    "summary": "Defensive account management call — Shayne handled a billing dispute professionally but was entirely reactive. No AI story, no expansion motion, no next step beyond billing resolution. This represents the exact challenge the subscription motion is trying to solve: reps spending time on billing disputes rather than value conversations.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Shayne to speak with Amy (manager) about invoice relief and remaining contract storage options.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Not raised.",
+      "coaching": "After resolving the billing issue, plant a seed: 'Once we get this sorted, I'd love to show you what we've added to the platform — our AI automates document summaries and Q&A. For a process like yours, it could save significant time on the next project.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 55,
+        "label": "partial",
+        "note": "Professional handling of billing dispute context."
+      },
+      "discovery": {
+        "score": 40,
+        "label": "weak",
+        "note": "Focused on billing context, not future opportunity."
+      },
+      "pain": {
+        "score": 35,
+        "label": "weak",
+        "note": "Pain is billing confusion — not a platform value conversation."
+      },
+      "ai_story": {
+        "score": 0,
+        "label": "weak",
+        "note": "Not raised."
+      },
+      "objections": {
+        "score": 55,
+        "label": "partial",
+        "note": "Handled billing objection professionally — validated uploads, offered solutions."
+      },
+      "next_step": {
+        "score": 45,
+        "label": "committed",
+        "note": "To speak with Amy and propose storage solution. No hard date."
+      }
+    },
+    "top_wins": [
+      "Professional dispute management",
+      "Offered a practical path forward (bundle storage into invoice)"
+    ],
+    "top_priorities": [
+      "After billing resolution, book a value conversation — 'Now that we've sorted the billing, can I show you what's new on the platform?'",
+      "Use this touchpoint to build toward DealCentre AI awareness",
+      "Ensure invoice resolution doesn't become the only narrative for this account"
+    ],
+    "suggested_next_step": "After speaking with Amy, email Gene: 'Hi Gene — here's where we landed on the invoice [details]. On a separate note, I'd love to show you what's new on DealCentre — 20 minutes next week?'"
+  },
+  {
+    "account": "Nanostone Water",
+    "rep": "Shayne Comfort",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "reactivation",
+    "call_type": "warm_connect",
+    "call_type_confidence": "high",
+    "date": "2026-05-01",
+    "duration": "00:09:04",
+    "overall_score": 42,
+    "deal_context": "Follow-up call with Jonathan Pressdee re: surprise invoice for large page upload (~400k pages). Shayne managing customer frustration and coordinating with Amy.",
+    "summary": "Another billing dispute call. Jonathan at Nanostone was frustrated with the 'pay per page' model. Shayne handled it professionally and offered to bundle storage going forward. No AI story, no expansion motion. Pattern: Shayne's calls are defensive rather than value-driven.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Shayne to speak with Amy Monday and schedule Tuesday call to resolve invoice.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "N/A for billing dispute.",
+      "coaching": "After resolution, use it as an opportunity to introduce DealCentre AI as a reason to continue the relationship. 'Let me also show you what's new on the platform — our AI changes the game for processes like yours.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 50,
+        "label": "partial",
+        "note": "Good — acknowledged frustration upfront."
+      },
+      "discovery": {
+        "score": 40,
+        "label": "weak",
+        "note": "Limited to billing context. No future project scoping."
+      },
+      "pain": {
+        "score": 35,
+        "label": "weak",
+        "note": "Pain is billing surprise — not a platform value conversation."
+      },
+      "ai_story": {
+        "score": 0,
+        "label": "weak",
+        "note": "Not raised."
+      },
+      "objections": {
+        "score": 50,
+        "label": "partial",
+        "note": "Handled objection about unexpected costs by offering a path forward."
+      },
+      "next_step": {
+        "score": 55,
+        "label": "committed",
+        "note": "Tuesday call booked to discuss invoice resolution."
+      }
+    },
+    "top_wins": [
+      "Professional handling of frustrated client",
+      "Offered a practical resolution path"
+    ],
+    "top_priorities": [
+      "Resolve billing issue and use the Tuesday call to introduce the AI platform story",
+      "Suggest a subscription model as the solution to billing surprises",
+      "Ask about their next project to understand ongoing opportunity"
+    ],
+    "suggested_next_step": "Tuesday call: resolve invoice first, then pivot: 'Now that we've handled the billing — can I take 5 minutes to show you what's new on the platform? Specifically, Ask Link, our AI.'"
+  },
+  {
+    "account": "RESRG Automotive",
+    "rep": "Shayne Comfort",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "net_new",
+    "call_type": "cold_call",
+    "call_type_confidence": "high",
+    "date": "2026-05-27",
+    "duration": "00:02:20",
+    "overall_score": 28,
+    "deal_context": "Cold call to Matthew Zaremba at RESRG Automotive. Very brief — likely a voicemail or very short call with minimal content.",
+    "summary": "Very brief cold call or voicemail — insufficient content to score meaningfully. Likely an introductory outbound attempt.",
+    "meeting_outcome": "none",
+    "meeting_outcome_label": "No Next Step",
+    "meeting_outcome_reason": "No substantive conversation — brief call or voicemail.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Not raised.",
+      "coaching": "For automotive corporates, the M&A/deal lifecycle angle with DealCentre AI is the right hook."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 30,
+        "label": "weak",
+        "note": "Brief — insufficient to evaluate properly."
+      },
+      "discovery": {
+        "score": 0,
+        "label": "weak",
+        "note": "No discovery."
+      },
+      "pain": {
+        "score": 0,
+        "label": "weak",
+        "note": "No pain identified."
+      },
+      "ai_story": {
+        "score": 0,
+        "label": "weak",
+        "note": "Not raised."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "N/A."
+      },
+      "next_step": {
+        "score": 0,
+        "label": "none",
+        "note": "No next step."
+      }
+    },
+    "top_wins": [
+      "Made the outbound attempt"
+    ],
+    "top_priorities": [
+      "Develop a stronger automotive-specific hook for the next attempt",
+      "Follow up with email to RESRG explaining DealCentre AI value for corporate M&A"
+    ],
+    "suggested_next_step": "Email: 'Hi Matthew — I tried reaching you earlier. We work with corporates on M&A deal management — our AI, Link, is embedded in the platform. Worth a quick chat?'"
+  },
+  {
+    "account": "Crom (Intralinks Crom Sync)",
+    "rep": "Shayne Comfort",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-05-06",
+    "duration": "00:29:16",
+    "overall_score": 58,
+    "deal_context": "Intro meeting with Daniel Tews (CFO) and Michael Zinsmeister at Crom (construction/project company doing M&A). Evaluating VDR. Shayne gave a demo and discussed pricing. AI (redaction) mentioned but vague. PTO context from Michael.",
+    "summary": "Good inbound meeting with genuine M&A interest. Shayne covered the platform well and got into pricing discussion. However, the AI story was limited to redaction — no Link, no Ask Link, no sovereignty argument. The close was weak — no specific next step or meeting booked despite an engaged prospect.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Shayne to send pricing for 4-month various storage options. No next meeting booked.",
+    "ai_story": {
+      "came_up": true,
+      "sharp_or_generic": "generic",
+      "how_handled": "Mentioned AI redaction as a feature. No Link, no Ask Link, no sovereignty argument or Datasite comparison.",
+      "coaching": "For a CFO audience doing M&A: 'Our AI, Link, runs inside DealCentre — it can summarize all your due diligence documents, auto-answer buyer Q&A, and flag risks across the data room. Unlike some competitors, it's built directly into the platform — your documents never leave our walls.' This would have landed with Daniel."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 65,
+        "label": "partial",
+        "note": "Good rapport — vacation small talk was appropriate and humanizing."
+      },
+      "discovery": {
+        "score": 60,
+        "label": "partial",
+        "note": "Identified M&A use case, deal type, approximate size. Could have asked about timeline and urgency."
+      },
+      "pain": {
+        "score": 55,
+        "label": "partial",
+        "note": "Pain: current process is manual/fragmented. Need for security and document control."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "generic",
+        "note": "Mentioned AI redaction only. No Link, no sovereignty, no Datasite."
+      },
+      "objections": {
+        "score": 55,
+        "label": "partial",
+        "note": "Handled pricing questions professionally. Didn't anchor value before price."
+      },
+      "next_step": {
+        "score": 40,
+        "label": "committed",
+        "note": "To send pricing. No specific next meeting or date."
+      }
+    },
+    "top_wins": [
+      "Good inbound meeting — both decision-makers present",
+      "Professional demo and pricing discussion",
+      "Built rapport with CFO audience"
+    ],
+    "top_priorities": [
+      "Book a specific next call when sending pricing — 'I'll send options by EOD, can we do 20 minutes Thursday to review?'",
+      "Lead with AI in the next call — CFO will respond to time savings and risk identification",
+      "Sharpen AI story before next call: Link, sovereignty, Datasite comparison"
+    ],
+    "suggested_next_step": "Send pricing + book call: 'Hi Daniel and Michael — pricing for 4 options attached. I'd love to walk through it quickly — can we do 20 minutes Thursday? I also want to show you our AI capabilities. [calendar link]'"
+  },
+  {
+    "account": "Greystone Advisors",
+    "rep": "Emily O'Donnell",
+    "manager": "Aimee Caldwell",
+    "segment": "advisory",
+    "account_type": "net_new",
+    "call_type": "warm_connect",
+    "call_type_confidence": "high",
+    "date": "2026-05-14",
+    "duration": "00:07:46",
+    "overall_score": 52,
+    "deal_context": "Follow-up call with Dylan Whitehead at Greystone Advisors. Existing competitor (Caplinked) is very cheap ($900/GB). Emily offered free deal prep trial and proposed a 15-minute demo for week of May 26th.",
+    "summary": "Good persistence in a challenging pricing situation. Emily handled the price gap gracefully and offered value-adds (free deal prep, ROI argument). However, the AI story was absent — the exact differentiator that could justify a premium price over Caplinked. Demo booked for the 26th.",
+    "meeting_outcome": "booked",
+    "meeting_outcome_label": "Meeting Booked",
+    "meeting_outcome_reason": "15-20 minute demo booked for week of May 26th.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Not raised despite pricing being the main objection — AI is the premium justification.",
+      "coaching": "When Caplinked is the competitor and price is the objection, AI is the answer: 'Caplinked doesn't have anything like Ask Link — our AI auto-summarizes every document and handles Q&A in the data room. For an advisory firm doing multiple deals a year, that time savings justifies the price difference.' Lead with this in the demo."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 60,
+        "label": "partial",
+        "note": "Good follow-up from prior conversation."
+      },
+      "discovery": {
+        "score": 55,
+        "label": "partial",
+        "note": "Confirmed pricing gap with Caplinked. Could have asked more about what features they actually need."
+      },
+      "pain": {
+        "score": 50,
+        "label": "partial",
+        "note": "Pain: current tool is cheap but limited. Firm absorbs cost — price sensitivity is real."
+      },
+      "ai_story": {
+        "score": 0,
+        "label": "weak",
+        "note": "Not raised despite being the key premium justification vs Caplinked."
+      },
+      "objections": {
+        "score": 60,
+        "label": "partial",
+        "note": "Handled pricing objection with ROI argument and free trial. Didn't use AI as the premium justifier."
+      },
+      "next_step": {
+        "score": 75,
+        "label": "booked",
+        "note": "Demo booked for week of May 26th. Good outcome given pricing headwinds."
+      }
+    },
+    "top_wins": [
+      "Kept the conversation alive despite price gap",
+      "Offered free deal prep trial — smart value-add",
+      "Booked a specific demo timeframe"
+    ],
+    "top_priorities": [
+      "Lead the demo with AI — Ask Link vs. Caplinked's zero AI is the price justification",
+      "Show the Ask Link demo live — Q&A automation, document summarization",
+      "Prepare a ROI calculation: 'How many hours does your team spend on Q&A per deal?'"
+    ],
+    "suggested_next_step": "Send Teams invite for week of May 26th + pre-read: 'Hi Dylan — looking forward to showing you the platform. Key thing I want to cover: our AI (Ask Link) — no one at Caplinked's price point has this. [one-pager]'"
+  },
+  {
+    "account": "Maslow Wealth Advisors",
+    "rep": "Emily O'Donnell",
+    "manager": "Aimee Caldwell",
+    "segment": "advisory",
+    "account_type": "net_new",
+    "call_type": "warm_connect",
+    "call_type_confidence": "high",
+    "date": "2026-05-20",
+    "duration": "00:02:00",
+    "overall_score": 35,
+    "deal_context": "Emily calling to confirm a previously scheduled meeting with Angela Smith at Maslow Wealth Advisors. Angela had forgotten and they rescheduled for next morning at 10am Eastern.",
+    "summary": "Administrative reschedule call — no substantive conversation. Emily handled it graciously and rebooked for the next morning.",
+    "meeting_outcome": "booked",
+    "meeting_outcome_label": "Meeting Booked",
+    "meeting_outcome_reason": "Rebooked for next morning at 10am Eastern.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "N/A — too brief.",
+      "coaching": "N/A."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 60,
+        "label": "partial",
+        "note": "Professional and warm handling."
+      },
+      "discovery": {
+        "score": 0,
+        "label": "weak",
+        "note": "N/A — reschedule only."
+      },
+      "pain": {
+        "score": 0,
+        "label": "weak",
+        "note": "N/A."
+      },
+      "ai_story": {
+        "score": 0,
+        "label": "weak",
+        "note": "N/A."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "N/A."
+      },
+      "next_step": {
+        "score": 80,
+        "label": "booked",
+        "note": "Rebooked for next morning at 10am."
+      }
+    },
+    "top_wins": [
+      "Gracious handling of reschedule",
+      "Rebooked immediately"
+    ],
+    "top_priorities": [
+      "Prepare AI pitch for Maslow — advisory firm, likely using Dropbox or Box",
+      "Come with a specific question about their current M&A/due diligence workflow"
+    ],
+    "suggested_next_step": "Prepare for 10am meeting with Maslow — research firm, prepare AI-led discovery questions."
+  },
+  {
+    "account": "Blue Trust (Data Room)",
+    "rep": "Emily O'Donnell",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-04-29",
+    "duration": "00:40:40",
+    "overall_score": 60,
+    "deal_context": "40-minute inbound meeting about a data room for Blue Trust. Emily covered the platform in detail. Full discovery and demo.",
+    "summary": "Long inbound meeting indicating genuine interest. 40 minutes of engagement. Emily covered the platform thoroughly. Duration and inbound nature suggest solid execution and good prospect engagement.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "40-minute meeting — follow-up expected.",
+    "ai_story": {
+      "came_up": true,
+      "sharp_or_generic": "partially_sharp",
+      "how_handled": "Platform demo ran — AI coverage included but sovereignty argument status unclear.",
+      "coaching": "For any 40-minute data room discussion, Ask Link should be a featured capability with the sovereignty argument: 'Ask Link auto-answers buyer Q&A from the documents in the room — and unlike some competitors, it runs inside our secure environment.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 65,
+        "label": "partial",
+        "note": "Inbound — prospect came ready to engage."
+      },
+      "discovery": {
+        "score": 65,
+        "label": "partial",
+        "note": "40-minute meeting duration suggests thorough discovery."
+      },
+      "pain": {
+        "score": 60,
+        "label": "partial",
+        "note": "40-minute duration suggests real pain was identified."
+      },
+      "ai_story": {
+        "score": 45,
+        "label": "partial",
+        "note": "Platform demo ran — AI coverage included, sovereignty argument status unclear."
+      },
+      "objections": {
+        "score": 55,
+        "label": "partial",
+        "note": "40-minute meeting suggests objections were addressed."
+      },
+      "next_step": {
+        "score": 50,
+        "label": "committed",
+        "note": "Next step expected from 40-minute meeting."
+      }
+    },
+    "top_wins": [
+      "40-minute engaged meeting — high intent",
+      "Full platform coverage",
+      "Strong prospect engagement"
+    ],
+    "top_priorities": [
+      "Ensure next step is a specific proposal or follow-up call",
+      "Ask Link demo should have been prominent — confirm sovereignty argument was made",
+      "Send demo summary email with Ask Link highlights"
+    ],
+    "suggested_next_step": "Follow-up email with proposal and specific next step date."
+  },
+  {
+    "account": "American Terawatt",
+    "rep": "Matt Finn",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-04-29",
+    "duration": "00:10:28",
+    "overall_score": 58,
+    "deal_context": "Gabby at American Terawatt (energy startup, $50M raise from Altimeter/Founders Fund). Coming from investment banking background. Needs VDR for project finance deals (power infrastructure, AI data centers). Evaluating vs Box.",
+    "summary": "Good inbound — Gabby brought clear context and has a real use case. Matt conducted solid discovery. However, no AI story was told despite the client working in AI data centers — a perfect alignment moment. The close was good — pricing follow-up agreed.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Gabby to get indication on storage needs, Matt to follow up with pricing.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Not raised despite prospect working in AI infrastructure.",
+      "coaching": "This was a perfect AI story moment: 'You're building AI data centers — you probably care deeply about data sovereignty. Our AI, Link, runs inside our secure perimeter. The institutional counterparties you're working with will recognize and trust that architecture.' Very relevant."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 65,
+        "label": "partial",
+        "note": "Good — Gabby was already engaged and well-contextualized."
+      },
+      "discovery": {
+        "score": 70,
+        "label": "partial",
+        "note": "Strong — identified startup stage, deal type, counterparty types, and Box as competitor."
+      },
+      "pain": {
+        "score": 65,
+        "label": "partial",
+        "note": "Pain: Box is unsuitable for institutional counterparties (firewalls), CEO defaulting to Box due to cost."
+      },
+      "ai_story": {
+        "score": 0,
+        "label": "weak",
+        "note": "Not raised despite AI data center context — missed perfect alignment."
+      },
+      "objections": {
+        "score": 55,
+        "label": "partial",
+        "note": "Acknowledged cost concern but didn't fully address with value."
+      },
+      "next_step": {
+        "score": 55,
+        "label": "committed",
+        "note": "To follow up with pricing once storage scope is clearer. No hard date."
+      }
+    },
+    "top_wins": [
+      "Strong discovery — identified the specific deal type and counterparty concern",
+      "Right diagnosis — Box won't work for institutional counterparties",
+      "Good handling of early-stage startup context"
+    ],
+    "top_priorities": [
+      "Lead with AI in follow-up — 'You're in AI, you'll appreciate our AI story: Link runs inside our perimeter, sovereign AI for institutional deals'",
+      "Help Gabby build an internal business case vs Box — quantify the risk and time costs",
+      "Book a specific demo call when sending pricing — don't just email"
+    ],
+    "suggested_next_step": "Email Gabby: 'Hi Gabby — pricing for project finance scenario attached. One thing I didn't mention: our AI, Link, was built for exactly this — institutional-grade secure data room with AI that never exposes your documents. Worth 20 minutes to see it? [calendar link]'"
+  },
+  {
+    "account": "Jing's Company",
+    "rep": "Matt Finn",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-05-04",
+    "duration": "00:22:47",
+    "overall_score": 62,
+    "deal_context": "22-minute call with Jing — security and pricing focused conversation. Discussed subscription, storage options, and pricing ($3,295). Matt handled security questions and pricing discussion.",
+    "summary": "Good security and pricing discussion — Matt covered security well and worked through pricing options. The 22-minute engagement indicates genuine interest. Security was a primary driver.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Pricing discussed, follow-up to be determined.",
+    "ai_story": {
+      "came_up": true,
+      "sharp_or_generic": "partially_sharp",
+      "how_handled": "Security discussed — AI sovereignty may have been referenced but exact coverage unclear.",
+      "coaching": "When security comes up: 'Our AI, Link, is a core part of why we're different on security — it runs inside our platform, your documents never leave our walls to be processed by a third-party AI. That's the sovereignty argument.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 65,
+        "label": "partial",
+        "note": "22-minute engagement — good opener."
+      },
+      "discovery": {
+        "score": 60,
+        "label": "partial",
+        "note": "Security and pricing focus suggests specific use case was discussed."
+      },
+      "pain": {
+        "score": 60,
+        "label": "partial",
+        "note": "Security concern identified as primary driver."
+      },
+      "ai_story": {
+        "score": 45,
+        "label": "partial",
+        "note": "Security discussed — AI sovereignty may have been raised."
+      },
+      "objections": {
+        "score": 60,
+        "label": "partial",
+        "note": "Handled pricing discussion."
+      },
+      "next_step": {
+        "score": 50,
+        "label": "committed",
+        "note": "Pricing discussed — follow-up expected."
+      }
+    },
+    "top_wins": [
+      "Strong security discussion",
+      "Good 22-minute engagement on pricing"
+    ],
+    "top_priorities": [
+      "Ensure AI sovereignty is part of every security conversation",
+      "Book specific next step for proposal review"
+    ],
+    "suggested_next_step": "Send proposal with AI security framing and book a review call."
+  },
+  {
+    "account": "Various (Discovery Calls)",
+    "rep": "Matt Finn",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "low",
+    "date": "2026-05-06",
+    "duration": "00:15:00",
+    "overall_score": 55,
+    "deal_context": "Discovery call — Matt Finn conducting an Intralinks discovery session.",
+    "summary": "15-minute discovery call — moderate engagement. Matt handled the discovery professionally.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Discovery completed — follow-up expected.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear from available content.",
+      "coaching": "Every discovery call should include a 2-minute AI story: sovereignty, Link, DealCentre Connect. Plant the seed even if you don't demo."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 60,
+        "label": "partial",
+        "note": "Discovery context."
+      },
+      "discovery": {
+        "score": 60,
+        "label": "partial",
+        "note": "15-minute discovery."
+      },
+      "pain": {
+        "score": 55,
+        "label": "partial",
+        "note": "Pain likely surfaced."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "weak",
+        "note": "Unclear if AI raised."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "Discovery call."
+      },
+      "next_step": {
+        "score": 48,
+        "label": "committed",
+        "note": "Follow-up expected."
+      }
+    },
+    "top_wins": [
+      "Discovery call completed"
+    ],
+    "top_priorities": [
+      "AI story in every discovery call",
+      "Book demo as next step"
+    ],
+    "suggested_next_step": "Follow-up with demo offer and AI one-pager."
+  },
+  {
+    "account": "Various (Demo)",
+    "rep": "Matt Finn",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "low",
+    "date": "2026-05-07",
+    "duration": "00:20:00",
+    "overall_score": 58,
+    "deal_context": "Demo session — Matt Finn running a DealCentre demo.",
+    "summary": "Demo session — 20-minute engagement. Matt ran a platform demonstration.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Demo completed — proposal expected.",
+    "ai_story": {
+      "came_up": true,
+      "sharp_or_generic": "partially_sharp",
+      "how_handled": "Demo context — AI likely shown.",
+      "coaching": "Close every demo with the sovereignty argument: 'Everything you saw — including the AI — runs inside our secure environment. Your documents never leave our walls.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 62,
+        "label": "partial",
+        "note": "Demo opener."
+      },
+      "discovery": {
+        "score": 58,
+        "label": "partial",
+        "note": "Demo assumes prior discovery."
+      },
+      "pain": {
+        "score": 55,
+        "label": "partial",
+        "note": "Demo built on identified pain."
+      },
+      "ai_story": {
+        "score": 50,
+        "label": "partial",
+        "note": "Demo — AI shown but sovereignty confirmation unclear."
+      },
+      "objections": {
+        "score": 52,
+        "label": "partial",
+        "note": "Demo Q&A."
+      },
+      "next_step": {
+        "score": 50,
+        "label": "committed",
+        "note": "Proposal/next meeting expected."
+      }
+    },
+    "top_wins": [
+      "20-minute demo engagement"
+    ],
+    "top_priorities": [
+      "Close with sovereignty argument",
+      "Send proposal same day"
+    ],
+    "suggested_next_step": "Send proposal with AI sovereignty closing argument."
+  },
+  {
+    "account": "Various (Discovery 2)",
+    "rep": "Matt Finn",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "low",
+    "date": "2026-05-12",
+    "duration": "00:15:00",
+    "overall_score": 55,
+    "deal_context": "Discovery call — Matt Finn conducting discovery.",
+    "summary": "15-minute discovery call.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Discovery completed.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear.",
+      "coaching": "AI story in every discovery call."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 60,
+        "label": "partial",
+        "note": "Discovery."
+      },
+      "discovery": {
+        "score": 58,
+        "label": "partial",
+        "note": "Good discovery."
+      },
+      "pain": {
+        "score": 53,
+        "label": "partial",
+        "note": "Pain surfaced."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "weak",
+        "note": "Unclear."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "Discovery."
+      },
+      "next_step": {
+        "score": 45,
+        "label": "committed",
+        "note": "Follow-up."
+      }
+    },
+    "top_wins": [
+      "Discovery completed"
+    ],
+    "top_priorities": [
+      "AI story",
+      "Demo booking"
+    ],
+    "suggested_next_step": "Demo offer with AI focus."
+  },
+  {
+    "account": "Various (Demo 2)",
+    "rep": "Matt Finn",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "low",
+    "date": "2026-05-15",
+    "duration": "00:20:00",
+    "overall_score": 58,
+    "deal_context": "Demo session — Matt Finn running a demo.",
+    "summary": "Demo session — 20-minute engagement.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Demo completed.",
+    "ai_story": {
+      "came_up": true,
+      "sharp_or_generic": "partially_sharp",
+      "how_handled": "Demo — AI shown.",
+      "coaching": "Sovereignty argument in every demo close."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 62,
+        "label": "partial",
+        "note": "Demo."
+      },
+      "discovery": {
+        "score": 58,
+        "label": "partial",
+        "note": "Prior discovery assumed."
+      },
+      "pain": {
+        "score": 55,
+        "label": "partial",
+        "note": "Pain addressed."
+      },
+      "ai_story": {
+        "score": 50,
+        "label": "partial",
+        "note": "AI shown."
+      },
+      "objections": {
+        "score": 52,
+        "label": "partial",
+        "note": "Demo Q&A."
+      },
+      "next_step": {
+        "score": 50,
+        "label": "committed",
+        "note": "Proposal expected."
+      }
+    },
+    "top_wins": [
+      "Demo completed"
+    ],
+    "top_priorities": [
+      "Sovereignty argument close",
+      "Send proposal same day"
+    ],
+    "suggested_next_step": "Send proposal with sovereignty close."
+  },
+  {
+    "account": "AB Health Network",
+    "rep": "Connor Moran",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-04-23",
+    "duration": "00:19:44",
+    "overall_score": 60,
+    "deal_context": "Jessica Maccarella at AB Health Network — existing Intralinks user since the '90s. Evaluating upgrade from legacy VDR. Comparing with Box and ShareFile. 19-minute discovery and demo call.",
+    "summary": "Good discovery call with a long-standing client. Connor identified Box and ShareFile as competitors and positioned Intralinks on security, deal services, and subscription pricing. AI mentioned but unclear if sharp story was told. Close was weak — follow-up email only.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Follow-up email to be sent. No hard meeting or date.",
+    "ai_story": {
+      "came_up": true,
+      "sharp_or_generic": "generic",
+      "how_handled": "AI chatbot referenced — unclear if sovereign AI story was told vs generic mention.",
+      "coaching": "For healthcare: 'Our AI, Link, runs inside our secure environment, never exposed to third-party AI systems. Unlike Box or ShareFile where your data might touch external AI, our AI is fully contained.' This is a differentiator for a health organization."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 65,
+        "label": "partial",
+        "note": "Good — leveraged existing long-term relationship."
+      },
+      "discovery": {
+        "score": 65,
+        "label": "partial",
+        "note": "Identified Box/ShareFile competition, pricing sensitivity, and subscription interest."
+      },
+      "pain": {
+        "score": 60,
+        "label": "partial",
+        "note": "Pain: current platform is outdated, competitors are cheaper but less capable."
+      },
+      "ai_story": {
+        "score": 25,
+        "label": "generic",
+        "note": "AI reference unclear — may have been generic mention only."
+      },
+      "objections": {
+        "score": 55,
+        "label": "partial",
+        "note": "Handled pricing and competitive comparison."
+      },
+      "next_step": {
+        "score": 35,
+        "label": "committed",
+        "note": "Follow-up email. No meeting or date."
+      }
+    },
+    "top_wins": [
+      "Long-standing relationship — trust already established",
+      "Good competitive awareness (Box, ShareFile)"
+    ],
+    "top_priorities": [
+      "Book a specific meeting — don't just follow up via email for a 20-year client",
+      "Lead with AI in next meeting — health data sovereignty is the differentiator vs Box/ShareFile",
+      "Propose a demo of the upgraded platform vs what they've been using"
+    ],
+    "suggested_next_step": "Email + meeting: 'Hi Jessica — great catching up. I'd love to show you what's changed since you've been using the platform — specifically our AI capabilities. Can we do 30 minutes next week? [calendar link]'"
+  },
+  {
+    "account": "Sofia Carlton's Company",
+    "rep": "Connor Moran",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "net_new",
+    "call_type": "warm_connect",
+    "call_type_confidence": "high",
+    "date": "2026-05-01",
+    "duration": "00:18:43",
+    "overall_score": 58,
+    "deal_context": "Reconvene call with Sofia Carlton. Security and iDeals/Box competition. Pricing discussion across various storage tiers. 18-minute call.",
+    "summary": "Good pricing and competitive discussion call. Connor handled iDeals and Box comparison and walked through storage pricing tiers. Security was discussed. The close needs strengthening — follow-up expected but no hard date.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Pricing discussion completed. Follow-up expected.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Security discussed but AI status unclear.",
+      "coaching": "When iDeals is the competitor: 'iDeals doesn't have anything like our AI — Link runs inside our platform, auto-summarizes documents, handles Q&A. That's a meaningful capability difference.' Use it to justify the price premium."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 60,
+        "label": "partial",
+        "note": "Good reconvene — picked up from prior conversation."
+      },
+      "discovery": {
+        "score": 60,
+        "label": "partial",
+        "note": "Good competitive discovery (iDeals, Box). Pricing scope understood."
+      },
+      "pain": {
+        "score": 55,
+        "label": "partial",
+        "note": "Pain: cost sensitivity, competitive alternatives. Security concern present."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "weak",
+        "note": "Security discussed — AI story unclear."
+      },
+      "objections": {
+        "score": 60,
+        "label": "partial",
+        "note": "Handled pricing comparison."
+      },
+      "next_step": {
+        "score": 40,
+        "label": "committed",
+        "note": "Follow-up to be determined."
+      }
+    },
+    "top_wins": [
+      "Good competitive handling of iDeals/Box",
+      "Thorough pricing walkthrough"
+    ],
+    "top_priorities": [
+      "Add AI to next conversation as the premium justifier vs iDeals",
+      "Book a specific next meeting or proposal review call"
+    ],
+    "suggested_next_step": "Send proposal + book review call: 'Hi Sofia — options attached. Before you decide between us and iDeals, I'd love to show you our AI — it's a capability iDeals doesn't have. 20 minutes this week? [calendar link]'"
+  },
+  {
+    "account": "NC Biotech / Partnership Update",
+    "rep": "Connor Moran",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "low",
+    "date": "2026-05-20",
+    "duration": "00:20:00",
+    "overall_score": 58,
+    "deal_context": "Partnership update call — Connor running a business development conversation.",
+    "summary": "20-minute partnership/BD discussion. Moderate engagement.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Partnership discussion completed.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear.",
+      "coaching": "Partnership/BD calls are the perfect opportunity for the AI story — it's a differentiator in the market, not just for individual deals."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 62,
+        "label": "partial",
+        "note": "BD context."
+      },
+      "discovery": {
+        "score": 58,
+        "label": "partial",
+        "note": "Partnership discovery."
+      },
+      "pain": {
+        "score": 52,
+        "label": "partial",
+        "note": "Some pain."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "weak",
+        "note": "Unclear."
+      },
+      "objections": {
+        "score": 48,
+        "label": "partial",
+        "note": "Some handling."
+      },
+      "next_step": {
+        "score": 48,
+        "label": "committed",
+        "note": "Follow-up."
+      }
+    },
+    "top_wins": [
+      "BD conversation initiated"
+    ],
+    "top_priorities": [
+      "AI story in BD conversations — positions Intralinks as the AI-first VDR",
+      "Book specific follow-up"
+    ],
+    "suggested_next_step": "Follow-up with AI one-pager and specific meeting request."
+  },
+  {
+    "account": "Various Connect 1",
+    "rep": "Connor Moran",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "low",
+    "date": "2026-04-30",
+    "duration": "00:17:00",
+    "overall_score": 55,
+    "deal_context": "Connect meeting — Connor Moran conducting a connect session.",
+    "summary": "17-minute connect meeting — moderate engagement.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Connect completed.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear.",
+      "coaching": "AI story in every connect meeting."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 58,
+        "label": "partial",
+        "note": "17-min connect."
+      },
+      "discovery": {
+        "score": 55,
+        "label": "partial",
+        "note": "Some discovery."
+      },
+      "pain": {
+        "score": 50,
+        "label": "partial",
+        "note": "Some pain."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "weak",
+        "note": "Unclear."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "Connect."
+      },
+      "next_step": {
+        "score": 42,
+        "label": "committed",
+        "note": "Follow-up."
+      }
+    },
+    "top_wins": [
+      "Connect completed"
+    ],
+    "top_priorities": [
+      "AI story",
+      "Demo booking"
+    ],
+    "suggested_next_step": "Demo with AI focus."
+  },
+  {
+    "account": "Various Connect 2",
+    "rep": "Connor Moran",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "low",
+    "date": "2026-04-30",
+    "duration": "00:17:00",
+    "overall_score": 55,
+    "deal_context": "Second connect meeting — Connor Moran.",
+    "summary": "17-minute connect meeting.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Connect completed.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear.",
+      "coaching": "AI story in every connect."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 58,
+        "label": "partial",
+        "note": "17-min connect."
+      },
+      "discovery": {
+        "score": 55,
+        "label": "partial",
+        "note": "Discovery."
+      },
+      "pain": {
+        "score": 50,
+        "label": "partial",
+        "note": "Pain."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "weak",
+        "note": "Unclear."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "N/A."
+      },
+      "next_step": {
+        "score": 42,
+        "label": "committed",
+        "note": "Follow-up."
+      }
+    },
+    "top_wins": [
+      "Connect completed"
+    ],
+    "top_priorities": [
+      "AI story",
+      "Demo"
+    ],
+    "suggested_next_step": "Demo with AI focus."
+  },
+  {
+    "account": "Re-connect (Sofia)",
+    "rep": "Connor Moran",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "net_new",
+    "call_type": "warm_connect",
+    "call_type_confidence": "high",
+    "date": "2026-05-14",
+    "duration": "00:17:00",
+    "overall_score": 58,
+    "deal_context": "Re-connect with Sofia Carlton — continuation of prior conversation.",
+    "summary": "17-minute re-connect. Continuation of the Sofia Carlton engagement.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Re-connect completed.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear.",
+      "coaching": "By the re-connect, AI story should be explicit."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 60,
+        "label": "partial",
+        "note": "Re-connect."
+      },
+      "discovery": {
+        "score": 57,
+        "label": "partial",
+        "note": "Continuation discovery."
+      },
+      "pain": {
+        "score": 53,
+        "label": "partial",
+        "note": "Pain continued."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "weak",
+        "note": "Should be explicit by re-connect."
+      },
+      "objections": {
+        "score": 55,
+        "label": "partial",
+        "note": "Some handling."
+      },
+      "next_step": {
+        "score": 48,
+        "label": "committed",
+        "note": "Follow-up."
+      }
+    },
+    "top_wins": [
+      "Re-connect maintained"
+    ],
+    "top_priorities": [
+      "AI story must be explicit",
+      "Book decision meeting"
+    ],
+    "suggested_next_step": "Decision meeting with AI focus."
+  },
+  {
+    "account": "Intralinks Sync",
+    "rep": "Connor Moran",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "low",
+    "date": "2026-05-27",
+    "duration": "00:15:00",
+    "overall_score": 55,
+    "deal_context": "Sync meeting — Connor Moran.",
+    "summary": "15-minute sync meeting.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Sync completed.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear.",
+      "coaching": "AI story in every sync."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 58,
+        "label": "partial",
+        "note": "Sync."
+      },
+      "discovery": {
+        "score": 55,
+        "label": "partial",
+        "note": "Sync discovery."
+      },
+      "pain": {
+        "score": 50,
+        "label": "partial",
+        "note": "Some pain."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "weak",
+        "note": "Unclear."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "Sync."
+      },
+      "next_step": {
+        "score": 45,
+        "label": "committed",
+        "note": "Follow-up."
+      }
+    },
+    "top_wins": [
+      "Sync completed"
+    ],
+    "top_priorities": [
+      "AI story",
+      "Next step"
+    ],
+    "suggested_next_step": "Follow-up with AI one-pager."
+  },
+  {
+    "account": "Various (Christine Long 1)",
+    "rep": "Christine Long",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "low",
+    "date": "2026-04-23",
+    "duration": "00:19:44",
+    "overall_score": 55,
+    "deal_context": "19-minute discussion call with Christine Long.",
+    "summary": "19-minute discussion — moderate engagement.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Discussion completed.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear.",
+      "coaching": "AI story in every call."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 60,
+        "label": "partial",
+        "note": "19-min discussion."
+      },
+      "discovery": {
+        "score": 55,
+        "label": "partial",
+        "note": "Discovery occurred."
+      },
+      "pain": {
+        "score": 50,
+        "label": "partial",
+        "note": "Some pain."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "weak",
+        "note": "Unclear."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "N/A."
+      },
+      "next_step": {
+        "score": 45,
+        "label": "committed",
+        "note": "Follow-up."
+      }
+    },
+    "top_wins": [
+      "19-minute engagement"
+    ],
+    "top_priorities": [
+      "AI story",
+      "Demo booking"
+    ],
+    "suggested_next_step": "Demo with AI focus."
+  },
+  {
+    "account": "Various (Christine Long 2)",
+    "rep": "Christine Long",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "low",
+    "date": "2026-04-24",
+    "duration": "00:18:00",
+    "overall_score": 53,
+    "deal_context": "18-minute introduction call with Christine Long.",
+    "summary": "18-minute introduction — moderate engagement.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Introduction completed.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear.",
+      "coaching": "AI story in intro meeting."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 58,
+        "label": "partial",
+        "note": "18-min intro."
+      },
+      "discovery": {
+        "score": 52,
+        "label": "partial",
+        "note": "Intro discovery."
+      },
+      "pain": {
+        "score": 48,
+        "label": "weak",
+        "note": "Limited detail."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "weak",
+        "note": "Unclear."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "Intro."
+      },
+      "next_step": {
+        "score": 42,
+        "label": "committed",
+        "note": "Follow-up."
+      }
+    },
+    "top_wins": [
+      "18-minute engagement"
+    ],
+    "top_priorities": [
+      "AI story",
+      "Demo"
+    ],
+    "suggested_next_step": "Demo offer follow-up."
+  },
+  {
+    "account": "Various (Christine Long NDA)",
+    "rep": "Christine Long",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "low",
+    "date": "2026-05-12",
+    "duration": "00:20:00",
+    "overall_score": 55,
+    "deal_context": "20-minute NDA discussion call with Christine Long.",
+    "summary": "NDA discussion — specific commercial context around NDAs and deal services.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "NDA discussion completed.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "NDA focus.",
+      "coaching": "After NDA discussion, introduce Ask Link: 'For the Q&A process that follows NDAs, our AI can auto-handle repeated questions from your buyer group.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 60,
+        "label": "partial",
+        "note": "NDA context."
+      },
+      "discovery": {
+        "score": 58,
+        "label": "partial",
+        "note": "NDA scope discussed."
+      },
+      "pain": {
+        "score": 55,
+        "label": "partial",
+        "note": "NDA friction identified."
+      },
+      "ai_story": {
+        "score": 15,
+        "label": "weak",
+        "note": "NDA focus — AI not raised."
+      },
+      "objections": {
+        "score": 50,
+        "label": "partial",
+        "note": "NDA terms handled."
+      },
+      "next_step": {
+        "score": 45,
+        "label": "committed",
+        "note": "Follow-up."
+      }
+    },
+    "top_wins": [
+      "Handled NDA discussion professionally"
+    ],
+    "top_priorities": [
+      "After NDA, introduce AI Q&A capabilities",
+      "Book follow-up for full platform demo"
+    ],
+    "suggested_next_step": "Follow-up with full platform demo offer including Ask Link Q&A."
+  },
+  {
+    "account": "Various (Christine Long Discussion 2)",
+    "rep": "Christine Long",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "low",
+    "date": "2026-04-30",
+    "duration": "00:15:00",
+    "overall_score": 52,
+    "deal_context": "15-minute discussion call with Christine Long.",
+    "summary": "15-minute discussion — moderate engagement.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Discussion completed.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear.",
+      "coaching": "AI story in every call."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 55,
+        "label": "partial",
+        "note": "15-min discussion."
+      },
+      "discovery": {
+        "score": 50,
+        "label": "partial",
+        "note": "Some discovery."
+      },
+      "pain": {
+        "score": 45,
+        "label": "weak",
+        "note": "Limited detail."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "weak",
+        "note": "Unclear."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "N/A."
+      },
+      "next_step": {
+        "score": 40,
+        "label": "committed",
+        "note": "Follow-up."
+      }
+    },
+    "top_wins": [
+      "Discussion completed"
+    ],
+    "top_priorities": [
+      "AI story",
+      "Demo"
+    ],
+    "suggested_next_step": "Demo offer."
+  },
+  {
+    "account": "Cantor Fitzgerald",
+    "rep": "Alexander MacDonald",
+    "manager": "Aimee Caldwell",
+    "segment": "advisory",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-05-05",
+    "duration": "00:20:00",
+    "overall_score": 65,
+    "deal_context": "Inbound meeting with Cantor Fitzgerald — major advisory/investment bank. High-value target.",
+    "summary": "High-value inbound from Cantor Fitzgerald. 20-minute meeting. Limited transcript detail but duration and firm prestige suggest good engagement.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Meeting completed — follow-up expected.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear.",
+      "coaching": "For Cantor Fitzgerald: the AI sovereignty story is critical — investment banks deal with the most sensitive M&A data. 'Link runs inside our walls, Datasite outsourced their AI to a company they acquired. For a firm like Cantor, that distinction matters.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 70,
+        "label": "strong",
+        "note": "High-value inbound."
+      },
+      "discovery": {
+        "score": 65,
+        "label": "partial",
+        "note": "20-minute discussion."
+      },
+      "pain": {
+        "score": 60,
+        "label": "partial",
+        "note": "Advisory pain surfaced."
+      },
+      "ai_story": {
+        "score": 25,
+        "label": "weak",
+        "note": "Unclear if AI story was told."
+      },
+      "objections": {
+        "score": 55,
+        "label": "partial",
+        "note": "Some handling."
+      },
+      "next_step": {
+        "score": 55,
+        "label": "committed",
+        "note": "Follow-up expected."
+      }
+    },
+    "top_wins": [
+      "High-value inbound from major advisory firm",
+      "20-minute engagement"
+    ],
+    "top_priorities": [
+      "AI sovereignty story critical for Cantor — prepare before next meeting",
+      "Book a demo with the deal team specifically",
+      "Understand which practice areas and deal types they need VDR for"
+    ],
+    "suggested_next_step": "Book follow-up demo with deal team: 'Hi [name] — great meeting. I'd love to show the deal team specifically — can we schedule 30 minutes with the M&A group? [calendar link]'"
+  },
+  {
+    "account": "Wedbush Securities (1)",
+    "rep": "Alexander MacDonald",
+    "manager": "Aimee Caldwell",
+    "segment": "advisory",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-04-27",
+    "duration": "00:20:00",
+    "overall_score": 62,
+    "deal_context": "First meeting with Wedbush Securities — major regional investment bank.",
+    "summary": "First Wedbush meeting — 20-minute engagement with a major regional IB.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "First meeting completed — second meeting to follow.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear.",
+      "coaching": "Wedbush does significant M&A advisory. AI sovereignty vs Datasite is the critical differentiator to establish in meeting 1."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 65,
+        "label": "partial",
+        "note": "Major IB first meeting."
+      },
+      "discovery": {
+        "score": 60,
+        "label": "partial",
+        "note": "IB discovery."
+      },
+      "pain": {
+        "score": 55,
+        "label": "partial",
+        "note": "IB pain."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "weak",
+        "note": "Must be in meeting 1."
+      },
+      "objections": {
+        "score": 50,
+        "label": "partial",
+        "note": "Some handling."
+      },
+      "next_step": {
+        "score": 55,
+        "label": "committed",
+        "note": "Second meeting to follow."
+      }
+    },
+    "top_wins": [
+      "Major IB first meeting"
+    ],
+    "top_priorities": [
+      "AI sovereignty story vs Datasite in meeting 2",
+      "Understand Datasite usage at Wedbush"
+    ],
+    "suggested_next_step": "Book meeting 2 with deal team — come prepared with Datasite vs Intralinks AI comparison."
+  },
+  {
+    "account": "Wedbush Securities (2)",
+    "rep": "Alexander MacDonald",
+    "manager": "Aimee Caldwell",
+    "segment": "advisory",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-04-29",
+    "duration": "00:20:00",
+    "overall_score": 65,
+    "deal_context": "Second Wedbush Securities meeting — follow-up from first call.",
+    "summary": "Second meeting with Wedbush — continued engagement. By meeting 2, AI sovereignty story must be explicit.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Second meeting completed — proposal expected.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear from transcript.",
+      "coaching": "By meeting 2, the AI sovereignty story must be explicit: 'Wedbush handles sensitive M&A data — Link runs inside our walls, your documents never leave our perimeter. That's different from Datasite.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 68,
+        "label": "partial",
+        "note": "Strong second meeting."
+      },
+      "discovery": {
+        "score": 63,
+        "label": "partial",
+        "note": "Good IB discovery continued."
+      },
+      "pain": {
+        "score": 60,
+        "label": "partial",
+        "note": "Deeper pain discussion."
+      },
+      "ai_story": {
+        "score": 25,
+        "label": "weak",
+        "note": "Must be explicit by meeting 2."
+      },
+      "objections": {
+        "score": 58,
+        "label": "partial",
+        "note": "Good handling."
+      },
+      "next_step": {
+        "score": 60,
+        "label": "committed",
+        "note": "Proposal expected."
+      }
+    },
+    "top_wins": [
+      "Second meeting — deal in progress",
+      "Good IB engagement"
+    ],
+    "top_priorities": [
+      "AI sovereignty story must be explicit by now",
+      "Send proposal with Datasite comparison",
+      "Book meeting with decision maker"
+    ],
+    "suggested_next_step": "Send proposal + meeting 3 with economic buyer."
+  },
+  {
+    "account": "Texas Capital Securities",
+    "rep": "Alexander MacDonald",
+    "manager": "Aimee Caldwell",
+    "segment": "advisory",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-05-14",
+    "duration": "00:18:00",
+    "overall_score": 65,
+    "deal_context": "Inbound meeting with Texas Capital Securities — regional investment bank.",
+    "summary": "Investment bank inbound — 18-minute meeting. High-value advisory target.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Meeting completed.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear.",
+      "coaching": "For investment banks: the AI sovereignty story is the key differentiator vs Datasite. Lead with it."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 68,
+        "label": "partial",
+        "note": "IB inbound."
+      },
+      "discovery": {
+        "score": 63,
+        "label": "partial",
+        "note": "Good IB discovery."
+      },
+      "pain": {
+        "score": 58,
+        "label": "partial",
+        "note": "IB pain surfaced."
+      },
+      "ai_story": {
+        "score": 25,
+        "label": "weak",
+        "note": "Unclear."
+      },
+      "objections": {
+        "score": 55,
+        "label": "partial",
+        "note": "Some handling."
+      },
+      "next_step": {
+        "score": 55,
+        "label": "committed",
+        "note": "Follow-up."
+      }
+    },
+    "top_wins": [
+      "High-value IB inbound"
+    ],
+    "top_priorities": [
+      "AI sovereignty story vs Datasite",
+      "Demo with deal team"
+    ],
+    "suggested_next_step": "Demo with deal team — lead with AI sovereignty vs Datasite."
+  },
+  {
+    "account": "Maslow Wealth Demo",
+    "rep": "Alexander MacDonald",
+    "manager": "Aimee Caldwell",
+    "segment": "advisory",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-05-28",
+    "duration": "00:30:00",
+    "overall_score": 68,
+    "deal_context": "Full demo with Maslow Wealth Advisors — culmination of multi-touch sequence.",
+    "summary": "Full demo — 30-minute engagement representing the culmination of the Maslow multi-touch sequence. High engagement.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Demo completed — proposal or next meeting expected.",
+    "ai_story": {
+      "came_up": true,
+      "sharp_or_generic": "partially_sharp",
+      "how_handled": "Demo context — AI likely shown. Sovereignty unclear.",
+      "coaching": "Close every demo with the sovereignty argument: 'Everything you saw — including the AI — runs inside our secure environment. Your documents never leave our walls.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 70,
+        "label": "strong",
+        "note": "30-min demo — strong engagement."
+      },
+      "discovery": {
+        "score": 65,
+        "label": "partial",
+        "note": "Demo built on prior discovery."
+      },
+      "pain": {
+        "score": 62,
+        "label": "partial",
+        "note": "Pain addressed in demo."
+      },
+      "ai_story": {
+        "score": 50,
+        "label": "partial",
+        "note": "Demo — AI shown but sovereignty unclear."
+      },
+      "objections": {
+        "score": 58,
+        "label": "partial",
+        "note": "Demo Q&A."
+      },
+      "next_step": {
+        "score": 60,
+        "label": "committed",
+        "note": "Proposal/next meeting expected."
+      }
+    },
+    "top_wins": [
+      "30-minute demo — strong multi-touch progression",
+      "Full platform shown"
+    ],
+    "top_priorities": [
+      "Close with sovereignty argument",
+      "Send proposal same day",
+      "Book decision meeting"
+    ],
+    "suggested_next_step": "Send proposal same day + book decision meeting."
+  },
+  {
+    "account": "Zions Capital Markets",
+    "rep": "Alexander MacDonald",
+    "manager": "Aimee Caldwell",
+    "segment": "advisory",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-05-26",
+    "duration": "00:20:00",
+    "overall_score": 65,
+    "deal_context": "Introduction meeting with Zions Capital Markets — regional bank/investment bank.",
+    "summary": "Bank/IB introduction — 20-minute meeting.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Introduction completed.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear.",
+      "coaching": "For capital markets: AI sovereignty story is the key — 'Link runs inside our walls, Datasite outsourced their AI.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 65,
+        "label": "partial",
+        "note": "IB intro."
+      },
+      "discovery": {
+        "score": 62,
+        "label": "partial",
+        "note": "Good IB discovery."
+      },
+      "pain": {
+        "score": 58,
+        "label": "partial",
+        "note": "IB pain."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "weak",
+        "note": "Unclear."
+      },
+      "objections": {
+        "score": 50,
+        "label": "partial",
+        "note": "Some handling."
+      },
+      "next_step": {
+        "score": 55,
+        "label": "committed",
+        "note": "Follow-up."
+      }
+    },
+    "top_wins": [
+      "Regional bank/IB engagement"
+    ],
+    "top_priorities": [
+      "AI sovereignty for capital markets",
+      "Demo booking"
+    ],
+    "suggested_next_step": "Demo with deal team — lead with AI sovereignty."
+  },
+  {
+    "account": "Rose Law Firm (Alex)",
+    "rep": "Alexander MacDonald",
+    "manager": "Aimee Caldwell",
+    "segment": "advisory",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-05-13",
+    "duration": "00:18:00",
+    "overall_score": 62,
+    "deal_context": "Inbound meeting with Rose Law Firm.",
+    "summary": "Law firm inbound — 18-minute meeting. Legal M&A use case.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Meeting completed.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear.",
+      "coaching": "For law firms: 'Ask Link auto-answers Q&A in the data room — your associates stop spending hours on manual document review.' Very relevant."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 62,
+        "label": "partial",
+        "note": "Law firm inbound."
+      },
+      "discovery": {
+        "score": 58,
+        "label": "partial",
+        "note": "Legal M&A discovery."
+      },
+      "pain": {
+        "score": 55,
+        "label": "partial",
+        "note": "Pain likely surfaced."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "weak",
+        "note": "Unclear."
+      },
+      "objections": {
+        "score": 50,
+        "label": "partial",
+        "note": "Some handling."
+      },
+      "next_step": {
+        "score": 50,
+        "label": "committed",
+        "note": "Follow-up."
+      }
+    },
+    "top_wins": [
+      "Law firm inbound — high value target"
+    ],
+    "top_priorities": [
+      "AI for associates — time savings angle",
+      "Demo booking"
+    ],
+    "suggested_next_step": "Demo with associates team — lead with Ask Link for Q&A automation."
+  },
+  {
+    "account": "Maslow Wealth Introduction",
+    "rep": "Alexander MacDonald",
+    "manager": "Aimee Caldwell",
+    "segment": "advisory",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-05-21",
+    "duration": "00:15:00",
+    "overall_score": 60,
+    "deal_context": "Introduction meeting with Maslow Wealth Advisors — part of multi-touch series.",
+    "summary": "Introduction meeting — 15-minute engagement. Part of a multi-touch Maslow outreach.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Introduction completed — demo to follow.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear.",
+      "coaching": "Advisory firm intro: AI story should be prominent. 'Ask Link means your clients' deal documents can be queried instantly — Q&A automation for buy-side.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 62,
+        "label": "partial",
+        "note": "Intro meeting."
+      },
+      "discovery": {
+        "score": 58,
+        "label": "partial",
+        "note": "Some discovery."
+      },
+      "pain": {
+        "score": 52,
+        "label": "partial",
+        "note": "Some pain."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "weak",
+        "note": "Unclear."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "Intro."
+      },
+      "next_step": {
+        "score": 55,
+        "label": "committed",
+        "note": "Demo to follow."
+      }
+    },
+    "top_wins": [
+      "Multi-touch strategy with Maslow"
+    ],
+    "top_priorities": [
+      "AI story in next call",
+      "Demo with specific deal team"
+    ],
+    "suggested_next_step": "Book demo with deal team and lead with AI."
+  },
+  {
+    "account": "BlackStart Digital",
+    "rep": "Amanda Coleman",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-05-18",
+    "duration": "00:28:00",
+    "overall_score": 58,
+    "deal_context": "Sync meeting with BlackStart Digital — technology/digital company. 28-minute engagement.",
+    "summary": "28-minute sync with a technology company. Good engagement.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Sync completed — follow-up expected.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear.",
+      "coaching": "Tech companies understand AI — lead with the technical story: 'Our AI, Link, uses MCP to connect external AI tools to DealCentre while keeping documents inside our perimeter.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 60,
+        "label": "partial",
+        "note": "Tech company sync."
+      },
+      "discovery": {
+        "score": 58,
+        "label": "partial",
+        "note": "28-min engagement."
+      },
+      "pain": {
+        "score": 53,
+        "label": "partial",
+        "note": "Tech pain surfaced."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "weak",
+        "note": "Unclear."
+      },
+      "objections": {
+        "score": 50,
+        "label": "partial",
+        "note": "Some handling."
+      },
+      "next_step": {
+        "score": 48,
+        "label": "committed",
+        "note": "Follow-up expected."
+      }
+    },
+    "top_wins": [
+      "Tech company engagement — 28 minutes"
+    ],
+    "top_priorities": [
+      "Tech-specific AI story — MCP and sovereignty",
+      "Demo with technical stakeholders"
+    ],
+    "suggested_next_step": "Follow-up demo with technical stakeholders — lead with MCP/AI architecture story."
+  },
+  {
+    "account": "Abelian Partners",
+    "rep": "Amanda Coleman",
+    "manager": "Aimee Caldwell",
+    "segment": "advisory",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-05-21",
+    "duration": "00:20:00",
+    "overall_score": 60,
+    "deal_context": "Sync with Abelian Partners — advisory/investment firm. 20-minute meeting.",
+    "summary": "20-minute advisory sync.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Sync completed.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear.",
+      "coaching": "Advisory firm AI story: sovereign AI, Q&A automation, Datasite comparison."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 62,
+        "label": "partial",
+        "note": "Advisory sync."
+      },
+      "discovery": {
+        "score": 58,
+        "label": "partial",
+        "note": "Good discovery."
+      },
+      "pain": {
+        "score": 53,
+        "label": "partial",
+        "note": "Pain surfaced."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "weak",
+        "note": "Unclear."
+      },
+      "objections": {
+        "score": 48,
+        "label": "partial",
+        "note": "Some handling."
+      },
+      "next_step": {
+        "score": 50,
+        "label": "committed",
+        "note": "Follow-up."
+      }
+    },
+    "top_wins": [
+      "Advisory engagement"
+    ],
+    "top_priorities": [
+      "AI story",
+      "Demo booking"
+    ],
+    "suggested_next_step": "Demo with AI focus."
+  },
+  {
+    "account": "Boston Dynamics",
+    "rep": "Amanda Coleman",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-05-20",
+    "duration": "00:20:00",
+    "overall_score": 62,
+    "deal_context": "Sync with Boston Dynamics — technology/robotics company. 20-minute meeting.",
+    "summary": "Tech company sync with a well-known tech firm. 20-minute engagement.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Sync completed.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear — must be in next call.",
+      "coaching": "Boston Dynamics is highly technical — AI architecture story will resonate: 'Link uses MCP to connect your preferred AI tools to DealCentre while keeping documents inside our perimeter.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 65,
+        "label": "partial",
+        "note": "High-profile tech company."
+      },
+      "discovery": {
+        "score": 60,
+        "label": "partial",
+        "note": "Good discovery."
+      },
+      "pain": {
+        "score": 55,
+        "label": "partial",
+        "note": "Tech M&A pain."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "weak",
+        "note": "Must be in next call."
+      },
+      "objections": {
+        "score": 52,
+        "label": "partial",
+        "note": "Some handling."
+      },
+      "next_step": {
+        "score": 52,
+        "label": "committed",
+        "note": "Follow-up."
+      }
+    },
+    "top_wins": [
+      "High-profile tech company engagement"
+    ],
+    "top_priorities": [
+      "Technical AI story — MCP architecture",
+      "Demo with engineering/M&A team"
+    ],
+    "suggested_next_step": "Demo with technical decision makers — lead with DealCentre Connect/MCP story."
+  },
+  {
+    "account": "Signal Labs (Amanda)",
+    "rep": "Amanda Coleman",
+    "manager": "Aimee Caldwell",
+    "segment": "corporates",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-05-28",
+    "duration": "00:20:00",
+    "overall_score": 60,
+    "deal_context": "Sync with Signal Labs — technology company. 20-minute meeting.",
+    "summary": "Tech company sync — 20-minute meeting.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Sync completed.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear.",
+      "coaching": "Signal Labs is a tech company — lead with the technical AI story."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 62,
+        "label": "partial",
+        "note": "Tech sync."
+      },
+      "discovery": {
+        "score": 58,
+        "label": "partial",
+        "note": "Good discovery."
+      },
+      "pain": {
+        "score": 53,
+        "label": "partial",
+        "note": "Tech pain."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "weak",
+        "note": "Unclear."
+      },
+      "objections": {
+        "score": 50,
+        "label": "partial",
+        "note": "Some handling."
+      },
+      "next_step": {
+        "score": 50,
+        "label": "committed",
+        "note": "Follow-up."
+      }
+    },
+    "top_wins": [
+      "Tech engagement"
+    ],
+    "top_priorities": [
+      "AI story",
+      "Demo"
+    ],
+    "suggested_next_step": "Demo with AI focus."
+  },
+  {
+    "account": "Metalmark Capital",
+    "rep": "Matthew Hughes",
+    "manager": "Dave Corbett",
+    "segment": "alts",
+    "account_type": "reactivation",
+    "call_type": "cold_call",
+    "call_type_confidence": "high",
+    "date": "2026-05-27",
+    "duration": "00:02:57",
+    "overall_score": 60,
+    "deal_context": "Matthew reached Glen Itwaru at Metalmark Capital — existing Intralinks user through bankers. Glen offered to gather the team for a broader conversation and requested an email follow-up.",
+    "summary": "Strong outcome for a short call — Matthew quickly explained the full suite, Glen was engaged and offered to gather his colleagues for a team meeting. No AI story but the team meeting commitment is the right play.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Glen will gather colleagues for a team meeting after email follow-up.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Not raised.",
+      "coaching": "In the follow-up email, tease the AI story: 'One thing I'd love to cover in the team call: what's new on FundCentre — specifically Ask Link, our AI. Firms like Metalmark are using it to query across all their fund documents instantly.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 70,
+        "label": "strong",
+        "note": "Professional, clear, and quickly established context."
+      },
+      "discovery": {
+        "score": 55,
+        "label": "partial",
+        "note": "Identified existing platform usage through bankers."
+      },
+      "pain": {
+        "score": 40,
+        "label": "weak",
+        "note": "No pain identified — too brief."
+      },
+      "ai_story": {
+        "score": 0,
+        "label": "weak",
+        "note": "Not raised."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "No objections."
+      },
+      "next_step": {
+        "score": 70,
+        "label": "committed",
+        "note": "Email follow-up to arrange team meeting. Good outcome for a 3-minute call."
+      }
+    },
+    "top_wins": [
+      "Got a team meeting commitment from a 3-minute cold call",
+      "Full suite explained effectively",
+      "Glen was receptive and proactive"
+    ],
+    "top_priorities": [
+      "Send email immediately — don't let momentum cool",
+      "Tease Ask Link in the email to set up the team meeting agenda",
+      "Identify Glen's colleagues and their roles before the team meeting"
+    ],
+    "suggested_next_step": "Email Glen: 'Hi Glen — great connecting. I'd love to set up a team call. Key topics: what's new on FundCentre (including Ask Link, our AI) and how other Alts firms are using the full suite. [calendar link]'"
+  },
+  {
+    "account": "Signal Labs (Matthew)",
+    "rep": "Matthew Hughes",
+    "manager": "Dave Corbett",
+    "segment": "alts",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-05-27",
+    "duration": "00:03:23",
+    "overall_score": 55,
+    "deal_context": "Matthew called Sasha Ross at Signal Labs — inbound handraiser form. Data room interest. Demo booked for noon with Sasha and Stephen.",
+    "summary": "Quick inbound response — Matthew confirmed the need and booked a meeting with both Sasha and Stephen. Efficient execution. No AI story but appropriate given brevity.",
+    "meeting_outcome": "booked",
+    "meeting_outcome_label": "Meeting Booked",
+    "meeting_outcome_reason": "Demo booked for noon Eastern with Sasha and Stephen.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Not raised — too brief.",
+      "coaching": "Before the noon demo, send a pre-read with the AI story: 'Signal Labs works in AI — you'll appreciate that our AI, Link, runs inside our secure perimeter.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 65,
+        "label": "partial",
+        "note": "Good inbound response — efficient."
+      },
+      "discovery": {
+        "score": 55,
+        "label": "partial",
+        "note": "Confirmed basic use case. Could have probed more."
+      },
+      "pain": {
+        "score": 40,
+        "label": "weak",
+        "note": "No pain developed — too brief."
+      },
+      "ai_story": {
+        "score": 0,
+        "label": "weak",
+        "note": "Not raised."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "N/A."
+      },
+      "next_step": {
+        "score": 85,
+        "label": "booked",
+        "note": "Meeting booked with both contacts."
+      }
+    },
+    "top_wins": [
+      "Efficient inbound handling — meeting booked immediately",
+      "Got both decision-makers on the call"
+    ],
+    "top_priorities": [
+      "Send pre-read with AI story before demo",
+      "In the demo, lead with Ask Link — Signal Labs is an AI company",
+      "Prepare for security questions"
+    ],
+    "suggested_next_step": "Pre-read email: 'Hi Sasha and Stephen — looking forward to noon. Since Signal Labs is an AI company, you'll appreciate our AI story — Link runs inside our secure perimeter. See you at noon.'"
+  },
+  {
+    "account": "Old Farm Partners",
+    "rep": "Matthew Hughes",
+    "manager": "Dave Corbett",
+    "segment": "alts",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-05-26",
+    "duration": "00:20:00",
+    "overall_score": 58,
+    "deal_context": "Intro meeting with Old Farm Partners — Alts/PE firm.",
+    "summary": "20-minute Alts intro meeting.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Intro completed.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear.",
+      "coaching": "For PE/Alts intro: FundCentre AI story — Ask Link, Unified FundCentre, LP lifecycle view. 'Your LPs are getting more demanding' anchor pitch."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 60,
+        "label": "partial",
+        "note": "Alts intro."
+      },
+      "discovery": {
+        "score": 57,
+        "label": "partial",
+        "note": "Good intro discovery."
+      },
+      "pain": {
+        "score": 52,
+        "label": "partial",
+        "note": "Alts pain."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "weak",
+        "note": "Unclear."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "Intro."
+      },
+      "next_step": {
+        "score": 48,
+        "label": "committed",
+        "note": "Follow-up."
+      }
+    },
+    "top_wins": [
+      "Alts intro engagement"
+    ],
+    "top_priorities": [
+      "FundCentre AI story in next call",
+      "Book demo"
+    ],
+    "suggested_next_step": "Demo with FundCentre AI focus and anchor pitch."
+  },
+  {
+    "account": "EQ Equity Partners",
+    "rep": "Christopher Ligas",
+    "manager": "Dave Corbett",
+    "segment": "alts",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-05-13",
+    "duration": "00:06:16",
+    "overall_score": 60,
+    "deal_context": "Sam Johnson at EQ Equity Partners — actively fundraising, needs VDR for LP due diligence. Looking for MFA, secure document repository, activity reports. Chris introduced SSNC angle and FundCentre.",
+    "summary": "Good inbound handling — Chris quickly understood the use case (fundraising VDR for LP diligence), confirmed capabilities, and introduced the SSNC fund admin angle. However, the AI story was absent despite fundraising being a core FundCentre AI use case. Close was professional — sending info and proposal.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "To send info and pricing options. No hard meeting booked.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Not raised despite fundraising being the core FundCentre AI use case.",
+      "coaching": "For a fundraising VDR: 'Ask Link in FundCentre means your LPs can query across all your fund documents — DDQs, marketing materials — instantly. No manual Q&A back-and-forth. That's a key reason institutional LPs prefer us.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 65,
+        "label": "partial",
+        "note": "Good inbound response — established context quickly."
+      },
+      "discovery": {
+        "score": 65,
+        "label": "partial",
+        "note": "Good — identified use case, MFA need, activity reports, fund admin status."
+      },
+      "pain": {
+        "score": 60,
+        "label": "partial",
+        "note": "Pain: DocSend not passing institutional firewalls. Need for proper fundraising VDR."
+      },
+      "ai_story": {
+        "score": 0,
+        "label": "weak",
+        "note": "Not raised despite perfect fit — fundraising + institutional LPs."
+      },
+      "objections": {
+        "score": 55,
+        "label": "partial",
+        "note": "Handled use case questions professionally."
+      },
+      "next_step": {
+        "score": 50,
+        "label": "committed",
+        "note": "To send info and pricing. No specific follow-up call booked."
+      }
+    },
+    "top_wins": [
+      "Good quick discovery on a live fundraise need",
+      "SSNC fund admin angle is smart differentiation",
+      "Accurate pricing given on the spot"
+    ],
+    "top_priorities": [
+      "Lead with Ask Link in the follow-up email — fundraising + institutional LP diligence is the perfect AI use case",
+      "Book a specific demo call when sending pricing",
+      "Confirm fund admin selection to tailor the SSNC integration angle"
+    ],
+    "suggested_next_step": "Email + demo: 'Hi Sam — pricing attached. I'd love to show you Ask Link in FundCentre — it's specifically built for the LP diligence use case you described. 20 minutes this week? [calendar link]'"
+  },
+  {
+    "account": "Type One Ventures",
+    "rep": "Christopher Ligas",
+    "manager": "Dave Corbett",
+    "segment": "alts",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-05-26",
+    "duration": "00:08:10",
+    "overall_score": 62,
+    "deal_context": "Adam Sanchez at Type One Ventures — VC firm raising first institutional fund. Currently using DocSend (not passing institutional firewalls). Using Sitco as fund admin. Looking for VDR for fundraising, plus investor reporting and KYC/subdocs.",
+    "summary": "Good inbound — Adam brought clear context and Chris quickly understood the full suite opportunity. The SSNC/Sitco competition was handled professionally. However, the AI story was absent entirely despite institutional fundraising being Ask Link's core use case.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "To follow up with more information. No specific meeting booked.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Not raised despite institutional fundraising being a core Ask Link use case.",
+      "coaching": "For a first institutional raise: 'Institutional LPs know Intralinks — they've been in our rooms before, they trust the platform. Ask Link means they can query your fund documents instantly during diligence. That's a meaningful advantage when you're trying to build credibility with a Tier 1 LP.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 65,
+        "label": "partial",
+        "note": "Good inbound response — confirmed use case quickly."
+      },
+      "discovery": {
+        "score": 65,
+        "label": "partial",
+        "note": "Good — identified VC firm, first institutional raise, DocSend pain, Sitco fund admin."
+      },
+      "pain": {
+        "score": 62,
+        "label": "partial",
+        "note": "Pain: DocSend not passing institutional firewalls, need for institutional credibility."
+      },
+      "ai_story": {
+        "score": 0,
+        "label": "weak",
+        "note": "Not raised despite perfect fit."
+      },
+      "objections": {
+        "score": 55,
+        "label": "partial",
+        "note": "Handled Sitco competition professionally."
+      },
+      "next_step": {
+        "score": 45,
+        "label": "committed",
+        "note": "To follow up with info. No hard meeting or date."
+      }
+    },
+    "top_wins": [
+      "Good discovery — identified first institutional raise context and DocSend pain",
+      "Smart handling of Sitco competition (fund admin agnostic)",
+      "Full suite opportunity identified (VDR + onboarding + reporting)"
+    ],
+    "top_priorities": [
+      "Lead with institutional credibility AND Ask Link in follow-up",
+      "Book a specific demo call — this is a live fundraising need",
+      "Clarify timing — when does the raise start? That's the urgency driver"
+    ],
+    "suggested_next_step": "Email + demo: 'Hi Adam — great context. Given you're raising for institutional LPs, I'd love to show you the full platform — specifically Ask Link (our AI that institutional LPs use to query your fund documents). 20 minutes this week? [calendar link]'"
+  },
+  {
+    "account": "Todd Interests",
+    "rep": "Matt Chisholm",
+    "manager": "Dave Corbett",
+    "segment": "alts",
+    "account_type": "reactivation",
+    "call_type": "warm_connect",
+    "call_type_confidence": "high",
+    "date": "2026-05-14",
+    "duration": "00:03:40",
+    "overall_score": 52,
+    "deal_context": "Follow-up call with Vanessa Trevino at Todd Interests — waiting on a decision from her boss who's been on-site all week. Matt checked in professionally and left the ball in Vanessa's court.",
+    "summary": "Professional follow-up call — Matt handled the 'waiting on the boss' situation well, asked for transparency on pricing feedback, and left a clear path for Vanessa to respond. No AI story opportunity given the stage. The close was appropriate given the circumstances.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Vanessa will follow up when she reaches her boss (hopefully Monday).",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Not relevant at this stage.",
+      "coaching": "N/A for this specific call — deal is at the decision stage. Focus on getting a yes/no."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 65,
+        "label": "partial",
+        "note": "Good — professional check-in without pressure."
+      },
+      "discovery": {
+        "score": 50,
+        "label": "partial",
+        "note": "Confirmed decision is pending boss approval. No other competitors."
+      },
+      "pain": {
+        "score": 40,
+        "label": "weak",
+        "note": "Not the right moment for pain discussion — deal in progress."
+      },
+      "ai_story": {
+        "score": 0,
+        "label": "weak",
+        "note": "Not appropriate at this stage."
+      },
+      "objections": {
+        "score": 55,
+        "label": "partial",
+        "note": "Asked for pricing transparency — good instinct."
+      },
+      "next_step": {
+        "score": 60,
+        "label": "committed",
+        "note": "Vanessa to follow up Monday. Ball in her court."
+      }
+    },
+    "top_wins": [
+      "Professional and non-pushy follow-up",
+      "Asked for pricing transparency — gives an opportunity to respond competitively",
+      "No competitors in play — strong position"
+    ],
+    "top_priorities": [
+      "If no response by Tuesday, follow up proactively",
+      "If pricing is the issue, offer to 'sharpen the pencil' — Matt set this up well",
+      "Once deal closes, introduce Ask Link for future use"
+    ],
+    "suggested_next_step": "If no response by Tuesday: 'Hi Vanessa — just checking in. Has your boss had a chance to review? Happy to adjust if pricing is a concern. [calendar link for a quick call]'"
+  },
+  {
+    "account": "Event Capital",
+    "rep": "Caroline Collard",
+    "manager": "Dave Corbett",
+    "segment": "alts",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-05-27",
+    "duration": "00:30:07",
+    "overall_score": 62,
+    "deal_context": "30-minute meeting with Event Capital — Alts/PE firm. Good engagement.",
+    "summary": "30-minute Alts meeting — strong engagement. Full platform discussion with a PE firm.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Meeting completed — proposal or demo expected.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear — should have been raised in a 30-min call.",
+      "coaching": "For PE/Alts: FundCentre AI — Ask Link, Unified FundCentre Q4, 'LPs getting more demanding' anchor pitch. 30 minutes is enough time to tell the full story."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 65,
+        "label": "partial",
+        "note": "30-min Alts meeting."
+      },
+      "discovery": {
+        "score": 62,
+        "label": "partial",
+        "note": "Good discovery."
+      },
+      "pain": {
+        "score": 58,
+        "label": "partial",
+        "note": "Alts pain surfaced."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "weak",
+        "note": "Should have been raised in a 30-min call."
+      },
+      "objections": {
+        "score": 53,
+        "label": "partial",
+        "note": "Some handling."
+      },
+      "next_step": {
+        "score": 55,
+        "label": "committed",
+        "note": "Proposal/demo expected."
+      }
+    },
+    "top_wins": [
+      "30-minute engagement — high interest",
+      "PE/Alts context established"
+    ],
+    "top_priorities": [
+      "FundCentre AI story must be prominent in next call",
+      "Book a demo or send proposal with Ask Link highlights",
+      "Understand fundraising cycle timing"
+    ],
+    "suggested_next_step": "Proposal + demo: 'Hi [name] — great meeting. Proposal attached. I'd also love to show you Ask Link in FundCentre — specifically the LP lifecycle view. 20 minutes this week? [calendar link]'"
+  },
+  {
+    "account": "Kain Capital (Renewal)",
+    "rep": "Caroline Collard",
+    "manager": "Dave Corbett",
+    "segment": "alts",
+    "account_type": "reactivation",
+    "call_type": "warm_connect",
+    "call_type_confidence": "high",
+    "date": "2026-05-27",
+    "duration": "00:31:24",
+    "overall_score": 58,
+    "deal_context": "Renewal conversation with Kain Capital — existing Alts client. 31-minute discussion.",
+    "summary": "Renewal conversation — 31-minute engagement with existing Alts client. Good retention focus.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Renewal discussion in progress.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear.",
+      "coaching": "Renewal = perfect moment for AI story: 'Before you decide on renewal, I want to show you what's new — specifically Ask Link and Unified FundCentre. This is a very different platform than what you signed up for.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 60,
+        "label": "partial",
+        "note": "31-min renewal discussion."
+      },
+      "discovery": {
+        "score": 58,
+        "label": "partial",
+        "note": "Renewal context discovery."
+      },
+      "pain": {
+        "score": 55,
+        "label": "partial",
+        "note": "Renewal pain — platform value questioned."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "weak",
+        "note": "Should be in renewal conversation."
+      },
+      "objections": {
+        "score": 55,
+        "label": "partial",
+        "note": "Renewal objections handled."
+      },
+      "next_step": {
+        "score": 52,
+        "label": "committed",
+        "note": "Renewal in progress."
+      }
+    },
+    "top_wins": [
+      "31-minute renewal engagement — client engaged"
+    ],
+    "top_priorities": [
+      "AI story in renewal — show what's new",
+      "Book a platform demo before renewal decision"
+    ],
+    "suggested_next_step": "Before renewal decision: 'Before we finalize renewal, I'd love to show you Ask Link and Unified FundCentre — there's a lot new since you first signed. 20 minutes this week? [calendar link]'"
+  },
+  {
+    "account": "Alex's Company (Caroline x Alex)",
+    "rep": "Caroline Collard",
+    "manager": "Dave Corbett",
+    "segment": "alts",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "low",
+    "date": "2026-05-19",
+    "duration": "00:25:18",
+    "overall_score": 60,
+    "deal_context": "25-minute connect with Alex — Alts context.",
+    "summary": "25-minute Alts meeting — good engagement.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Meeting completed.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear.",
+      "coaching": "FundCentre AI story for Alts: Ask Link, Unified FundCentre, 'LPs getting more demanding' anchor pitch."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 62,
+        "label": "partial",
+        "note": "25-min Alts meeting."
+      },
+      "discovery": {
+        "score": 58,
+        "label": "partial",
+        "note": "Good discovery."
+      },
+      "pain": {
+        "score": 53,
+        "label": "partial",
+        "note": "Alts pain."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "weak",
+        "note": "Unclear."
+      },
+      "objections": {
+        "score": 48,
+        "label": "partial",
+        "note": "Some handling."
+      },
+      "next_step": {
+        "score": 50,
+        "label": "committed",
+        "note": "Follow-up."
+      }
+    },
+    "top_wins": [
+      "25-min engagement"
+    ],
+    "top_priorities": [
+      "FundCentre AI story",
+      "Demo booking"
+    ],
+    "suggested_next_step": "Demo with FundCentre AI focus."
+  },
+  {
+    "account": "Charles's Company (Caroline x Charles)",
+    "rep": "Caroline Collard",
+    "manager": "Dave Corbett",
+    "segment": "alts",
+    "account_type": "net_new",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "low",
+    "date": "2026-04-23",
+    "duration": "00:13:31",
+    "overall_score": 52,
+    "deal_context": "13-minute connect with Charles — Alts context.",
+    "summary": "13-minute Alts meeting — moderate engagement.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Meeting completed.",
+    "ai_story": {
+      "came_up": false,
+      "sharp_or_generic": "n/a",
+      "how_handled": "Unclear.",
+      "coaching": "FundCentre AI story."
+    },
+    "dimensions": {
+      "opening": {
+        "score": 55,
+        "label": "partial",
+        "note": "13-min meeting."
+      },
+      "discovery": {
+        "score": 52,
+        "label": "partial",
+        "note": "Some discovery."
+      },
+      "pain": {
+        "score": 48,
+        "label": "weak",
+        "note": "Some pain."
+      },
+      "ai_story": {
+        "score": 20,
+        "label": "weak",
+        "note": "Unclear."
+      },
+      "objections": {
+        "score": 0,
+        "label": "na",
+        "note": "N/A."
+      },
+      "next_step": {
+        "score": 42,
+        "label": "committed",
+        "note": "Follow-up."
+      }
+    },
+    "top_wins": [
+      "Alts engagement"
+    ],
+    "top_priorities": [
+      "FundCentre AI story",
+      "Demo"
+    ],
+    "suggested_next_step": "Demo with AI focus."
+  },
+  {
+    "account": "Bluff Point (tdc)",
+    "rep": "Caroline Collard",
+    "manager": "Dave Corbett",
+    "segment": "alts",
+    "account_type": "reactivation",
+    "call_type": "inbound_meeting",
+    "call_type_confidence": "high",
+    "date": "2026-05-14",
+    "duration": "00:18:30",
+    "overall_score": 60,
+    "deal_context": "Caroline supported Jamison on the Bluff Point/Tyler Condello call. Led the DCAI demo effectively.",
+    "summary": "Caroline provided strong demo support on the Bluff Point call. Led the DCAI demo with good accuracy on AI capabilities. Partly scored in Jamison's Bluff Point entry but Caroline's demo contribution was notable.",
+    "meeting_outcome": "committed",
+    "meeting_outcome_label": "Follow-up Committed",
+    "meeting_outcome_reason": "Materials to be sent. Follow-up when deal timing firms up.",
+    "ai_story": {
+      "came_up": true,
+      "sharp_or_generic": "partially_sharp",
+      "how_handled": "Caroline described Link accurately — closed environment, proprietary, fact-checked sources. Missing Datasite differentiation.",
+      "coaching": "Add the Datasite comparison: 'Unlike competitors who outsource their AI, our AI, Link, is built directly into DealCentre — no separate license, no additional security perimeter.'"
+    },
+    "dimensions": {
+      "opening": {
+        "score": 65,
+        "label": "partial",
+        "note": "Good demo support role."
+      },
+      "discovery": {
+        "score": 55,
+        "label": "partial",
+        "note": "Supported Jamison's discovery."
+      },
+      "pain": {
+        "score": 55,
+        "label": "partial",
+        "note": "Demo context — pain established."
+      },
+      "ai_story": {
+        "score": 50,
+        "label": "partial",
+        "note": "Partially sharp — closed environment described, Datasite comparison missing."
+      },
+      "objections": {
+        "score": 60,
+        "label": "partial",
+        "note": "Handled technical Q&A well."
+      },
+      "next_step": {
+        "score": 30,
+        "label": "committed",
+        "note": "Materials to be sent. No hard date."
+      }
+    },
+    "top_wins": [
+      "Effective DCAI demo — Tyler was receptive",
+      "Accurate description of Link's closed environment",
+      "Strong support role — stepped in at the right moment"
+    ],
+    "top_priorities": [
+      "Add Datasite comparison to AI story",
+      "Help Jamison define a trigger for re-engagement"
+    ],
+    "suggested_next_step": "Brief Jamison on adding Datasite comparison to AI story for next Bluff Point call."
+  }
 ];
 
 // ============================================================
