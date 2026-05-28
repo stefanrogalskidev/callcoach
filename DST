@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CallCoach DST — Intralinks Digital Sales Team</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0f0f0f;--ink-2:#3a3a3a;--ink-3:#6b6b6b;--ink-4:#9b9b9b;
+  --paper:#fafaf8;--surface:#f3f2ef;--surface-2:#e8e6e1;--rule:#dddbd5;
+  --accent:#1a3a5c;--accent-light:#e8eef5;
+  --green:#1a6644;--green-light:#e6f2ec;
+  --amber:#7a4a00;--amber-light:#fdf3e3;
+  --red:#8b1f1f;--red-light:#fdeaea;--gold:#b8860b;
+  --purple:#4a2a7a;--purple-light:#f0ebfa;
+  --teal:#1a5a5a;--teal-light:#e6f5f5;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh;line-height:1.6;}
+.hdr{background:var(--ink);height:58px;display:flex;align-items:center;padding:0 28px;position:sticky;top:0;z-index:200;gap:14px;}
+.logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff;white-space:nowrap;}
+.logo span{color:#7eb3e0;}
+.logo-sub{font-family:'DM Mono',monospace;font-size:9px;color:#4db880;letter-spacing:0.1em;text-transform:uppercase;padding:2px 6px;border:1px solid #1a5a30;border-radius:3px;margin-left:4px;}
+.hdr-meta{font-family:'DM Mono',monospace;font-size:10px;color:#555;letter-spacing:0.08em;text-transform:uppercase;padding-left:16px;border-left:1px solid #333;}
+.hdr-right{margin-left:auto;display:flex;gap:8px;align-items:center;}
+.badge{font-family:'DM Mono',monospace;font-size:10px;padding:3px 8px;border-radius:3px;letter-spacing:0.05em;text-transform:uppercase;}
+.b-blue{background:#1a3a5c;color:#7eb3e0;}
+.b-green{background:#0a3020;color:#4db880;}
+.b-amber{background:#3a2000;color:#e8a830;}
+.nav-tabs{background:white;border-bottom:1px solid var(--rule);display:flex;padding:0 28px;position:sticky;top:58px;z-index:100;}
+.nav-tab{padding:12px 20px;font-size:13px;font-weight:500;color:var(--ink-3);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.15s;white-space:nowrap;}
+.nav-tab:hover{color:var(--ink);}
+.nav-tab.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:600;}
+.main{padding:28px 32px;max-width:1200px;margin:0 auto;}
+.filter-bar{background:white;border:1px solid var(--rule);border-radius:8px;padding:12px 16px;margin-bottom:20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+.filter-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.07em;white-space:nowrap;}
+.filter-select{background:var(--surface);border:1px solid var(--rule);border-radius:5px;padding:6px 10px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--ink);cursor:pointer;}
+.filter-search{flex:1;min-width:160px;background:var(--surface);border:1px solid var(--rule);border-radius:5px;padding:6px 10px;font-family:'DM Sans',sans-serif;font-size:12px;}
+.filter-count{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-3);white-space:nowrap;margin-left:auto;}
+.kpi-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:20px;}
+.kpi{background:white;border:1px solid var(--rule);border-radius:8px;padding:14px 16px;text-align:center;}
+.kpi.k-green{border-top:3px solid var(--green);background:var(--green-light);}
+.kpi.k-amber{border-top:3px solid var(--gold);background:var(--amber-light);}
+.kpi.k-red{border-top:3px solid var(--red);background:var(--red-light);}
+.kpi.k-blue{border-top:3px solid var(--accent);background:var(--accent-light);}
+.kpi.k-purple{border-top:3px solid var(--purple);background:var(--purple-light);}
+.kpi.k-grey{border-top:3px solid var(--ink-3);}
+.kpi-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;line-height:1;margin-bottom:3px;}
+.kpi-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-3);text-transform:uppercase;letter-spacing:0.06em;line-height:1.3;}
+.kpi.k-green .kpi-label{color:var(--green);}
+.kpi.k-amber .kpi-label{color:var(--amber);}
+.kpi.k-red .kpi-label{color:var(--red);}
+.kpi.k-blue .kpi-label{color:var(--accent);}
+.kpi.k-purple .kpi-label{color:var(--purple);}
+.themes-section{margin-bottom:28px;background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:20px 24px;}
+.themes-hdr{display:flex;align-items:baseline;gap:10px;margin-bottom:16px;}
+.themes-hdr-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;}
+.themes-hdr-sub{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);margin-left:auto;text-transform:uppercase;letter-spacing:0.06em;}
+.theme-item{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--rule);}
+.theme-item:last-child{border-bottom:none;padding-bottom:0;}
+.theme-item:first-child{padding-top:0;}
+.theme-icon-wrap{width:32px;height:32px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:15px;margin-top:1px;}
+.theme-content{font-size:13px;color:var(--ink-2);line-height:1.65;}
+.theme-content strong{color:var(--ink);font-weight:600;}
+.deal-table{width:100%;border-collapse:collapse;}
+.deal-table th{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.07em;padding:8px 12px;text-align:left;border-bottom:2px solid var(--rule);white-space:nowrap;background:var(--surface);position:sticky;top:80px;z-index:50;}
+.deal-table-calls th{top:80px;}
+.deal-table-coaching th{top:80px;}
+.deal-table td{padding:11px 12px;border-bottom:1px solid var(--rule);font-size:13px;color:var(--ink-2);vertical-align:middle;}
+.deal-table tr:hover td{background:var(--surface);cursor:pointer;}
+.deal-table tr:last-child td{border-bottom:none;}
+.tbl-account{font-weight:600;color:var(--ink);}
+.tbl-stage{font-family:'DM Mono',monospace;font-size:11px;padding:2px 8px;border-radius:3px;background:var(--surface-2);color:var(--ink-3);white-space:nowrap;}
+.tbl-signal{display:flex;align-items:center;gap:5px;font-family:'DM Mono',monospace;font-size:11px;white-space:nowrap;}
+.sig-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.score-pill{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;}
+.ai-pill{font-family:'DM Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;letter-spacing:0.05em;text-transform:uppercase;font-weight:500;}
+.p-sharp{background:var(--green-light);color:var(--green);border:1px solid #b8d9c8;}
+.p-partial{background:var(--amber-light);color:var(--amber);border:1px solid #f0d9a8;}
+.p-generic{background:var(--red-light);color:var(--red);border:1px solid #f0c0c0;}
+.p-na{background:var(--surface);color:var(--ink-3);border:1px solid var(--rule);}
+.panel-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.3);z-index:299;display:none;}
+.panel-overlay.show{display:block;}
+.coaching-panel{position:fixed;top:0;right:0;width:600px;height:100vh;background:white;box-shadow:-4px 0 40px rgba(0,0,0,0.15);z-index:300;overflow-y:auto;transform:translateX(100%);transition:transform 0.3s ease;}
+.coaching-panel.open{transform:translateX(0);}
+.panel-hdr{background:var(--ink);padding:18px 24px;display:flex;align-items:flex-start;gap:12px;position:sticky;top:0;z-index:10;}
+.panel-close{background:none;border:none;color:#888;font-size:20px;cursor:pointer;padding:2px 6px;border-radius:4px;flex-shrink:0;margin-left:auto;}
+.panel-close:hover{color:white;background:#333;}
+.panel-title{font-family:'Playfair Display',serif;font-size:18px;color:white;line-height:1.2;}
+.panel-sub{font-family:'DM Mono',monospace;font-size:10px;color:#666;margin-top:3px;}
+.panel-body{padding:20px 24px;}
+.p-outcome-box{border-radius:7px;padding:10px 14px;margin-bottom:16px;display:flex;align-items:flex-start;gap:10px;}
+.p-outcome-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:3px;}
+.p-outcome-label{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:3px;}
+.p-outcome-text{font-size:12px;line-height:1.5;}
+.p-meta-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+.p-meta-card{background:var(--surface);border-radius:6px;padding:10px 12px;border-top:2px solid var(--accent);}
+.p-meta-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:4px;}
+.p-meta-value{font-size:13px;font-weight:600;color:var(--ink);}
+.p-scores-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px;}
+.p-score{background:var(--surface);border-radius:8px;padding:12px 10px;text-align:center;border:1px solid var(--rule);}
+.p-score-num{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;line-height:1;margin-bottom:3px;}
+.p-score-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.05em;}
+.p-dim-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
+.p-dim-card{background:var(--surface);border-radius:6px;padding:10px 12px;}
+.p-dim-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
+.p-dim-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.06em;}
+.p-dim-score{font-family:'DM Mono',monospace;font-size:11px;font-weight:600;}
+.p-dim-bar{height:4px;border-radius:2px;background:var(--rule);margin-bottom:6px;}
+.p-dim-fill{height:4px;border-radius:2px;}
+.p-dim-note{font-size:11px;color:var(--ink-3);line-height:1.5;}
+.p-section-hdr{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.07em;color:var(--ink-4);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--rule);}
+.p-wins-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
+.p-wins-box{border-radius:6px;padding:10px 12px;}
+.p-wins-box.wins{background:var(--green-light);border:1px solid #b8d9c8;}
+.p-wins-box.pris{background:var(--red-light);border:1px solid #f0c0c0;}
+.p-wins-title{font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;}
+.p-wins-box.wins .p-wins-title{color:var(--green);}
+.p-wins-box.pris .p-wins-title{color:var(--red);}
+.p-wins-item{font-size:11px;color:var(--ink-2);line-height:1.5;margin-bottom:3px;padding-left:10px;position:relative;}
+.p-wins-item::before{content:'·';position:absolute;left:2px;}
+.p-next-step{background:var(--accent-light);border:1px solid #c0d4e8;border-radius:6px;padding:12px 14px;margin-bottom:14px;}
+.p-next-step-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px;}
+.p-next-step-text{font-size:12px;color:var(--ink);line-height:1.6;}
+.p-context-box{background:var(--surface);border-radius:6px;padding:12px 14px;margin-bottom:14px;}
+.p-context-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px;}
+.p-context-text{font-size:12px;color:var(--ink-2);line-height:1.65;}
+.p-ai-box{border-radius:6px;padding:12px 14px;margin-bottom:14px;}
+.p-ai-sharp{background:var(--green-light);border:1px solid #b8d9c8;}
+.p-ai-partial{background:var(--amber-light);border:1px solid #f0d9a8;}
+.p-ai-generic{background:var(--red-light);border:1px solid #f0c0c0;}
+.p-ai-na{background:var(--surface);border:1px solid var(--rule);}
+.p-ai-header{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.p-ai-label-text{font-family:'DM Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;}
+.p-ai-sharp .p-ai-label-text{color:var(--green);}
+.p-ai-partial .p-ai-label-text{color:var(--amber);}
+.p-ai-generic .p-ai-label-text{color:var(--red);}
+.p-ai-na .p-ai-label-text{color:var(--ink-4);}
+.p-ai-note{font-size:12px;color:var(--ink-2);line-height:1.6;}
+.p-ai-coaching{font-size:11px;color:var(--ink-3);margin-top:6px;padding-top:6px;border-top:1px solid rgba(0,0,0,0.06);line-height:1.5;font-style:italic;}
+.seg-badge{font-family:'DM Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;letter-spacing:0.05em;text-transform:uppercase;font-weight:500;}
+.seg-alts{background:var(--purple-light);color:var(--purple);border:1px solid #c8b0e8;}
+.seg-corp{background:var(--teal-light);color:var(--teal);border:1px solid #a8d0d0;}
+.seg-adv{background:var(--amber-light);color:var(--amber);border:1px solid #f0d9a8;}
+.acct-type-badge{font-family:'DM Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;letter-spacing:0.05em;text-transform:uppercase;font-weight:500;}
+.acct-newnew{background:#e8f4fd;color:#1a5a8a;border:1px solid #b8d4f0;}
+.acct-react{background:#fdf0e8;color:#8a4a1a;border:1px solid #f0c8a8;}
+.heatmap-table{width:100%;border-collapse:collapse;font-size:12px;}
+.heatmap-table th{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.06em;padding:8px 10px;text-align:center;border-bottom:2px solid var(--rule);background:var(--surface);position:sticky;top:80px;z-index:50;white-space:nowrap;}
+.heatmap-table th.rep-col{text-align:left;min-width:160px;}
+.heatmap-table td{padding:7px 10px;text-align:center;border-bottom:1px solid var(--rule);vertical-align:middle;}
+.heatmap-table td.rep-name{text-align:left;font-weight:600;font-size:12px;color:var(--ink);}
+.heatmap-table td.rep-calls{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);}
+.heatmap-table td.mgr-row{background:var(--surface);font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.06em;text-align:left;padding:6px 10px;}
+.hm-cell{display:inline-flex;align-items:center;justify-content:center;width:52px;height:30px;border-radius:5px;font-family:'DM Mono',monospace;font-size:11px;font-weight:600;}
+.hm-na{background:var(--surface);color:var(--ink-4);font-size:10px;}
+.heatmap-legend{display:flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);}
+.heatmap-legend-swatch{width:16px;height:16px;border-radius:3px;}
+.score-info-link{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);cursor:pointer;display:flex;align-items:center;gap:4px;margin-top:8px;}
+.score-info-link:hover{color:var(--accent);}
+.score-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;}
+.score-modal-overlay.open{display:flex;}
+.score-modal{background:var(--paper);border-radius:10px;padding:28px 32px;max-width:580px;width:90%;max-height:80vh;overflow-y:auto;position:relative;}
+.score-modal-close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:18px;cursor:pointer;color:var(--ink-3);}
+.score-modal h2{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:4px;}
+.score-modal .score-modal-sub{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:20px;}
+.score-modal h3{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:var(--accent);margin:16px 0 6px;}
+.score-modal p,.score-modal li{font-size:13px;color:var(--ink-2);line-height:1.65;}
+.score-modal ul{padding-left:18px;margin:4px 0;}
+.score-info-icon{display:inline-flex;align-items:center;justify-content:center;width:13px;height:13px;border-radius:50%;border:1px solid var(--ink-4);font-size:9px;cursor:pointer;color:var(--ink-4);margin-left:4px;vertical-align:middle;}
+.score-info-icon:hover{border-color:var(--accent);color:var(--accent);}
+.empty{text-align:center;padding:60px 20px;color:var(--ink-3);}
+.group-section{margin-bottom:28px;}
+.group-hdr{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--rule);}
+.group-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.group-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;}
+.group-count{font-family:'DM Mono',monospace;font-size:12px;color:var(--ink-3);}
+.group-mgr{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink-4);margin-left:auto;}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div>
+    <div class="logo">Call<span>Coach</span> <span class="logo-sub">DST</span></div>
+  </div>
+  <div class="hdr-meta">Intralinks · Digital Sales Team</div>
+  <div class="hdr-right">
+    <div class="badge b-green" id="hdr-call-count">· 0 CALLS</div>
+    <div class="badge b-blue">Q2 2026</div>
+  </div>
+</div>
+
+<nav class="nav-tabs" id="nav-tabs">
+  <div class="nav-tab on" onclick="showView('exec',this)">📊 Executive Dashboard</div>
+  <div class="nav-tab" onclick="showView('calls',this)">📞 All Calls</div>
+  <div class="nav-tab" onclick="showView('coaching',this)">🎯 Team Coaching</div>
+  <div class="nav-tab" onclick="showView('heatmap',this)">🔥 Coaching Heatmap</div>
+</nav>
+
+<div class="main" id="main"></div>
+
+<div class="panel-overlay" id="overlay" onclick="closePanel()"></div>
+<div class="coaching-panel" id="panel">
+  <div class="panel-hdr">
+    <div>
+      <div class="panel-title" id="panel-title"></div>
+      <div class="panel-sub" id="panel-sub"></div>
+    </div>
+    <button class="panel-close" onclick="closePanel()">✕</button>
+  </div>
+  <div class="panel-body" id="panel-body"></div>
+</div>
+
+<div class="score-modal-overlay" id="scoreModal" onclick="if(event.target===this)closeScoreModal()">
+  <div class="score-modal">
+    <button class="score-modal-close" onclick="closeScoreModal()">✕</button>
+    <h2>How DST Scores Work</h2>
+    <div class="score-modal-sub">INcommand of the Message · AI-powered analysis</div>
+
+    <h3>Overall Score (0–100)</h3>
+    <p>Weighted across 6 INcommand dimensions. For DSR outbound calls, the primary conversation is Uncover Needs — discovery quality and pain identification are weighted heavily. AI Story is weighted at 20% reflecting Intralinks' AI-first positioning.</p>
+
+    <h3>The 6 Dimensions</h3>
+    <ul>
+      <li><strong>Opening & Preparation (10%)</strong> — Did the rep demonstrate research? Earn the right to ask questions? Establish credibility in the first 30 seconds?</li>
+      <li><strong>Discovery Quality (20%)</strong> — Double-sided, open-ended (TED-W) questions. Follow-up and funnel questions. Avoided close-ended, double-barreled, or wordy questions.</li>
+      <li><strong>Pain Identification (20%)</strong> — Did the rep uncover a specific pain point across the three value drivers: reducing cost, increasing revenue, mitigating risk?</li>
+      <li><strong>AI Story (20%)</strong> — Did the rep lead with AI? SS&C sovereign AI / Link / stack control argument. For Alts: Ask Link in FundCentre + Unified FundCentre Q4 2026 pitch.</li>
+      <li><strong>Objection Handling (10%)</strong> — Acknowledge → Message → Challenge framework. Did the rep handle pushback without folding or over-explaining?</li>
+      <li><strong>Next Step (20%)</strong> — Specific next step with a date committed. Demo, follow-up call, or proposal. Vague close = 0.</li>
+    </ul>
+
+    <h3>AI Story — What "Sharp" Looks Like</h3>
+    <p><strong>Corporates/B&C:</strong> Leads with AI not VDR. SS&C sovereign AI — model, fine-tuning, hosting inside the perimeter. DealCentre Connect / MCP. Datasite differentiation (Blueflame outsourced vs. built in-house).</p>
+    <p style="margin-top:8px"><strong>Alts:</strong> Ask Link embedded in FundCentre. Unified FundCentre Q4 2026 — one platform for fundraising, onboarding, reporting. Cross-module analytics — LP relationship lifecycle view. Anchor pitch: "Your LPs are getting more demanding, your competitors are professionalizing their investor experience..."</p>
+
+    <h3>Meeting Outcome</h3>
+    <p>Primary success metric for DSR calls. Scored as: Meeting Booked / Follow-up Committed / No Next Step.</p>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// DST CALLS — Add calls here as transcripts are analyzed
+// Schema defined below. Currently empty — scaffold only.
+// ============================================================
+const CALLS = [
+  // Example schema (remove this comment when adding real calls):
+  // {
+  //   account: 'Account Name',
+  //   rep: 'Rep Name',
+  //   manager: 'Aimee Caldwell',          // or 'Dave Corbett'
+  //   segment: 'corporates',              // 'corporates' | 'alts' | 'advisory'
+  //   account_type: 'net_new',            // 'net_new' | 'reactivation'
+  //   date: '2026-05-28',
+  //   duration: '00:08:32',
+  //   overall_score: 0,                   // 0-100
+  //   deal_context: '',                   // 1-2 sentence account context
+  //   summary: '',                        // 2-3 sentence coaching summary
+  //   meeting_outcome: 'booked',          // 'booked' | 'committed' | 'none'
+  //   meeting_outcome_label: 'Meeting Booked',
+  //   meeting_outcome_reason: '',
+  //   ai_story: {
+  //     came_up: true,
+  //     sharp_or_generic: 'sharp',        // 'sharp' | 'partially_sharp' | 'generic' | 'n/a'
+  //     how_handled: '',
+  //     coaching: ''
+  //   },
+  //   dimensions: {
+  //     opening:    { score: 0, label: 'strong|partial|weak', note: '' },
+  //     discovery:  { score: 0, label: 'strong|partial|weak', note: '' },
+  //     pain:       { score: 0, label: 'strong|partial|weak', note: '' },
+  //     ai_story:   { score: 0, label: 'strong|partial|weak', note: '' },
+  //     objections: { score: 0, label: 'strong|partial|weak|na', note: '' },
+  //     next_step:  { score: 0, label: 'booked|committed|none', note: '' },
+  //   },
+  //   top_wins: [],
+  //   top_priorities: [],
+  //   suggested_next_step: ''
+  // }
+];
+
+// ============================================================
+// REPS
+// ============================================================
+const REPS = {
+  'Aimee Caldwell': ['Shayne Comfort','Ninielle Bushmich','Michael Rosenfeld','Matt Finn','Jonathan Bearden','Emily O\'Donnell','Connor Moran','Christine Long','Amanda Coleman','Alexander MacDonald'],
+  'Dave Corbett': ['Taylor Davis','Matthew Hughes','Matt Chisholm','Jamison McNulty','Isabella Liquori','Connor Glebus','Chris Ligas','Caroline Collard']
+};
+
+// ============================================================
+// HELPERS
+// ============================================================
+let currentView = 'exec';
+let filterRep = 'all', filterOutcome = 'all', filterSegment = 'all', filterSearch = '';
+
+function sc(s){return s>=70?'var(--green)':s>=50?'var(--gold)':'var(--red)';}
+function aiPillClass(v){return v==='sharp'?'p-sharp':v==='partially_sharp'?'p-partial':v==='generic'?'p-generic':'p-na';}
+function aiLabelShort(v){return v==='sharp'?'Sharp':v==='partially_sharp'?'Partial':v==='generic'?'Generic':'Not Raised';}
+function outcomColor(v){return v==='booked'?'var(--green)':v==='committed'?'var(--gold)':'var(--red)';}
+function outcomeBg(v){return v==='booked'?'var(--green-light)':v==='committed'?'var(--amber-light)':'var(--red-light)';}
+function segLabel(v){return v==='alts'?'Alts':v==='corporates'?'Corporates':'Advisory';}
+function segClass(v){return v==='alts'?'seg-alts':v==='corporates'?'seg-corp':'seg-adv';}
+function acctLabel(v){return v==='net_new'?'Net New':'Reactivation';}
+function acctClass(v){return v==='net_new'?'acct-newnew':'acct-react';}
+function hmColor(s){
+  if(s===null) return null;
+  if(s>=75) return {bg:'#1a7f4b',fg:'#ffffff'};
+  if(s>=50) return {bg:'#f0a500',fg:'#ffffff'};
+  if(s>=25) return {bg:'#e06420',fg:'#ffffff'};
+  return {bg:'#c0392b',fg:'#ffffff'};
+}
+
+function getFiltered(){
+  return CALLS.filter(c=>{
+    if(filterRep!=='all' && c.rep!==filterRep) return false;
+    if(filterOutcome!=='all' && c.meeting_outcome!==filterOutcome) return false;
+    if(filterSegment!=='all' && c.segment!==filterSegment) return false;
+    if(filterSearch && !c.account.toLowerCase().includes(filterSearch) && !c.rep.toLowerCase().includes(filterSearch)) return false;
+    return true;
+  });
+}
+
+function showView(v, tab){
+  currentView = v;
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('on'));
+  if(tab) tab.classList.add('on');
+  if(v==='exec') renderExec();
+  else if(v==='calls') renderCalls();
+  else if(v==='coaching') renderCoaching();
+  else if(v==='heatmap') renderHeatmap();
+}
+
+function openPanel(account){
+  const c = CALLS.find(x=>x.account===account);
+  if(!c) return;
+  document.getElementById('panel-title').textContent = c.account;
+  document.getElementById('panel-sub').textContent = `${c.rep} · ${c.manager} · ${c.date} · ${c.duration}`;
+
+  const ocol = outcomColor(c.meeting_outcome);
+  const obg = outcomeBg(c.meeting_outcome);
+
+  const dims = [
+    {key:'opening',   label:'Opening & Prep',   weight:'10%'},
+    {key:'discovery', label:'Discovery Quality', weight:'20%'},
+    {key:'pain',      label:'Pain Identification', weight:'20%'},
+    {key:'ai_story',  label:'AI Story',          weight:'20%'},
+    {key:'objections',label:'Objection Handling', weight:'10%'},
+    {key:'next_step', label:'Next Step',          weight:'20%'},
+  ];
+
+  document.getElementById('panel-body').innerHTML = `
+    <div class="p-outcome-box" style="background:${obg}">
+      <div class="p-outcome-dot" style="background:${ocol}"></div>
+      <div>
+        <div class="p-outcome-label" style="color:${ocol}">${c.meeting_outcome_label}</div>
+        <div class="p-outcome-text">${c.meeting_outcome_reason||''}</div>
+      </div>
+    </div>
+
+    <div class="p-meta-strip">
+      <div class="p-meta-card">
+        <div class="p-meta-label">Segment</div>
+        <div class="p-meta-value"><span class="seg-badge ${segClass(c.segment)}">${segLabel(c.segment)}</span></div>
+      </div>
+      <div class="p-meta-card">
+        <div class="p-meta-label">Account Type</div>
+        <div class="p-meta-value"><span class="acct-type-badge ${acctClass(c.account_type)}">${acctLabel(c.account_type)}</span></div>
+      </div>
+      <div class="p-meta-card">
+        <div class="p-meta-label">Manager</div>
+        <div class="p-meta-value" style="font-size:12px">${c.manager}</div>
+      </div>
+    </div>
+
+    <div class="p-scores-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="p-score" style="grid-column:span 3;background:var(--ink);border-color:var(--ink)">
+        <div class="p-score-num" style="color:${sc(c.overall_score)};font-size:36px">${c.overall_score}</div>
+        <div class="p-score-label" style="color:#888">Overall Score <span class="score-info-icon" style="border-color:#555;color:#555" onclick="event.stopPropagation();openScoreModal()">i</span></div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:16px">
+      <div class="p-section-hdr">INcommand Dimensions</div>
+      <div class="p-dim-grid">
+        ${dims.map(d=>{
+          const dim = c.dimensions?.[d.key];
+          const s = dim?.score ?? null;
+          const col = s!==null ? hmColor(s) : null;
+          const pct = s!==null ? s+'%' : '0%';
+          return `<div class="p-dim-card">
+            <div class="p-dim-header">
+              <div class="p-dim-label">${d.label} <span style="color:var(--ink-4);font-size:8px">${d.weight}</span></div>
+              <div class="p-dim-score" style="color:${col?col.bg:'var(--ink-4)'}">${s!==null?s:'—'}</div>
+            </div>
+            <div class="p-dim-bar"><div class="p-dim-fill" style="width:${pct};background:${col?col.bg:'var(--rule)'}"></div></div>
+            <div class="p-dim-note">${dim?.note||'—'}</div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+
+    <div class="p-context-box">
+      <div class="p-context-label">Call Context</div>
+      <div class="p-context-text">${c.deal_context||'—'}</div>
+    </div>
+    <div class="p-context-box" style="margin-bottom:14px">
+      <div class="p-context-label">Coaching Summary</div>
+      <div class="p-context-text">${c.summary||'—'}</div>
+    </div>
+
+    <div class="p-ai-box p-ai-${c.ai_story?.sharp_or_generic==='sharp'?'sharp':c.ai_story?.sharp_or_generic==='partially_sharp'?'partial':c.ai_story?.sharp_or_generic==='generic'?'generic':'na'}">
+      <div class="p-ai-header">
+        <span class="ai-pill ${aiPillClass(c.ai_story?.sharp_or_generic)}">AI Story · ${aiLabelShort(c.ai_story?.sharp_or_generic)}</span>
+      </div>
+      <div class="p-ai-note">${c.ai_story?.how_handled||'AI topic did not come up in this call.'}</div>
+      ${c.ai_story?.coaching?`<div class="p-ai-coaching">${c.ai_story.coaching}</div>`:''}
+    </div>
+
+    <div class="p-wins-row">
+      <div class="p-wins-box wins">
+        <div class="p-wins-title">✓ Top Wins</div>
+        ${(c.top_wins||[]).map(w=>`<div class="p-wins-item">${w}</div>`).join('')||'<div class="p-wins-item" style="color:var(--ink-4)">None noted</div>'}
+      </div>
+      <div class="p-wins-box pris">
+        <div class="p-wins-title">↑ Top Priorities</div>
+        ${(c.top_priorities||[]).map(p=>`<div class="p-wins-item">${p}</div>`).join('')||'<div class="p-wins-item" style="color:var(--ink-4)">None noted</div>'}
+      </div>
+    </div>
+
+    ${c.suggested_next_step?`<div class="p-next-step">
+      <div class="p-next-step-label">Suggested Next Step</div>
+      <div class="p-next-step-text">${c.suggested_next_step}</div>
+    </div>`:''}
+  `;
+
+  document.getElementById('overlay').classList.add('show');
+  document.getElementById('panel').classList.add('open');
+}
+
+function closePanel(){
+  document.getElementById('overlay').classList.remove('show');
+  document.getElementById('panel').classList.remove('open');
+}
+
+function openScoreModal(){document.getElementById('scoreModal').classList.add('open');}
+function closeScoreModal(){document.getElementById('scoreModal').classList.remove('open');}
+
+// ============================================================
+// FILTER BAR
+// ============================================================
+function renderFilterBar(filtered){
+  const allReps = [...new Set(CALLS.map(c=>c.rep))].sort();
+  return `<div class="filter-bar">
+    <span class="filter-label">Filter:</span>
+    <select class="filter-select" onchange="filterRep=this.value;rerender()">
+      <option value="all">All Reps</option>
+      <optgroup label="Aimee Caldwell">
+        ${REPS['Aimee Caldwell'].map(r=>`<option value="${r}" ${filterRep===r?'selected':''}>${r}</option>`).join('')}
+      </optgroup>
+      <optgroup label="Dave Corbett">
+        ${REPS['Dave Corbett'].map(r=>`<option value="${r}" ${filterRep===r?'selected':''}>${r}</option>`).join('')}
+      </optgroup>
+    </select>
+    <select class="filter-select" onchange="filterOutcome=this.value;rerender()">
+      <option value="all">All Outcomes</option>
+      <option value="booked">Meeting Booked</option>
+      <option value="committed">Follow-up Committed</option>
+      <option value="none">No Next Step</option>
+    </select>
+    <select class="filter-select" onchange="filterSegment=this.value;rerender()">
+      <option value="all">All Segments</option>
+      <option value="corporates">Corporates</option>
+      <option value="alts">Alts</option>
+      <option value="advisory">Advisory</option>
+    </select>
+    <input class="filter-search" placeholder="Search account or rep..." oninput="filterSearch=this.value.toLowerCase();rerender()" value="${filterSearch}">
+    <span class="filter-count">${filtered.length} calls</span>
+  </div>`;
+}
+
+function rerender(){
+  if(currentView==='exec') renderExec();
+  else if(currentView==='calls') renderCalls();
+  else if(currentView==='coaching') renderCoaching();
+  else if(currentView==='heatmap') renderHeatmap();
+}
+
+// ============================================================
+// EXEC DASHBOARD
+// ============================================================
+function renderExec(){
+  const total = CALLS.length;
+  document.getElementById('hdr-call-count').textContent = `· ${total} CALLS`;
+
+  if(total===0){
+    document.getElementById('main').innerHTML = `
+      <div style="margin-bottom:20px">
+        <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:4px">DST Executive Dashboard</div>
+        <div style="font-size:13px;color:var(--ink-3)">Digital Sales Team · Q2 2026</div>
+      </div>
+      <div style="background:white;border:1px solid var(--rule);border-radius:8px;padding:48px 32px;text-align:center;">
+        <div style="font-size:32px;margin-bottom:12px">📞</div>
+        <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:600;margin-bottom:8px">No calls analyzed yet</div>
+        <div style="font-size:13px;color:var(--ink-3);max-width:400px;margin:0 auto;line-height:1.7">Upload Salesloft transcripts from the DST team and add them to the CALLS array in this file. The dashboard will populate automatically.</div>
+        <div style="margin-top:24px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:600px;margin:24px auto 0">
+          <div style="background:var(--surface);border-radius:6px;padding:14px;text-align:left">
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px">18 DSRs Ready</div>
+            <div style="font-size:12px;color:var(--ink-2)">Aimee Caldwell (10) and Dave Corbett (8) teams loaded</div>
+          </div>
+          <div style="background:var(--surface);border-radius:6px;padding:14px;text-align:left">
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px">INcommand Framework</div>
+            <div style="font-size:12px;color:var(--ink-2)">6 dimensions · AI Story weighted at 20%</div>
+          </div>
+          <div style="background:var(--surface);border-radius:6px;padding:14px;text-align:left">
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px">Success Metric</div>
+            <div style="font-size:12px;color:var(--ink-2)">Meeting booked · Follow-up committed · No next step</div>
+          </div>
+        </div>
+      </div>`;
+    return;
+  }
+
+  const booked = CALLS.filter(c=>c.meeting_outcome==='booked').length;
+  const committed = CALLS.filter(c=>c.meeting_outcome==='committed').length;
+  const noStep = CALLS.filter(c=>c.meeting_outcome==='none').length;
+  const avgScore = Math.round(CALLS.reduce((a,c)=>a+c.overall_score,0)/total);
+  const aiSharp = CALLS.filter(c=>c.ai_story?.sharp_or_generic==='sharp').length;
+  const meetingRate = Math.round((booked/total)*100);
+
+  document.getElementById('main').innerHTML = `
+    <div style="margin-bottom:20px">
+      <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:4px">DST Executive Dashboard</div>
+      <div style="font-size:13px;color:var(--ink-3)">Digital Sales Team · ${total} calls analyzed · Q2 2026</div>
+    </div>
+    <div class="kpi-strip">
+      <div class="kpi k-green"><div class="kpi-num" style="color:var(--green)">${booked}</div><div class="kpi-label">Meetings Booked</div></div>
+      <div class="kpi k-amber"><div class="kpi-num" style="color:var(--gold)">${committed}</div><div class="kpi-label">Follow-up Committed</div></div>
+      <div class="kpi k-red"><div class="kpi-num" style="color:var(--red)">${noStep}</div><div class="kpi-label">No Next Step</div></div>
+      <div class="kpi k-blue"><div class="kpi-num" style="color:var(--accent)">${meetingRate}%</div><div class="kpi-label">Meeting Rate</div></div>
+      <div class="kpi k-purple"><div class="kpi-num" style="color:var(--purple)">${aiSharp}</div><div class="kpi-label">Sharp AI Story</div></div>
+      <div class="kpi k-grey"><div class="kpi-num" style="color:${sc(avgScore)}">${avgScore}</div><div class="kpi-label">Avg Call Score</div></div>
+    </div>
+    <div style="text-align:right;margin-top:-12px;margin-bottom:16px"><span class="score-info-link" onclick="openScoreModal()">ⓘ How scores work</span></div>
+    ${renderCrossTeamThemes()}
+    ${renderGroupSection('🟢 Meetings Booked', CALLS.filter(c=>c.meeting_outcome==='booked'), 'booked')}
+    ${renderGroupSection('🟡 Follow-up Committed', CALLS.filter(c=>c.meeting_outcome==='committed'), 'committed')}
+    ${renderGroupSection('🔴 No Next Step', CALLS.filter(c=>c.meeting_outcome==='none'), 'none')}
+  `;
+}
+
+function renderCrossTeamThemes(){
+  if(CALLS.length===0) return '';
+  // Will auto-populate from real data once calls are added
+  const aiCameUp = CALLS.filter(c=>c.ai_story?.came_up).length;
+  const aiSharp = CALLS.filter(c=>c.ai_story?.sharp_or_generic==='sharp').length;
+  const booked = CALLS.filter(c=>c.meeting_outcome==='booked').length;
+  const avgNext = Math.round(CALLS.filter(c=>c.dimensions?.next_step?.score!==undefined).reduce((a,c)=>a+(c.dimensions.next_step.score||0),0)/CALLS.length);
+  const avgDisc = Math.round(CALLS.filter(c=>c.dimensions?.discovery?.score!==undefined).reduce((a,c)=>a+(c.dimensions.discovery.score||0),0)/CALLS.length);
+
+  const themes = [
+    {icon:'🤖',bg:'#e8eef5',lead:'AI story adoption across the team.',text:` AI came up on ${aiCameUp} of ${CALLS.length} calls. Only ${aiSharp} delivered a fully sharp, sovereignty-grounded story. DSRs need to lead with AI — not VDR — as the reason for the call.`},
+    {icon:'🎯',bg:'#e6f2ec',lead:'Meeting conversion rate.',text:` ${booked} of ${CALLS.length} calls resulted in a booked meeting (${Math.round((booked/CALLS.length)*100)}%). The primary lever is closing discipline — calls without a specific date and next step committed rarely convert.`},
+    {icon:'🔍',bg:'#f0ebfa',lead:'Discovery quality is the coaching priority.',text:` Average discovery score: ${avgDisc}/100. DSRs who asked double-sided, open-ended questions before pitching produced more engaged prospects. Most reps are leading with the product, not the problem.`},
+    {icon:'🏁',bg:'#fdeaea',lead:'Closing discipline determines outcome.',text:` Average next step score: ${avgNext}/100. Every call should end with a specific date and action — demo, follow-up call, or email with materials. Vague closes ("I'll send something over") rarely convert to meetings.`},
+  ];
+
+  return `<div class="themes-section" style="margin-bottom:20px">
+    <div class="themes-hdr">
+      <div class="themes-hdr-title">Cross-Team Themes</div>
+      <div class="themes-hdr-sub">${CALLS.length} calls · Q2 2026</div>
+    </div>
+    ${themes.map(t=>`<div class="theme-item">
+      <div class="theme-icon-wrap" style="background:${t.bg}">${t.icon}</div>
+      <div class="theme-content"><strong>${t.lead}</strong>${t.text}</div>
+    </div>`).join('')}
+  </div>`;
+}
+
+function renderGroupSection(title, calls, type){
+  if(calls.length===0) return '';
+  const dot = type==='booked'?'var(--green)':type==='committed'?'var(--gold)':'var(--red)';
+  return `<div class="group-section">
+    <div class="group-hdr">
+      <div class="group-dot" style="background:${dot}"></div>
+      <div class="group-title">${title}</div>
+      <div class="group-count">${calls.length} calls</div>
+    </div>
+    <table class="deal-table">
+      <thead><tr>
+        <th>Account</th><th>Rep</th><th>Segment</th><th>Type</th>
+        <th>Date</th><th>Score</th><th>AI Story</th><th>Outcome Signal</th>
+      </tr></thead>
+      <tbody>
+        ${calls.map(c=>`<tr onclick="openPanel('${c.account.replace(/'/g,"\\'")}')">
+          <td><div class="tbl-account">${c.account}</div><div style="font-size:11px;color:var(--ink-4)">${c.date}</div></td>
+          <td><div style="font-size:13px">${c.rep}</div><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4)">${c.manager}</div></td>
+          <td><span class="seg-badge ${segClass(c.segment)}">${segLabel(c.segment)}</span></td>
+          <td><span class="acct-type-badge ${acctClass(c.account_type)}">${acctLabel(c.account_type)}</span></td>
+          <td style="font-family:'DM Mono',monospace;font-size:11px">${c.date}</td>
+          <td><span class="score-pill" style="color:${sc(c.overall_score)}">${c.overall_score}</span></td>
+          <td><span class="ai-pill ${aiPillClass(c.ai_story?.sharp_or_generic)}">${aiLabelShort(c.ai_story?.sharp_or_generic)}</span></td>
+          <td><div class="tbl-signal" style="color:${outcomColor(c.meeting_outcome)}"><div class="sig-dot" style="background:${outcomColor(c.meeting_outcome)}"></div>${c.meeting_outcome_label}</div></td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+  </div>`;
+}
+
+// ============================================================
+// ALL CALLS
+// ============================================================
+function renderCalls(){
+  const filtered = getFiltered();
+  document.getElementById('main').innerHTML = `
+    <div style="margin-bottom:12px">
+      <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:4px">All Calls</div>
+      <div style="font-size:13px;color:var(--ink-3)">Click any call to view full INcommand coaching analysis</div>
+    </div>
+    ${renderFilterBar(filtered)}
+    ${filtered.length===0?`<div class="empty">No calls match the current filters.</div>`:`
+    <table class="deal-table deal-table-calls">
+      <thead><tr>
+        <th>Account</th><th>Rep</th><th>Segment</th><th>Type</th>
+        <th>Date</th><th>Duration</th><th>Score</th><th>AI Story</th><th>Outcome</th>
+      </tr></thead>
+      <tbody>
+        ${filtered.map(c=>`<tr onclick="openPanel('${c.account.replace(/'/g,"\\'")}')">
+          <td><div class="tbl-account">${c.account}</div></td>
+          <td>${c.rep}</td>
+          <td><span class="seg-badge ${segClass(c.segment)}">${segLabel(c.segment)}</span></td>
+          <td><span class="acct-type-badge ${acctClass(c.account_type)}">${acctLabel(c.account_type)}</span></td>
+          <td style="font-family:'DM Mono',monospace;font-size:11px">${c.date}</td>
+          <td style="font-family:'DM Mono',monospace;font-size:11px">${c.duration}</td>
+          <td><span class="score-pill" style="color:${sc(c.overall_score)}">${c.overall_score}</span></td>
+          <td><span class="ai-pill ${aiPillClass(c.ai_story?.sharp_or_generic)}">${aiLabelShort(c.ai_story?.sharp_or_generic)}</span></td>
+          <td><div class="tbl-signal" style="color:${outcomColor(c.meeting_outcome)}"><div class="sig-dot" style="background:${outcomColor(c.meeting_outcome)}"></div>${c.meeting_outcome_label}</div></td>
+        </tr>`).join('')}
+      </tbody>
+    </table>`}
+  `;
+}
+
+// ============================================================
+// TEAM COACHING
+// ============================================================
+function renderCoaching(){
+  const sorted = [...CALLS].sort((a,b)=>b.overall_score-a.overall_score);
+  document.getElementById('main').innerHTML = `
+    <div style="margin-bottom:20px">
+      <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:4px">Team Coaching</div>
+      <div style="font-size:13px;color:var(--ink-3)">All ${CALLS.length} calls · Sorted by score</div>
+    </div>
+    ${CALLS.length===0?`<div class="empty">No calls analyzed yet. Add transcripts to see coaching insights.</div>`:`
+    <table class="deal-table deal-table-coaching">
+      <thead><tr>
+        <th>Account</th><th>Rep</th><th>Score</th><th>AI Story</th>
+        <th>Opening</th><th>Discovery</th><th>Pain</th><th>Next Step</th><th>Outcome</th>
+      </tr></thead>
+      <tbody>
+        ${sorted.map(c=>`<tr onclick="openPanel('${c.account.replace(/'/g,"\\'")}')">
+          <td><div class="tbl-account">${c.account}</div><div style="font-size:11px;color:var(--ink-4)">${c.date}</div></td>
+          <td><div style="font-size:13px">${c.rep}</div><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4)">${c.manager}</div></td>
+          <td><span class="score-pill" style="color:${sc(c.overall_score)}">${c.overall_score}</span></td>
+          <td><span class="ai-pill ${aiPillClass(c.ai_story?.sharp_or_generic)}">${aiLabelShort(c.ai_story?.sharp_or_generic)}</span></td>
+          <td style="font-family:'DM Mono',monospace;font-size:12px;color:${sc(c.dimensions?.opening?.score??0)}">${c.dimensions?.opening?.score??'—'}</td>
+          <td style="font-family:'DM Mono',monospace;font-size:12px;color:${sc(c.dimensions?.discovery?.score??0)}">${c.dimensions?.discovery?.score??'—'}</td>
+          <td style="font-family:'DM Mono',monospace;font-size:12px;color:${sc(c.dimensions?.pain?.score??0)}">${c.dimensions?.pain?.score??'—'}</td>
+          <td style="font-family:'DM Mono',monospace;font-size:12px;color:${sc(c.dimensions?.next_step?.score??0)}">${c.dimensions?.next_step?.score??'—'}</td>
+          <td><div class="tbl-signal" style="color:${outcomColor(c.meeting_outcome)}"><div class="sig-dot" style="background:${outcomColor(c.meeting_outcome)}"></div>${c.meeting_outcome_label}</div></td>
+        </tr>`).join('')}
+      </tbody>
+    </table>`}
+  `;
+}
+
+// ============================================================
+// HEATMAP
+// ============================================================
+function renderHeatmap(){
+  const dims = [
+    {key:'overall',    label:'Overall',    fn:c=>c.overall_score},
+    {key:'opening',    label:'Opening',    fn:c=>c.dimensions?.opening?.score??null},
+    {key:'discovery',  label:'Discovery',  fn:c=>c.dimensions?.discovery?.score??null},
+    {key:'pain',       label:'Pain ID',    fn:c=>c.dimensions?.pain?.score??null},
+    {key:'ai_story',   label:'AI Story',   fn:c=>c.dimensions?.ai_story?.score??null},
+    {key:'objections', label:'Objections', fn:c=>c.dimensions?.objections?.score??null},
+    {key:'next_step',  label:'Next Step',  fn:c=>c.dimensions?.next_step?.score??null},
+  ];
+
+  function avg(calls, fn){
+    const vals = calls.map(fn).filter(v=>v!==null&&v!==undefined);
+    return vals.length ? Math.round(vals.reduce((a,b)=>a+b,0)/vals.length) : null;
+  }
+
+  function cell(score){
+    if(score===null) return `<div class="hm-cell hm-na">—</div>`;
+    const c = hmColor(score);
+    return `<div class="hm-cell" style="background:${c.bg};color:${c.fg}">${score}</div>`;
+  }
+
+  const managers = ['Aimee Caldwell','Dave Corbett'];
+
+  document.getElementById('main').innerHTML = `
+    <div style="margin-bottom:16px">
+      <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:4px">Coaching Heatmap</div>
+      <div style="font-size:13px;color:var(--ink-3);margin-bottom:12px">Rep performance across INcommand dimensions · ${CALLS.length} calls</div>
+      <div class="heatmap-legend">
+        <div class="heatmap-legend-swatch" style="background:#1a7f4b"></div><span>75–100 Strong</span>
+        <div class="heatmap-legend-swatch" style="background:#f0a500"></div><span>50–74 Developing</span>
+        <div class="heatmap-legend-swatch" style="background:#e06420"></div><span>25–49 Needs Work</span>
+        <div class="heatmap-legend-swatch" style="background:#c0392b"></div><span>0–24 Critical Gap</span>
+      </div>
+    </div>
+    ${CALLS.length===0?`<div class="empty">No calls analyzed yet. Add transcripts to see the heatmap.</div>`:`
+    <table class="heatmap-table">
+      <thead><tr>
+        <th class="rep-col">Rep</th>
+        <th>Calls</th>
+        ${dims.map(d=>`<th>${d.label}</th>`).join('')}
+      </tr></thead>
+      <tbody>
+        <tr style="background:var(--surface)">
+          <td class="rep-name" style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-4);font-weight:400;text-transform:uppercase;letter-spacing:0.05em">Team Avg</td>
+          <td class="rep-calls">${CALLS.length}</td>
+          ${dims.map(d=>`<td>${cell(avg(CALLS,d.fn))}</td>`).join('')}
+        </tr>
+        <tr><td colspan="${dims.length+2}" style="padding:0;border-bottom:2px solid var(--rule)"></td></tr>
+        ${managers.map(mgr=>{
+          const mgrReps = REPS[mgr].filter(r=>CALLS.some(c=>c.rep===r));
+          if(mgrReps.length===0) return `<tr><td class="mgr-row" colspan="${dims.length+2}">${mgr} — no calls yet</td></tr>`;
+          return `<tr><td class="mgr-row" colspan="${dims.length+2}">${mgr}</td></tr>
+          ${mgrReps.map(rep=>{
+            const repCalls = CALLS.filter(c=>c.rep===rep);
+            return `<tr style="cursor:pointer" onmouseover="this.style.background='var(--surface)'" onmouseout="this.style.background=''">
+              <td class="rep-name">${rep}</td>
+              <td class="rep-calls">${repCalls.length}</td>
+              ${dims.map(d=>`<td>${cell(avg(repCalls,d.fn))}</td>`).join('')}
+            </tr>`;
+          }).join('')}`;
+        }).join('')}
+      </tbody>
+    </table>`}
+  `;
+}
+
+// ============================================================
+// INIT
+// ============================================================
+renderExec();
+</script>
+</body>
+</html>
