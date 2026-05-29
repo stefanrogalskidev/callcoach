@@ -4803,7 +4803,7 @@ function renderCrossTeamThemes(){
   const avgDisc = Math.round(CALLS.filter(c=>c.dimensions?.discovery?.score!==undefined).reduce((a,c)=>a+(c.dimensions.discovery.score||0),0)/CALLS.length);
 
   const themes = [
-    {icon:'🤖',bg:'#e8eef5',lead:'AI story adoption across the team.',text:` AI came up on ${aiCameUp} of ${CALLS.length} calls. Only ${aiSharp} delivered a fully sharp, sovereignty-grounded story. DSRs need to lead with AI — not VDR — as the reason for the call.`},
+    {icon:'🤖',bg:'#e8eef5',lead:'AI story adoption across the team.',text:` AI came up on ${aiCameUp} of ${CALLS.length} calls. Only ${aiSharp} delivered a fully sharp, sovereignty-grounded story. The gap isn't about leading with AI instead of VDR — it's that once a buyer's pain is identified, the AI differentiator should be the sharpest part of the value articulation. Right now it's either absent or generic.`},
     {icon:'🎯',bg:'#e6f2ec',lead:'Meeting conversion rate.',text:` ${booked} of ${CALLS.length} calls resulted in a booked meeting (${Math.round((booked/CALLS.length)*100)}%). The primary lever is closing discipline — calls without a specific date and next step committed rarely convert.`},
     {icon:'🔍',bg:'#f0ebfa',lead:'Discovery quality is the coaching priority.',text:` Average discovery score: ${avgDisc}/100. DSRs who asked double-sided, open-ended questions before pitching produced more engaged prospects. Most reps are leading with the product, not the problem.`},
     {icon:'🏁',bg:'#fdeaea',lead:'Closing discipline determines outcome.',text:` Average next step score: ${avgNext}/100. Every call should end with a specific date and action — demo, follow-up call, or email with materials. Vague closes ("I'll send something over") rarely convert to meetings.`},
