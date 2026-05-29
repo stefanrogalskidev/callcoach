@@ -4855,8 +4855,79 @@ function renderGroupSection(title, calls, type){
 // ============================================================
 // ALL CALLS
 // ============================================================
+// Sort state
+let callsSortCol = 'date', callsSortDir = 'desc';
+let coachingSortCol = 'overall_score', coachingSortDir = 'desc';
+
+function sortIcon(col, activeCol, dir){
+  if(col!==activeCol) return '<span style="color:var(--ink-4);font-size:9px;margin-left:3px">⇅</span>';
+  return dir==='asc'
+    ? '<span style="color:var(--accent);font-size:9px;margin-left:3px">↑</span>'
+    : '<span style="color:var(--accent);font-size:9px;margin-left:3px">↓</span>';
+}
+
+function sortCalls(col){
+  if(callsSortCol===col) callsSortDir = callsSortDir==='asc'?'desc':'asc';
+  else { callsSortCol=col; callsSortDir='asc'; }
+  renderCalls();
+}
+
+function sortCoaching(col){
+  if(coachingSortCol===col) coachingSortDir = coachingSortDir==='asc'?'desc':'asc';
+  else { coachingSortCol=col; coachingSortDir='asc'; }
+  renderCoaching();
+}
+
+function applySortCalls(arr){
+  const dir = callsSortDir==='asc'?1:-1;
+  return [...arr].sort((a,b)=>{
+    let av, bv;
+    switch(callsSortCol){
+      case 'account':   av=a.account; bv=b.account; break;
+      case 'rep':       av=a.rep; bv=b.rep; break;
+      case 'segment':   av=a.segment; bv=b.segment; break;
+      case 'acct_type': av=a.account_type; bv=b.account_type; break;
+      case 'call_type': av=a.call_type; bv=b.call_type; break;
+      case 'date':      av=a.date; bv=b.date; break;
+      case 'duration':  av=a.duration; bv=b.duration; break;
+      case 'score':     av=a.overall_score; bv=b.overall_score; return (av-bv)*dir;
+      case 'ai_story':  av=a.ai_story?.sharp_or_generic??'z'; bv=b.ai_story?.sharp_or_generic??'z'; break;
+      case 'outcome':   av=a.meeting_outcome; bv=b.meeting_outcome; break;
+      default:          av=a.date; bv=b.date;
+    }
+    if(av<bv) return -1*dir;
+    if(av>bv) return 1*dir;
+    return 0;
+  });
+}
+
+function applySortCoaching(arr){
+  const dir = coachingSortDir==='asc'?1:-1;
+  return [...arr].sort((a,b)=>{
+    let av, bv;
+    switch(coachingSortCol){
+      case 'account':   av=a.account; bv=b.account; break;
+      case 'rep':       av=a.rep; bv=b.rep; break;
+      case 'overall_score': av=a.overall_score; bv=b.overall_score; return (av-bv)*dir;
+      case 'ai_story':  av=a.ai_story?.sharp_or_generic??'z'; bv=b.ai_story?.sharp_or_generic??'z'; break;
+      case 'opening':   av=a.dimensions?.opening?.score??0; bv=b.dimensions?.opening?.score??0; return (av-bv)*dir;
+      case 'discovery': av=a.dimensions?.discovery?.score??0; bv=b.dimensions?.discovery?.score??0; return (av-bv)*dir;
+      case 'pain':      av=a.dimensions?.pain?.score??0; bv=b.dimensions?.pain?.score??0; return (av-bv)*dir;
+      case 'next_step': av=a.dimensions?.next_step?.score??0; bv=b.dimensions?.next_step?.score??0; return (av-bv)*dir;
+      case 'outcome':   av=a.meeting_outcome; bv=b.meeting_outcome; break;
+      default:          av=a.overall_score; bv=b.overall_score; return (av-bv)*dir;
+    }
+    if(av<bv) return -1*dir;
+    if(av>bv) return 1*dir;
+    return 0;
+  });
+}
+
+function thStyle(){ return 'cursor:pointer;user-select:none;white-space:nowrap;'; }
+
 function renderCalls(){
-  const filtered = getFiltered();
+  const filtered = applySortCalls(getFiltered());
+  const s = callsSortCol, d = callsSortDir;
   document.getElementById('main').innerHTML = `
     <div style="margin-bottom:12px">
       <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:4px">All Calls</div>
@@ -4866,8 +4937,16 @@ function renderCalls(){
     ${filtered.length===0?`<div class="empty">No calls match the current filters.</div>`:`
     <table class="deal-table deal-table-calls">
       <thead><tr>
-        <th>Account</th><th>Rep</th><th>Segment</th><th>Acct Type</th><th>Call Type</th>
-        <th>Date</th><th>Duration</th><th>Score</th><th>AI Story</th><th>Outcome</th>
+        <th style="${thStyle()}" onclick="sortCalls('account')">Account${sortIcon('account',s,d)}</th>
+        <th style="${thStyle()}" onclick="sortCalls('rep')">Rep${sortIcon('rep',s,d)}</th>
+        <th style="${thStyle()}" onclick="sortCalls('segment')">Segment${sortIcon('segment',s,d)}</th>
+        <th style="${thStyle()}" onclick="sortCalls('acct_type')">Acct Type${sortIcon('acct_type',s,d)}</th>
+        <th style="${thStyle()}" onclick="sortCalls('call_type')">Call Type${sortIcon('call_type',s,d)}</th>
+        <th style="${thStyle()}" onclick="sortCalls('date')">Date${sortIcon('date',s,d)}</th>
+        <th style="${thStyle()}" onclick="sortCalls('duration')">Duration${sortIcon('duration',s,d)}</th>
+        <th style="${thStyle()}" onclick="sortCalls('score')">Score${sortIcon('score',s,d)}</th>
+        <th style="${thStyle()}" onclick="sortCalls('ai_story')">AI Story${sortIcon('ai_story',s,d)}</th>
+        <th style="${thStyle()}" onclick="sortCalls('outcome')">Outcome${sortIcon('outcome',s,d)}</th>
       </tr></thead>
       <tbody>
         ${filtered.map(c=>`<tr onclick="openPanel('${c.account.replace(/'/g,"\\'")}')">
@@ -4891,17 +4970,25 @@ function renderCalls(){
 // TEAM COACHING
 // ============================================================
 function renderCoaching(){
-  const sorted = [...CALLS].sort((a,b)=>b.overall_score-a.overall_score);
+  const sorted = applySortCoaching(CALLS);
+  const s = coachingSortCol, d = coachingSortDir;
   document.getElementById('main').innerHTML = `
     <div style="margin-bottom:20px">
       <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:4px">Team Coaching</div>
-      <div style="font-size:13px;color:var(--ink-3)">All ${CALLS.length} calls · Sorted by score</div>
+      <div style="font-size:13px;color:var(--ink-3)">All ${CALLS.length} calls · Click any column header to sort</div>
     </div>
     ${CALLS.length===0?`<div class="empty">No calls analyzed yet. Add transcripts to see coaching insights.</div>`:`
     <table class="deal-table deal-table-coaching">
       <thead><tr>
-        <th>Account</th><th>Rep</th><th>Score</th><th>AI Story</th>
-        <th>Opening</th><th>Discovery</th><th>Pain</th><th>Next Step</th><th>Outcome</th>
+        <th style="${thStyle()}" onclick="sortCoaching('account')">Account${sortIcon('account',s,d)}</th>
+        <th style="${thStyle()}" onclick="sortCoaching('rep')">Rep${sortIcon('rep',s,d)}</th>
+        <th style="${thStyle()}" onclick="sortCoaching('overall_score')">Score${sortIcon('overall_score',s,d)}</th>
+        <th style="${thStyle()}" onclick="sortCoaching('ai_story')">AI Story${sortIcon('ai_story',s,d)}</th>
+        <th style="${thStyle()}" onclick="sortCoaching('opening')">Opening${sortIcon('opening',s,d)}</th>
+        <th style="${thStyle()}" onclick="sortCoaching('discovery')">Discovery${sortIcon('discovery',s,d)}</th>
+        <th style="${thStyle()}" onclick="sortCoaching('pain')">Pain${sortIcon('pain',s,d)}</th>
+        <th style="${thStyle()}" onclick="sortCoaching('next_step')">Next Step${sortIcon('next_step',s,d)}</th>
+        <th style="${thStyle()}" onclick="sortCoaching('outcome')">Outcome${sortIcon('outcome',s,d)}</th>
       </tr></thead>
       <tbody>
         ${sorted.map(c=>`<tr onclick="openPanel('${c.account.replace(/'/g,"\\'")}')">
@@ -4919,6 +5006,7 @@ function renderCoaching(){
     </table>`}
   `;
 }
+
 
 // ============================================================
 // HEATMAP
